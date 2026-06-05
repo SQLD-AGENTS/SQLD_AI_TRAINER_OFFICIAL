@@ -1,5 +1,7 @@
 # SQLD AI 적응형 학습 플랫폼
 
+> 이 프로젝트는 [SQLD_AI_TRIANER](https://github.com/chodonghee-hub/SQLD_AI_TRAINER) 프로젝트에서 이어지는 작업물 입니다.
+
 ![Python](https://img.shields.io/badge/Python-3.11-blue?logo=python)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.111+-green?logo=fastapi)
 ![React](https://img.shields.io/badge/React-19-61DAFB?logo=react)
