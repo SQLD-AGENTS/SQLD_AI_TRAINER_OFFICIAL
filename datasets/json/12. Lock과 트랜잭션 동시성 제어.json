@@ -1,0 +1,680 @@
+{
+  "subject_id": 3,
+  "chapter_id": 7,
+  "questions": [
+    {
+      "question_number": 1,
+      "book_section": "III",
+      "book_question_number": 110,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "Lock 경합에 의한 성능 저하를 최소화하기 위한 가이드라인으로 가장 적절하지 않은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "트랜잭션의 원자성을 훼손하지 않는 선에서 트랜잭션을 가능한 짧게 정의할 것",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "같은 데이터를 갱신하는 프로그램이 가급적 동시에 수행되지 않도록 트랜잭션을 설계할 것",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "select 문장에 for update 문장을 사용하지 말 것",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "온라인 트랜잭션을 처리하는 DML 문장을 1순위로 튜닝하여 조건절에 맞는 최적의 인덱스를 제공할 것",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "for update 구문을 반드시 사용해야 할 경우가 많은데, 성능을 이유로 이를 사용 못하게 하면 데이터 정합성을 해칠 수 있다. 성능보다 중요한 것은 데이터 정합성이다. nowait이나 wait 옵션을 잘 활용하면 select for update 문장을 통해 오히려 동시성을 높일 수도 있다."
+      }
+    },
+    {
+      "question_number": 2,
+      "book_section": "III",
+      "book_question_number": 111,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "MS-SQL Server에서 아래 UPDATE문과 블록킹 없이 동시 수행이 가능한 SQL로 가장 적절한 것은? (단, Transaction Isolation Level을 조정하지 않았고, Snapshot 관련 데이터베이스 설정도 초기값 그대로인 상황이다.)"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "EMP",
+            "columns": [
+              "EMPNO (PK)",
+              "ENAME",
+              "DEPTNO",
+              "SAL"
+            ],
+            "rows": [
+              {
+                "EMPNO (PK)": "7788",
+                "ENAME": "김철수",
+                "DEPTNO": "10",
+                "SAL": "3000"
+              },
+              {
+                "EMPNO (PK)": "7900",
+                "ENAME": "이정훈",
+                "DEPTNO": "20",
+                "SAL": "5000"
+              },
+              {
+                "EMPNO (PK)": "7903",
+                "ENAME": "정명훈",
+                "DEPTNO": "20",
+                "SAL": "2000"
+              },
+              {
+                "EMPNO (PK)": "8012",
+                "ENAME": "홍길동",
+                "DEPTNO": "30",
+                "SAL": "6000"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "sql_server",
+            "code": "update emp set sal = sal * 1.1 where deptno = 20;"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "sql_query",
+          "choice_text": "select * from emp where empno = 7900",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "sql_query",
+          "choice_text": "update emp set sal = sal * 1.1 where empno = 7900",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "sql_query",
+          "choice_text": "delete from emp where empno = 7903",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "sql_query",
+          "choice_text": "insert into emp(empno, ename, deptno, sal) values(8014, '이정훈', 40, 4000)",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "SQL Server에서 Share Lock과 Exclusive Lock은 호환되지 않으므로 1번 SELECT문에는 블록킹이 발생할 수 있다. 4번 INSERT문은 문제의 UPDATE문과 DEPTNO가 서로 다르고 PK 중복도 없으므로 블록킹 없이 진행된다."
+      }
+    },
+    {
+      "question_number": 3,
+      "book_section": "III",
+      "book_question_number": 112,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "오라클 PL/SQL로 작성한 아래 프로그램을 MS-SQL Server T-SQL 구문으로 변환하고자 한다. 아래 FOR UPDATE 구문을 대신하기 위해 사용할 SQL Server 힌트로 가장 적절한 것은?"
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "plsql",
+            "code": "select 적립포인트, 구매실적, 방문횟수, 최근방문일자\ninto v_적립포인트, v_구매실적, v_방문횟수, v_최근방문일자\nfrom 고객\nwhere 고객번호 = 100\nFOR UPDATE;\n\n-- do anything\n\nupdate 고객 set 적립포인트 = v_적립포인트 where 고객번호 = 100;\ncommit;"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "from 고객 WITH (HOLDLOCK)",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "from 고객 WITH (FORCESEEK)",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "from 고객 WITH (READPAST)",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "from 고객 WITH (TABLOCK)",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "FORCESEEK은 테이블 또는 뷰의 데이터에 대한 액세스 경로로 Index Seek 연산만 사용하도록 지정하는 힌트다. READPAST는 Lock이 걸린 행은 읽지 않고 건너뛰도록 하는 힌트다. TABLOCK은 테이블 레벨 Lock을 설정하고자 할 때 사용하는 힌트다."
+      }
+    },
+    {
+      "question_number": 4,
+      "book_section": "III",
+      "book_question_number": 113,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래와 같은 락(Lock) 모니터링 결과가 발생할 수 있는 SQL로 가장 적절한 것은?"
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "oracle",
+            "code": "SELECT a.SESSION_ID, a.LOCK_TYPE, a.MODE_HELD,\n       a.MODE_REQUESTED, a.LOCK_ID1, a.LOCK_ID2\nFROM DBA_LOCK a, V$SESSION b\nWHERE a.SESSION_ID = b.SID\nAND a.LOCK_TYPE IN ('Transaction', 'DML')\nAND b.USERNAME = USER;"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "Lock Monitoring Result",
+            "columns": [
+              "SESSION_ID",
+              "LOCK_TYPE",
+              "MODE_HELD",
+              "MODE_REQUESTED",
+              "LOCK_ID1",
+              "LOCK_ID2"
+            ],
+            "rows": [
+              {
+                "SESSION_ID": "135",
+                "LOCK_TYPE": "Transaction",
+                "MODE_HELD": "Exclusive",
+                "MODE_REQUESTED": "None",
+                "LOCK_ID1": "131074",
+                "LOCK_ID2": "3098"
+              },
+              {
+                "SESSION_ID": "135",
+                "LOCK_TYPE": "DML",
+                "MODE_HELD": "Exclusive",
+                "MODE_REQUESTED": "None",
+                "LOCK_ID1": "92614",
+                "LOCK_ID2": "0"
+              }
+            ]
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "sql_query",
+          "choice_text": "INSERT INTO EMP (EMPNO, ENAME) VALUES (1000, 'SQLP');",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "sql_query",
+          "choice_text": "UPDATE EMP SET SAL=1000 WHERE EMPNO = 7369;",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "sql_query",
+          "choice_text": "INSERT /*+ APPEND */ INTO EMP SELECT * FROM SCOTT.EMP;",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "sql_query",
+          "choice_text": "SELECT * FROM EMP WHERE EMPNO = 7369 FOR UPDATE;",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "테이블 Lock(=TM Lock) Exclusive 모드이므로 Append 모드로 입력한 ③번 SQL 실행 후 Lock 발생현황을 모니터링한 결과이다."
+      }
+    },
+    {
+      "question_number": 5,
+      "book_section": "III",
+      "book_question_number": 114,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 쿼리를 수행했을 때 블로킹을 발생시키는 상황으로 적절한 것은?"
+          }
+        },
+        {
+          "asset_type": "sql_ddl",
+          "payload": {
+            "dialect": "oracle",
+            "code": "CREATE TABLE t1 (\n  c1 NUMBER,\n  CONSTRAINT t1_pk PRIMARY KEY (c1)\n);"
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "oracle",
+            "code": "-- 세션1\nINSERT INTO t1 VALUES (1);\n\n-- 세션2\nINSERT INTO t1 VALUES (1);"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "세션1: TM-RX, 세션2: TM-RX",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "세션1: TM-RX, 세션2: TM-X",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "세션1: TX-X, 세션2: TX-S",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "세션1: TX-X, 세션2: TX-X",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "세션1은 TX-X를 획득하고 있고 세션2는 PK 제약조건에 의해 TX-S를 요청하면서 블로킹됨"
+      }
+    },
+    {
+      "question_number": 6,
+      "book_section": "III",
+      "book_question_number": 115,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "데이터베이스 트랜잭션에 대한 격리성이 낮은 경우 발생할 수 있는 문제점으로 가장 적절하지 않은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "Dirty Read: 다른 트랜잭션에 의해 수정되었고 아직 커밋되지 않은 데이터를 읽는 것을 말한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "Non-Repeatable Read: 한 트랜잭션 내에서 같은 쿼리를 두 번 수행했는데, 그 사이에 다른 트랜잭션이 값을 수정 또는 삭제하는 바람에 두 쿼리 결과가 다르게 나타나는 현상을 말한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "Phantom Read: 한 트랜잭션 내에서 같은 쿼리를 두 번 수행했는데, 첫 번째 쿼리에서 없던 유령 레코드가 두 번째 쿼리에서 나타나는 현상을 말한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "Isolation: 트랜잭션이 실행되는 도중에 다른 트랜잭션의 영향을 받아 잘못된 결과를 만들어서는 안된다.",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "④ Isolation(트랜잭션이 실행되는 도중에 다른 트랜잭션의 영향을 받아 잘못된 결과를 만들어서는 안된다)은 데이터베이스 트랜잭션의 4가지 특성 중 하나로 문제점이 아니고 목표라고 할 수 있다."
+      }
+    },
+    {
+      "question_number": 7,
+      "book_section": "III",
+      "book_question_number": 116,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "오라클에서 아래 저장 프로시저를 두 트랜잭션(TX1, TX2)이 동시에 실행할 때 발생할 수 있는 현상으로 가장 적절하지 않은 것은?"
+          }
+        },
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "[PK]\n예약현황 : 예약번호\n예약변경이력 : 예약번호, 예약변경회차"
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "plsql",
+            "code": "create or replace procedure p (\n  v_rsv_no varchar2(10),\n  v_rsv_seq number\n)\nIS\n  v_max_rsv_seq number;\nbegin\n  delete\n  from 예약변경이력\n  where 예약번호 = v_rsv_no\n  and 예약변경회차 = v_rsv_seq;\n\n  insert into 예약변경이력 (예약번호, 예약변경회차)\n  values (v_rsv_no, v_rsv_seq);\n\n  select max(예약변경회차)\n  into v_max_rsv_seq\n  from 예약변경이력\n  where 예약번호 = v_rsv_no;\n\n  merge into 예약현황 a\n  using (select v_rsv_no 예약번호,\n                v_max_rsv_seq 최종예약변경회차\n         from dual\n        ) b\n  on (a.예약번호 = v_rsv_no)\n  when not matched then\n    insert (예약번호, 최종예약변경회차)\n    values (v_rsv_no, v_max_rsv_seq);\n  when matched then\n    update set 최종예약변경회차 = v_max_rsv_seq;\n\n  commit;\nend;"
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "plsql",
+            "code": "-- [트랜잭션]\n-- TX1\nexec p('2014000001', 1);\n\n-- TX2\nexec p('2014000001', 2);"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "교착상태(Dead Lock)가 발생할 수 있다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "예약현황 테이블의 PK 제약 오류가 발생할 수 있다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "예약현황 테이블의 최종예약변경회차 값이 잘못 입력될 수 있다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "두 트랜잭션 모두 예약현황 테이블에 Row Exclusive(=SX) 모드로 테이블 Lock(TM Lock)을 획득한다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "예약번호가 신규일 때 동시에 실행된다면 PK제약 오류가 발생할 수 있고, TX2가 TX1보다 늦게 시작하여 먼저 종료한 경우 잘못된 값이 입력될 수 있다. 일반 DML 문은 TM 테이블 Lock을 Row Exclusive 모드로 획득하고, 서로 자원을 획득한 채 선행 트랜잭션을 대기하지는 않으므로 교착상태는 발생하지 않는다."
+      }
+    },
+    {
+      "question_number": 8,
+      "book_section": "III",
+      "book_question_number": 117,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "트랜잭션 내에서 쿼리를 두 번 이상 수행할 때 첫 번째 쿼리에 있던 레코드가 사라지거나 값이 바뀌는 현상을 방지해 주는 트랜잭션 격리성 수준 단계로 가장 적절한 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "Read Uncommitted",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "Read Committed",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "Repeatable Read",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "Serializable Read",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "Read Uncommitted: 트랜잭션에서 처리 중인 아직 커밋되지 않은 데이터를 다른 트랜잭션이 읽는 것을 허용한다.\nRead Committed: 트랜잭션이 커밋되어 확정된 데이터만 다른 트랜잭션이 읽도록 허용하여 dirty read 방지한다.\nRepeatable Read: 트랜잭션 내에서 쿼리를 두 번 이상 수행할 때 첫 번째 쿼리에 있던 레코드가 사라지거나 값이 바뀌는 현상을 방지한다.\nSerializable Read: 트랜잭션 내에서 쿼리를 두 번 이상 수행할 때 첫 번째 쿼리에 있던 레코드가 사라지거나 값이 바뀌지 않으며 새로운 레코드가 나타나지 않는다."
+      }
+    },
+    {
+      "question_number": 9,
+      "book_section": "III",
+      "book_question_number": 118,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "대부분의 DBMS가 채택하고 있는 기본 트랜잭션 격리성 수준(Transaction Isolation Level)은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "Read Uncommitted",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "Read Committed",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "Repeatable Read",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "Serializable",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "대부분의 DBMS가 Read Committed를 기본 트랜잭션 격리성 수준으로 채택하고 있으므로 Dirty Read가 발생할까 걱정하지 않아도 되지만, Non-Repeatable Read, Phantom Read 현상에 대해선 세심한 주의가 필요하다."
+      }
+    },
+    {
+      "question_number": 10,
+      "book_section": "III",
+      "book_question_number": 119,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "트랜잭션 동시성 제어에 대한 설명으로 가장 적절하지 않은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "비관적 동시성 제어(Pessimistic Concurrency Control)는 두 트랜잭션이 같은 데이터를 동시에 수정할 것이라고 가정하고 데이터를 읽는 시점에 Lock을 설정하는 방식을 말한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "낙관적 동시성 제어(Optimistic Concurrency Control)는 두 트랜잭션이 같은 데이터를 동시에 수정하지 않을 것이라고 가정하고 데이터를 읽는 시점에 Lock을 설정하지 않는 방식을 말한다. 이 방식에선 데이터를 수정하는 시점에, 앞서 읽은 데이터가 다른 트랜잭션에 의해 변경되었는지 반드시 확인해야 데이터 정합성을 유지할 수 있다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "트랜잭션 격리성 수준(Transaction Isolation Level)을 Serializable로 상향 조정하면 일반적으로 동시성과 일관성이 같이 높아진다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "트랜잭션 격리성 수준(Transaction Isolation Level)을 Serializable로 상향 조정하면 프로그램에서 별도로 동시성 제어를 하지 않아도 DBMS가 트랜잭션 단위 일관성을 보장해 준다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "트랜잭션 격리성 수준(Transaction Isolation Level)을 상향 조정할수록 데이터의 일관성은 높아지지만, Lock의 범위가 넓어지고 대기 시간이 늘어나므로 동시성은 낮아진다."
+      }
+    },
+    {
+      "question_number": 11,
+      "book_section": "III",
+      "book_question_number": 120,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "EMP 테이블 7788번 사원의 SAL 값이 현재 1000인 상황에서 아래 TX1, TX2 두 개의 트랜잭션이 동시에 수행되었다. 양쪽 트랜잭션이 모두 완료된 시점에 오라클과 SQL Server 환경에서의 7788번 사원의 SAL 값을 순서대로 나열한 것은? (단, Transaction Isolation Level을 조정하지 않았고, Snapshot 관련 데이터베이스 설정도 초기값 그대로인 상황이다.)"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "트랜잭션 수행 순서",
+            "columns": [
+              "<TX1>",
+              "시간",
+              "<TX2>"
+            ],
+            "rows": [
+              {
+                "<TX1>": "update emp set sal = 2000\nwhere empno = 7788\nand sal = 1000;",
+                "시간": "t1",
+                "<TX2>": ""
+              },
+              {
+                "<TX1>": "",
+                "시간": "t2",
+                "<TX2>": "update emp set sal = 3000\nwhere empno = 7788\nand sal = 2000;"
+              },
+              {
+                "<TX1>": "commit;",
+                "시간": "t3",
+                "<TX2>": ""
+              },
+              {
+                "<TX1>": "",
+                "시간": "t4",
+                "<TX2>": "commit;"
+              }
+            ]
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "2000, 2000",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "3000, 2000",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "2000, 3000",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "3000, 3000",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "오라클은 Update 문장이 시작되는 시작을 기준으로 갱신 대상 레코드를 식별하므로 TX2 트랜잭션의 update는 실패한다. 따라서 TX1 트랜잭션의 결과가 7788 사원의 최종 결과가 된다. SQL Server에서 TX2 트랜잭션은 TX1 트랜잭션이 완료될 때까지 기다린다. TX1이 끝났을 때 7788 사원의 sal 값은 2000이므로 TX2 트랜잭션이 정상적으로 진행돼 값을 3000으로 바꾼다."
+      }
+    },
+    {
+      "question_number": 12,
+      "book_section": "III",
+      "book_question_number": 121,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "다중버전 동시성 제어(Multiversion Concurrency Control, 이하 MVCC) 모델을 채택한 DBMS의 읽기 일관성 메커니즘에 대한 설명으로 가장 적절하지 않은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "읽기 일관성을 위해 Undo 세그먼트(또는 버전 저장소)에 저장된 Undo(또는 Snapshot) 데이터를 활용한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "MVCC 모델은 기본적으로 완벽한 문장 수준 읽기 일관성을 보장한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "MVCC 모델은 기본적으로 완벽한 트랜잭션 수준 읽기 일관성을 보장한다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "트랜잭션 수준 읽기 일관성이란, 트랜잭션이 시작된 시점을 기준으로 일관성 있게 데이터를 읽어들이는 것을 말한다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "MVCC 모델은 문장 수준의 읽기 일관성을 완벽히 보장하지만, 트랜잭션 수준의 읽기 일관성을 보장하지는 않는다."
+      }
+    }
+  ]
+}

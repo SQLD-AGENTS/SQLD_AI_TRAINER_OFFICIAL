@@ -1,0 +1,1285 @@
+{
+  "subject_id": 3,
+  "chapter_id": 3,
+  "questions": [
+    {
+      "question_number": 1,
+      "book_section": "III",
+      "book_question_number": 31,
+      "question_type": "design_index",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 SQL을 참고할 때 가장 적절한 인덱스 안은?"
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT *\nFROM 주문\nWHERE 상품번호 = :B1\nAND 고객번호 = :B2\nAND 주문일시 LIKE '2018%';"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "index_definition",
+          "choice_text": "주문일시 + 고객번호",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "index_definition",
+          "choice_text": "주문일시 + 고객번호 + 상품번호",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "index_definition",
+          "choice_text": "상품번호 + 고객번호",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "index_definition",
+          "choice_text": "상품번호 + 고객번호 + 주문일시",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "주문일시는 범위를 넓게 만들어 인덱스 선두칼럼으로 적절하지 않지만 마지막 칼럼으로는 효율을 발휘한다."
+      }
+    },
+    {
+      "question_number": 2,
+      "book_section": "III",
+      "book_question_number": 32,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 논리 데이터 모델에서 학생들이 본인이 수강하고 있는 개설과정에 대한 정보를 검색하는 경우가 매우 빈번하다고 할 때, 성능을 고려한 개선 방법으로 가장 적절한 것은?\n(단, 각 엔터티의 식별자 속성 순서가 그대로 PK 인덱스에 반영된다고 가정)"
+          }
+        },
+        {
+          "asset_type": "erd",
+          "payload": "erDiagram\n  학생 ||--o{ 수강 : \"\"\n  개설과정 ||--o{ 수강 : \"\"\n  학생 {\n    varchar 학번 PK\n  }\n  수강 {\n    varchar 과목번호 PK,FK\n    varchar 개설년도 PK,FK\n    varchar 개설학기 PK,FK\n    varchar 학번 PK,FK\n  }\n  개설과정 {\n    varchar 과목번호 PK\n    varchar 개설년도 PK\n    varchar 개설학기 PK\n  }"
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "수강 엔터티의 주식별자를 수강번호라는 인조식별자로 대체한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "수강 엔터티의 주식별자 속성 순서에서 학번이 가장 앞에 오도록 수정 한다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "개설과정의 주식별자를 개설번호 같은 단일 인조식별자로 대체하면 수강 엔터티의 주식별자 속성이 간결해져 SQL의 조인 성능이 향상된다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "수강 엔터티는 전교생의 수강 정보가 매학기 누적되기 때문에 용량과 I/O 성능을 고려하여 파티셔닝할 필요가 있다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "전제에 따르면 임의의 학번을 검색조건으로 사용하는 경우가 빈번할 것이므로 수강 엔터티의 식별자 속성 선두가 학번인 경우 인덱스 사용 효율이 가장 좋다."
+      }
+    },
+    {
+      "question_number": 3,
+      "book_section": "III",
+      "book_question_number": 33,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 데이터 모델에 표현된 FK(Foreign Key)에 대한 설명으로 가장 적절한 것은?\n\n단, 학사기준과 수강신청은 조인하여 정보를 조회할 업무가 많음"
+          }
+        },
+        {
+          "asset_type": "erd",
+          "payload": "erDiagram\n  학사기준 ||--o{ 수강신청 : \"\"\n  학사기준 {\n    varchar 학사기준번호 PK\n    varchar 년도\n    varchar 학기\n    varchar 특이사항\n  }\n  수강신청 {\n    varchar 강의번호 PK\n    varchar 학번 PK\n    varchar 학사기준번호 FK\n    varchar 성명\n    varchar 연락처1\n    varchar 연락처2\n    varchar 등록년도\n    varchar 감면코드\n  }"
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "학사기준번호는 부모 테이블에 이미 인덱스가 존재하기 때문에 상속 받아 생긴 수강신청에는 학사기준번호 칼럼에 대한 별도의 인덱스가 필요하지 않다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "학사기준번호는 부모 테이블에 이미 인덱스가 존재하지만 수강신청과 조인에 의한 성능저하 예방을 위해 상속받아 생긴 수강신청에도 학사기준번호 칼럼에 대한 별도의 인덱스가 필요하다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "데이터 모델에서는 관계를 연결하고 데이터베이스에 FK제약조건 생성을 생략하는 경우 학사기준번호에 대한 인덱스를 생성할 필요가 없다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "수강신청의 학사기준번호를 주식별자로 변경(강의번호 + 학번 + 학사기준번호)하는 것이 조인 시 성능저하를 방지할 수 있다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "엔터티 간에 논리적 관계가 있을 경우 즉, 엔터티 간에 관계(Relationship)를 정의하여 관련 엔터티 상호 간에 업무적인 연관성이 있음을 표현한 경우에는, 이 데이터들이 업무적으로 밀접하게 연결되어 상호 간에 조인이 자주 발생한다는 것을 의미한다. 따라서 데이터베이스 상에서 DBMS가 제공하는 FK Constraints를 생성했는지 여부와 상관없이 조인 성능을 향상하기 위한 인덱스를 생성해주는 것이 좋다. 그러므로 수강신청테이블의 학사기준번호에 인덱스가 필요하다. 데이터베이스에 생성하는 FK Constraints는 데이터 모델상에 표현된 논리적 관계에 따라 관련 인스턴스 간에 일관성을 보장하기 위해 설계된 제약조건을 구현할 수 있도록 DBMS가 제공해 주는 하나의 '지원 기능'으로 이해될 수 있다. 수강신청의 학사기준번호를 주식별자로 변경(강의번호+학번+학사기준번호)하는 것은 인덱스 생성을 최소화하는 측면에서는 효과가 있지만 조인 시 '강의번호, 학번' 조건절이 없다면 인덱스 검색 때 효율적이지 않다."
+      }
+    },
+    {
+      "question_number": 4,
+      "book_section": "III",
+      "book_question_number": 34,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "인덱스에 대한 설명으로 가장 적절하지 않은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "인덱스는 검색 성능 최적화에 사용된다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "인덱스가 많으면 INSERT, UPDATE, DELETE 와 같은 DML 작업 시 오히려 성능이 느려질 수 있다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "인덱스는 구성하는 칼럼의 데이터와 레코드 식별자(ROWID)로 구성 되어 있다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "인덱스는 '='로 검색하는 일치 검색에만 사용 가능하다.",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "인덱스는 BETWEEN과 > 같은 범위검색에도 사용이 가능하다."
+      }
+    },
+    {
+      "question_number": 5,
+      "book_section": "III",
+      "book_question_number": 35,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "관계형 데이터베이스의 인덱스에 대한 설명으로 가장 적절하지 않은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "DBMS에서 가장 일반적인 인덱스는 B-Tree구조이다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "루트, 브랜치, 리프 블록으로 구성된다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "루트 블록은 트리의 가장 아래 단계로 레코드 식별자를 가지고 있다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "인덱스 검색이 테이블 스캔보다 비효율적일 수 있다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "테이블의 대부분의 데이터를 찾을 때는 한 블록씩 읽는 인덱스 검색보다 한 번에 여러 블록을 읽는 전체 테이블 스캔 방식이 유리할 수 있다. 리프 블록은 트리의 가장 아래 단계로 레코드 식별자를 가지고 있다."
+      }
+    },
+    {
+      "question_number": 6,
+      "book_section": "III",
+      "book_question_number": 36,
+      "question_type": "fill_blanks_multi",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 빈칸에 들어갈 인덱스 종류를 순서대로 나열한 것은?"
+          }
+        },
+        {
+          "asset_type": "list_items",
+          "payload": {
+            "items": [
+              "[ ㉠ ]는 브랜치 블록과 리프 블록으로 구성되며, 브랜치 블록은 분기를 목적으로 하고 리프블록은 인덱스를 구성하는 칼럼의 값으로 정렬된다. 일반적으로 OLTP 시스템 환경에서 가장 많이 사용된다.",
+              "[ ㉡ ]는 인덱스의 리프 페이지가 곧 데이터 페이지이며, 리프 페이지의 모든 데이터는 인덱스 키 칼럼 순으로 물리적으로 정렬되어 저장된다.",
+              "[ ㉢ ]는 시스템에서 사용될 질의를 시스템 구현 시에 모두 알 수 없는 경우인 DW 및 AD-HOC 질의 환경을 위해서 설계되었으며, 하나의 인덱스 키 엔트리가 많은 행에 대한 포인터를 저장하고 있는 구조이다."
+            ]
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "tuple",
+          "choice_text": "B-TREE 인덱스, BITMAP 인덱스, CLUSTERED 인덱스",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "tuple",
+          "choice_text": "B-TREE 인덱스, CLUSTERED 인덱스, BITMAP 인덱스",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "tuple",
+          "choice_text": "BITMAP 인덱스, CLUSTERED 인텍스, REVERSE KEY 인덱스",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "tuple",
+          "choice_text": "BITMAP 인덱스, REVERSE KEY 인덱스, CLUSTERED 인덱스",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": ""
+      }
+    },
+    {
+      "question_number": 7,
+      "book_section": "III",
+      "book_question_number": 37,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "인덱스에 대한 설명으로 가장 적절한 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "인덱스는 인덱스 구성 칼럼으로 항상 오름차순으로 정렬된다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "비용기반 옵티마이저는 인덱스 스캔이 항상 유리하다고 판단한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "규칙기반 옵티마이저는 적절한 인덱스가 존재하면 항상 인덱스를 사용하려고 한다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "인덱스 범위 스캔은 결과가 없으면 에러가 발생한다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "① 인덱스를 생성할 때 정렬 순서를 내림차순으로 하면 내림차순으로 정렬된다. ② 비용기반 옵티마이저는 SQL을 수행하는데 드는 비용을 계산하여 실행계획을 생성하므로 인덱스가 존재하더라도 전체 테이블 스캔이 유리하다고 판단할 수도 있다. ④ 인덱스 범위 스캔은 결과 건수만큼 반환하지만, 결과가 없으면 한 건도 반환하지 않을 수 있다."
+      }
+    },
+    {
+      "question_number": 8,
+      "book_section": "III",
+      "book_question_number": 38,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래에 대한 설명으로 가장 적절한 것은?\n\n[아래]\n[INDEX 생성]"
+          }
+        },
+        {
+          "asset_type": "sql_ddl",
+          "payload": {
+            "dialect": "ansi",
+            "code": "CREATE INDEX IDX_EMP_01 ON EMP (REGIST_DATE, DEPTNO);"
+          }
+        },
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "[SQL]"
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT *\nFROM EMP\nWHERE DEPTNO = 47\nAND REGIST_DATE BETWEEN '2015.02.01' AND '2015.02.28';"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "REGIST_DATE 조건의 범위가 넓을수록 SQL 성능이 좋다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "IDX_EMP_01 인덱스를 이용하여 DEPTNO = 47 조건을 효율적으로 탐색할 수 있다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "REGIST_DATE 칼럼에 대한 조건을 범위 검색이 아닌 동등 검색 조건으로 변경하면 IDX_EMP_01 인덱스를 효율적으로 활용할 수 있다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "IDX_EMP_01 인덱스는 테이블 내의 대량 데이터를 탐색할 때 매우 유용하게 활용될 수 있는 인덱스 형식이다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "① REGIST_DATE 조건의 범위가 넓을수록 인덱스 검색효율이 저하된다. ② REGIST_DATE 조건이 범위 조건이고 DEPTNO 칼럼이 후행 칼럼이므로 효율적인 조건 검색을 할 수 없다. ④btree index는 일반적으로 테이블 내의 데이터 중 10% 이하의 데이터를 검색할 때 유리하다."
+      }
+    },
+    {
+      "question_number": 9,
+      "book_section": "III",
+      "book_question_number": 39,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "인덱스에 대한 설명으로 가장 적절하지 않은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "인덱스의 목적은 조회 성능을 최적화하는 것이다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "Insert, Update, Delete 등의 DML 처리 성능을 저하시킬 수도 있다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "B-트리 인덱스는 일치 및 범위 검색에 적절한 구조이다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "인덱스 액세스는 테이블 전체 스캔보다 항상 유리하다.",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "인덱스를 스캔하여 테이블로 데이터를 찾아가는 방식이 랜덤 엑세스인데, 이러한 랜덤 엑세스의 부하가 크기 때문에 매우 많은 양의 데이터를 읽을 경우에는 인덱스 스캔보다 테이블 전체 스캔이 유리할 수도 있다."
+      }
+    },
+    {
+      "question_number": 10,
+      "book_section": "III",
+      "book_question_number": 40,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래에서 인덱스에 대한 설명으로 적절한 내용을 모두 고른 것은?"
+          }
+        },
+        {
+          "asset_type": "list_items",
+          "payload": {
+            "items": [
+              "(가) 인덱스는 데이터 조회 목적에는 효과적이지만, INSERT, UPDATE, DELETE 작업에는 오히려 많은 부하를 줄 수도 있다.",
+              "(나) 인덱스를 이용한 데이터 조회는 항상 테이블 전체 스캔보다 빠른 것을 보장할 수 있다.",
+              "(다) SQL Server의 클러스터형 인덱스는 오라클의 IOT와 매우 유사하다.",
+              "(라) 인덱스는 INSERT와 DELETE 작업과는 다르게 UPDATE 작업에서는 부하가 없을 수도 있다.",
+              "(마) 인덱스를 활용하여 데이터를 조회할 때 인덱스를 구성하는 칼럼들의 순서는 SQL 실행 성능과 관계가 없다."
+            ]
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "tuple",
+          "choice_text": "(가), (나), (다)",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "tuple",
+          "choice_text": "(가), (다), (라)",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "tuple",
+          "choice_text": "(다), (라), (마)",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "tuple",
+          "choice_text": "(가), (다), (마)",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "대량의 데이터를 조회하는 경우 인덱스를 이용한 조회보다는 테이블 전체 스캔 방식으로 조회하는 것이 더 빠를 수도 있으며, 인덱스를 구성하는 칼럼들의 순서는 데이터 조회 시 성능적인 관점에서 매우 중요한 역할을 한다. 또한 인덱스를 구성하는 칼럼 이외의 데이터가 UPDATE될 때는 인덱스로 인한 부하가 발생하지 않는다."
+      }
+    },
+    {
+      "question_number": 11,
+      "book_section": "III",
+      "book_question_number": 41,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 SQL에서 EMP_IDX 인덱스의 수평적 탐색 시작 지점의 값으로 가장 적절한 것은?"
+          }
+        },
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "[인덱스 구성]\nemp_idx : deptno + sal + comm"
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "select /*+ index_asc(e emp_idx) */\nempno, ename, sal, comm, hiredate\nfrom emp e\nwhere deptno = 20\nand sal between 2000 and 3000\nand comm <= 100"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "인덱스 정렬 순서상 deptno = 20 조건을 만족하는 첫 번째 레코드",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "인덱스 정렬 순서상 deptno = 20 and sal = 2000 조건을 만족하는 첫 번째 레코드",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "인덱스 정렬 순서상 deptno = 20 and sal = 2000 and comm = 100 조건을 만족하는 첫 번째 레코드",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "인덱스 정렬 순서상 deptno = 20 and sal = 3000 and comm = 100 조건을 만족하는 첫 번째 레코드",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "인덱스 정렬 순서상 deptno = 20 and sal = 2000 조건을 만족하는 첫 번째 레코드에서부터 수평적 탐색을 시작한다. comm 조건이 less than or equal인 점에 주목하자. comm 조건이 more than or equal 이면, deptno = 20 and sal = 2000 and comm = 100 조건을 만족하는 첫 번째 레코드에서부터 스캔을 시작한다."
+      }
+    },
+    {
+      "question_number": 12,
+      "book_section": "III",
+      "book_question_number": 42,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래와 같은 인덱스 상황에서 Index Range Scan이 불가능한 SQL은?"
+          }
+        },
+        {
+          "asset_type": "sql_ddl",
+          "payload": {
+            "dialect": "ansi",
+            "code": "create index emp_idx on emp(deptno, job, ename);"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "sql_query",
+          "choice_text": "select empno, ename, job, hiredate\nfrom emp\nwhere deptno = :deptno\nand ename like :ename;",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "sql_query",
+          "choice_text": "select empno, ename, job, hiredate\nfrom emp\nwhere deptno = :deptno\nand job is null;",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "sql_query",
+          "choice_text": "select empno, ename, job, hiredate\nfrom emp\nwhere deptno is null\nand job = :job;",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "sql_query",
+          "choice_text": "select empno, ename, job, hiredate\nfrom emp\nwhere job = :job\nand ename like :ename;",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "Index Range Scan이 가능하려면 인덱스 선두 칼럼이 조건절에 사용되어야 한다."
+      }
+    },
+    {
+      "question_number": 13,
+      "book_section": "III",
+      "book_question_number": 43,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래를 참고할 때 INDEX RANGE SCAN/INDEX UNIQUE SCAN이 불가능한 SQL로 가장 적절한 것은?"
+          }
+        },
+        {
+          "asset_type": "entity_schema",
+          "payload": {
+            "table": "EMP",
+            "columns": [
+              {"name": "EMPNO", "type": "NUMBER", "key": "PK"},
+              {"name": "ENAME", "type": "VARCHAR2(10)"},
+              {"name": "JOB", "type": "VARCHAR2(9)"},
+              {"name": "MGR", "type": "NUMBER"},
+              {"name": "HIREDATE", "type": "DATE"},
+              {"name": "SAL", "type": "NUMBER"},
+              {"name": "COMM", "type": "NUMBER"},
+              {"name": "DEPTNO", "type": "NUMBER"}
+            ]
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "sql_query",
+          "choice_text": "SELECT * FROM EMP WHERE EMPNO LIKE '77%';",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "sql_query",
+          "choice_text": "SELECT * FROM EMP WHERE EMPNO = '7782';",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "sql_query",
+          "choice_text": "SELECT * FROM EMP WHERE (EMPNO, ENAME) IN ((7782, 'CLARK'));",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "sql_query",
+          "choice_text": "SELECT * FROM EMP WHERE EMPNO > 0;",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "LIKE는 문자열 함수이기에 숫자형인 EMPNO가 가공되어 정상적인 인덱스 활용이 불가능하다."
+      }
+    },
+    {
+      "question_number": 14,
+      "book_section": "III",
+      "book_question_number": 44,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 SQL을 수행한 후 Index Range Scan이 가능한 SQL로 가장 적절한 것은?"
+          }
+        },
+        {
+          "asset_type": "sql_ddl",
+          "payload": {
+            "dialect": "ansi",
+            "code": "CREATE TABLE 일별매출(\n  일자 VARCHAR2(8),\n  상품코드 VARCHAR2(5),\n  매출금액 NUMBER\n);\n\nCREATE INDEX IX_일별매출 ON 일별매출(일자, 상품코드);"
+          }
+        },
+        {
+          "asset_type": "sql_dml",
+          "payload": {
+            "dialect": "ansi",
+            "code": "INSERT INTO 일별매출 VALUES ('20170301', 'A', 100);\nINSERT INTO 일별매출 VALUES ('20170302', 'A', 150);\nINSERT INTO 일별매출 VALUES ('20170302', 'B', 250);\nINSERT INTO 일별매출 VALUES ('20170303', 'C', 50);\nINSERT INTO 일별매출 VALUES ('20170304', 'A', 450);\nINSERT INTO 일별매출 VALUES ('20170305', 'C', 200);\nCOMMIT;"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "sql_query",
+          "choice_text": "SELECT * FROM 일별매출 WHERE SUBSTR(일자, 1, 4) = '2017' AND SUBSTR(일자, -4, 2) = '03';",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "sql_query",
+          "choice_text": "SELECT * FROM 일별매출 WHERE (일자, 상품코드) IN (('20170301', 'A'));",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "sql_query",
+          "choice_text": "SELECT * FROM 일별매출 WHERE 일자 > TO_DATE('20170301');",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "sql_query",
+          "choice_text": "SELECT * FROM 일별매출 WHERE 일자 = '20170301' OR 상품코드 = 'A';",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "① 인덱스는 해당 칼럼이 가공되면 활용할 수 없다.\n② 다중 IN절의 경우는 칼럼의 가공으로 보지 않는다. Index Range Scan 가능\n④ OR절로 인하여 Index Full Scan 가능"
+      }
+    },
+    {
+      "question_number": 15,
+      "book_section": "III",
+      "book_question_number": 45,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "인덱스에 대한 설명으로 가장 적절하지 않은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "B-Tree 인덱스의 수직적 탐색은 동일한 깊이를 보장한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "Index Full Scan은 선두 칼럼을 가공하거나 누락한 경우에 사용할 수 있다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "Index Fast Full Scan은 인덱스 칼럼대로 결과의 정렬을 보장하지 않는다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "Index Unique Scan은 단일 칼럼으로 생성된 인덱스에서만 사용된다.",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "Index Unique Scan은 단일, 결합 칼럼으로 생성된 Unique Index의 칼럼을 모두 '=' 조건으로 검색할 때 사용된다."
+      }
+    },
+    {
+      "question_number": 16,
+      "book_section": "III",
+      "book_question_number": 46,
+      "question_type": "design_index",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 SQL을 처리하기에 가장 효율적인 인덱스 구성은? (단, 클러스터링 팩터는 고려하지 않는다.)"
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "select *\nfrom 주문\nwhere 주문유형코드 = :a\nand 지점코드 = :b\nand 계좌번호 = :c\nand 주문일자 between :d and :e"
+          }
+        },
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "[값의 종류 개수(Number Of Distinct Value)]"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "값의 종류 개수",
+            "columns": ["칼럼명", "값의 종류 개수"],
+            "rows": [
+              {"칼럼명": "주문유형코드", "값의 종류 개수": "5"},
+              {"칼럼명": "계좌번호", "값의 종류 개수": "500,000"},
+              {"칼럼명": "지점코드", "값의 종류 개수": "100"},
+              {"칼럼명": "주문일자", "값의 종류 개수": "1,800"}
+            ]
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "index_definition",
+          "choice_text": "지점코드+주문일자+계좌번호",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "index_definition",
+          "choice_text": "계좌번호+주문일자+지점코드",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "index_definition",
+          "choice_text": "주문일자+계좌번호+지점코드",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "index_definition",
+          "choice_text": "주문유형코드+지점코드+주문일자+계좌번호",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "계좌번호, 주문일자 between 조건만으로도 충분히 스캔범위를 줄일 수 있다."
+      }
+    },
+    {
+      "question_number": 17,
+      "book_section": "III",
+      "book_question_number": 47,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 SQL을 튜닝하기 위해 분석한 내용으로 가장 적절하지 않은 것은?"
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "CREATE INDEX 주문_IDX ON 주문(주문일자);\n\nSELECT 고객ID, 연락처, 고객등급\nFROM 주문\nWHERE 주문일자 = '20110725'\nAND 배송상태 = 'ING';"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "[주문일자 = '20110725'] 조건만으로 인덱스 탐색이 이루어진다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "[배송상태 = 'ING'] 조건에 대한 필터링은 테이블 액세스 단계에서 이루어진다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "SQL 문장에 [배송상태 = 'ING'] 조건절이 없다면 테이블은 액세스하지 않아도 된다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "[배송상태 = 'ING'] 조건을 만족하는 레코드 비중이 아주 낮다면, 주문일자_idx 인덱스가 주문일자와 배송상태 두 칼럼을 모두 포함하도록 구성하여 쿼리 성능을 향상시킬 수 있다. 이 쿼리만 고려한다면, 두 칼럼 간 순서는 자유롭게 선택해도 무방하다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "배송상태 = 'ING' 조건절이 없더라도 고객ID, 연락처, 고객등급을 읽기 위해 테이블을 액세스해야 한다."
+      }
+    },
+    {
+      "question_number": 18,
+      "book_section": "III",
+      "book_question_number": 48,
+      "question_type": "design_index",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "성능 향상을 위해 아래 왼쪽 SQL을 오른쪽과 같이 변환하였을 때, SQL의 블록 I/O를 최소화하는 인덱스 구성으로 가장 적절한 것은?"
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "select *\nfrom 고객\nwhere 가입일자 like '2010%'\nand 고객등급 between 'A' and 'B'"
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "select *\nfrom 고객\nwhere 가입일자 like '2010%'\nand 고객등급 = 'A'\nunion all\nselect *\nfrom 고객\nwhere 가입일자 like '2010%'\nand 고객등급 = 'B'"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "index_definition",
+          "choice_text": "가입일자",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "index_definition",
+          "choice_text": "고객등급",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "index_definition",
+          "choice_text": "가입일자 + 고객등급",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "index_definition",
+          "choice_text": "고객등급 + 가입일자",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "①과 같은 인덱스 구성에서 SQL을 오른쪽과 같이 변환하면 인덱스에서 가입일자 like 조건에 해당하는 범위를 2번 스캔하게 된다. 고객등급을 테이블에서 필터링하므로 테이블 Random 액세스양도 2배 증가한다.\n②와 같은 인덱스 구성에서는 SQL을 변환하기 전후 블록 I/O 발생량이 거의 동일하다.\n③과 같은 인덱스 구성에서는 고객등급을 인덱스에서 필터링하므로 테이블 Random 액세스양은 늘지 않지만, 인덱스에서 같은 범위를 2번 스캔하므로 블록 I/O가 오히려 늘어난다.\n④와 같은 인덱스 구성에서는 SQL을 변환한 후 블록 I/O 발생량이 크게 줄어든다."
+      }
+    },
+    {
+      "question_number": 19,
+      "book_section": "III",
+      "book_question_number": 49,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래에 대한 설명으로 가장 적절한 것은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "SQL 통계 정보 요약",
+            "columns": ["Call", "Count", "CPU Time", "Elapsed Time", "Disk", "Query", "Current", "Rows"],
+            "rows": [
+              {"Call": "Parse", "Count": "1", "CPU Time": "0.010", "Elapsed Time": "0.012", "Disk": "0", "Query": "0", "Current": "0", "Rows": "0"},
+              {"Call": "Execute", "Count": "1", "CPU Time": "0.000", "Elapsed Time": "0.000", "Disk": "0", "Query": "0", "Current": "0", "Rows": "0"},
+              {"Call": "Fetch", "Count": "78", "CPU Time": "10.150", "Elapsed Time": "49.199", "Disk": "27830", "Query": "266468", "Current": "0", "Rows": "1909"},
+              {"Call": "Total", "Count": "80", "CPU Time": "10.160", "Elapsed Time": "49.231", "Disk": "27830", "Query": "266468", "Current": "0", "Rows": "1909"}
+            ]
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "Row Source Operation",
+            "columns": ["Rows", "Row Source Operation"],
+            "rows": [
+              {"Rows": "1909", "Row Source Operation": "TABLE ACCESS BY INDEX ROWID TAB1 (cr=266468 pr=27830 pw=0 time=58480816 us)"},
+              {"Rows": "266476", "Row Source Operation": "INDEX RANGE SCAN TAB1_X01 (cr=511 pr=300 pw=0 time=1893462 us) OF..."}
+            ]
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "TAB1_X01 인덱스의 클러스터링 팩터는 매우 좋은 상태다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "TAB1_X01 인덱스에 칼럼을 추가하면 성능을 높이는 데 매우 큰 도움이 된다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "TAB1_X01 인덱스 칼럼 순서를 조정하면 성능을 높이는 데 매우 큰 도움이 된다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "CPU Time과 Elapsed Time 간 39초 가량 차이가 발생한 이유는 Fetch 해야할 건수가 많기 때문이다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "TAB1_X01 인덱스의 클러스터링 팩터는 매우 나쁜 상태다. 테이블 액세스 횟수만큼 블록 I/O가 발생한 것으로 이를 알 수 있다.\n511개 인덱스 블록을 스캔했는데, 이것은 인덱스 스캔 과정에서 얻는 266,476개 레코드 수에 비하면 그리 큰 수치가 아니다. 비효율이 크지 않다는 뜻이다. TAB1_X01 인덱스 칼럼 순서를 조정하면 블록 I/O가 약간 감소할 수 있을지 모르지만, 전체 성능에 미치는 영향은 크지 않을 것이다.\nCPU Time과 Elapsed Time 간 39초 가량 차이가 발생한 이유는, 27,000여 개 디스크 블록을 읽기 위한 I/O Call 과정에 발생한 대기 현상 때문일 가능성이 가장 높다."
+      }
+    },
+    {
+      "question_number": 20,
+      "book_section": "III",
+      "book_question_number": 50,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "결합 인덱스 키 칼럼을 선정할 때 중요한 선택 기준 두 가지는?"
+          }
+        },
+        {
+          "asset_type": "list_items",
+          "payload": {
+            "items": [
+              "(가) 데이터 분포",
+              "(나) '=' 조건으로 자주 조회되는지 여부",
+              "(다) 조건절에 항상 또는 자주 사용되는지 여부",
+              "(라) 정렬 기준 칼럼으로 자주 사용되는지 여부"
+            ]
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "tuple",
+          "choice_text": "(가), (나)",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "tuple",
+          "choice_text": "(나), (가)",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "tuple",
+          "choice_text": "(다), (나)",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "tuple",
+          "choice_text": "(다), (라)",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "인덱스를 설계하는 가장 중요한 선택 기준은, 조건절에 항상 또는 자주 사용되는지 여부와 '=' 조건으로 자주 조회되는지 여부다. 인덱스 선두 칼럼이 일단 조건절에 사용돼야 해당 인덱스가 사용될 수 있으므로 전자가 특히 중요하다."
+      }
+    },
+    {
+      "question_number": 21,
+      "book_section": "III",
+      "book_question_number": 51,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 인덱스 구성과 SQL을 고려할 때, 실행계획 맨 아래(ID=5) 주문_IDX 인덱스의 액세스 조건으로 가장 적절한 것은?"
+          }
+        },
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "[인덱스 구성]"
+          }
+        },
+        {
+          "asset_type": "sql_ddl",
+          "payload": {
+            "dialect": "ansi",
+            "code": "create index 주문_IDX on 주문(주문일자, 고객번호);"
+          }
+        },
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "[SQL]"
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "select /*+ ordered use_nl(o) */ *\nfrom 고객 c, 주문 o\nwhere c.가입일자 = '20130414'\nand o.고객번호 = c.고객번호\nand o.주문일자 = '20130414'\nand o.상품코드 = 'A123';"
+          }
+        },
+        {
+          "asset_type": "execution_plan",
+          "payload": {
+            "text": "0 SELECT STATEMENT Optimizer ALL_ROWS\n1 0  TABLE ACCESS (BY INDEX ROWID) OF '주문' (TABLE)\n2 1    NESTED LOOPS\n3 2      TABLE ACCESS (BY INDEX ROWID) OF '고객' (TABLE)\n4 3        INDEX (RANGE SCAN) OF '고객_X01' (INDEX)\n5 2      INDEX (RANGE SCAN) OF '주문_IDX' (INDEX)"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "sql_fragment",
+          "choice_text": "o.고객번호 = c.고객번호",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "sql_fragment",
+          "choice_text": "o.주문일자 = '20130414'",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "sql_fragment",
+          "choice_text": "o.주문일자 = '20130414' and o.고객번호 = c.고객번호",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "sql_fragment",
+          "choice_text": "o.주문일자 = '20130414' and o.고객번호 = c.고객번호 and o.상품코드 = 'A123'",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "상품코드는 인덱스 구성칼럼이 아니므로 주문 테이블 액세스(ID=1) 단계의 필터조건이다."
+      }
+    },
+    {
+      "question_number": 22,
+      "book_section": "III",
+      "book_question_number": 52,
+      "question_type": "diagnose_action",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "SQL 트레이스를 수집한 결과 Row Source Operation이 아래와 같았다. 튜닝을 위해 가장 우선적으로 검토할 사항으로 가장 적절한 것은?\n(단, 한 달간 주문 건수는 평균 50만 건이다.)"
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "select c.고객명, c.연령, c.전화번호, o.주문일자, o.주문총금액, o.배송지주소\nfrom 고객 c, 주문 o\nwhere o.고객번호 = c.고객번호\nand c.고객등급 = 'A'\nand c.연령 between 51 and 60\nand o.주문일자 between '20101201' and '20101231'"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "Row Source Operation",
+            "columns": ["Rows", "Row Source Operation"],
+            "rows": [
+              {"Rows": "10", "Row Source Operation": "NESTED LOOPS"},
+              {"Rows": "23", "Row Source Operation": "TABLE ACCESS BY INDEX ROWID 고객"},
+              {"Rows": "2978", "Row Source Operation": "INDEX RANGE SCAN 고객_IDX"},
+              {"Rows": "10", "Row Source Operation": "TABLE ACCESS BY INDEX ROWID 주문"},
+              {"Rows": "28", "Row Source Operation": "INDEX RANGE SCAN 주문_IDX"}
+            ]
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "고객_IDX 인덱스 칼럼 순서를 조정한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "고객_IDX 인덱스에 칼럼을 추가한다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "주문_IDX 인덱스에 칼럼을 추가한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "테이블 조인 순서를 변경한다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "고객_IDX가 연령+고객등급 구성이라면 순서를 바꿨을 때 액세스양 개선이 가능하다. 한 달간 주문 건수는 평균 50만 건이므로 조인 순서 변경은 성능에 도움이 되지 않는다."
+      }
+    },
+    {
+      "question_number": 23,
+      "book_section": "III",
+      "book_question_number": 53,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "고객 테이블의 구성이 아래와 같을 때, INDEX RANGE SCAN으로 데이터를 액세스할 수 있는 SQL로 가장 적절한 것은?"
+          }
+        },
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "[칼럼 리스트]"
+          }
+        },
+        {
+          "asset_type": "entity_schema",
+          "payload": {
+            "entities": [
+              {
+                "table": "고객",
+                "columns": [
+                  {
+                    "name": "고객ID",
+                    "type": "VARCHAR2(10)",
+                    "constraint": "NOT NULL"
+                  },
+                  {
+                    "name": "고객명",
+                    "type": "VARCHAR2(20)",
+                    "constraint": "NOT NULL"
+                  },
+                  {
+                    "name": "직업코드",
+                    "type": "VARCHAR2(3)",
+                    "constraint": "NULLABLE"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "[인덱스 구성]"
+          }
+        },
+        {
+          "asset_type": "list_items",
+          "payload": {
+            "items": [
+              "고객_PK: 고객ID",
+              "고객_X01: 직업코드, 고객명"
+            ]
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "sql_query",
+          "choice_text": "SELECT FROM 고객 WHERE SUBSTR(고객ID, 1, 3) = '100'",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "sql_query",
+          "choice_text": "SELECT FROM 고객 WHERE 고객명 = '김시험'",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "sql_query",
+          "choice_text": "SELECT FROM 고객 WHERE 직업코드 IS NULL",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "sql_query",
+          "choice_text": "SELECT FROM 고객 WHERE 고객ID = '100000000'",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "직업코드 조건으로 인덱스를 Range Scan하려면 직업코드를 선두로 갖는 인덱스여야 한다. 고객_X01 인덱스가 여기에 해당한다. 인덱스 구성칼럼 중 하나라도 NOT NULL 칼럼이면, IS NULL 조회에 인덱스를 사용할 수 있다. 따라서 직업코드 IS NULL 조회에 고객_X01 인덱스를 사용할 수 있다."
+      }
+    }
+  ]
+}

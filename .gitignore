@@ -1,0 +1,87 @@
+PRD/
+datasets/*.pdf
+datasets/*.PDF
+workflow/
+trouble_shooting/
+
+# 생성된 리포트
+reports/
+
+# Vite 캐시
+frontend/.vite/
+
+# 런타임 로그 (outputs/ 자체는 Docker 빌드용으로 추적 중)
+outputs/user_logs.csv
+
+# 생성 데이터 (Railway Docker 빌드에 필요하므로 추적)
+# outputs/
+
+# 데이터베이스 파일
+*.db
+*.sqlite
+*.sqlite3
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+
+# 가상환경
+.venv/
+venv/
+env/
+.env
+
+# 환경변수 / 시크릿
+.env.local
+*.env
+secrets.yaml
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# 모델 파일 — 실제 크기 확인 후 ~30MB 수준이므로 추적 허용
+# (최대 단일 파일: predictor_rf.joblib 17.8MB)
+# *.pkl
+# *.joblib
+# *.pt
+# *.pth
+# *.h5
+# *.onnx
+# models/
+
+# 벡터 인덱스
+# *.faiss
+# *.index
+# faiss_index/
+
+# IDE
+.vscode/
+.idea/
+*.code-workspace
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 빌드 / 배포
+dist/
+build/
+*.egg-info/
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.env.local
+frontend/.env
+
+# Backend (경로 변경 반영)
+backend/.venv/
+backend/outputs/
+# backend/models/   ← Docker 빌드에 필요하므로 추적
+backend/*.db
+backend/*.sqlite

@@ -1,0 +1,486 @@
+{
+  "subject_id": 3,
+  "chapter_id": 2,
+  "questions": [
+    {
+      "question_number": 1,
+      "book_section": "III",
+      "book_question_number": 20,
+      "question_type": "fill_blank",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "'Response Time Analysis 성능관리 방법론'은 세션 또는 시스템 전체에 발생하는 병목 현상과 그 원인을 찾아 문제를 해결하는 방법과 과정을 다루며, 데이터베이스 서버의 응답 시간(Response Time)을 아래와 같이 정의하고 있다.\n\n[아래]\nResponse Time = Service Time + [       ]"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "Wait Time",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "CPU Time",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "I/O Time",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "Idle Time",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "'Service Time'은 프로세스가 정상적으로 동작하며 일을 수행한 시간을 말하며, 'CPU Time'이라고도 한다. 'Wait Time'은 프로세스가 어떤 이유에서건 잠시 수행을 멈추고 대기한 시간을 말하며, 'Queue Time'이라고도 한다."
+      }
+    },
+    {
+      "question_number": 2,
+      "book_section": "III",
+      "book_question_number": 21,
+      "question_type": "fill_blanks_multi",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "Response Time Analysis 성능관리 방법론을 설명할 때, 빈칸 ㉠, ㉡에 들어갈 내용으로 가장 적절한 것은?\n\n[아래]\nResponse Time = ㉠ Time + ㉡ Time"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "㉠ CPU, ㉡ Queue",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "㉠ CPU, ㉡ Elapsed",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "㉠ Service, ㉡ CPU",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "㉠ Service, ㉡ Idle",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "Response Time = Service Time + Wait Time = CPU Time + Queue Time"
+      }
+    },
+    {
+      "question_number": 3,
+      "book_section": "III",
+      "book_question_number": 22,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "가장 최근에 수행한 SQL에 대한 실제 실행계획을 확인할 수 있는 오라클 성능관리 도구 DBMS_XPLAN 패키지 함수는?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "DBMS_XPLAN.DISPLAY",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "DBMS_XPLAN.DISPLAY_CURSOR",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "DBMS_XPLAN.DISPLAY_AWR",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "DBMS_XPLAN.DISPLAY_PLAN",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "DBMS_XPLAN.DISPLAY_CURSOR 함수를 통해 캐싱된 커서가 실제 수행하면서 사용했던 실행계획을 간편하게 조회할 수 있다."
+      }
+    },
+    {
+      "question_number": 4,
+      "book_section": "III",
+      "book_question_number": 23,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "SQL Server에서 SQL의 예상 실행계획을 출력하는 명령문으로 가장 적절한 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "explain plan for",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "set autotrace on",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "set showplan_text on",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "grant plustrace to",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "다른 명령문들은 모두 오라클에서 사용되는 명령문이다."
+      }
+    },
+    {
+      "question_number": 5,
+      "book_section": "III",
+      "book_question_number": 24,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "오라클에서 실제로 SQL을 수행하는 명령문으로 가장 적절하지 않은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "set autotrace on explain",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "set autotrace on statistics",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "set autotrace traceonly",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "set autotrace traceonly explain",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "④는 SQL은 수행하지 않고 실행계획만을 출력한다."
+      }
+    },
+    {
+      "question_number": 6,
+      "book_section": "III",
+      "book_question_number": 25,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "오라클에서 SQL의 실행계획을 좀 더 편하고 이해하기 쉽게 출력하기 위해 제공하는 것으로 가장 적절하지 않은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "utlxpls.sql 스크립트",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "utlxplp.sql 스크립트",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "DBMS_SCHEDULER 패키지",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "DBMS_XPLAN 패키지",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "①, ②, ④는 해당 용도로 사용하지만 ③은 scheduling function 및 procedure들을 모아놓은 패키지이다."
+      }
+    },
+    {
+      "question_number": 7,
+      "book_section": "III",
+      "book_question_number": 26,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "오라클에서 아래 명령을 수행했을 때 이에 대한 설명으로 가장 적절하지 않은 것은?"
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SQL> alter session set sql_trace = true;\nSQL> select * from employee where id = 1001;\nSQL> alter session set sql_trace = false;"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "현재 접속한 세션의 SQL 트레이스가 수집된다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "SQL 수행 후 지정된 서버 디렉터리 밑에 트레이스 파일이 생성된다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "관리자만 사용할 수 있는 SQL이며 개발자는 다른 SQL을 사용해야 한다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "생성된 트레이스 파일의 확장자는 \".trc\"이다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "개발자도 사용가능한 SQL이다."
+      }
+    },
+    {
+      "question_number": 8,
+      "book_section": "III",
+      "book_question_number": 27,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "오라클에서 생성된 SQL 트레이스 파일을 TKPROF 유틸리티를 사용하여 포맷팅했을 때, 이 포맷팅 결과에 포함된 정보로 가장 적절하지 않은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "SQL 수행에 걸린 시간",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "디스크로부터 읽은 블록 수",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "Parse, Execute, Fetch 각 단계의 수행 횟수",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "Commit과 Rollback 횟수",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "TKPROF 유틸리티는 ①, ②, ③을 report하지만 트레이스 파일의 commit과 rollback 정보는 report하지 않는다."
+      }
+    },
+    {
+      "question_number": 9,
+      "book_section": "III",
+      "book_question_number": 28,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "SQL Server에서 SQL 트레이스를 설정하기 위해 on으로 설정해야 하는 옵션으로 가장 적절하지 않은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "statistics profile",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "statistics io",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "statistics time",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "showplan_text",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "statistics profile, statistics io, statistics time 옵션은 on으로 설정하고, showplan_text 및 showplan_all 옵션은 off로 설정해야 한다."
+      }
+    },
+    {
+      "question_number": 10,
+      "book_section": "III",
+      "book_question_number": 29,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "오라클에서 어떤 SQL이 수행 중일 때, 해당 SQL이 참조 중인 객체에 다른 사용자가 DDL 문장을 수행할 때 발생할 수 있는 대기 이벤트로 가장 적절한 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "db file sequential read",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "log file sync",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "library cache lock",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "SQL*Net more data to client",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "오라클에서 수행 중인 SQL이 참조하는 오브젝트에 다른 사용자가 DDL 문장을 수행할 때 나타나는 대기 이벤트로는 library cache lock과 library cache pin이 있다."
+      }
+    },
+    {
+      "question_number": 11,
+      "book_section": "III",
+      "book_question_number": 30,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "오라클에서 응답 시간 분석에 사용되는 도구인 AWR(Automatic Workload Repository)이 제공하는 첫 장 요약 보고서에 포함되는 정보로 가장 적절하지 않은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "누적 대기 시간이 가장 짧았던 대기 이벤트들",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "인스턴스 효율성",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "공유 풀 메모리 사용량",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "초당 부하 발생량",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "AWR 리포트는 누적 대기 시간이 가장 컸던 대기 이벤트들을 보여준다."
+      }
+    }
+  ]
+}

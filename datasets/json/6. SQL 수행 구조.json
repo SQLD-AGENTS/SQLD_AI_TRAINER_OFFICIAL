@@ -1,0 +1,971 @@
+{
+  "subject_id": 3,
+  "chapter_id": 1,
+  "questions": [
+    {
+      "question_number": 1,
+      "book_section": "III",
+      "book_question_number": 1,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "실행계획을 통해서 알 수 있는 정보로 가장 적절하지 않은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "액세스 기법",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "질의 처리 예상 비용(Cost)",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "조인 순서",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "실제 처리 건수",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "실행계획은 예상 정보이다. 실제 처리 건수는 트레이스 정보로 알 수 있다."
+      }
+    },
+    {
+      "question_number": 2,
+      "book_section": "III",
+      "book_question_number": 2,
+      "question_type": "fill_blanks_multi",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래의 빈칸에 들어갈 내용으로 가장 적절한 것은?"
+          }
+        },
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "오라클에서 I/O는 [   ] 단위로 이루어진다. [   ] 단위로 I/O 한다는 것은, 하나의 레코드에서 하나의 칼럼만 읽으려 해도 레코드가 속한 [   ] 전체를 읽게 됨을 뜻한다."
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "테이블",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "페이지",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "블록",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "칼럼",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "오라클에서 모든 I/O의 최소단위는 블록(BLOCK)이다."
+      }
+    },
+    {
+      "question_number": 3,
+      "book_section": "III",
+      "book_question_number": 3,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "실행계획에 대한 설명으로 가장 적절하지 않은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "실행계획은 SQL 처리를 위한 실행 절차와 방법을 표현한 것이다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "실행계획은 조인 방법, 조인 순서, 액세스 기법 등이 표현된다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "실행계획이 변경되더라도 SQL 출력 순서는 동일하다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "CBO(Cost Based Optimizer)의 실행계획에는 단계별 예상 비용 및 건수 등이 표시된다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "조인 순서, 방법, 인덱스 선택 등과 같이 실행방법에 따라 SQL 출력순서는 변경될 수 있다."
+      }
+    },
+    {
+      "question_number": 4,
+      "book_section": "III",
+      "book_question_number": 4,
+      "question_type": "fill_blanks_multi",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래의 내용을 참고할 때, 빈칸 ㉠, ㉡ 에 들어갈 내용으로 가장 적절한 것은?"
+          }
+        },
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "버퍼에 캐시된 이후 변경이 발생했지만, 아직 디스크에 기록되지 않아 데이터 파일 블록과 동기화가 필요한 상태의 버퍼 블럭을 ( ㉠ ) 버퍼라 한다. 이 상태의 버퍼 블록을 재사용하기 위해 디스크에 기록하는 순간 이 버퍼는 ( ㉡ ) 버퍼가 된다."
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "㉠ 리사이클(Recycle) - ㉡ 더티(Dirty)",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "㉠ 프리(Free) - ㉡ 더티(Dirty)",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "㉠ 더티(Dirty) - ㉡ 리사이클(Recycle)",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "㉠ 더티(Dirty) - ㉡ 프리(Free)",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "버퍼에 캐시된 이후 변경이 발생했지만, 아직 디스크에 기록되지 않아 데이터 파일 블록과 동기화가 필요한 상태의 버퍼 블럭을 더티 버퍼라 한다. 이 상태의 버퍼 블록을 재사용하기 위해 디스크에 기록하는 순간 이 버퍼는 프리 버퍼가 된다. 리사이클, 킵은 멀티 버퍼 풀을 구성하는 영역 중 하나이다."
+      }
+    },
+    {
+      "question_number": 5,
+      "book_section": "III",
+      "book_question_number": 5,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래의 옵티마이저와 실행계획에 대한 설명으로 적절한 내용을 모두 고른 것은?"
+          }
+        },
+        {
+          "asset_type": "list_items",
+          "payload": {
+            "items": [
+              "(가) 오라클의 규칙 기반 옵티마이저에서 가장 우선 순위가 높은 규칙은 Single row by rowid 엑세스 기법이다.",
+              "(나) 비용 기반 옵티마이저는 테이블, 인덱스, 칼럼 등 객체의 통계정보를 사용하여 실행계획을 수립하므로 통계정보가 변경되면 SQL의 실행 계획이 달라질 수 있다.",
+              "(다) 오라클의 실행계획에 나타나는 기본적인 Join 기법으로는 NL Join, Hash Join, Sort Merge Join 등이 있다.",
+              "(라) 다양한 Join 기법 중 NL Join은 DW 등에서 데이터를 집계하는 업무에 많이 사용된다."
+            ]
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "tuple",
+          "choice_text": "(가), (다)",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "tuple",
+          "choice_text": "(가), (나), (다)",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "tuple",
+          "choice_text": "(나), (다)",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "tuple",
+          "choice_text": "(나), (다), (라)",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "NL Join은 데이터를 집계하는 업무보다는 OLTP의 목록 처리 업무에 많이 사용된다. DW 등의 데이터 집계 업무에서 많이 사용되는 Join 기법은 Hash Join 또는 Sort Merge Join이다."
+      }
+    },
+    {
+      "question_number": 6,
+      "book_section": "III",
+      "book_question_number": 6,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "I/O 효율화 원리에 대한 설명으로 가장 적절하지 않은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "동일한 데이터를 중복 액세스하지 않도록 한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "인덱스를 가급적 많이 생성해서 옵티마이저가 활용할 수 있는 액세스 경로를 많이 제공한다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "옵티마이저에 정확한 통계정보를 제공한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "옵티마이저 힌트를 사용해 최적의 액세스 경로를 유도한다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "액세스 패턴을 분석한 효율적인 인덱스는 꼭 필요하지만, 불필요한 인덱스는 지양해야한다."
+      }
+    },
+    {
+      "question_number": 7,
+      "book_section": "III",
+      "book_question_number": 7,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "데이터베이스 연결(Connection)과 관련한 설명으로 가장 적절하지 않은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "데이터베이스 서버와 클라이언트 간 연결상태를 유지하면 서버 자원을 낭비하게 되므로 동시 사용자가 많은 OLTP 환경에선 SQL 수행을 마치자마자 곧바로 연결(Connection)을 닫아주는 것이 바람직하다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "연결(Connection) 요청에 대한 부하는 스레드(Thread) 기반 아키텍처 보다 프로세스 기반 아키텍처에서 더 심하게 발생한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "전용 서버(Dedicated Server) 방식으로 오라클 데이스베이스에 접속 하면 사용자가 데이터베이스 서버에 연결 요청을 할 때마다 서버 프로세스(또는 스레드)가 생성된다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "공유 서버(Shared Server) 방식으로 오라클 데이스베이스에 접속하면 사용자 프로세스는 서버 프로세스와 직접 통신하지 않고 Dispatcher 프로세스를 거친다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "다중 사용자 환경에서 서버와 모든 클라이언트 간 연결상태를 지속하면 서버 자원을 낭비하게 된다. 그렇다고 SQL을 수행할 때마다 연결 요청을 반복하면 서버 프로세스(또는 쓰레드)의 생성과 해제도 반복하므로 성능에 좋지 않다. 따라서 OLTP성 애플리케이션에선 Connection Pooling 기법의 활용이 필수적이다."
+      }
+    },
+    {
+      "question_number": 8,
+      "book_section": "III",
+      "book_question_number": 8,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "오라클이나 SQL Server와 같은 데이터베이스의 저장 구조를 설명한 것으로 가장 적절하지 않은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "데이터를 읽고 쓰는 단위는 블록(=페이지)이다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "데이터 파일에 공간을 할당하는 단위는 익스텐트다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "같은 세그먼트(테이블, 인덱스)에 속한 익스텐트끼리는 데이터파일 내에서 서로 인접해 있다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "SQL Server에서는 한 익스텐트에 속한 페이지들을 여러 오브젝트가 나누어 사용할 수 있다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "익스텐트 내 블록들은 서로 인접하지만, 익스텐트끼리 서로 인접하지는 않는다."
+      }
+    },
+    {
+      "question_number": 9,
+      "book_section": "III",
+      "book_question_number": 9,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래에서 설명하는 Redo 로그(또는 트랜잭션 로그) 메커니즘의 특징으로 가장 적절한 것은?"
+          }
+        },
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "버퍼 캐시 블록을 갱신하기 전에 변경 사항을 먼저 로그 버퍼에 기록해야 하며, Dirty 버퍼를 디스크에 기록하기 전에 해당 로그 엔트리를 먼저 로그 파일에 기록해야 한다."
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "Write Ahead Logging",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "Log Force at commit",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "Fast Commit",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "Delayed Block Cleanout",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "Log Force at commit은, 로그 버퍼를 주기적으로 로그 파일에 기록하되 늦어도 커밋 시점에는 반드시 기록해야 함을 뜻한다. Fast Commit은, 사용자의 갱신 내용이 메모리상의 버퍼 블록에만 기록된 채 아직 디스크에 기록되지 않았지만 Redo 로그를 믿고 빠르게 커밋을 완료하는 것을 말한다. Delayed Block Cleanout은 오라클만의 독특한 메커니즘으로서, 변경된 블록을 커밋 시점에 바로 Cleanout(로우 Lock 정보 해제, 커밋 정보 기록)하지 않고 그대로 두었다가 나중에 해당 블록을 처음 읽는 세션에 의해 정리되도록 하는 것을 말한다."
+      }
+    },
+    {
+      "question_number": 10,
+      "book_section": "III",
+      "book_question_number": 10,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "메모리 구조에 대한 설명으로 가장 적절하지 않은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "DB 버퍼 캐시는 데이터 파일로부터 읽어 들인 데이터 블록을 담는 캐시 영역이다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "/*+ append */ 힌트를 사용하면 Insert 시 DB 버퍼 캐시를 거치지 않고 디스크에서 직접 쓴다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "클러스터링 팩터가 좋은 인덱스를 사용하면 Buffer Pinning 효과로 I/O를 줄일 수 있다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "LRU(Least Recently Used) 알고리즘에 따라 Table Full Scan한 데이터 블록이 Index Range Scan한 데이터 블록보다 DB 버퍼 캐시에 더 오래 머무른다.",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "Table Full Scan한 데이터 블록은 LRU end에 위치하기 때문에 버퍼 캐시에 오래 머물지 않는다."
+      }
+    },
+    {
+      "question_number": 11,
+      "book_section": "III",
+      "book_question_number": 11,
+      "question_type": "fill_blanks_multi",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 빈칸에 들어갈 내용으로 가장 적절한 것은?"
+          }
+        },
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "I/O 튜닝의 핵심 원리는 [ ㉠ ] 액세스에 의한 선택 비중을 높이고 [ ㉡ ] 액세스 발생량을 줄이는 것이다."
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "㉠ Sequential - ㉡ Random",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "㉠ Random - ㉡ Sequential",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "㉠ Single Block I/O - ㉡ Multi Block I/O",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "㉠ Multi Block I/O - ㉡ Single Block I/O",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "I/O 튜닝의 핵심 원리는 Sequential 액세스에 의한 선택 비중을 높이고 Random 액세스 발생량을 줄이는 것이다."
+      }
+    },
+    {
+      "question_number": 12,
+      "book_section": "III",
+      "book_question_number": 12,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "데이터베이스 I/O에 대한 설명으로 가장 적절한 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "테이블 블록을 스캔할 때는 Random I/O 방식을, 인덱스 블록을 스캔할 때는 Sequential I/O 방식을 사용한다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "Multiblock I/O란 한 번에 Segment Block 전체를 Buffer Cache에 적재하는 것을 말한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "Singleblock I/O와 Multiblock I/O는 테이블의 크기에 따라 선택 되지만 사용자가 지정할 수 있다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "Index Unique Scan 방식으로 하나의 레코드를 읽을 때에는 Block 단위 I/O가 아닌 Row 단위 I/O를 할 수 있다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "② Multiblock I/O는 한 Extent에 속한 블록을 가져온다. ③ 테이블의 크기와는 무관하다. ④ I/O는 Block 단위로 진행한다."
+      }
+    },
+    {
+      "question_number": 13,
+      "book_section": "III",
+      "book_question_number": 13,
+      "question_type": "compute_metric",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 SQL Trace에서 버퍼 캐시 히트율(BCHR)을 계산한 것으로 가장 적절 한 것은?"
+          }
+        },
+        {
+          "asset_type": "sql_trace",
+          "payload": {
+            "headers": [
+              "call",
+              "count",
+              "cpu",
+              "elapsed",
+              "disk",
+              "query",
+              "current",
+              "rows"
+            ],
+            "rows": [
+              [
+                "Parse",
+                "1",
+                "0.00",
+                "0.00",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              [
+                "Execute",
+                "1",
+                "4.00",
+                "34.00",
+                "50000",
+                "900000",
+                "100000",
+                "100000"
+              ],
+              [
+                "Fetch",
+                "0",
+                "0.00",
+                "0.00",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              [
+                "total",
+                "2",
+                "4.00",
+                "34.00",
+                "50000",
+                "900000",
+                "100000",
+                "100000"
+              ]
+            ]
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "value",
+          "choice_text": "95%",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "value",
+          "choice_text": "94%",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "value",
+          "choice_text": "83%",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "value",
+          "choice_text": "85%",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "BCHR = (캐시에서 곧바로 찾은 블록 수/총 읽은 블록 수)*100 = ((논리적 블록읽기 - 물리적 블록읽기) / 논리적 블록읽기) * 100 = ((900000+100000)-50000)/(900000+100000) * 100 = 95%"
+      }
+    },
+    {
+      "question_number": 14,
+      "book_section": "III",
+      "book_question_number": 14,
+      "question_type": "diagnose_action",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래는 운영 중인 오라클 DB의 AWR Report의 일부분이다. 상위 5개의 Wait Event가 아래와 같을 때 조치사항으로 가장 적절한 것은?"
+          }
+        },
+        {
+          "asset_type": "awr_report",
+          "payload": {
+            "title": "Top 5 Timed Foreground Events",
+            "headers": [
+              "Event",
+              "Waits",
+              "Time(s)",
+              "% DB time"
+            ],
+            "rows": [
+              [
+                "db file sequential read",
+                "1,767,055",
+                "7,421",
+                "68.84"
+              ],
+              [
+                "DB CPU",
+                "",
+                "1,988",
+                "18.44"
+              ],
+              [
+                "direct path read",
+                "23,035",
+                "530",
+                "4.92"
+              ],
+              [
+                "log file sync",
+                "33,881",
+                "325",
+                "3.01"
+              ],
+              [
+                "read by other session",
+                "245,776",
+                "314",
+                "2.91"
+              ]
+            ]
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "현재보다 FULL SCAN으로 더 많이 유도해야 한다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "현재보다 인덱스를 더 많이 생성해야 한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "현재보다 Hash Join을 더 적게 쓰도록 유도해야 한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "Online Redo Log File의 개수를 더 늘려야 한다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "② 기존보다 더 효율적인 인덱스 생성 및 사용으로 어느 정도 db file sequential read 부하를 줄일 수는 있으나 가장 적절한 방식이라고 볼 수는 없다. ③ 배치쿼리는 FULL SCAN + HASH JOIN 방식으로 유도하는 게 좋다. ④ log file sync 이벤트가 4번째로 랭크되어 있기는 하지만 전체 비중은 3%에 불과하므로 가장 필요한 조치라고 볼 수는 없다."
+      }
+    },
+    {
+      "question_number": 15,
+      "book_section": "III",
+      "book_question_number": 15,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 두 SQL의 수행 성능을 비교한 내용으로 가장 적절한 것은?"
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "sql": "-- (가)\nselect 고객명\nfrom 고객\nwhere 가입일자 = to_char(sysdate, 'yyyymmdd')\norder by 고객명;"
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "sql": "-- (나)\nselect *\nfrom 고객\nwhere 가입일자 = to_char(sysdate, 'yyyymmdd')\norder by 고객명;"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "클라이언트에게 데이터를 전송할 때 발생하는 네트워크 트래픽은 두 SQL이 똑같다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "가입일자만으로 구성된 단일 칼럼 인덱스를 사용한다면, 두 SQL의 소트 공간 사용량은 똑같다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "가입일자만으로 구성된 단일 칼럼 인덱스를 사용한다면 (나)보다 (가) SQL에 블록 I/O가 더 많이 발생한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "{가입일자 + 고객명}을 선두로 갖는 인덱스를 사용한다면 (가)보다 (나) SQL에 블록 I/O가 더 많이 발생한다.",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "가입일자, 고객명을 선두로 갖는 인덱스를 사용한다면 (가) SQL은 인덱스만 읽고 처리를 완료하므로 블록 I/O가 더 적게 발생한다. ① (나) SQL을 수행하면 조건절을 만족하는 모든 칼럼을 클라이언트에게 전송해야 하므로 네트워크 트래픽이 더 많이 발생한다. ② (가) SQL은 소트 공간에 고객명만 저장하면 되지만, (나) SQL은 모든 칼럼을 저장해야 하므로 더 많은 소트 공간을 사용한다. ③ 가입일자만으로 구성된 단일 칼럼 인덱스를 사용한다면 두 SQL 모두 테이블 액세스가 불가피하므로 블록 I/O는 똑같다."
+      }
+    },
+    {
+      "question_number": 16,
+      "book_section": "III",
+      "book_question_number": 16,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "I/O 효율화 튜닝 방안으로 가장 적절하지 않은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "필요한 최소 블록만 읽도록 쿼리를 작성한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "전략적인 인덱스 구성은 물론 DBMS가 제공하는 다양한 기능을 활용 한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "옵티마이저 행동에 영향을 미치는 가장 중요한 요소는 통계정보이므로 변경이 거의 없는 테이블일지라도 통계정보를 매일 수집해 준다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "필요하다면 옵티마이저 힌트를 사용해 최적의 액세스 경로로 유도한다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "변경이 거의 없는 테이블까지 매일 통계정보를 수집할 필요는 없다."
+      }
+    },
+    {
+      "question_number": 17,
+      "book_section": "III",
+      "book_question_number": 17,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "블록 I/O에 대한 설명으로 가장 적절하지 않은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "Random I/O는 인덱스를 통해 테이블을 액세스할 때 주로 발생한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "Direct Path I/O는 병렬로 인덱스를 통해 테이블을 액세스할 때 주로 발생한다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "Single Block I/O는 인덱스를 통해 테이블을 액세스할 때 주로 발생 한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "Multiblock I/O는 인덱스를 이용하지 않고 테이블 전체를 스캔할 때 주로 발생한다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "Direct Path I/O는 일반적으로 병렬쿼리로 Full Scan을 수행할 때 발생한다."
+      }
+    },
+    {
+      "question_number": 18,
+      "book_section": "III",
+      "book_question_number": 18,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "데이터베이스 I/O 원리에 대한 설명으로 가장 적절하지 않은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "한 쿼리 내에서 같은 블록을 반복하여 액세스하면 버퍼 캐시 히트율(BCHR)은 높아진다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "Multiblock I/O는 한번의 I/O Call로 여러 데이터 블록을 읽어 메모리에 적재하는 방식이다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "테이블을 Full Scan할 때, 테이블이 작은 Extent로 구성되어 있을수록 더 많은 I/O Call이 발생한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "인덱스를 통해 테이블을 액세스할 때, 더 큰 Extent로 구성되어 있으면 더 적은 I/O Call이 발생한다.",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "Multiblock I/O 방식으로 읽더라도 Extent 범위를 넘어서까지 읽지는 않는다. 따라서 작은 Extent로 구성된 테이블을 Full Table Scan하면 I/O Call이 더 많이 발생한다. 반면, 인덱스를 통한 테이블 액세스 시에는 Single Block I/O 방식을 사용하므로 Extent 크기가 I/O Call 횟수에 영향을 미치지 않는다."
+      }
+    },
+    {
+      "question_number": 19,
+      "book_section": "III",
+      "book_question_number": 19,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "데이터베이스 I/O 원리에 대한 설명으로 가장 적절하지 않은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "단 하나의 레코드를 읽더라도 해당 레코드가 속한 블록을 통째로 읽는다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "I/O를 수행할 때 익스텐트 내에 인접한 블록을 같이 읽어들이는 것을 Multiblock I/O라고 한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "테이블 블록을 스캔할 때는 Sequential I/O 방식을, 인덱스 블록을 스캔할 때는 Random I/O 방식을 사용한다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "MPP(Massively Parallel Processing) 방식의 데이터베이스 제품에선 각 프로세스가 독립적인 메모리 공간을 사용하며, 데이터를 저장할 때도 각각의 디스크를 사용한다. 읽을 때도 동시에 각각의 디스크를 액세스하기 때문에 병렬 I/O 효과가 극대화된다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "Sequential I/O 방식은 테이블이나 인덱스를 스캔할 때 사용한다. Random I/O 방식은 인덱스를 스캔하면서 테이블을 액세스할 때 사용한다."
+      }
+    }
+  ]
+}

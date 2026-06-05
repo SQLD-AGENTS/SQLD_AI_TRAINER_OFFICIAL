@@ -1,0 +1,68 @@
+# 대용량 원본 데이터 — Claude가 읽어도 의미 없는 바이너리/대량 데이터
+datasets/*.pdf
+datasets/json/
+
+# 생성된 출력물 — 소스가 아닌 산출물
+outputs/
+reports/
+
+# 데이터베이스 파일 (바이너리)
+*.db
+*.sqlite
+*.sqlite3
+
+# 바이너리 데이터 파일
+*.npy
+
+# 이미지 파일 (바이너리)
+*.png
+*.jpg
+*.jpeg
+*.gif
+
+# Node.js 의존성 (대용량, 자동 생성)
+node_modules/
+**/node_modules/
+package-lock.json
+**/package-lock.json
+
+# Python 캐시
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Git 내부
+.git/
+
+# 가상환경
+.venv/
+venv/
+env/
+
+# 환경변수 / 시크릿
+.env
+.env.local
+*.env
+secrets.yaml
+
+# 모델/벡터 파일 (용량 큼)
+*.pkl
+*.joblib
+*.pt
+*.pth
+*.h5
+*.onnx
+*.faiss
+*.index
+models/
+faiss_index/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini

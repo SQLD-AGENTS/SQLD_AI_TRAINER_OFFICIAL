@@ -1,0 +1,30 @@
+# Python 캐시
+**/__pycache__/
+**/*.pyc
+**/*.pyo
+
+# 가상환경
+.venv/
+
+# 환경 변수 (런타임에 주입)
+.env
+backend/.env
+
+# 프론트엔드 (백엔드 이미지 불필요)
+frontend/
+
+# 원본 PDF 데이터셋 (JSON만 필요)
+datasets/*.pdf
+
+# 개발/문서 산출물
+workflow/
+reports/
+PRD/
+README.md
+
+# SQLite DB (컨테이너 내부에서 새로 생성)
+*.db
+
+# Git
+.git/
+.gitignore

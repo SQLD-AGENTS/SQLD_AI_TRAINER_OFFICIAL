@@ -1,0 +1,837 @@
+{
+  "subject_id": 3,
+  "chapter_id": 4,
+  "questions": [
+    {
+      "question_number": 1,
+      "book_section": "III",
+      "book_question_number": 54,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "Sort Merge Join에 대한 설명으로 가장 적절한 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "양쪽 집합을 정렬하고 조인하며, 인덱스에 의해 이미 정렬된 집합은 정렬 없이 곧바로 조인에 참여하기도 한다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "먼저 액세스한 테이블의 처리 범위에 따라 전체 일의 양이 결정된다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "오라클에서는 조인 연결고리에 Equi Join 조건이 하나라도 있어야 한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "테이블별 검색조건은 전체 일의 양에 영향을 미치지 않는다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "먼저 액세스한 테이블의 처리 범위에 따라 전체 일의 양이 결정되는 것은 NL Join의 특징이며, Merge Join은 각 테이블의 검색조건에 의해 전체 일의 양이 결정된다."
+      }
+    },
+    {
+      "question_number": 2,
+      "book_section": "III",
+      "book_question_number": 55,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "TAB1과 TAB2 테이블이 동일한 기준으로 파티셔닝 되어있을 때, Full Partition Wise Join으로 유도하기 위해 추가한 힌트 문법으로 가장 적절한 것은?"
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT /*+ PARALLEL(8) ORDERED USE_HASH(B) */\nFROM TAB1 A, TAB2 B\nWHERE A.COL1 = B.COL1"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "sql_fragment",
+          "choice_text": "/*+ PQ_DISTRIBUTE (B, NONE, NONE) */",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "sql_fragment",
+          "choice_text": "/*+ PQ_DISTRIBUTE (B, PARTITION, NONE) */",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "sql_fragment",
+          "choice_text": "/*+ PQ_DISTRIBUTE (B, NONE, PARTITION) */",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "sql_fragment",
+          "choice_text": "/*+ PQ_DISTRIBUTE (B, PARTITION, PARTITION) */",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "Full Partition Wise Join으로 유도하기 위한 방법은 ①번이며, ②, ③번은 Partial-Partition Wise Join으로 유도하는 방법이다."
+      }
+    },
+    {
+      "question_number": 3,
+      "book_section": "III",
+      "book_question_number": 56,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "Hash Join에 대한 설명으로 가장 적절한 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "Hash Join은 둘 중 작은 집합(Build Input)을 읽어 Sort Area에 해시 테이블을 생성한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "Hash Join하는 양쪽 테이블 모두 전체 범위를 읽으므로 양쪽 모두 부분범위처리가 불가능하다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "Build Input 해시(Hash) 키 값에 중복이 많을수록 Hash Join의 성능은 좋아진다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "Build Input 집합을 Hash Area에서 탐색할 때는 래치(Latch) 획득 과정이 없어서 빠르다.",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "Hash Join 시 Build Input되는 집합은 PGA 메모리에 할당되는 Hash Area 영역에 저장된다. Build Input되는 테이블은 전체 범위 처리를 해야 하지만 Probe Input된 테이블에 대한 부분 범위 처리는 가능하다. Hash Join의 성능을 높이기 위해서는 Build Input 해시 키 칼럼에 중복 값이 거의 없어야 한다."
+      }
+    },
+    {
+      "question_number": 4,
+      "book_section": "III",
+      "book_question_number": 57,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "Nested Loop Join에 대한 설명으로 가장 적절한 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "빠르게 결과를 조회할 수 있지만 조인 횟수가 많을수록 다른 조인 방법에 비해 성능 저하가 나타날 수 있다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "3개 테이블이 NL 조인 시 선행 2개 테이블 조인 결과에 대한 부분집합을 생성 후 3번째 테이블과 조인을 시도한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "PGA를 통해 조인하기 때문에 래치(Latch)에 대한 경합이 없다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "Driving Table은 반드시 인덱스를 통해 검색해야 한다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "NL 조인의 경우 랜덤 액세스 위주 방식이므로 인덱스 구조가 완벽하더라도 대량의 데이터를 조인할 때 매우 비효율적이다."
+      }
+    },
+    {
+      "question_number": 5,
+      "book_section": "III",
+      "book_question_number": 58,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래와 같은 SQL에서 나타날 수 있는 Join 기법으로 가장 적절한 것은?"
+          }
+        },
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "[DEPT 테이블 INDEX 정보]\nPK_DEPT : DEPTNO\n\n[EMP 테이블 INDEX 정보]\nPK_EMP : EMPNO\nIDX_EMP_01 : DEPTNO"
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT *\nFROM DEPT D\nWHERE D.DEPTNO = 'A001'\nAND EXISTS (SELECT 'X' FROM EMP E WHERE D.DEPTNO = E.DEPTNO)"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "HASH ANTI JOIN",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "HASH SEMI JOIN",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "NESTED LOOP ANTI JOIN",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "NESTED LOOP SEMI JOIN",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "EXISTS절은 실행계획상에 주로 SEMI JOIN으로 나타난다. NESTED LOOP, HASH, SORT MERGE의 SEMI JOIN이 모두 나타날 수 있지만, 위의 인덱스 정보와 SQL을 볼 때 HASH SEMI JOIN보다는 NESTED LOOP SEMI JOIN이 나타날 가능성이 가장 크다."
+      }
+    },
+    {
+      "question_number": 6,
+      "book_section": "III",
+      "book_question_number": 59,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "Sort Merge Join에 대한 설명으로 가장 적절하지 않은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "조인 칼럼에 적당한 인덱스가 없어서 NL 조인(Nested Loops)이 비효율 적일 때 사용할 수 있다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "Driving Table의 개념이 중요하지 않은 조인 방식이다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "조인 조건의 인덱스 유무에 영향을 받지 않는다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "EQUI(=) 조인 조건에서만 동작한다.",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "EQUI JOIN에서만 동작하는 Join 방식은 Hash Join이다. Sort Merge Join은 Non-EQUI JOIN 조건에서도 사용할 수 있다."
+      }
+    },
+    {
+      "question_number": 7,
+      "book_section": "III",
+      "book_question_number": 60,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "Hash Join이 더 효과적일 수 있는 조건으로 가장 적절하지 않은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "조인 칼럼에 적당한 인덱스가 없어서 자연조인(Natural Join)이 비효율 적일 때",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "자연조인(Natural Join) 시 드라이빙(Driving) 집합 쪽으로 조인 액세스 양이 많아 Random 액세스 부하가 심할 때",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "소트 머지 조인(Sort Merge Join)을 하기에는 두 테이블이 너무 커서 소트(Sort) 부하가 심할 때",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "유니크 인덱스를 활용하여 수행시간이 적게 걸리는 소량 테이블을 온라인 조회하는 경우",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "유니크 인덱스를 활용하여 수행시간이 적게 걸리는 소량 테이블을 조인할 때는 NL 조인이 적합하다."
+      }
+    },
+    {
+      "question_number": 8,
+      "book_section": "III",
+      "book_question_number": 61,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "조인(Join) 방식 중에서 Hash Join을 선택하는 기준으로 가장 적절한 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "소량의 데이터를 주로 처리하며, 부분 범위 처리가 극대화되어야 한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "쿼리의 조인 조건식이 범위 조건이다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "쿼리 수행 시간이 짧고 수행 빈도가 높다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "조인 칼럼에 적당한 인덱스가 없고, 조인 대상 테이블 중 한쪽 테이블의 크기가 작다.",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "해시 조인은 수행 빈도가 낮고, 쿼리 수행시간이 오래 걸리는 대용량 테이블을 조인할 때 사용하는 것이 좋다. 또한, 한쪽 테이블이 가용 메모리에 담길 정도로 충분히 작아야 성능 효과가 높다. 만약, 수행시간이 짧으면서 수행 빈도가 매우 높은 OLTP 성 쿼리를 Hash Join으로 처리한다면 CPU와 메모리 사용률이 증가하여 전체 시스템 성능에 오히려 좋지 않은 영향을 줄 수 있다."
+      }
+    },
+    {
+      "question_number": 9,
+      "book_section": "III",
+      "book_question_number": 62,
+      "question_type": "fill_blank",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "TAB1, TAB2 순으로 NL 조인하도록 유도하려고 할 때, 빈칸에 들어갈 힌트로 가장 적절한 것은? (단, DBMS는 오라클로 가정)"
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT /*+ [ 빈칸 ] */ ...\nFROM TAB1 A, TAB2 B\nWHERE A.KEY = B.KEY"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "sql_fragment",
+          "choice_text": "ORDERED(A B) USE_NL(B)",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "sql_fragment",
+          "choice_text": "ORDERED USE_NL(TAB2)",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "sql_fragment",
+          "choice_text": "LEADING(A) USE_NL(B)",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "sql_fragment",
+          "choice_text": "DRIVING_SITE(A) USE_NL(B)",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "테이블 Alias가 있는 상황에선 반드시 Alias를 사용해야 한다. ORDERED는 FROM절의 테이블 순서대로 조인을 진행하는 Hint이다. DRIVING_SITE는 분산환경(DBLINK)에서 쿼리의 실행이 Oracle에 의해 선택된 Site가 아닌 다른 Site에서 일어나게 유도하는 힌트다."
+      }
+    },
+    {
+      "question_number": 10,
+      "book_section": "III",
+      "book_question_number": 63,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "Hash Join에 대한 설명으로 가장 적절한 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "조인 연결고리에 오직 Equi Join 조건만 있을 때 작동한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "일반적으로, 큰 집합으로 해시 테이블을 생성 후 작은 집합을 읽으면서 이 해시 테이블을 탐색하는 것이 유리하다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "먼저 양쪽 집합을 정렬하고 조인을 하므로 조인 키에 인덱스가 없어도 된다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "Build Input으로 선택된 집합의 조인 칼럼에는 중복 값이 거의 없어야 효과적이다.",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "조인 조건 중 equi-join 조건이 하나라도 있다면 Hash Join을 사용할 수 있다. 단, Build Input으로 선택된 집합의 조인 칼럼에는 중복 값이 거의 없어야 효과적이다. 먼저 Build Input을 선택된 집합을 PGA에 Hash Table을 생성 후 Probe Input 테이블이 Hash Table을 탐색하기 때문에 정렬이 필요하지 않는다."
+      }
+    },
+    {
+      "question_number": 11,
+      "book_section": "III",
+      "book_question_number": 64,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "스칼라 서브쿼리의 특징을 설명한 것으로 가장 적절하지 않은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "스칼라 서브쿼리를 이용한 조인은 NL 조인처럼 한 레코드씩 순차적으로 진행한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "메인 쿼리의 레코드마다 스칼라 서브쿼리를 통해 하나의 레코드, 하나의 값만 리턴한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "조인에 실패할 경우, NULL을 리턴한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "입력 값(=조인 칼럼)과 출력 값(=리턴 값)을 Shared Pool에 있는 Result Cache에 캐싱했다가 같은 입력 값에 대해서는 캐싱된 값을 리턴하여 조인 부하를 줄여준다.",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "Result Cache가 아니라 PGA에 캐싱한다."
+      }
+    },
+    {
+      "question_number": 12,
+      "book_section": "III",
+      "book_question_number": 65,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 SQL1과 SQL2의 실행계획에 대한 설명으로 가장 적절하지 않은 것은?"
+          }
+        },
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "[SQL1]"
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT /*+ LEADING(A) USE_NL(B) */\n       b.상품분류코드, a.기준일자,\n       SUM(a.판매금액) AS 판매금액,\n       SUM(a.판매수량) AS 판매수량\nFROM 일별매출 a, 상품 b\nWHERE a.기준일자 BETWEEN TO_DATE(:v_시작기준일자, 'YYYYMMDD')\n                     AND TO_DATE(:v_종료기준일자, 'YYYYMMDD')\nAND b.상품코드 = a.상품코드\nAND b.판매시작일자 >= TO_DATE(:v_판매시작일자, 'YYYYMMDD')\nGROUP BY b.상품분류코드, a.기준일자"
+          }
+        },
+        {
+          "asset_type": "execution_plan",
+          "payload": {
+            "text": "Id Operation                                 Name\n0  SELECT STATEMENT\n1  HASH GROUP BY\n2  FILTER\n3  NESTED LOOPS\n4  NESTED LOOPS\n5  PARTITION RANGE ITERATOR\n6  TABLE ACCESS BY LOCAL INDEX ROWID         일별매출\n7  INDEX RANGE SCAN                          일별매출_X1\n8  INDEX RANGE SCAN                          상품_PK\n9  TABLE ACCESS BY INDEX ROWID               상품"
+          }
+        },
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "[SQL2]"
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT /*+ LEADING(A) USE_NL(B) */\n       b.상품분류코드, a.기준일자,\n       SUM(a.판매금액) AS 판매금액,\n       SUM(a.판매수량) AS 판매수량\nFROM (SELECT a.기준일자,\n             a.상품코드,\n             SUM(a.판매금액) AS 판매금액,\n             SUM(a.판매수량) AS 판매수량\n      FROM 일별매출 a\n      WHERE a.기준일자 BETWEEN TO_DATE(:v_시작기준일자, 'YYYYMMDD')\n                         AND TO_DATE(:v_종료기준일자, 'YYYYMMDD')\n      GROUP BY a.기준일자, a.상품코드) a,\n     상품 b\nWHERE b.상품코드 = a.상품코드\nAND b.판매시작일자 >= TO_DATE(:v_판매시작일자, 'YYYYMMDD')\nGROUP BY b.상품분류코드, a.기준일자"
+          }
+        },
+        {
+          "asset_type": "execution_plan",
+          "payload": {
+            "text": "Id Operation                                 Name\n0  SELECT STATEMENT\n1  HASH GROUP BY\n2  NESTED LOOPS\n3  NESTED LOOPS\n4  VIEW\n5  HASH GROUP BY\n6  FILTER\n7  PARTITION RANGE ITERATOR\n8  TABLE ACCESS BY LOCAL INDEX ROWID         일별매출\n9  INDEX RANGE SCAN                          일별매출_X1\n10 INDEX UNIQUE SCAN                         상품_PK\n11 TABLE ACCESS BY INDEX ROWID               상품"
+          }
+        },
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "[테이블]"
+          }
+        },
+        {
+          "asset_type": "sql_ddl",
+          "payload": {
+            "dialect": "ansi",
+            "code": "CREATE TABLE 상품(\n  상품코드 VARCHAR2(10) NOT NULL,\n  상품명 VARCHAR2(100) NOT NULL,\n  상품분류코드 VARCHAR2(5) NOT NULL,\n  판매시작일자 DATE NOT NULL,\n  판매종료일자 DATE NULL\n);\nCREATE UNIQUE INDEX 상품_PK ON 상품 (상품코드);\nCREATE INDEX 상품_X1 ON 상품 (판매시작일자);\n\nCREATE TABLE 일별매출(\n  기준일자 DATE NOT NULL,\n  상품코드 VARCHAR2(10) NOT NULL,\n  판매금액 NUMBER(10) NOT NULL,\n  판매수량 NUMBER(10) NOT NULL\n);\nCREATE UNIQUE INDEX 일별매출_PK ON 일별매출 (상품코드, 기준일자);\nCREATE INDEX 일별매출_X1 ON 일별매출 (기준일자);"
+          }
+        },
+        {
+          "asset_type": "list_items",
+          "payload": {
+            "items": [
+              "단, 상품 테이블은 판매시작일자별 상품 수가 비슷한 것으로 가정한다.",
+              "단, 일별매출 테이블은 기준일자로 파티셔닝되어 있다고 가정한다."
+            ]
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "SQL1은 조인 과정에서 과도한 I/O가 발생할 수 있다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "SQL1은 판매시작일자 조건을 만족하는 상품 건수가 적다면, 조인 순서 변경만으로 성능이 개선될 가능성이 높다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "SQL2는 v_판매시작일자 변수에 오래된 과거일자를 입력할 때보다 최근일자를 입력할 때 비효율이 더 적다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "Query Transformer는 쿼리변환을 수행하여 SQL1에 대해 SQL2와 유사한 실행계획을 수립하기도 한다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "대량 집합을 기준으로 NL 조인하면 많은 랜덤 I/O가 발생한다. SQL1에서 판매시작일자 조건을 만족하는 상품 건수가 적다면, 일별매출보다 상품 테이블을 먼저 드라이빙하는 것이 유리할 수 있다. SQL2에서 v_판매시작일자 변수에 최근일자를 입력하면 판매시작일자 조건을 만족하는 상품 건수가 적어지므로 그만큼 비효율이 커진다. 기준일자 Between 조건에 해당하는 많은 일별매출 데이터를 읽고 Group By 처리까지 마쳤는데, 상품 테이블과 조인하는 과정에 많은 데이터가 필터링되기 때문이다."
+      }
+    },
+    {
+      "question_number": 13,
+      "book_section": "III",
+      "book_question_number": 66,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 SQL에서 가능한 조인 방법을 모두 나열한 것은?"
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT emp.ename, salgrade.grade\nFROM emp t1, salgrade t2\nWHERE t1.sal BETWEEN t2.losal AND t2.hisal"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "Nested Loop Join",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "Nested Loop Join, Sort Merge Join",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "Sort Merge Join, Hash Join",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "Nested Loop Join, Sort Merge Join, Hash Join",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "Hash 조인은 \"=\" 조인이 하나라도 있어야 사용 가능함"
+      }
+    },
+    {
+      "question_number": 14,
+      "book_section": "III",
+      "book_question_number": 67,
+      "question_type": "fill_blank",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래와 같이 고객 테이블과 2개의 변경이력 테이블이 있다. 두 변경이력 테이블에 있는 시작일자, 종료일자는 선분이력으로 관리된다. 즉, 시작일자에는 이력 레코드 생성일자가 입력되고, 종료일자에는 처음에 '99991231'로 입력되었다가 다음 번 새 이력 레코드가 생성되는 순간 바로 전 일자로 갱신된다.\n\n이 세 테이블에서 이름이 '홍길동'인 고객의 1998년 5월 29일자 고객등급과 전화번호를 조회하려고 한다. 아래 빈칸에 들어갈 SQL로 가장 적절한 것은?\n(단, 고객번호와 변경순번을 제외한 나머지 속성은 모두 문자형으로 가정)"
+          }
+        },
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "[테이블 구조]"
+          }
+        },
+        {
+          "asset_type": "entity_schema",
+          "payload": {
+            "entities": [
+              {
+                "table": "고객",
+                "columns": [
+                  {
+                    "name": "고객번호",
+                    "type": "VARCHAR",
+                    "key": "PK"
+                  },
+                  {
+                    "name": "고객명",
+                    "type": "VARCHAR"
+                  },
+                  {
+                    "name": "거주지역",
+                    "type": "VARCHAR"
+                  },
+                  {
+                    "name": "주소",
+                    "type": "VARCHAR"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "entity_schema",
+          "payload": {
+            "entities": [
+              {
+                "table": "고객등급변경이력",
+                "columns": [
+                  {
+                    "name": "변경순번",
+                    "type": "NUMBER",
+                    "key": "PK"
+                  },
+                  {
+                    "name": "고객번호",
+                    "type": "VARCHAR",
+                    "key": "PK"
+                  },
+                  {
+                    "name": "고객등급",
+                    "type": "VARCHAR"
+                  },
+                  {
+                    "name": "시작일자",
+                    "type": "VARCHAR"
+                  },
+                  {
+                    "name": "종료일자",
+                    "type": "VARCHAR"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "entity_schema",
+          "payload": {
+            "entities": [
+              {
+                "table": "전화번호변경이력",
+                "columns": [
+                  {
+                    "name": "변경순번",
+                    "type": "NUMBER",
+                    "key": "PK"
+                  },
+                  {
+                    "name": "고객번호",
+                    "type": "VARCHAR",
+                    "key": "PK"
+                  },
+                  {
+                    "name": "전화번호",
+                    "type": "VARCHAR"
+                  },
+                  {
+                    "name": "시작일자",
+                    "type": "VARCHAR"
+                  },
+                  {
+                    "name": "종료일자",
+                    "type": "VARCHAR"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "[인덱스 상황]"
+          }
+        },
+        {
+          "asset_type": "list_items",
+          "payload": {
+            "items": [
+              "고객_PK: 고객번호",
+              "고객_X01: 고객명",
+              "고객등급변경이력_PK: 고객번호 + 변경순번",
+              "고객등급변경이력_X01: 고객번호 + 시작일자 + 종료일자",
+              "고객전화번호변경이력_PK: 고객번호 + 변경순번",
+              "고객전화번호변경이력_X01: 고객번호 + 종료일자 + 시작일자"
+            ]
+          }
+        },
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "[SQL]"
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "select c.고객번호, c.고객명, c1.고객등급, c2.전화번호\nfrom 고객 c, 고객등급변경이력 c1, 전화번호변경이력 c2\nwhere c.고객명 = '홍길동'\nand c1.고객번호 = c.고객번호\nand c2.고객번호 = c.고객번호\n[ 빈칸 ]"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "sql_fragment",
+          "choice_text": "and c1.변경순번 = (select max(변경순번) from 고객등급변경이력 where 시작일자 <= '19980529')\nand c2.변경순번 = (select max(변경순번) from 전화번호변경이력 where 시작일자 <= '19980529')",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "sql_fragment",
+          "choice_text": "and c1.변경순번 = (select 변경순번 from 고객등급변경이력 where '19980529' between 시작일자 and 종료일자)\nand c2.변경순번 = (select 변경순번 from 전화번호변경이력 where '19980529' between 시작일자 and 종료일자)",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "sql_fragment",
+          "choice_text": "and '19980529' between c1.시작일자 and c1.종료일자\nand '19980529' between c2.시작일자 and c2.종료일자",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "sql_fragment",
+          "choice_text": "and '19980529' between c1.시작일자 and c1.종료일자\nand c1.종료일자 >= c2.시작일자\nand c1.시작일자 <= c2.종료일자",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "선분이력 각각을 between으로 조회하면 된다."
+      }
+    }
+  ]
+}

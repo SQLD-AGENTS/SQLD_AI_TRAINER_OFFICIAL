@@ -1,0 +1,2795 @@
+{
+  "subject_id": 2,
+  "chapter_id": 1,
+  "questions": [
+    {
+      "question_number": 1,
+      "book_section": "II",
+      "book_question_number": 1,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "데이터 제어어(DCL)에 해당하는 명령어는?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "keyword",
+          "choice_text": "INSERT",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "keyword",
+          "choice_text": "RENAME",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "keyword",
+          "choice_text": "COMMIT",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "keyword",
+          "choice_text": "REVOKE",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "데이터 제어어(DCL, Data Control Language)는 데이터베이스에 접근하고 객체들을 사용할 수 있도록 권한을 부여하거나 회수하는 명령어로 GRANT, REVOKE 등이 있다."
+      }
+    },
+    {
+      "question_number": 2,
+      "book_section": "II",
+      "book_question_number": 2,
+      "question_type": "fill_blank",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래에서 빈칸에 들어갈 내용으로 가장 적절한 것은?"
+          }
+        },
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "[아래]\nINSERT는 테이블에 데이터를 입력할 때 사용한다.\n(     )는 입력한 정보 중에 잘못 입력되거나 변경이 발생하여 정보를 수정할 때 사용한다.\nDELETE는 테이블의 정보가 필요 없게 되었을 경우 데이터 삭제를 수행한다."
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "keyword",
+          "choice_text": "UPDATE",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "keyword",
+          "choice_text": "SELECT",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "keyword",
+          "choice_text": "ALTER",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "keyword",
+          "choice_text": "REVOKE",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "데이터의 수정 시 사용하는 DML 구문은 UPDATE이다."
+      }
+    },
+    {
+      "question_number": 3,
+      "book_section": "II",
+      "book_question_number": 3,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 내용에 해당하는 SQL 명령어의 종류는?"
+          }
+        },
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "[아래]\n논리적인 작업의 단위를 묶어 DML에 의해 조작된 결과를 작업단위(Transaction)별로 제어하는 명령어인 Commit, Rollback, Savepoint 등이 여기에 해당하며, 일부에서는 DCL(Data Control Language)로 분류하기도 한다."
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "keyword",
+          "choice_text": "DDL",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "keyword",
+          "choice_text": "DML",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "keyword",
+          "choice_text": "TCL",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "keyword",
+          "choice_text": "TML",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "Transaction을 제어하는 명령어는 TCL(Transaction Control Language)이다."
+      }
+    },
+    {
+      "question_number": 4,
+      "book_section": "II",
+      "book_question_number": 4,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "SELECT 문에 대한 설명으로 가장 적절하지 않은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "WHERE 절은 필수가 아니므로 생략 가능하다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "DISTINCT 옵션을 통해 중복된 데이터가 있을 경우 1건으로 처리해 출력할 수 있다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "FROM 절이 없는 다음 문장 \"SELECT COL1, COL2\"은 에러 없이 수행된다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "SELECT List에 서브쿼리가 사용될 수 있다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "SELECT ... FROM은 필수이므로 FROM 절이 생략되면 에러가 발생된다."
+      }
+    },
+    {
+      "question_number": 5,
+      "book_section": "II",
+      "book_question_number": 5,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "SQL의 종류와 해당되는 명령어를 바르게 연결한 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "DML - SELECT",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "TCL - GRANT",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "DCL - DROP",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "DML - ALTER",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "DDL: CREATE, DROP, ALTER, RENAME\nDML: SELECT, INSERT, UPDATE, DELETE\nDCL: GRANT, REVOKE\nTCL: COMMIT, ROLLBACK"
+      }
+    },
+    {
+      "question_number": 6,
+      "book_section": "II",
+      "book_question_number": 6,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 내용의 범주에 해당하는 SQL 명령어로 가장 적절하지 않은 것은?"
+          }
+        },
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "[아래]\n테이블의 구조를 생성, 변경, 삭제하는 등 데이터 구조를 정의하는 데 사용되는 명령어이다."
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "keyword",
+          "choice_text": "CREATE",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "keyword",
+          "choice_text": "GRANT",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "keyword",
+          "choice_text": "ALTER",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "keyword",
+          "choice_text": "DROP",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "데이터의 구조를 정의하는 명령어는 DDL(데이터 정의어)에 해당하며 CREATE, ALTER, DROP, RENAME 이 있다. GRANT는 권한을 제어하는 DCL이다."
+      }
+    },
+    {
+      "question_number": 7,
+      "book_section": "II",
+      "book_question_number": 7,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "데이터베이스에서 조회되는 데이터에 대한 조건을 설정하여 원하는 데이터만을 검색하기 위해 사용하는 절로 가장 적절한 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "keyword",
+          "choice_text": "WHERE 절",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "keyword",
+          "choice_text": "GROUP BY 절",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "keyword",
+          "choice_text": "ORDER BY 절",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "keyword",
+          "choice_text": "HAVING 절",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "WHERE 절은 SQL을 이용하여 데이터베이스로부터 데이터를 검색할 때 조회되어야 하는 데이터를 필터링하는 데 사용된다."
+      }
+    },
+    {
+      "question_number": 8,
+      "book_section": "II",
+      "book_question_number": 8,
+      "question_type": "find_erroneous",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "SQL 문을 실행했을 때 오류가 발생하는 부분으로 가장 적절한 것은?"
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT DEPTNO, ROUND(AVG(SAL), 2)\nFROM EMP\nWHERE AVG(SAL) >= 1800\nGROUP BY DEPTNO;"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "sql_fragment",
+          "choice_text": "SELECT DEPTNO, ROUND(AVG(SAL), 2)",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "sql_fragment",
+          "choice_text": "FROM EMP",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "sql_fragment",
+          "choice_text": "WHERE AVG(SAL) >= 1800",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "sql_fragment",
+          "choice_text": "GROUP BY DEPTNO;",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "WHERE 절에는 집계 함수를 사용할 수 없다. 집계 함수에 대한 조건은 HAVING 절을 사용해야 한다."
+      }
+    },
+    {
+      "question_number": 9,
+      "book_section": "II",
+      "book_question_number": 9,
+      "question_type": "predict_result",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 SQL의 수행 결과로 가장 적절한 것은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "TAB_A",
+            "columns": ["COL1", "COL2", "COL3"],
+            "rows": [
+              {"COL1": "30", "COL2": "<NULL>", "COL3": "20"},
+              {"COL1": "<NULL>", "COL2": "50", "COL3": "10"},
+              {"COL1": "0", "COL2": "10", "COL3": "<NULL>"}
+            ]
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT SUM(COL2) + SUM(COL3) FROM TAB_A;\nSELECT SUM(COL2) + SUM(COL3) FROM TAB_A WHERE COL1 > 0;\nSELECT SUM(COL2) + SUM(COL3) FROM TAB_A WHERE COL1 IS NOT NULL;\nSELECT SUM(COL2) + SUM(COL3) FROM TAB_A WHERE COL1 IS NULL;"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "result_table",
+          "choice_text": "60, NULL, 30, 60",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "result_table",
+          "choice_text": "60, 20, 30, 60",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "result_table",
+          "choice_text": "90, NULL, 30, 60",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "result_table",
+          "choice_text": "90, 20, 30, 60",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "A. 첫 번째 쿼리: 첫 번째 행 COL2의 NULL, 세 번째 행 COL3의 NULL은 SUM 연산 대상에서 제외된다. (SUM(COL2)=60, SUM(COL3)=30, 결과 90)\nB. 두 번째 쿼리: COL1이 NULL인 두 번째 행과 COL1이 0인 세 번째 행은 연산 대상에서 제외된다. (첫 번째 행만 남으므로 SUM(COL2)는 NULL이 되어 전체 결과는 NULL)\nC. 세 번째 쿼리: COL1이 NULL인 두 번째 행은 제외된다. 첫 번째 행과 세 번째 행을 대상으로 SUM을 구한다. (결과 30)\nD. 네 번째 쿼리: COL1이 NULL인 두 번째 행만 대상이 된다. (결과 60)"
+      }
+    },
+    {
+      "question_number": 10,
+      "book_section": "II",
+      "book_question_number": 10,
+      "question_type": "identify_sql",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "다음 SQL 문장 중 COLUMN1의 값이 NULL이 아닌 경우를 찾아내는 문장으로 가장 적절한 것은? (ANSI 표준 기준)"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "sql_query",
+          "choice_text": "SELECT * FROM MYTABLE WHERE COLUMN1 IS NOT NULL;",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "sql_query",
+          "choice_text": "SELECT * FROM MYTABLE WHERE COLUMN1 <> NULL;",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "sql_query",
+          "choice_text": "SELECT * FROM MYTABLE WHERE COLUMN1 != NULL;",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "sql_query",
+          "choice_text": "SELECT * FROM MYTABLE WHERE COLUMN1 NOT NULL;",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "NULL 값을 조건절에서 사용하는 경우 IS NULL, IS NOT NULL이란 키워드를 사용해야 한다. NULL과의 일반 비교 연산자(=, <>, != 등)는 항상 UNKNOWN을 반환한다."
+      }
+    },
+    {
+      "question_number": 11,
+      "book_section": "II",
+      "book_question_number": 11,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래에 대한 설명으로 가장 적절한 것은?"
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "CREATE TABLE 서비스 (\n  서비스번호 VARCHAR2(10) PRIMARY KEY,\n  서비스명 VARCHAR2(100) NULL,\n  개시일자 DATE NOT NULL\n);\n\n[SQL]\n① SELECT * FROM 서비스 WHERE 서비스번호 = 1;\n② INSERT INTO 서비스 VALUES ('999', '', '2015-11-11');\n③ SELECT * FROM 서비스 WHERE 서비스명 = '';\n④ SELECT * FROM 서비스 WHERE 서비스명 IS NULL;"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "서비스번호 칼럼의 레코드 중 '001'과 같은 숫자 형식으로 된 레코드가 하나라도 입력되어 있다면 ①은 오류 없이 실행된다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "오라클에서 ②와 같이 데이터를 입력하였을 때, 서비스명 칼럼에 공백 문자 데이터가 입력된다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "오라클에서 ②와 같이 데이터를 입력하고 ③과 같이 조회하였을 때, 데이터는 조회된다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "SQL Server에서 ②와 같이 데이터를 입력하고 ④와 같이 조회하였을 때, 데이터는 조회되지 않는다.",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "① 서비스번호 칼럼의 모든 레코드가 '001'과 같은 숫자형식으로 입력되어 있어야 오류가 발생하지 않는다. ② ''와 같이 데이터를 입력하면 서비스명 칼럼의 데이터에 대해서 오라클에서는 NULL로 입력된다. ③ ''와 같이 데이터가 입력되어있을 때 오라클에서 데이터를 조회하려면 서비스명 IS NULL 조건으로 조회하여야 한다. ④ ''와 같이 데이터가 입력되어 있을 때 SQL Server에서 데이터를 조회하려면 서비스명 = ''로 조회하여야 한다."
+      }
+    },
+    {
+      "question_number": 12,
+      "book_section": "II",
+      "book_question_number": 12,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "함수의 실행 결과로 가장 적절하지 않은 것은? (단, A의 아스키코드는 65이다.)"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "LOWER('SQL Expert') : 'sql expert'",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "UPPER('SQL Expert') : 'SQL EXPERT'",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "ASCII('A') : 65",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "LTRIM('xxYYZZxYZxx', 'x') : 'YYZZxYZ'",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "LTRIM은 첫 번째 인자 값인 문자열의 왼쪽 첫 문자부터 확인해서 두 번째 인자 값인 지정문자가 나타나면 해당 문자를 제거한다. 오른쪽이나 문자 사이의 지정 문자는 제거되지 않는다. 따라서 결과는 'YYZZxYZxx'가 되어야 한다."
+      }
+    },
+    {
+      "question_number": 13,
+      "book_section": "II",
+      "book_question_number": 13,
+      "question_type": "different_result",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래를 참고할 때 실행 결과가 다른 SQL은?"
+          }
+        },
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "[SVC_JOIN 테이블 구조]\nCUST_ID: VARCHAR2(10) NOT NULL\nSVC_ID: VARCHAR2(5) NOT NULL\nJOIN_YMD: VARCHAR2(8) NOT NULL\nJOIN_HH: VARCHAR2(4) NOT NULL\nSVC_START_DATE: DATE NULL\nSVC_END_DATE: DATE NULL"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "sql_query",
+          "choice_text": "SELECT SVC_ID, COUNT(*) AS CNT\nFROM SVC_JOIN\nWHERE SVC_END_DATE >= TO_DATE('20150101000000', 'YYYYMMDDHH24MISS')\nAND SVC_END_DATE <= TO_DATE('20150131235959', 'YYYYMMDDHH24MISS')\nAND CONCAT(JOIN_YMD, JOIN_HH) = '2014120100'\nGROUP BY SVC_ID;",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "sql_query",
+          "choice_text": "SELECT SVC_ID, COUNT(*) AS CNT\nFROM SVC_JOIN\nWHERE SVC_END_DATE >= TO_DATE('20150101', 'YYYYMMDD')\nAND SVC_END_DATE < TO_DATE('20150201', 'YYYYMMDD')\nAND (JOIN_YMD, JOIN_HH) IN (('20141201', '00'))\nGROUP BY SVC_ID;",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "sql_query",
+          "choice_text": "SELECT SVC_ID, COUNT(*) AS CNT\nFROM SVC_JOIN\nWHERE '201501' = TO_CHAR(SVC_END_DATE, 'YYYYMM')\nAND JOIN_YMD = '20141201'\nAND JOIN_HH = '00'\nGROUP BY SVC_ID;",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "sql_query",
+          "choice_text": "SELECT SVC_ID, COUNT(*) AS CNT\nFROM SVC_JOIN\nWHERE TO_DATE('201501', 'YYYYMM') = SVC_END_DATE\nAND JOIN_YMD||JOIN_HH = '2014120100'\nGROUP BY SVC_ID;",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "①, ②, ③번 SQL은 모두 가입이 2014년 12월 01일 00시에 발생했고 서비스 종료일시가 2015년 01월 01일 00시 00분 00초부터 2015년 01월 31일 23시 59분 59초 사이에 속하는 데이터를 찾는 조건이다. ④번 SQL은 서비스 종료일시가 정확히 2015년 01월 01일 00시 00분 00초에 종료되는 데이터만 찾는 조건이다."
+      }
+    },
+    {
+      "question_number": 14,
+      "book_section": "II",
+      "book_question_number": 14,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "GROUP BY 절과 HAVING 절에 대한 설명으로 가장 적절한 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "집계 함수의 통계 정보는 NULL 값을 가진 행을 포함하여 수행한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "GROUP BY 절에서는 SELECT 절과 같이 ALIAS 명을 사용할 수 있다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "집계 함수는 WHERE 절에도 올 수 있다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "HAVING 절은 일반적으로 GROUP BY 절 뒤에 위치한다.",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "① 집계 함수의 통계 정보는 NULL 값을 가진 행을 제외하고 수행한다. ② GROUP BY 절에서는 SELECT 절과는 달리 ALIAS 명을 사용할 수 없다. ③ 집계 함수는 WHERE 절에는 올 수 없다."
+      }
+    },
+    {
+      "question_number": 15,
+      "book_section": "II",
+      "book_question_number": 15,
+      "question_type": "predict_result",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래를 참고할 때 SQL의 실행 결과로 가장 적절한 것은? (단, 이해를 돕기 위해 \\n는 줄바꿈을 의미하며 실제 저장값이 아님, 또한 CHR(10)의 ASCII 값은 줄바꿈을 의미)"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "TAB1",
+            "columns": ["ROWNUM", "C1"],
+            "rows": [
+              {"ROWNUM": 1, "C1": "A\nA"},
+              {"ROWNUM": 2, "C1": "B\nB\nB"}
+            ]
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT SUM(CC)\nFROM (\n  SELECT (LENGTH(C1) - LENGTH(REPLACE(C1, CHR(10))) + 1) CC\n  FROM TAB1\n);"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "value",
+          "choice_text": "2",
+          "payload": 2,
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "value",
+          "choice_text": "3",
+          "payload": 3,
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "value",
+          "choice_text": "5",
+          "payload": 5,
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "value",
+          "choice_text": "6",
+          "payload": 6,
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "이 SQL은 데이터에 포함된 라인(줄) 수를 구하기 위해 작성된 쿼리이다. ROWNUM 1은 줄바꿈 1개(총 2줄)이므로 계산 결과가 3 - 2 + 1 = 2이다. ROWNUM 2는 줄바꿈 2개(총 3줄)이므로 계산 결과가 5 - 3 + 1 = 3이다. 따라서 SUM(CC)는 2 + 3 = 5이다."
+      }
+    },
+    {
+      "question_number": 16,
+      "book_section": "II",
+      "book_question_number": 16,
+      "question_type": "predict_result",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 SQL의 실행 결과로 가장 적절한 것은? (단, DBMS는 오라클로 가정)"
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "oracle",
+            "code": "SELECT TO_CHAR(TO_DATE('2023.01.10 10', 'YYYY.MM.DD HH24') + 1/24/(60/10), 'YYYY.MM.DD HH24:MI:SS') FROM DUAL;"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "value",
+          "choice_text": "2023.01.10 11:01:00",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "value",
+          "choice_text": "2023.01.10 10:05:00",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "value",
+          "choice_text": "2023.01.10 10:10:00",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "value",
+          "choice_text": "2023.01.10 10:30:00",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "오라클에서 날짜의 연산은 숫자의 연산과 같다. 특정 날짜에 1을 더하면 하루를 더한 것과 같다. 1/24/60은 1분을 의미하며, 1/24/(60/10)은 10분과 같으므로 2023년 1월 10일 10시에 10분을 더한 결과인 10:10:00이 출력된다."
+      }
+    },
+    {
+      "question_number": 17,
+      "book_section": "II",
+      "book_question_number": 17,
+      "question_type": "fill_blank",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래의 (가)와 (나)가 동일한 결과를 출력한다고 할 때, 빈칸에 들어갈 내용으로 가장 적절한 것은? (단, 스칼라 서브쿼리는 제외함)"
+          }
+        },
+        {
+          "asset_type": "code_compare",
+          "payload": {
+            "equivalence_type": "original_vs_rewrite",
+            "blocks": [
+              {
+                "label": "(가)",
+                "dialect": "ansi",
+                "code": "SELECT LOC,\n  CASE WHEN LOC = 'NEW YORK' THEN 'EAST'\n  ELSE 'ETC'\n  END as AREA\nFROM DEPT;"
+              },
+              {
+                "label": "(나)",
+                "dialect": "ansi",
+                "code": "SELECT LOC,\n  [          ] as AREA\nFROM DEPT;"
+              }
+            ]
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "sql_fragment",
+          "choice_text": "CASE WHEN LOC IS 'NEW YORK' THEN 'EAST' ELSE 'ETC' END",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "sql_fragment",
+          "choice_text": "CASE LOC WHEN 'NEW YORK' THEN 'EAST' ELSE 'ETC' END",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "sql_fragment",
+          "choice_text": "CASE LOC WHEN 'NEW YORK' THEN 'EAST' DEFAULT 'ETC' END",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "sql_fragment",
+          "choice_text": "DECODE (LOC, 'EAST', 'NEW YORK', 'ETC')",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "= 조건만 있는 검색 CASE 표현식은 단순 CASE 표현식(CASE 칼럼 WHEN 값 THEN ...)으로 변환할 수 있다. ④번의 올바른 DECODE 표기법은 DECODE(LOC, 'NEW YORK', 'EAST', 'ETC') 이어야 한다."
+      }
+    },
+    {
+      "question_number": 18,
+      "book_section": "II",
+      "book_question_number": 18,
+      "question_type": "different_result",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "각 팀별로 FW, MF, DF, GK 포지션의 인원수와 팀별 전체 인원수를 구하는 SQL을 작성할 때 결과가 다른 하나는? (단, ①은 SQL Server 환경이고 보기 ②, ③, ④는 오라클 환경이다.)"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "sql_query",
+          "choice_text": "SELECT TEAM_ID,\nISNULL(SUM(CASE WHEN POSITION = 'FW' THEN 1 END), 0) FW,\nISNULL(SUM(CASE WHEN POSITION = 'MF' THEN 1 END), 0) MF,\nISNULL(SUM(CASE WHEN POSITION = 'DF' THEN 1 END), 0) DF,\nISNULL(SUM(CASE WHEN POSITION = 'GK' THEN 1 END), 0) GK,\nCOUNT(*) SUM\nFROM PLAYER\nGROUP BY TEAM_ID;",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "sql_query",
+          "choice_text": "SELECT TEAM_ID,\nNVL(SUM(CASE POSITION WHEN 'FW' THEN 1 END), 0) FW,\nNVL(SUM(CASE POSITION WHEN 'MF' THEN 1 END), 0) MF,\nNVL(SUM(CASE POSITION WHEN 'DF' THEN 1 END), 0) DF,\nNVL(SUM(CASE POSITION WHEN 'GK' THEN 1 END), 0) GK,\nCOUNT(*) SUM\nFROM PLAYER\nGROUP BY TEAM_ID;",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "sql_query",
+          "choice_text": "SELECT TEAM_ID,\nNVL(SUM(CASE WHEN POSITION = 'FW' THEN 1 END), 0) FW,\nNVL(SUM(CASE WHEN POSITION = 'MF' THEN 1 END), 0) MF,\nNVL(SUM(CASE WHEN POSITION = 'DF' THEN 1 END), 0) DF,\nNVL(SUM(CASE WHEN POSITION = 'GK' THEN 1 END), 0) GK,\nCOUNT(*) SUM\nFROM PLAYER\nGROUP BY TEAM_ID;",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "sql_query",
+          "choice_text": "SELECT TEAM_ID,\nNVL(SUM(CASE POSITION WHEN 'FW' THEN 1 ELSE 1 END), 0) FW,\nNVL(SUM(CASE POSITION WHEN 'MF' THEN 1 ELSE 1 END), 0) MF,\nNVL(SUM(CASE POSITION WHEN 'DF' THEN 1 ELSE 1 END), 0) DF,\nNVL(SUM(CASE POSITION WHEN 'GK' THEN 1 ELSE 1 END), 0) GK,\nCOUNT(*) SUM\nFROM PLAYER\nGROUP BY TEAM_ID;",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "④는 CASE 문장에 ELSE 1 END를 사용했기 때문에, 해당 포지션이 아니더라도 1이 반환되어 SUM이 전체 행 수를 세는 결과(COUNT(*))와 동일하게 나온다. 데이터가 없는 경우 0으로 합산되게 하려면 ELSE 0을 쓰거나 생략하여 NULL로 처리한 뒤 외부에서 NVL/ISNULL 처리를 해야 한다."
+      }
+    },
+    {
+      "question_number": 19,
+      "book_section": "II",
+      "book_question_number": 19,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 SQL에 대한 설명으로 가장 적절한 것은? (단, 고객이름은 중복되지 않는다고 가정)"
+          }
+        },
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "고객 (고객번호, 고객이름, 주소, 전화번호)\n상품 (상품번호, 상품이름, 무게, 가격)\n주문 (고객번호, 상품번호, 수량, 날짜)"
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT 고객이름, SUM(수량)\nFROM 고객, 상품, 주문\nWHERE 고객.고객번호 = 주문.고객번호\n  AND 상품.상품번호 = 주문.상품번호\nGROUP BY 고객.고객이름\nHAVING MAX(수량) > 10;"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "고객번호가 10보다 큰 고객이름과 주문한 수량의 합을 구한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "수량이 10보다 큰 주문을 한 고객이름과 주문한 수량의 합을 구한다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "열한 번 이상 상품을 주문한 고객이름과 주문한 수량의 합을 구한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "주문한 수량의 합이 10보다 큰 고객이름과 주문한 수량의 합을 구한다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "HAVING 절은 주로 집계 함수 결과에 대한 조건을 확인하는 용도이다. HAVING MAX(수량) > 10은 각 고객의 개별 주문 건들 중 최대 수량이 10을 초과하는(즉, 단일 주문에서 수량이 10보다 큰 주문을 한 적이 있는) 고객을 의미한다."
+      }
+    },
+    {
+      "question_number": 20,
+      "book_section": "II",
+      "book_question_number": 20,
+      "question_type": "fill_blank",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "EMP 테이블에서 MGR의 값이 7698과 같으면 NULL을 표시하고, 같지 않으면 MGR을 표시하려고 할 때 빈칸에 들어갈 함수는?"
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT ENAME, EMPNO, MGR, ____(MGR,7698) as NM\nFROM EMP;"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "keyword",
+          "choice_text": "NULLIF",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "keyword",
+          "choice_text": "NVL",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "keyword",
+          "choice_text": "IFNULL",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "keyword",
+          "choice_text": "COALESCE",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "NULLIF(표현식1, 표현식2) 함수는 표현식1이 표현식2와 같으면 NULL을, 같지 않으면 표현식1을 리턴한다. 특정 값을 NULL로 대체하는 경우 유용하게 사용할 수 있다."
+      }
+    },
+    {
+      "question_number": 21,
+      "book_section": "II",
+      "book_question_number": 21,
+      "question_type": "different_result",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "실행 결과가 다른 하나는?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "sql_query",
+          "choice_text": "SELECT DNAME, LOC, DEPTNO FROM DEPT ORDER BY DNAME, LOC, 3 DESC;",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "sql_query",
+          "choice_text": "SELECT DNAME, LOC AS AREA, DEPTNO FROM DEPT ORDER BY DNAME, AREA, DEPTNO DESC;",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "sql_query",
+          "choice_text": "SELECT DNAME, LOC AS AREA, DEPTNO FROM DEPT ORDER BY 1, AREA, 3 DESC;",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "sql_query",
+          "choice_text": "SELECT DNAME AS DEPT, LOC AS AREA, DEPTNO FROM DEPT ORDER BY DEPT DESC, LOC, 3 DESC;",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "첫 번째 결과 칼럼인 DEPT(DNAME)를 역순 정렬하여 나머지와 결과가 다르다."
+      }
+    },
+    {
+      "question_number": 22,
+      "book_section": "II",
+      "book_question_number": 22,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래는 이름이 4문자 이상이고 2번째 문자가 S인 학번을 출력하는 SQL이다. 빈칸에 들어갈 수 있는 내용으로 가장 적절하지 않은 것은?"
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT 학번\nFROM 학생\nWHERE 학생.이름 LIKE [    ];"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "value",
+          "choice_text": "'%S'",
+          "payload": "'%S'",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "value",
+          "choice_text": "'_S__%'",
+          "payload": "'_S__%'",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "value",
+          "choice_text": "'_S_%'",
+          "payload": "'_S_%'",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "value",
+          "choice_text": "'_S%'",
+          "payload": "'_S%'",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "①은 % 위치에 아무런 문자가 들어가지 않을 수도 있다. 따라서 S가 첫 문자가 될 수도 있으므로 '2번째 문자가 S'라는 조건을 보장하지 못해 적절하지 않다."
+      }
+    },
+    {
+      "question_number": 23,
+      "book_section": "II",
+      "book_question_number": 23,
+      "question_type": "fill_blanks_multi",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "전공이름별로 묶어 전공이름과 학점 평균을 전공이름의 내림차순 정렬하여 출력하고자 할 때, 빈칸에 들어갈 명령어로 가장 적절한 것은?"
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT 전공이름, AVG(학점)\nFROM 전공, 학생\nWHERE 전공.전공번호 = 학생.전공번호\n[  ㄱ  ] 전공이름\nORDER BY 전공이름 [  ㄴ  ];"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "tuple",
+          "choice_text": "GROUP BY, DESC",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "tuple",
+          "choice_text": "HAVING, DESC",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "tuple",
+          "choice_text": "GROUP BY, ASC",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "tuple",
+          "choice_text": "HAVING, ASC",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "데이터들을 작은 그룹으로 분류해 소그룹에 대한 항목별 통계 정보를 얻을 때 GROUP BY를 사용한다. 내림차순 정렬은 DESC이다."
+      }
+    },
+    {
+      "question_number": 24,
+      "book_section": "II",
+      "book_question_number": 24,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "SQL의 실행 결과로 가장 적절하지 않은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "ROUND(4.875, 2) = 4.88",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "LENGTH('KOREAN') = 6",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "DATE_FORMAT('2022-11-02', '%Y-%m-%d') = '2022-11-02'",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "SUBSTR('Gangneung Wonju', 8, 4) = 'g Wo'",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "'Gangneung Wonju' 문자열에서 8번째 문자인 'n'에서부터 4개 문자를 출력하면 'ng W'가 되어야 한다."
+      }
+    },
+    {
+      "question_number": 25,
+      "book_section": "II",
+      "book_question_number": 25,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래를 참고할 때 광고매체 ID별 최초로 게시한 광고명과 광고시작일자를 출력하기 위하여 빈칸에 들어갈 SQL로 가장 적절한 것은?"
+          }
+        },
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "[테이블 구조]\n광고(광고ID, 광고명)\n광고게시(광고게시번호, 광고ID, 광고매체ID, 광고시작일자, 광고종료일자)\n광고매체(광고매체ID, 광고매체명)"
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT C.광고매체명, B.광고명, A.광고시작일자\nFROM 광고게시 A, 광고 B, 광고매체 C,\n     ( [        빈칸        ] ) D\nWHERE A.광고시작일자 = D.광고시작일자\n  AND A.광고매체ID = D.광고매체ID\n  AND A.광고ID = B.광고ID\n  AND A.광고매체ID = C.광고매체ID\nORDER BY C.광고매체명;"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "sql_query",
+          "choice_text": "SELECT D.광고매체ID, MIN(D.광고시작일자) AS 광고시작일자\nFROM 광고게시 D\nWHERE D.광고매체ID = C.광고매체ID\nGROUP BY D.광고매체ID",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "sql_query",
+          "choice_text": "SELECT 광고매체ID, MIN(광고시작일자) AS 광고시작일자\nFROM 광고게시\nGROUP BY 광고매체ID",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "sql_query",
+          "choice_text": "SELECT MIN(광고매체ID) AS 광고매체ID, MIN(광고시작일자) AS 광고시작일자\nFROM 광고게시\nGROUP BY 광고ID",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "sql_query",
+          "choice_text": "SELECT MIN(광고매체ID) AS 광고매체ID, MIN(광고시작일자) AS 광고시작일자\nFROM 광고게시",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "광고게시 테이블에서 광고매체ID별로 광고시작일자가 가장 빠른 데이터를 추출하는 Inline View를 작성해야 한다. ①은 Inline View 내에서 메인 쿼리의 C 테이블을 참조(연관 서브쿼리)하려 하므로 오류가 발생한다. ②가 올바른 인라인 뷰 형태이다."
+      }
+    },
+    {
+      "question_number": 26,
+      "book_section": "II",
+      "book_question_number": 26,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 SQL을 순서대로 실행했을 때 최종적으로 반영되는 SQL을 모두 고른 것은?"
+          }
+        },
+        {
+          "asset_type": "transaction_steps",
+          "payload": {
+            "steps": [
+              {"order": 1, "kind": "DML", "code": "(가) INSERT INTO emp (empno, ename, deptno) VALUES (999, 'Smith', 10);"},
+              {"order": 2, "kind": "SAVEPOINT", "name": "a"},
+              {"order": 3, "kind": "DML", "code": "(나) DELETE emp WHERE empno = 202;"},
+              {"order": 4, "kind": "SAVEPOINT", "name": "b"},
+              {"order": 5, "kind": "DML", "code": "(다) UPDATE emp SET ename = 'Clark';"},
+              {"order": 6, "kind": "ROLLBACK", "to_savepoint": "a"},
+              {"order": 7, "kind": "DML", "code": "(라) INSERT INTO emp (empno, ename, deptno) VALUES (300, 'Thomas', 30);"},
+              {"order": 8, "kind": "SAVEPOINT", "name": "c"},
+              {"order": 9, "kind": "DML", "code": "(마) DELETE emp WHERE deptno = 20;"},
+              {"order": 10, "kind": "COMMIT"}
+            ]
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "tuple",
+          "choice_text": "(가), (나), (다), (라), (마)",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "tuple",
+          "choice_text": "(가), (나), (다), (라)",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "tuple",
+          "choice_text": "(나), (다), (라), (마)",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "tuple",
+          "choice_text": "(가), (라), (마)",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "SAVEPOINT a 이후의 트랜잭션인 (나)와 (다)는 ROLLBACK TO SAVEPOINT a에 의해 취소된다. 따라서 최종 반영되는 것은 (가), (라), (마)이다."
+      }
+    },
+    {
+      "question_number": 27,
+      "book_section": "II",
+      "book_question_number": 27,
+      "question_type": "predict_result",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 SQL의 실행 결과로 가장 적절한 것은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "TABLE_A",
+            "columns": ["TABKEY", "COLA", "COLB", "COLC"],
+            "rows": [
+              {"TABKEY": 1, "COLA": "<NULL>", "COLB": "가", "COLC": "<NULL>"},
+              {"TABKEY": 2, "COLA": "1", "COLB": "가", "COLC": "5"},
+              {"TABKEY": 3, "COLA": "<NULL>", "COLB": "나", "COLC": "2"},
+              {"TABKEY": 4, "COLA": "3", "COLB": "나", "COLC": "<NULL>"},
+              {"TABKEY": 5, "COLA": "<NULL>", "COLB": "<NULL>", "COLC": "3"},
+              {"TABKEY": 6, "COLA": "5", "COLB": "다", "COLC": "0"},
+              {"TABKEY": 7, "COLA": "<NULL>", "COLB": "다", "COLC": "<NULL>"}
+            ]
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT COLB,\n       MAX(COLA) AS COLA1,\n       MIN(COLA) AS COLA2,\n       SUM(COLA + COLC) AS SUMAC\nFROM TABLE_A\nGROUP BY COLB;"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "result_table",
+          "choice_text": "NULL행 포함 4행: SUMAC NULL/6/NULL/5, COLA2=COLA1",
+          "payload": {
+            "columns": ["COLB", "COLA1", "COLA2", "SUMAC"],
+            "rows": [
+              {"COLB": "<NULL>", "COLA1": "<NULL>", "COLA2": "<NULL>", "SUMAC": "<NULL>"},
+              {"COLB": "가", "COLA1": "1", "COLA2": "1", "SUMAC": "6"},
+              {"COLB": "나", "COLA1": "3", "COLA2": "3", "SUMAC": "<NULL>"},
+              {"COLB": "다", "COLA1": "5", "COLA2": "5", "SUMAC": "5"}
+            ],
+            "sub_kind": "generic"
+          },
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "result_table",
+          "choice_text": "NULL행 없음 3행: SUMAC 6/3/5, COLA2=NULL",
+          "payload": {
+            "columns": ["COLB", "COLA1", "COLA2", "SUMAC"],
+            "rows": [
+              {"COLB": "가", "COLA1": "1", "COLA2": "<NULL>", "SUMAC": "6"},
+              {"COLB": "나", "COLA1": "3", "COLA2": "<NULL>", "SUMAC": "3"},
+              {"COLB": "다", "COLA1": "5", "COLA2": "<NULL>", "SUMAC": "5"}
+            ],
+            "sub_kind": "generic"
+          },
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "result_table",
+          "choice_text": "NULL행 포함 4행: SUMAC 3/6/5/5, COLA2=COLA1",
+          "payload": {
+            "columns": ["COLB", "COLA1", "COLA2", "SUMAC"],
+            "rows": [
+              {"COLB": "<NULL>", "COLA1": "<NULL>", "COLA2": "<NULL>", "SUMAC": "3"},
+              {"COLB": "가", "COLA1": "1", "COLA2": "1", "SUMAC": "6"},
+              {"COLB": "나", "COLA1": "3", "COLA2": "3", "SUMAC": "5"},
+              {"COLB": "다", "COLA1": "5", "COLA2": "5", "SUMAC": "5"}
+            ],
+            "sub_kind": "generic"
+          },
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "result_table",
+          "choice_text": "NULL행 없음 3행: SUMAC 6/5/5, COLA2=NULL",
+          "payload": {
+            "columns": ["COLB", "COLA1", "COLA2", "SUMAC"],
+            "rows": [
+              {"COLB": "가", "COLA1": "1", "COLA2": "<NULL>", "SUMAC": "6"},
+              {"COLB": "나", "COLA1": "3", "COLA2": "<NULL>", "SUMAC": "5"},
+              {"COLB": "다", "COLA1": "5", "COLA2": "<NULL>", "SUMAC": "5"}
+            ],
+            "sub_kind": "generic"
+          },
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "GROUP BY 절은 NULL 데이터도 집계에 포함하므로 COLB가 NULL인 행도 출력된다. MIN, MAX 함수는 NULL이 아닌 행 중에서 연산한다. 사칙연산(COLA+COLC)의 경우 둘 중 하나라도 NULL이면 결과는 NULL이며, SUM 함수는 이 NULL을 제외하고 계산한다. 따라서 '나' 그룹은 (NULL+2)와 (3+NULL) 모두 NULL이 되어 SUM 결과가 NULL이 된다."
+      }
+    },
+    {
+      "question_number": 28,
+      "book_section": "II",
+      "book_question_number": 28,
+      "question_type": "predict_result",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 SQL의 실행 결과로 가장 적절한 것은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "TBL",
+            "columns": ["ID"],
+            "rows": [
+              {"ID": 100},
+              {"ID": 100},
+              {"ID": 200},
+              {"ID": 200},
+              {"ID": 200},
+              {"ID": 999},
+              {"ID": 999}
+            ]
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT ID FROM TBL\nGROUP BY ID\nHAVING COUNT(*) = 2\nORDER BY (CASE WHEN ID=999 THEN 0 ELSE ID END);"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "result_table",
+          "choice_text": "100, 999",
+          "payload": {
+            "columns": ["ID"],
+            "rows": [{"ID": 100}, {"ID": 999}],
+            "sub_kind": "generic"
+          },
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "result_table",
+          "choice_text": "999, 100",
+          "payload": {
+            "columns": ["ID"],
+            "rows": [{"ID": 999}, {"ID": 100}],
+            "sub_kind": "generic"
+          },
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "result_table",
+          "choice_text": "100, 200, 999",
+          "payload": {
+            "columns": ["ID"],
+            "rows": [{"ID": 100}, {"ID": 200}, {"ID": 999}],
+            "sub_kind": "generic"
+          },
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "result_table",
+          "choice_text": "999, 100, 200",
+          "payload": {
+            "columns": ["ID"],
+            "rows": [{"ID": 999}, {"ID": 100}, {"ID": 200}],
+            "sub_kind": "generic"
+          },
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "HAVING COUNT(*) = 2 조건에 의해 건수가 2개인 ID는 100, 999이다. ORDER BY 절의 CASE문에 의해 999는 0으로 치환되어 평가되므로 오름차순 정렬 시 999가 먼저 출력된다."
+      }
+    },
+    {
+      "question_number": 29,
+      "book_section": "II",
+      "book_question_number": 29,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "오류가 발생하는 SQL은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "sql_query",
+          "choice_text": "SELECT 지역, SUM(매출금액) AS 매출금액\nFROM 지역별매출\nGROUP BY 지역\nORDER BY 매출금액 DESC;",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "sql_query",
+          "choice_text": "SELECT 지역, 매출금액\nFROM 지역별매출\nORDER BY 년 ASC;",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "sql_query",
+          "choice_text": "SELECT 지역, SUM(매출금액) AS 매출금액\nFROM 지역별매출\nGROUP BY 지역\nORDER BY 년 DESC;",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "sql_query",
+          "choice_text": "SELECT 지역, SUM(매출금액) AS 매출금액\nFROM 지역별매출\nGROUP BY 지역\nHAVING SUM(매출금액) > 1000\nORDER BY COUNT(*) ASC;",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "GROUP BY를 사용할 경우 GROUP BY 표현식이 아닌 값은 다중 행을 가지므로 기술될 수 없다. ③번은 GROUP BY에 '지역'만 기술되었는데 ORDER BY에 '년'을 사용하려 하여 오류가 발생한다. (②번은 테이블 전체 스캔이므로 SELECT 절에 없는 '년' 칼럼으로도 정렬이 가능하다.)"
+      }
+    },
+    {
+      "question_number": 30,
+      "book_section": "II",
+      "book_question_number": 30,
+      "question_type": "predict_result",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 SQL의 실행 결과로 가장 적절한 것은?"
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "oracle",
+            "code": "SELECT TO_CHAR(TO_DATE('2019.02.25', 'YYYY.MM.DD') + 1/12/(60/30), 'YYYY.MM.DD HH24:MI:SS') FROM DUAL;"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "value",
+          "choice_text": "'2019.02.25 02:00:00'",
+          "payload": "'2019.02.25 02:00:00'",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "value",
+          "choice_text": "'2019.02.25 01:30:00'",
+          "payload": "'2019.02.25 01:30:00'",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "value",
+          "choice_text": "'2019.02.25 01:00:00'",
+          "payload": "'2019.02.25 01:00:00'",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "value",
+          "choice_text": "'2019.02.25 00:30:00'",
+          "payload": "'2019.02.25 00:30:00'",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "오라클에서 날짜 연산 시 1은 1일을 의미한다. 1/12는 2시간을 의미하며, 60/30은 2이다. 즉, 2시간 / 2 = 1시간을 더하는 것과 같으므로 '2019.02.25 01:00:00'이 반환된다."
+      }
+    },
+    {
+      "question_number": 31,
+      "book_section": "II",
+      "book_question_number": 31,
+      "question_type": "predict_result",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "실행 결과가 NULL인 SQL은? (단, DBMS는 오라클로 가정)"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "sql_query",
+          "choice_text": "SELECT COALESCE(NULL, 'A') FROM DUAL;",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "sql_query",
+          "choice_text": "SELECT NULLIF('A', 'A') FROM DUAL;",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "sql_query",
+          "choice_text": "SELECT NVL('A', NULL) FROM DUAL;",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "sql_query",
+          "choice_text": "SELECT NVL(NULL, 0)+ 10 FROM DUAL;",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "NULLIF(표현식1, 표현식2) 함수는 표현식1과 표현식2가 같으면 NULL, 아니면 표현식1을 리턴한다."
+      }
+    },
+    {
+      "question_number": 32,
+      "book_section": "II",
+      "book_question_number": 32,
+      "question_type": "correct_ordering",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "SELECT 문장의 실행 순서를 올바르게 나열한 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "SELECT - FROM - WHERE - GROUP BY - HAVING - ORDER BY",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "FROM - SELECT - WHERE - GROUP BY - HAVING - ORDER BY",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "FROM - WHERE - GROUP BY - HAVING - ORDER BY - SELECT",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "FROM - WHERE - GROUP BY - HAVING - SELECT - ORDER BY",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "SELECT 문장의 실행 순서는 FROM - WHERE - GROUP BY - HAVING - SELECT - ORDER BY 이다."
+      }
+    },
+    {
+      "question_number": 33,
+      "book_section": "II",
+      "book_question_number": 33,
+      "question_type": "derive_count",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "5개의 테이블로부터 필요한 칼럼을 조회하려고 할 때, 최소 몇 개의 JOIN 조건이 필요한가?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "2개",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "3개",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "4개",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "5개",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "여러 테이블로부터 원하는 데이터를 조회하기 위해서는 전체 테이블 개수에서 최소 N-1 개 만큼의 JOIN 조건이 필요하다."
+      }
+    },
+    {
+      "question_number": 34,
+      "book_section": "II",
+      "book_question_number": 34,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "출연료가 8888 이상인 영화명, 배우명, 출연료를 구하는 SQL로 가장 적절한 것은? (단, 밑줄 친 속성들은 테이블의 기본키이다.)"
+          }
+        },
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "[아래]\n배우(배우번호(PK), 배우명, 성별)\n영화(영화번호(PK), 영화명, 제작년도)\n출연(배우번호(PK), 영화번호(PK), 출연료)"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "sql_query",
+          "choice_text": "SELECT 출연.영화명, 영화.배우명, 출연.출연료\nFROM 배우, 영화, 출연\nWHERE 출연료 >= 8888\nAND 출연.영화번호 = 영화.영화번호\nAND 출연.배우번호 = 배우.배우번호;",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "sql_query",
+          "choice_text": "SELECT 영화.영화명, 배우.배우명, 출연료\nFROM 영화, 배우, 출연\nWHERE 출연.출연료 > 8888\nAND 출연.영화번호 = 영화.영화번호\nAND 영화.영화번호 = 배우.배우번호;",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "sql_query",
+          "choice_text": "SELECT 영화명, 배우명, 출연료\nFROM 배우, 영화, 출연\nWHERE 출연료 >= 8888\nAND 영화번호 = 영화.영화번호\nAND 배우번호 = 배우.배우번호;",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "sql_query",
+          "choice_text": "SELECT 영화.영화명, 배우.배우명, 출연료\nFROM 배우, 영화, 출연\nWHERE 출연료 >= 8888\nAND 출연.영화번호 = 영화.영화번호\nAND 출연.배우번호 = 배우.배우번호;",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "영화명과 배우명은 출연 테이블이 아니라 영화와 배우 테이블에서 가지고 와야 하는 속성이므로, 각 테이블과 조인 조건을 명확히 설정한 ④번 SQL이 적절하다. ①은 칼럼 소속이 틀렸고, ②는 조인 조건이 잘못되었으며(영화번호=배우번호), ③은 칼럼 모호성(Ambiguity) 에러가 발생할 수 있다."
+      }
+    },
+    {
+      "question_number": 35,
+      "book_section": "II",
+      "book_question_number": 35,
+      "question_type": "select_all_correct",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래에서 JOIN에 대한 설명으로 가장 적절한 것은?"
+          }
+        },
+        {
+          "asset_type": "list_items",
+          "payload": {
+            "items": [
+              {
+                "label": "(가)",
+                "text": "일반적으로 조인은 PK와 FK값의 연관성에 의해 성립된다."
+              },
+              {
+                "label": "(나)",
+                "text": "DBMS 옵티마이저는 FROM 절에 나열된 테이블들을 임의로 3개 정도씩 묶어서 조인을 처리한다."
+              },
+              {
+                "label": "(다)",
+                "text": "EQUI JOIN은 조인에 관여하는 테이블 간의 칼럼 값들이 정확하게 일치하는 경우에 사용되는 방법이다."
+              },
+              {
+                "label": "(라)",
+                "text": "EQUI JOIN은 '=' 연산자에 의해서만 수행되며, 그 이외의 비교 연산자를 사용하는 경우에는 모두 NON EQUI JOIN이다."
+              },
+              {
+                "label": "(마)",
+                "text": "대부분 NON EQUI JOIN을 수행할 수 있지만, 때로는 설계상의 이유로 수행이 불가능한 경우도 있다."
+              }
+            ]
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "tuple",
+          "choice_text": "(가), (다), (라)",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "tuple",
+          "choice_text": "(가), (나), (다)",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "tuple",
+          "choice_text": "(가), (나), (다), (라)",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "tuple",
+          "choice_text": "(가), (다), (라), (마)",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "DBMS 옵티마이저는 FROM 절에 나열된 테이블이 아무리 많아도 항상 2개의 테이블씩 짝을 지어 Join을 수행한다. 따라서 (나)는 틀린 설명이다."
+      }
+    },
+    {
+      "question_number": 36,
+      "book_section": "II",
+      "book_question_number": 36,
+      "question_type": "predict_result",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 SQL의 실행 결과로 가장 적절한 것은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "EMP_TBL",
+            "columns": ["EMPNO", "ENAME"],
+            "rows": [
+              {"EMPNO": "1000", "ENAME": "SMITH"},
+              {"EMPNO": "1050", "ENAME": "ALLEN"},
+              {"EMPNO": "1100", "ENAME": "SCOTT"}
+            ]
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "RULE_TBL",
+            "columns": ["RULE_NO", "RULE"],
+            "rows": [
+              {"RULE_NO": "1", "RULE": "S%"},
+              {"RULE_NO": "2", "RULE": "%T%"}
+            ]
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT COUNT(*) CNT\nFROM EMP_TBL A, RULE_TBL B\nWHERE A.ENAME LIKE B.RULE;"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "value",
+          "choice_text": "0",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "value",
+          "choice_text": "2",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "value",
+          "choice_text": "4",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "value",
+          "choice_text": "6",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "LIKE 연산자를 이용한 조인이다. 'S%' 규칙에는 SMITH, SCOTT이 매칭(2건). '%T%' 규칙에도 SMITH, SCOTT이 매칭(2건). 따라서 총 4건이 카운트된다."
+      }
+    },
+    {
+      "question_number": 37,
+      "book_section": "II",
+      "book_question_number": 37,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "순수 관계 연산자로 가장 적절하지 않은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "keyword",
+          "choice_text": "SELECT",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "keyword",
+          "choice_text": "UPDATE",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "keyword",
+          "choice_text": "JOIN",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "keyword",
+          "choice_text": "DIVIDE",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "순수 관계 연산자에는 SELECT, PROJECT, JOIN, DIVIDE가 있다."
+      }
+    },
+    {
+      "question_number": 38,
+      "book_section": "II",
+      "book_question_number": 38,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래를 참고할 때 가장 적절한 SQL은?"
+          }
+        },
+        {
+          "asset_type": "erd",
+          "payload": "erDiagram\n  고객 ||--o{ 추천컨텐츠 : \"\"\n  컨텐츠 ||--o{ 추천컨텐츠 : \"\"\n  고객 ||--o{ 비선호컨텐츠 : \"\"\n  컨텐츠 ||--o{ 비선호컨텐츠 : \"\""
+        },
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "[설명]\n우리는 매일 배치작업을 통하여 고객에게 추천할 컨텐츠를 생성하고 고객에게 추천서비스를 제공한다. 추천 컨텐츠 엔터티에서 언제 추천을 해야 하는지를 정의하는 추천대상일자가 있어 해당일자에만 컨텐츠를 추천해야 한다. 또한 고객이 컨텐츠를 추천 받았을 때 선호하는 컨텐츠가 아닌 경우에는 고객이 비선호 컨텐츠로 분류하여 더 이상 추천 받기를 원하지 않는다. 그러므로 우리는 비선호 컨텐츠 엔터티에 등록된 데이터에 대해서는 추천을 수행하지 않아야 한다."
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "sql_query",
+          "choice_text": "SELECT C.컨텐츠ID, C.컨텐츠명\nFROM 고객 A INNER JOIN 추천컨텐츠 B\nON (A.고객ID = B.고객ID) INNER JOIN 컨텐츠 C\nON (B.컨텐츠ID = C.컨텐츠ID)\nWHERE A.고객ID = #custId#\nAND B.추천대상일자 = TO_CHAR(SYSDATE, 'YYYY.MM.DD')\nAND NOT EXISTS (SELECT X.컨텐츠ID\n                FROM 비선호컨텐츠 X\n                WHERE X.고객ID = B.고객ID);",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "sql_query",
+          "choice_text": "SELECT C.컨텐츠ID, C.컨텐츠명\nFROM 고객 A INNER JOIN 추천컨텐츠 B\nON (A.고객ID = #custId# AND A.고객ID = B.고객ID) INNER JOIN 컨텐츠 C\nON (B.컨텐츠ID = C.컨텐츠ID) RIGHT OUTER JOIN 비선호컨텐츠 D\nON (B.고객ID = D.고객ID AND B.컨텐츠ID = D.컨텐츠ID)\nWHERE B.추천대상일자 = TO_CHAR(SYSDATE, 'YYYY.MM.DD')\nAND B.컨텐츠ID IS NOT NULL;",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "sql_query",
+          "choice_text": "SELECT C.컨텐츠ID, C.컨텐츠명\nFROM 고객 A INNER JOIN 추천컨텐츠 B\nON (A.고객ID = B.고객ID) INNER JOIN 컨텐츠 C\nON (B.컨텐츠ID = C.컨텐츠ID) LEFT OUTER JOIN 비선호컨텐츠 D\nON (B.고객ID = D.고객ID AND B.컨텐츠ID = D.컨텐츠ID)\nWHERE A.고객ID = #custId#\nAND B.추천대상일자 = TO_CHAR(SYSDATE, 'YYYY.MM.DD')\nAND D.컨텐츠ID IS NOT NULL;",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "sql_query",
+          "choice_text": "SELECT C.컨텐츠ID, C.컨텐츠명\nFROM 고객 A INNER JOIN 추천컨텐츠 B\nON (A.고객ID = #custId# AND A.고객ID = B.고객ID) INNER JOIN 컨텐츠 C\nON (B.컨텐츠ID = C.컨텐츠ID)\nWHERE B.추천대상일자 = TO_CHAR(SYSDATE, 'YYYY.MM.DD')\nAND NOT EXISTS (SELECT X.컨텐츠ID\n                FROM 비선호컨텐츠 X\n                WHERE X.고객ID = B.고객ID\n                AND X.컨텐츠ID = B.컨텐츠ID);",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "비선호 컨텐츠에 특정 고객과 특정 컨텐츠 조합이 존재하는지 확인하여 제외시켜야 하므로 NOT EXISTS 안에 고객ID와 컨텐츠ID를 모두 비교하는 서브쿼리가 존재하는 ④번이 적절하다. ①번은 고객ID만 비교하여 비선호 컨텐츠가 하나라도 있으면 모든 컨텐츠 추천이 배제되는 오류가 있다."
+      }
+    },
+    {
+      "question_number": 39,
+      "book_section": "II",
+      "book_question_number": 39,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래에 대한 설명으로 가장 적절한 것은?"
+          }
+        },
+        {
+          "asset_type": "erd",
+          "payload": "erDiagram\n  제품 ||--o{ 생산제품 : \"\"\n  생산라인 ||--o{ 생산제품 : \"\""
+        },
+        {
+          "asset_type": "entity_schema",
+          "payload": {
+            "entities": [
+              { "table": "제품", "columns": [
+                  {"name": "제품코드", "key": "PK"}, {"name": "제품명"},
+                  {"name": "최초가공일자"}, {"name": "제품유형코드"}, {"name": "단위"}]},
+              { "table": "생산제품", "columns": [
+                  {"name": "제품코드", "key": "FK"}, {"name": "라인번호", "key": "FK"}]},
+              { "table": "생산라인", "columns": [
+                  {"name": "라인번호", "key": "PK"}]}
+            ]
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "제품, 생산제품, 생산라인 엔터티를 INNER JOIN하기 위해서 생산제품 엔터티는 WHERE 절에 최소 3번 나타나야 한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "제품과 생산라인 엔터티를 JOIN 시 적절한 JOIN 조건이 없으므로 카티시안 곱(Cartesian Product)이 발생한다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "제품과 생산라인 엔터티에는 생산제품과 대응되지 않는 레코드는 없다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "특정 생산라인번호에서 생산되는 제품의 제품명을 알기 위해서는 제품, 생산제품, 생산라인까지 3개 엔터티의 INNER JOIN이 필요하다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "제품과 생산라인 엔터티 간에는 조인 조건이 될 수 있는 공통 칼럼이 없다. 따라서 두 엔터티를 조인하면 매핑 조건이 없어 카티시안 곱(Cartesian Product)이 발생한다."
+      }
+    },
+    {
+      "question_number": 40,
+      "book_section": "II",
+      "book_question_number": 40,
+      "question_type": "fill_blanks_multi",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 SQL의 빈칸에 들어갈 내용으로 가장 적절한 것은?"
+          }
+        },
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "[테이블]\n고객(고객번호, 이름, 등급), 구매정보(구매번호, 구매금액, 고객번호)\n* 구매정보 테이블의 고객번호는 고객 테이블의 고객번호를 참조하는 외래키(Foreign Key)이다.\n\n[조건]\n구매 이력이 있는 고객 중 구매 횟수가 3회 이상인 고객의 이름과 등급을 출력"
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT A.이름, A.등급\nFROM 고객 A\n[ 빈칸 1 ]\nGROUP BY A.이름, A.등급\n[ 빈칸 2 ];"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "sql_fragment",
+          "choice_text": "[1] INNER JOIN 구매정보 B ON A.고객번호=B.고객번호 \n[2] HAVING SUM(B.구매번호) >= 3",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "sql_fragment",
+          "choice_text": "[1] INNER JOIN 구매정보 B ON A.고객번호=B.고객번호 \n[2] HAVING COUNT(B.구매번호) >= 3",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "sql_fragment",
+          "choice_text": "[1] LEFT OUTER JOIN 구매정보 B ON A.고객번호=B.고객번호 \n[2] HAVING SUM(B.구매번호) >= 3",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "sql_fragment",
+          "choice_text": "[1] INNER JOIN 구매정보 B ON A.고객번호=B.고객번호 \n[2] WHERE B.구매번호 >= 3",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "구매이력이 있어야 하므로 INNER JOIN이 필요하며, '구매 횟수'를 체크해야 하므로 COUNT 함수를 이용한 HAVING COUNT(B.구매번호) >= 3 조건이 적절하다."
+      }
+    },
+    {
+      "question_number": 41,
+      "book_section": "II",
+      "book_question_number": 41,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래를 참고할 때 시간대별사용량 테이블을 기반으로 고객별 사용금액을 출력하는 SQL로 가장 적절한 것은?"
+          }
+        },
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "[테이블 구조]\n시간대구간(시작시간대, 종료시간대, 단가)\n시간대별사용량(고객ID(FK), 사용시간대, 사용량)\n고객(고객ID(PK), 고객명, 생년월일)"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "sql_query",
+          "choice_text": "SELECT A.고객ID, A.고객명, SUM(B.사용량 * C.단가) AS 사용금액\nFROM 고객 A INNER JOIN 시간대별사용량 B\nON (A.고객ID = B.고객ID) INNER JOIN 시간대구간 C\nON (B.사용시간대 <= C.시작시간대 AND B.사용시간대 >= C.종료시간대)\nGROUP BY A.고객ID, A.고객명\nORDER BY A.고객ID, A.고객명;",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "sql_query",
+          "choice_text": "SELECT A.고객ID, A.고객명, SUM(B.사용량 * C.단가) AS 사용금액\nFROM 고객 A INNER JOIN 시간대별사용량 B INNER JOIN 시간대구간 C\nON (A.고객ID = B.고객ID AND B.사용시간대 BETWEEN C.시작시간대 AND C.종료시간대)\nGROUP BY A.고객ID, A.고객명\nORDER BY A.고객ID, A.고객명;",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "sql_query",
+          "choice_text": "SELECT A.고객ID, A.고객명, SUM(B.사용량 * C.단가) AS 사용금액\nFROM 고객 A INNER JOIN 시간대별사용량 B\nON (A.고객ID = B.고객ID) INNER JOIN 시간대구간 C\nON B.사용시간대 BETWEEN C.시작시간대 AND C.종료시간대\nGROUP BY A.고객ID, A.고객명\nORDER BY A.고객ID, A.고객명;",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "sql_query",
+          "choice_text": "SELECT A.고객ID, A.고객명, SUM(B.사용량 * C.단가) AS 사용금액\nFROM 고객 A INNER JOIN 시간대별사용량 B\nON (A.고객ID = B.고객ID) BETWEEN JOIN 시간대구간 C\nGROUP BY A.고객ID, A.고객명\nORDER BY A.고객ID, A.고객명;",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "① 두 번째 ON 절 조건이 잘못되었다(시작시간대보다 작거나 같고 종료시간대보다 크거나 같다라는 모순 발생). ② INNER JOIN 구문 오류가 발생한다. ④ BETWEEN JOIN이란 구문은 없으므로 구문 오류가 발생한다. 정상적인 조건 조인은 ③번이다."
+      }
+    },
+    {
+      "question_number": 42,
+      "book_section": "II",
+      "book_question_number": 42,
+      "question_type": "different_result",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "실행 결과가 다른 하나는?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "sql_query",
+          "choice_text": "SELECT T.REGION_NAME, T.TEAM_NAME, T.STADIUM_ID, S.STADIUM_NAME\nFROM TEAM T INNER JOIN STADIUM S\nUSING (T.STADIUM_ID = S.STADIUM_ID);",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "sql_query",
+          "choice_text": "SELECT TEAM.REGION_NAME, TEAM.TEAM_NAME, TEAM.STADIUM_ID, STADIUM.STADIUM_NAME\nFROM TEAM INNER JOIN STADIUM\nON (TEAM.STADIUM_ID = STADIUM.STADIUM_ID);",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "sql_query",
+          "choice_text": "SELECT T.REGION_NAME, T.TEAM_NAME, T.STADIUM_ID, S.STADIUM_NAME\nFROM TEAM T, STADIUM S\nWHERE T.STADIUM_ID = S.STADIUM_ID;",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "sql_query",
+          "choice_text": "SELECT TEAM.REGION_NAME, TEAM.TEAM_NAME, TEAM.STADIUM_ID, STADIUM.STADIUM_NAME\nFROM TEAM, STADIUM\nWHERE TEAM.STADIUM_ID = STADIUM.STADIUM_ID;",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "USING 조건절을 이용한 EQUI JOIN에서는 JOIN 칼럼에 대해서 테이블 이름과 같은 접두사(ALIAS)를 붙일 수 없다. 따라서 ①번은 SYNTAX 에러가 발생한다. 올바른 문법은 USING (STADIUM_ID) 이다."
+      }
+    },
+    {
+      "question_number": 43,
+      "book_section": "II",
+      "book_question_number": 43,
+      "question_type": "fill_blank",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 두 SQL이 같은 결과를 출력할 때, 빈칸에 들어갈 내용으로 가장 적절한 것은?"
+          }
+        },
+        {
+          "asset_type": "list_items",
+          "payload": {
+            "items": [
+              {
+                "label": "[SQL(1)]",
+                "code": "SELECT ENAME, DNAME\nFROM EMP, DEPT\nORDER BY ENAME;"
+              },
+              {
+                "label": "[SQL(2)]",
+                "code": "SELECT ENAME, DNAME\nFROM EMP\n[ 빈칸 ] DEPT\nORDER BY ENAME;"
+              }
+            ]
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "keyword",
+          "choice_text": "FULL OUTER JOIN",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "keyword",
+          "choice_text": "SELF JOIN",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "keyword",
+          "choice_text": "NATURAL JOIN",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "keyword",
+          "choice_text": "CROSS JOIN",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "조건절이 없는 조인(WHERE 절 누락)은 카티시안 곱(Cartesian Product)을 발생시킨다. ANSI SQL에서는 이를 명시적으로 나타내는 CROSS JOIN 키워드를 사용한다."
+      }
+    },
+    {
+      "question_number": 44,
+      "book_section": "II",
+      "book_question_number": 44,
+      "question_type": "predict_result",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래를 참고할 때 SQL 실행 결과로 가장 적절한 것은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "OS",
+            "columns": ["OSID(PK)", "OS명"],
+            "rows": [
+              {"OSID(PK)": "100", "OS명": "Android"},
+              {"OSID(PK)": "200", "OS명": "IOS"},
+              {"OSID(PK)": "300", "OS명": "Bada"}
+            ]
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "단말기",
+            "columns": ["단말기ID(PK)", "단말기명", "OSID(FK)"],
+            "rows": [
+              {"단말기ID(PK)": "1000", "단말기명": "A1000", "OSID(FK)": "100"},
+              {"단말기ID(PK)": "2000", "단말기명": "B2000", "OSID(FK)": "100"},
+              {"단말기ID(PK)": "3000", "단말기명": "C3000", "OSID(FK)": "200"},
+              {"단말기ID(PK)": "4000", "단말기명": "D3000", "OSID(FK)": "300"}
+            ]
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "고객",
+            "columns": ["고객번호(PK)", "고객명", "단말기ID(FK)"],
+            "rows": [
+              {"고객번호(PK)": "11000", "고객명": "홍길동", "단말기ID(FK)": "1000"},
+              {"고객번호(PK)": "12000", "고객명": "강감찬", "단말기ID(FK)": "<NULL>"},
+              {"고객번호(PK)": "13000", "고객명": "이순신", "단말기ID(FK)": "<NULL>"},
+              {"고객번호(PK)": "14000", "고객명": "안중근", "단말기ID(FK)": "3000"},
+              {"고객번호(PK)": "15000", "고객명": "고길동", "단말기ID(FK)": "4000"},
+              {"고객번호(PK)": "16000", "고객명": "이대로", "단말기ID(FK)": "4000"}
+            ]
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT A.고객번호, A.고객명, B.단말기ID, B.단말기명, C.OSID, C.OS명\nFROM 고객 A LEFT OUTER JOIN 단말기 B\nON (A.고객번호 IN (11000, 12000) AND A.단말기ID = B.단말기ID)\nLEFT OUTER JOIN OS C\nON (B.OSID = C.OSID)\nORDER BY A.고객번호;"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "result_table",
+          "choice_text": "6행 전체, 11000만 단말기 매핑, 나머지 NULL",
+          "payload": {
+            "columns": ["고객번호", "고객명", "단말기ID", "단말기명", "OSID", "OS명"],
+            "rows": [
+              {"고객번호": "11000", "고객명": "홍길동", "단말기ID": "1000", "단말기명": "A1000", "OSID": "100", "OS명": "Android"},
+              {"고객번호": "12000", "고객명": "강감찬", "단말기ID": "<NULL>", "단말기명": "<NULL>", "OSID": "<NULL>", "OS명": "<NULL>"},
+              {"고객번호": "13000", "고객명": "이순신", "단말기ID": "<NULL>", "단말기명": "<NULL>", "OSID": "<NULL>", "OS명": "<NULL>"},
+              {"고객번호": "14000", "고객명": "안중근", "단말기ID": "<NULL>", "단말기명": "<NULL>", "OSID": "<NULL>", "OS명": "<NULL>"},
+              {"고객번호": "15000", "고객명": "고길동", "단말기ID": "<NULL>", "단말기명": "<NULL>", "OSID": "<NULL>", "OS명": "<NULL>"},
+              {"고객번호": "16000", "고객명": "이대로", "단말기ID": "<NULL>", "단말기명": "<NULL>", "OSID": "<NULL>", "OS명": "<NULL>"}
+            ]
+          },
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "result_table",
+          "choice_text": "2행, 11000·12000만 출력",
+          "payload": {
+            "columns": ["고객번호", "고객명", "단말기ID", "단말기명", "OSID", "OS명"],
+            "rows": [
+              {"고객번호": "11000", "고객명": "홍길동", "단말기ID": "1000", "단말기명": "A1000", "OSID": "100", "OS명": "Android"},
+              {"고객번호": "12000", "고객명": "강감찬", "단말기ID": "<NULL>", "단말기명": "<NULL>", "OSID": "<NULL>", "OS명": "<NULL>"}
+            ]
+          },
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "result_table",
+          "choice_text": "1행, 11000만 출력",
+          "payload": {
+            "columns": ["고객번호", "고객명", "단말기ID", "단말기명", "OSID", "OS명"],
+            "rows": [
+              {"고객번호": "11000", "고객명": "홍길동", "단말기ID": "1000", "단말기명": "A1000", "OSID": "100", "OS명": "Android"}
+            ]
+          },
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "result_table",
+          "choice_text": "6행 전체, 14000·15000·16000도 단말기 매핑됨",
+          "payload": {
+            "columns": ["고객번호", "고객명", "단말기ID", "단말기명", "OSID", "OS명"],
+            "rows": [
+              {"고객번호": "11000", "고객명": "홍길동", "단말기ID": "1000", "단말기명": "A1000", "OSID": "100", "OS명": "Android"},
+              {"고객번호": "12000", "고객명": "강감찬", "단말기ID": "<NULL>", "단말기명": "<NULL>", "OSID": "<NULL>", "OS명": "<NULL>"},
+              {"고객번호": "13000", "고객명": "이순신", "단말기ID": "<NULL>", "단말기명": "<NULL>", "OSID": "<NULL>", "OS명": "<NULL>"},
+              {"고객번호": "14000", "고객명": "안중근", "단말기ID": "3000", "단말기명": "C3000", "OSID": "200", "OS명": "IOS"},
+              {"고객번호": "15000", "고객명": "고길동", "단말기ID": "4000", "단말기명": "D4000", "OSID": "300", "OS명": "Bada"},
+              {"고객번호": "16000", "고객명": "이대로", "단말기ID": "4000", "단말기명": "D4000", "OSID": "300", "OS명": "Bada"}
+            ]
+          },
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "WHERE 절이 아니라 아우터 조인의 ON 절에 'A.고객번호 IN (11000, 12000)' 조건을 넣었기 때문에, 좌측 기준 테이블(고객)의 모든 행(11000~16000)은 그대로 출력된다. 단, 단말기 테이블과 JOIN 대상이 되는 것은 고객번호 11000과 12000으로 제한된다. 11000은 단말기 정보가 매핑되지만 12000은 원래 단말기ID가 NULL이고 13000~16000은 ON 조건 필터링으로 인해 조인 실패하여 모두 NULL로 출력된다."
+      }
+    },
+    {
+      "question_number": 45,
+      "book_section": "II",
+      "book_question_number": 45,
+      "question_type": "same_result",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 SQL에서 실행 결과가 같은 것은?"
+          }
+        },
+        {
+          "asset_type": "list_items",
+          "payload": {
+            "items": [
+              {
+                "label": "(가)",
+                "code": "SELECT A.ID, B.ID\nFROM TBL1 A FULL OUTER JOIN TBL2 B\nON A.ID=B.ID"
+              },
+              {
+                "label": "(나)",
+                "code": "SELECT A.ID, B.ID\nFROM TBL1 A LEFT OUTER JOIN TBL2 B\nON A.ID=B.ID\nUNION\nSELECT A.ID, B.ID\nFROM TBL1 A RIGHT OUTER JOIN TBL2 B\nON A.ID=B.ID"
+              },
+              {
+                "label": "(다)",
+                "code": "SELECT A.ID, B.ID\nFROM TBL1 A, TBL2 B\nWHERE A.ID=B.ID\nUNION ALL\nSELECT A.ID, NULL\nFROM TBL1 A\nWHERE NOT EXISTS (SELECT 1 FROM TBL2 B WHERE A.ID=B.ID)\nUNION ALL\nSELECT NULL, B.ID\nFROM TBL2 B\nWHERE NOT EXISTS (SELECT 1 FROM TBL1 A WHERE B.ID=A.ID)"
+              }
+            ]
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "tuple",
+          "choice_text": "(가), (나)",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "tuple",
+          "choice_text": "(가), (다)",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "tuple",
+          "choice_text": "(나), (다)",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "tuple",
+          "choice_text": "(가), (나), (다)",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "보기의 3개의 SQL은 모두 FULL OUTER JOIN 연산과 동일한 논리적 결과 집합을 반환한다."
+      }
+    },
+    {
+      "question_number": 46,
+      "book_section": "II",
+      "book_question_number": 46,
+      "question_type": "derive_count",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래에서 EMP 테이블과 DEPT 테이블을 LEFT, FULL, RIGHT 외부조인(OUTER JOIN)하면 생성되는 결과 건수로 가장 적절한 것은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "EMP",
+            "columns": ["A", "B", "C"],
+            "rows": [
+              {"A": "1", "B": "b", "C": "W"},
+              {"A": "3", "B": "d", "C": "W"},
+              {"A": "5", "B": "y", "C": "y"}
+            ]
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "DEPT",
+            "columns": ["C", "D", "E"],
+            "rows": [
+              {"C": "W", "D": "1", "E": "10"},
+              {"C": "Z", "D": "4", "E": "11"},
+              {"C": "V", "D": "2", "E": "22"}
+            ]
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "tuple",
+          "choice_text": "3건, 5건, 4건",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "tuple",
+          "choice_text": "4건, 5건, 3건",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "tuple",
+          "choice_text": "3건, 4건, 4건",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "tuple",
+          "choice_text": "3건, 4건, 5건",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "주키와 외래키는 영향을 미치지 않는다. 공통 칼럼 C 기준으로 LEFT JOIN은 EMP 전체 3건 유지, FULL JOIN은 EMP 3건(W 매칭2, y 미매칭1) + DEPT 미매칭 2건(Z, V) = 총 5건, RIGHT JOIN은 DEPT 전체 3건 중 매칭 건(W가 EMP에 2건 있음) + Z 1건 + V 1건 = 2+1+1 = 총 4건이 생성된다."
+      }
+    },
+    {
+      "question_number": 47,
+      "book_section": "II",
+      "book_question_number": 47,
+      "question_type": "fill_blank",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "DEPT와 EMP를 조인하되 사원이 없는 부서 정보도 같이 출력하고자 할 때, 아래 SQL의 빈칸에 들어갈 내용으로 가장 적절한 것은?"
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT E.ENAME, D.DEPTNO, D.DNAME\nFROM DEPT D\n[ 빈칸 ] EMP E\nON D.DEPTNO = E.DEPTNO;"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "keyword",
+          "choice_text": "LEFT OUTER JOIN",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "keyword",
+          "choice_text": "RIGHT OUTER JOIN",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "keyword",
+          "choice_text": "FULL OUTER JOIN",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "keyword",
+          "choice_text": "INNER JOIN",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "사원이 없는 부서 정보도 모두 조회하려면 부서(DEPT) 테이블이 기준 집합이 되어야 한다. FROM 절에서 좌측에 위치한 기준 테이블(DEPT)의 데이터를 모두 출력하려면 LEFT OUTER JOIN을 사용해야 한다."
+      }
+    },
+    {
+      "question_number": 48,
+      "book_section": "II",
+      "book_question_number": 48,
+      "question_type": "predict_result",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 SQL의 실행 결과로 가장 적절한 것은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "TAB1",
+            "columns": ["C1", "C2"],
+            "rows": [
+              {"C1": "A", "C2": "1"},
+              {"C1": "B", "C2": "2"},
+              {"C1": "C", "C2": "3"},
+              {"C1": "D", "C2": "4"},
+              {"C1": "E", "C2": "5"}
+            ]
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "TAB2",
+            "columns": ["C1", "C2"],
+            "rows": [
+              {"C1": "B", "C2": "2"},
+              {"C1": "C", "C2": "3"},
+              {"C1": "D", "C2": "4"}
+            ]
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT *\nFROM TAB1 A LEFT OUTER JOIN TAB2 B\nON (A.C1=B.C1 AND B.C2 BETWEEN 1 AND 3);"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "result_table",
+          "choice_text": "5행, B·C·D TAB2 매핑됨",
+          "payload": {
+            "columns": ["A.C1", "A.C2", "B.C1", "B.C2"],
+            "rows": [
+              {"A.C1": "A", "A.C2": "1", "B.C1": "<NULL>", "B.C2": "<NULL>"},
+              {"A.C1": "B", "A.C2": "2", "B.C1": "B",      "B.C2": "2"},
+              {"A.C1": "C", "A.C2": "3", "B.C1": "C",      "B.C2": "3"},
+              {"A.C1": "D", "A.C2": "4", "B.C1": "D",      "B.C2": "4"},
+              {"A.C1": "E", "A.C2": "5", "B.C1": "<NULL>", "B.C2": "<NULL>"}
+            ]
+          },
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "result_table",
+          "choice_text": "5행, B·C만 TAB2 매핑, D는 NULL",
+          "payload": {
+            "columns": ["A.C1", "A.C2", "B.C1", "B.C2"],
+            "rows": [
+              {"A.C1": "A", "A.C2": "1", "B.C1": "<NULL>", "B.C2": "<NULL>"},
+              {"A.C1": "B", "A.C2": "2", "B.C1": "B",      "B.C2": "2"},
+              {"A.C1": "C", "A.C2": "3", "B.C1": "C",      "B.C2": "3"},
+              {"A.C1": "D", "A.C2": "4", "B.C1": "<NULL>", "B.C2": "<NULL>"},
+              {"A.C1": "E", "A.C2": "5", "B.C1": "<NULL>", "B.C2": "<NULL>"}
+            ]
+          },
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "result_table",
+          "choice_text": "3행, A·B·C만 출력",
+          "payload": {
+            "columns": ["A.C1", "A.C2", "B.C1", "B.C2"],
+            "rows": [
+              {"A.C1": "A", "A.C2": "1", "B.C1": "<NULL>", "B.C2": "<NULL>"},
+              {"A.C1": "B", "A.C2": "2", "B.C1": "B",      "B.C2": "2"},
+              {"A.C1": "C", "A.C2": "3", "B.C1": "C",      "B.C2": "3"}
+            ]
+          },
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "result_table",
+          "choice_text": "4행, A·B·C·D 출력, B·C·D 매핑됨",
+          "payload": {
+            "columns": ["A.C1", "A.C2", "B.C1", "B.C2"],
+            "rows": [
+              {"A.C1": "A", "A.C2": "1", "B.C1": "<NULL>", "B.C2": "<NULL>"},
+              {"A.C1": "B", "A.C2": "2", "B.C1": "B",      "B.C2": "2"},
+              {"A.C1": "C", "A.C2": "3", "B.C1": "C",      "B.C2": "3"},
+              {"A.C1": "D", "A.C2": "4", "B.C1": "D",      "B.C2": "4"}
+            ]
+          },
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "아우터 조인에서 ON 절의 조건은 조인할 대상을 필터링한다. A 테이블(좌측)의 데이터는 모두 보존되지만, B 테이블과는 B.C2 값이 1과 3 사이인 행(B와 C)만 조인에 성공한다. D는 C2 값이 4이므로 ON 조건을 만족하지 않아 매핑이 실패하고 NULL 처리된다."
+      }
+    },
+    {
+      "question_number": 49,
+      "book_section": "II",
+      "book_question_number": 49,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래의 오라클 SQL을 동일한 결과를 출력하는 ANSI 표준 구문으로 변경하고자 할 때 가장 적절한 SQL은?"
+          }
+        },
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "[테이블 구조]\n게시판(게시판ID(PK), 게시판명, 등록일시, 사용여부)\n게시글(게시글ID(PK), 게시판ID(FK), 제목, 내용, 등록일시, 등록자명, 삭제여부)"
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "oracle",
+            "code": "SELECT A.게시판ID, A.게시판명, COUNT(B.게시글ID) AS CNT\nFROM 게시판 A, 게시글 B\nWHERE A.게시판ID = B.게시판ID(+)\nAND B.삭제여부(+) = 'N'\nAND A.사용여부 = 'Y'\nGROUP BY A.게시판ID, A.게시판명\nORDER BY A.게시판ID;"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "sql_query",
+          "choice_text": "SELECT A.게시판ID, A.게시판명, COUNT(B.게시글ID) AS CNT\nFROM 게시판 A LEFT OUTER JOIN 게시글 B\nON (A.게시판ID = B.게시판ID AND B.삭제여부 = 'N')\nWHERE A.사용여부 = 'Y'\nGROUP BY A.게시판ID, A.게시판명\nORDER BY A.게시판ID;",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "sql_query",
+          "choice_text": "SELECT A.게시판ID, A.게시판명, COUNT(B.게시글ID) AS CNT\nFROM 게시판 A LEFT OUTER JOIN 게시글 B\nON (A.게시판ID = B.게시판ID AND A.사용여부 = 'Y')\nWHERE B.삭제여부 = 'N'\nGROUP BY A.게시판ID, A.게시판명\nORDER BY A.게시판ID;",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "sql_query",
+          "choice_text": "SELECT A.게시판ID, A.게시판명, COUNT(B.게시글ID) AS CNT\nFROM 게시판 A LEFT OUTER JOIN 게시글 B\nON (A.게시판ID = B.게시판ID)\nWHERE A.사용여부 = 'Y'\nAND B.삭제여부 = 'N'\nGROUP BY A.게시판ID, A.게시판명\nORDER BY A.게시판ID;",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "sql_query",
+          "choice_text": "SELECT A.게시판ID, A.게시판명, COUNT(B.게시글ID) AS CNT\nFROM 게시판 A RIGHT OUTER JOIN 게시글 B\nON (A.게시판ID = B.게시판ID AND A.사용여부 = 'Y' AND B.삭제여부 = 'N')\nGROUP BY A.게시판ID, A.게시판명\nORDER BY A.게시판ID;",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "오라클의 (+) 구문을 ANSI OUTER JOIN 구문으로 변경하기 위해서는 Inner쪽 테이블(게시글)에 걸린 조건절(B.삭제여부(+)='N')을 ON절 안에 위치시켜야 정상적인 OUTER JOIN 필터링이 수행된다. A 테이블에 걸린 일반 조건(A.사용여부='Y')은 조인 후 필터링인 WHERE 절에 둔다."
+      }
+    },
+    {
+      "question_number": 50,
+      "book_section": "II",
+      "book_question_number": 50,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래에 대한 설명으로 가장 적절한 것은? (단, 칼럼의 타입은 NUMBER이다.)"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "TAB1",
+            "columns": ["COL1", "COL2", "COL3"],
+            "rows": [
+              {"COL1": "10", "COL2": "20", "COL3": "<NULL>"},
+              {"COL1": "15", "COL2": "<NULL>", "COL3": "<NULL>"},
+              {"COL1": "50", "COL2": "70", "COL3": "20"}
+            ]
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "SELECT SUM(COL2) FROM TAB1의 결과는 NULL이다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "SELECT SUM(COL1 + COL2 + COL3) FROM TAB1의 결과는 185이다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "SELECT SUM(COL2 + COL3) FROM TAB1 의 결과는 90이다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "SELECT SUM(COL2) + SUM(COL3) FROM TAB1의 결과는 90이다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "레코드 내에서 단일 행 칼럼끼리 연산(COL2 + COL3)할 때 NULL이 포함되어 있으면 해당 행의 결과는 NULL이 된다. 따라서 첫 번째 행과 두 번째 행은 NULL이 되고, 세 번째 행은 70+20=90이 된다. 집계 함수 SUM은 전체 결과 집합에서 NULL 값을 제외하므로 최종 합계는 90이다."
+      }
+    }
+  ]
+}

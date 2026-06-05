@@ -1,0 +1,1990 @@
+{
+  "subject_id": 2,
+  "chapter_id": 3,
+  "questions": [
+    {
+      "question_number": 1,
+      "book_section": "II",
+      "book_question_number": 99,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 데이터 모델과 같은 테이블 및 PK 제약조건을 생성하는 DDL 문장으로 가장 적절한 것은? (단, DBMS는 오라클로 가정)"
+          }
+        },
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "PRODUCT\nPROD_ID: VARCHAR2(10) NOT NULL\nPROD_NM: VARCHAR2(100) NOT NULL\nREG_DT: DATE NOT NULL\nREGR_NO: NUMBER(10) NULL"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "sql_query",
+          "choice_text": "CREATE TABLE PRODUCT\n(PROD_ID VARCHAR2(10) NOT NULL\nPROD_NM VARCHAR2(100) NOT NULL\nREG_DT DATE NOT NULL\nREGR_NO NUMBER(10) NULL );\nALTER TABLE PRODUCT ADD PRIMARY KEY PRODUCT_PK\nON (PROD_ID);",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "sql_query",
+          "choice_text": "CREATE TABLE PRODUCT\n(PROD_ID VARCHAR2(10)\nPROD_NM VARCHAR2(100)\nREG_DT DATE\nREGR_NO NUMBER(10) );\nALTER TABLE PRODUCT ADD CONSTRAINT PRODUCT_PK\nPRIMARY KEY (PROD_ID);",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "sql_query",
+          "choice_text": "CREATE TABLE PRODUCT\n(PROD_ID VARCHAR2(10) NOT NULL\nPROD_NM VARCHAR2(100) NOT NULL\nREG_DT DATE NOT NULL\nREGR_NO NUMBER(10) NULL\nADD CONSTRAINT PRIMARY KEY (PROD_ID) );",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "sql_query",
+          "choice_text": "CREATE TABLE PRODUCT\n(PROD_ID VARCHAR2(10) NOT NULL\nPROD_NM VARCHAR2(100) NOT NULL\nREG_DT DATE NOT NULL\nREGR_NO NUMBER(10)\nCONSTRAINT PRODUCT_PK PRIMARY KEY (PROD_ID));",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "①은 PK를 지정하는 ALTER TABLE 문장에 문법 오류가 존재하고, 올바른 문법이 사용된 문장은 다음과 같다.\n(오류 발생) ALTER TABLE PRODUCT ADD PRIMARY KEY PRODUCT_PK ON (PROD_ID);\n(오류 수정) ALTER TABLE PRODUCT ADD CONSTRAINT PRODUCT_PK PRIMARY KEY (PROD_ID);\n②는 PROD_NM NOT NULL 칼럼에 대해서 NOT NULL 제약조건을 지정하지 않았다.\n③은 테이블을 생성할 때 PK를 지정하는 문장에 문법 오류가 존재한다."
+      }
+    },
+    {
+      "question_number": 2,
+      "book_section": "II",
+      "book_question_number": 100,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "데이터가 들어있지 않은 왼쪽의 기관분류 테이블 (가)를 (나)와 같이 변경하고자 할 때 가장 적절한 SQL은?\n(단, DBMS는 SQL Server로 가정)"
+          }
+        },
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "(가)\n기관분류\n분류ID: VARCHAR(10) NOT NULL\n분류명: VARCHAR(10) NOT NULL\n등록일자: VARCHAR(10) NULL\n\n(나)\n기관분류\n분류ID VARCHAR(10) NOT NULL\n분류명: VARCHAR(30) NOT NULL\n등록일자: DATE NOT NULL"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "sql_query",
+          "choice_text": "ALTER TABLE 기관분류 ALTER COLUMN (분류명 VARCHAR(30), 등록일자 DATE NOT NULL);",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "sql_query",
+          "choice_text": "ALTER TABLE 기관분류 ALTER COLUMN (분류명 VARCHAR(30)\nNOT NULL, 등록일자 DATE NOT NULL);",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "sql_query",
+          "choice_text": "ALTER TABLE 기관분류 ALTER COLUMN 분류명 VARCHAR(30);\nALTER TABLE 기관분류 ALTER COLUMN 등록일자 DATE NOT NULL;",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "sql_query",
+          "choice_text": "ALTER TABLE 기관분류 ALTER COLUMN 분류명 VARCHAR(30)\nNOT NULL;\nALTER TABLE 기관분류 ALTER COLUMN 등록일자 DATE NOT NULL;",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "①,② SQL Server에서 여러개의 칼럼을 ALTER COLUMN으로 동시에 수정하는 구문은 지원하지 않으므로 오류가 발생한다. 또한 괄호를 사용하지 않는다.\n③ 분류명을 수정할 때 NOT NULL 구문을 지정하지 않으면, 기존의 NOT NULL 제약조건이 NULL로 변경되므로 NOT NULL 요건을 만족하지 않는다."
+      }
+    },
+    {
+      "question_number": 3,
+      "book_section": "II",
+      "book_question_number": 101,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래와 같은 상황에서 문제가 발생한 트랜잭션의 특성으로 가장 적절한 것은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "TableA",
+            "columns": [
+              "COL1",
+              "COL2"
+            ],
+            "rows": [
+              {
+                "COL1": "A",
+                "COL2": "100"
+              },
+              {
+                "COL1": "B",
+                "COL2": "200"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "concurrent_timeline",
+          "payload": {
+            "title": "[트랜잭션]",
+            "headers": [
+              "시간",
+              "TX1",
+              "TX2"
+            ],
+            "rows": [
+              [
+                "t1",
+                "update TableA set col2 = 200 where col1 = 'A';",
+                ""
+              ],
+              [
+                "t2",
+                "",
+                "update TableA set col2 = 300 where col1 = 'A';"
+              ],
+              [
+                "t3",
+                "",
+                "commit;"
+              ],
+              [
+                "t4",
+                "commit;",
+                ""
+              ]
+            ]
+          }
+        },
+        {
+          "asset_type": "result_table",
+          "payload": {
+            "columns": [
+              "COL1",
+              "COL2"
+            ],
+            "rows": [
+              {
+                "COL1": "A",
+                "COL2": "300"
+              },
+              {
+                "COL1": "B",
+                "COL2": "200"
+              }
+            ]
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "keyword",
+          "choice_text": "원자성(Atomicity)",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "keyword",
+          "choice_text": "일관성(Consistency)",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "keyword",
+          "choice_text": "고립성(Isolation)",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "keyword",
+          "choice_text": "영속성(Durability)",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "트랜잭션의 특성 중 고립성(Isolation)은 어떤 트랜잭션이 수행 중일 때 다른 트랜잭션의 영향을 받아 잘못된 결과를 도출하는 경우가 발생하는 것을 방지하는 것이다.\n문제에서 TX1이 변경한 col2의 내용이 TX2에 의해서 잘못 반영되는 문제가 발생하였으므로 고립성에 문제가 발생하였음을 알 수 있다."
+      }
+    },
+    {
+      "question_number": 4,
+      "book_section": "II",
+      "book_question_number": 102,
+      "question_type": "predict_result",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래를 참고할 때 DELETE FROM T 를 수행한 후에 테이블 R에 남아있는 데이터로 가장 적절한 것은?"
+          }
+        },
+        {
+          "asset_type": "sql_ddl",
+          "payload": {
+            "dialect": "ansi",
+            "code": "CREATE TABLE T\n(C INTEGER PRIMARY KEY,\nD INTEGER);\nCREATE TABLE S\n(B INTEGER PRIMARY KEY,\nC INTEGER REFERENCES T(C) ON DELETE CASCADE);\nCREATE TABLE R\n(A INTEGER PRIMARY KEY,\nB INTEGER REFERENCES S(B) ON DELETE SET NULL);"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "T",
+            "columns": [
+              "C",
+              "D"
+            ],
+            "rows": [
+              {
+                "C": "1",
+                "D": "1"
+              },
+              {
+                "C": "2",
+                "D": "1"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "S",
+            "columns": [
+              "B",
+              "C"
+            ],
+            "rows": [
+              {
+                "B": "1",
+                "C": "1"
+              },
+              {
+                "B": "2",
+                "C": "1"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "R",
+            "columns": [
+              "A",
+              "B"
+            ],
+            "rows": [
+              {
+                "A": "1",
+                "B": "1"
+              },
+              {
+                "A": "2",
+                "B": "2"
+              }
+            ]
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "tuple",
+          "choice_text": "(1, NULL)과 (2, 2)",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "tuple",
+          "choice_text": "(1, NULL)과 (2, NULL)",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "tuple",
+          "choice_text": "(2, 2)",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "tuple",
+          "choice_text": "(1, 1)",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "DELETE FROM T; 이후 데이터 현황\n- T 테이블: 두건 모두 삭제됨\n- S 테이블 (Cascade 옵션): 두건 모두 삭제됨\n- R 테이블 (Set Null 옵션): Child 해당 필드(FK: B칼럼) 값이 Null로 변경됨"
+      }
+    },
+    {
+      "question_number": 5,
+      "book_section": "II",
+      "book_question_number": 103,
+      "question_type": "predict_result",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 SQL의 실행 결과로 가장 적절한 것은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "Table_A",
+            "columns": [
+              "keya",
+              "col1",
+              "col2"
+            ],
+            "rows": [
+              {
+                "keya": "1",
+                "col1": "A",
+                "col2": "2"
+              },
+              {
+                "keya": "2",
+                "col1": "A",
+                "col2": "2"
+              },
+              {
+                "keya": "3",
+                "col1": "B",
+                "col2": "3"
+              },
+              {
+                "keya": "4",
+                "col1": "B",
+                "col2": "3"
+              },
+              {
+                "keya": "5",
+                "col1": "C",
+                "col2": "3"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "begin transaction;\nsave transaction sp1;\ndelete from Table_A where keya = 2;\nsave transaction sp2;\ndelete from Table_A where col1 = 'A';\ndelete from Table_A where col2 = 3;\nrollback transaction sp2;\ncommit;\nselect count(*) as cnt from Table_A;"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "value",
+          "choice_text": "2",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "value",
+          "choice_text": "3",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "value",
+          "choice_text": "4",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "value",
+          "choice_text": "5",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "트랜잭션 처리에서 SAVEPOINT를 정의하면 ROLLBACK 시에 특정 위치까지 수행된 변경내용만을 ROLLBACK할 수 있다. 위의 문제에서는 SAVEPOINT sp1을 지정하고 keya = 2에 해당하는 데이터를 1건 삭제한 후 SAVEPOINT sp2를 지정하고 col1 = 'A'인 행과 col2 = 3인 행을 지워 전체 데이터를 삭제하였으나, ROLLBACK TRANSACTION sp2 문장에 의해 col1 = 'A' 행과 col2 = 3인 행이 삭제되기 이전 상태로 복귀하였다. 최종 commit 한 시점에는 keya = 2인 데이터만 삭제된 상태로 남게 되므로 전체 건수는 4건이 된다."
+      }
+    },
+    {
+      "question_number": 6,
+      "book_section": "II",
+      "book_question_number": 104,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "SQL에서 중복 행을 제거하는 데 사용되는 키워드로 가장 적절한 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "keyword",
+          "choice_text": "UNIQUE",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "keyword",
+          "choice_text": "SORT",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "keyword",
+          "choice_text": "ORDER BY",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "keyword",
+          "choice_text": "DISTINCT",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "중복된 데이터를 출력하지 않으려면 DISTINCT를 사용한다."
+      }
+    },
+    {
+      "question_number": 7,
+      "book_section": "II",
+      "book_question_number": 105,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "테이블 생성 시 주의해야 할 사항으로 가장 적절한 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "테이블명은 객체를 의미할 수 있는 적절한 이름을 사용하고 가능한 복수형을 권고한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "한 테이블 내에서는 칼럼명을 중복되게 지정할 수 있다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "칼럼 뒤에 데이터 유형은 꼭 지정되어야 한다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "벤더에서 사전에 정의한 예약어(Reserved Word)도 쓸 수 있다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "테이블명은 객체를 의미할 수 있는 적절한 이름을 사용하고 가능한 단수형을 권고한다. 또한 한 테이블 내에서는 칼럼명을 중복되게 지정할 수 없으며 벤더에서 사전에 정의한 예약어(Reserved word)를 사용 할 수 없다. 따라서 가장 적절한 설명은 칼럼 뒤에 데이터 유형이 꼭 지정되어야 한다는 점이다."
+      }
+    },
+    {
+      "question_number": 8,
+      "book_section": "II",
+      "book_question_number": 106,
+      "question_type": "derive_count",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 SQL을 수행했을 때 T1 테이블의 최종 건수로 가장 적절한 것은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "T1",
+            "columns": [
+              "EMPNO",
+              "ENAME",
+              "JOB",
+              "SAL"
+            ],
+            "rows": [
+              {
+                "EMPNO": "7369",
+                "ENAME": "SMITH",
+                "JOB": "CLERK",
+                "SAL": "800"
+              },
+              {
+                "EMPNO": "7566",
+                "ENAME": "JONES",
+                "JOB": "MANAGER",
+                "SAL": "2975"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "T2",
+            "columns": [
+              "EMPNO",
+              "ENAME",
+              "JOB",
+              "SAL"
+            ],
+            "rows": [
+              {
+                "EMPNO": "7369",
+                "ENAME": "SMITH",
+                "JOB": "CLERK",
+                "SAL": "800"
+              },
+              {
+                "EMPNO": "7566",
+                "ENAME": "JONES",
+                "JOB": "MANAGER",
+                "SAL": "2975"
+              },
+              {
+                "EMPNO": "7788",
+                "ENAME": "SCOTT",
+                "JOB": "ANALYST",
+                "SAL": "3000"
+              },
+              {
+                "EMPNO": "7876",
+                "ENAME": "ADAMS",
+                "JOB": "CLERK",
+                "SAL": "1100"
+              },
+              {
+                "EMPNO": "7902",
+                "ENAME": "FORD",
+                "JOB": "ANALYST",
+                "SAL": "3000"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "sql_dml",
+          "payload": {
+            "dialect": "ansi",
+            "code": "MERGE INTO t1 a\nUSING T2 B\nON (B.EMPNO = A.EMPNO)\nWHEN MATCHED THEN\n  UPDATE SET A.SAL = B.SAL + 500\n  WHERE A.JOB = 'CLERK'\n  DELETE WHERE A.SAL < 2000\nWHEN NOT MATCHED THEN\n  INSERT (A.EMPNO, A.ENAME, A.JOB)\n  VALUES (B.EMPNO, B.ENAME, B.JOB)\n  WHERE B.JOB = 'CLERK';"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "value",
+          "choice_text": "1",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "value",
+          "choice_text": "2",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "value",
+          "choice_text": "3",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "value",
+          "choice_text": "4",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "SMITH가 삭제되고, ADAMS가 삽입되어 최종 건수는 2건이 된다."
+      }
+    },
+    {
+      "question_number": 9,
+      "book_section": "II",
+      "book_question_number": 107,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래와 같이 테이블을 생성한 후 데이터를 삽입했을 때, (가)와 (나)의 실행 결과에 대한 설명으로 가장 적절한 것은?"
+          }
+        },
+        {
+          "asset_type": "sql_ddl",
+          "payload": {
+            "dialect": "ansi",
+            "code": "CREATE TABLE 학생 (학번 CHAR(8) PRIMARY KEY, 장학금 INTEGER);"
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "(가) SELECT COUNT(*) FROM 학생\n(나) SELECT COUNT(학번) FROM 학생"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "(가), (나) 문장의 실행 결과는 다를 수 있으며, 그 이유는 장학금 속성에 NULL이 존재할 수 있기 때문이다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "(가), (나) 문장의 실행 결과는 항상 다르다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "(가), (나) 문장의 실행 결과는 항상 같다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "(가), (나) 문장의 실행 결과는 다를 수 있으며, 그 이유는 학번 속성에 NULL이 존재할 수 있기 때문이다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "학번 칼럼이 PK 이기 때문에 NULL 값이 없다. count(*)와 COUNT(학번)의 결과는 항상 같다."
+      }
+    },
+    {
+      "question_number": 10,
+      "book_section": "II",
+      "book_question_number": 108,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "외래키에 대한 설명으로 가장 적절하지 않은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "테이블 생성 시 설정할 수 있다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "외래키 값은 NULL을 가질 수 없다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "한 테이블에 하나 이상 생성할 수 있다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "외래키 값은 참조 무결성 제약을 받을 수 있다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "외래키 값은 널 값을 가질 수 있다. 따라서 'NULL을 가질 수 없다'는 설명은 적절하지 않다."
+      }
+    },
+    {
+      "question_number": 11,
+      "book_section": "II",
+      "book_question_number": 109,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 SQL에서 RepName 속성이 가지는 키 특성으로 가장 적절한 것은?"
+          }
+        },
+        {
+          "asset_type": "sql_ddl",
+          "payload": {
+            "dialect": "ansi",
+            "code": "CREATE TABLE SALESREP (\n  SalesRepNo int NOT NULL,\n  RepName char(35) NOT NULL,\n  HireDate date NOT NULL,\n  CONSTRAINT SalesRepPK PRIMARY KEY (SalesRepNo),\n  CONSTRAINT SalesRepAK1 UNIQUE (RepName)\n);"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "keyword",
+          "choice_text": "기본키(Primary Key)",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "keyword",
+          "choice_text": "외래키(Foreign Key)",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "keyword",
+          "choice_text": "후보키(Candidate Key)",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "keyword",
+          "choice_text": "대리키(Surrogate Key)",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "기본키가 설정되어 있고 RepName 속성이 UNIQUE로 지정되어 후보키이다."
+      }
+    },
+    {
+      "question_number": 12,
+      "book_section": "II",
+      "book_question_number": 110,
+      "question_type": "fill_blanks_multi",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 테이블에서 COMM 칼럼을 삭제하고자 할 때, SQL의 빈칸 안에 들어갈 내용으로 가장 적절한 것은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "EMP",
+            "columns": [
+              "MGR",
+              "ENAME",
+              "SAL",
+              "COMM"
+            ],
+            "rows": [
+              {
+                "MGR": "7566",
+                "ENAME": "FORD",
+                "SAL": "3000",
+                "COMM": "<NULL>"
+              },
+              {
+                "MGR": "7566",
+                "ENAME": "SCOTT",
+                "SAL": "3000",
+                "COMM": "<NULL>"
+              },
+              {
+                "MGR": "7698",
+                "ENAME": "JAMES",
+                "SAL": "950",
+                "COMM": "<NULL>"
+              },
+              {
+                "MGR": "7698",
+                "ENAME": "ALLEN",
+                "SAL": "1600",
+                "COMM": "<NULL>"
+              },
+              {
+                "MGR": "7698",
+                "ENAME": "WARD",
+                "SAL": "1250",
+                "COMM": "<NULL>"
+              },
+              {
+                "MGR": "7698",
+                "ENAME": "TURNER",
+                "SAL": "1500",
+                "COMM": "<NULL>"
+              },
+              {
+                "MGR": "7698",
+                "ENAME": "MARTIN",
+                "SAL": "1250",
+                "COMM": "<NULL>"
+              },
+              {
+                "MGR": "7782",
+                "ENAME": "MILLER",
+                "SAL": "1300",
+                "COMM": "<NULL>"
+              },
+              {
+                "MGR": "7788",
+                "ENAME": "ADAMS",
+                "SAL": "1100",
+                "COMM": "<NULL>"
+              },
+              {
+                "MGR": "7839",
+                "ENAME": "BLAKE",
+                "SAL": "2850",
+                "COMM": "<NULL>"
+              },
+              {
+                "MGR": "7839",
+                "ENAME": "JONES",
+                "SAL": "2980",
+                "COMM": "<NULL>"
+              },
+              {
+                "MGR": "7839",
+                "ENAME": "CLARK",
+                "SAL": "2450",
+                "COMM": "<NULL>"
+              },
+              {
+                "MGR": "7902",
+                "ENAME": "SMITH",
+                "SAL": "800",
+                "COMM": "<NULL>"
+              },
+              {
+                "MGR": "<NULL>",
+                "ENAME": "KING",
+                "SAL": "5000",
+                "COMM": "<NULL>"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "[ 빈칸 1 ] TABLE EMP [ 빈칸 2 ] COMM;"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "ALTER, DROP COLUMN",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "ALTER, REMOVE COLUMN",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "MODIFY, DROP COLUMN",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "MODIFY, REMOVE COLUMN",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "Table 스키마 변경 시 사용하는 SQL문은 DDL(Data Definition Language)로, 칼럼 삭제 시 활용되는 문장은 다음과 같다.\nALTER TABLE 테이블명 DROP COLUMN 칼럼명;"
+      }
+    },
+    {
+      "question_number": 13,
+      "book_section": "II",
+      "book_question_number": 111,
+      "question_type": "predict_result",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 SQL의 실행 결과로 가장 적절한 것은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "T1",
+            "columns": [
+              "COL1",
+              "COL2"
+            ],
+            "rows": [
+              {
+                "COL1": "1",
+                "COL2": "AAAA"
+              },
+              {
+                "COL1": "1",
+                "COL2": "AAAA"
+              },
+              {
+                "COL1": "1",
+                "COL2": "AAAA"
+              },
+              {
+                "COL1": "1",
+                "COL2": "BBBB"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT COUNT(COL1) AS CNT1, COUNT(COL2) AS CNT2\nFROM (\n  SELECT DISTINCT COL1, COL2\n  FROM T1\n);"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "value",
+          "choice_text": "4, 2",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "value",
+          "choice_text": "2, 2",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "value",
+          "choice_text": "1, 2",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "value",
+          "choice_text": "4, 4",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "SELECT 절에 DISTINCT 키워드를 사용하면, 중복된 데이터는 1건으로 처리하여 출력한다. 다만, SELECT 절의 DISTINCT 키워드 뒤에 여러 개의 칼럼이 올 경우, 주어진 칼럼 값이 모두 동일한 행들만 중복 건으로 처리된다."
+      }
+    },
+    {
+      "question_number": 14,
+      "book_section": "II",
+      "book_question_number": 112,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "SQL에서 사용되는 표준 데이터 타입으로 가장 적절하지 않은 것은? (단, DBMS는 오라클로 가정)"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "keyword",
+          "choice_text": "Text",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "keyword",
+          "choice_text": "Char",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "keyword",
+          "choice_text": "Varchar2",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "keyword",
+          "choice_text": "Number",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "Text 형태의 데이터 타입은 Char, VarChar2 타입을 사용한다."
+      }
+    },
+    {
+      "question_number": 15,
+      "book_section": "II",
+      "book_question_number": 113,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "관계형 데이터베이스에서 자식 테이블의 FK 데이터 생성시 부모 테이블에 PK가 없는 경우, 자식 테이블 데이터 입력을 허용하지 않는 참조동작(Referential Action)은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "keyword",
+          "choice_text": "CASCADE",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "keyword",
+          "choice_text": "RESTRICT",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "keyword",
+          "choice_text": "AUTOMATIC",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "keyword",
+          "choice_text": "DEPENDENT",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "Insert Action - Dependent: Master 테이블에 PK가 존재할 때만 Child 입력 허용"
+      }
+    },
+    {
+      "question_number": 16,
+      "book_section": "II",
+      "book_question_number": 114,
+      "question_type": "identify_sql",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래를 참고할 때 오류가 발생하지 않는 SQL은?"
+          }
+        },
+        {
+          "asset_type": "sql_ddl",
+          "payload": {
+            "dialect": "sqlserver",
+            "code": "CREATE TABLE TBL\n(\n  ID NUMBER PRIMARY KEY,\n  AMT NUMBER NOT NULL,\n  DEGREE VARCHAR2(1)\n);"
+          }
+        },
+        {
+          "asset_type": "list_items",
+          "payload": {
+            "items": [
+              "(가) INSERT INTO TBL VALUES(1, 100);",
+              "(나) INSERT INTO TBL(ID, AMT, DEGREE) VALUES(2, 200, 'AB');",
+              "(다) INSERT INTO TBL(ID, DEGREE) VALUES(4, 'X');",
+              "(라) INSERT INTO TBL(ID, AMT) VALUES(3, 300);",
+              "(마) INSERT INTO TBL VALUES(5, 500, NULL);"
+            ]
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "(가), (나)",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "(나), (다)",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "(다), (라)",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "(라), (마)",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "(가): 삽입 칼럼을 명시하지 않았을 경우 모든 칼럼을 삽입해야 한다.\n(나): DEGREE 칼럼의 길이는 VARCHAR2(1)이다. 'AB'는 칼럼 길이를 초과한다.\n(다): Not Null 칼럼인 AMT 칼럼을 명시하지 않았다."
+      }
+    },
+    {
+      "question_number": 17,
+      "book_section": "II",
+      "book_question_number": 115,
+      "question_type": "find_erroneous",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래를 참고할 때 오류가 발생하는 SQL은?"
+          }
+        },
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "BOARD\nBOARD_ID: VARCHAR2(10) NOT NULL\nBOARD_NM: VARCHAR2(50) NOT NULL\nUSE_YN: VARCHAR2(1) NOT NULL\nREG_DATE: DATE NOT NULL\nBOARD_DESC: VARCHAR2(100) NULL"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "sql_query",
+          "choice_text": "INSERT INTO BOARD VALUES (1, 'Q&A', 'Y', SYSDATE, 'Q&A 게시판');",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "sql_query",
+          "choice_text": "INSERT INTO BOARD (BOARD_ID, BOARD_NM, USE_YN, BOARD_DESC) VALUES ('100', 'FAQ', 'Y', 'FAQ 게시판');",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "sql_query",
+          "choice_text": "UPDATE BOARD SET USE_YN = 'N' WHERE BOARD_ID = '1';",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "sql_query",
+          "choice_text": "UPDATE BOARD SET BOARD_ID = 200 WHERE BOARD_ID = '100';",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "②번 SQL은 REG_DATE 칼럼에 NOT NULL 제약조건이 있지만 INSERT INTO 구문에는 REG_DATE 칼럼이 대입되지 않아 NULL로 입력되므로 오류가 발생한다."
+      }
+    },
+    {
+      "question_number": 18,
+      "book_section": "II",
+      "book_question_number": 116,
+      "question_type": "find_erroneous",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래를 참고할 때 오류가 발생하는 INSERT문으로 가장 적절한 것은?"
+          }
+        },
+        {
+          "asset_type": "sql_ddl",
+          "payload": {
+            "dialect": "sqlserver",
+            "code": "CREATE TABLE 주문(\n  주문번호 NUMBER PRIMARY KEY,\n  주문일자 DATE NOT NULL,\n  회원번호 NUMBER,\n  주문상태코드 VARCHAR2(3) DEFAULT '000'\n);"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "sql_query",
+          "choice_text": "INSERT INTO 주문(주문번호, 주문일자, 회원번호, 주문상태코드) VALUES(1, SYSDATE, 1900123, '002');",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "sql_query",
+          "choice_text": "INSERT INTO 주문(주문번호, 주문일자, 회원번호, 주문상태코드) VALUES(2, '20190301', 1900124, '001');",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "sql_query",
+          "choice_text": "INSERT INTO 주문(주문번호, 주문일자, 회원번호, 주문상태코드) VALUES(3, SYSDATE-1, 1900125, '001');",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "sql_query",
+          "choice_text": "INSERT INTO 주문(주문번호, 주문일자, 회원번호, 주문상태코드) VALUES(4, 20190302, 1900126, '001');",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "④에서 DATE 타입에 숫자값은 입력하지 못하고 에러를 발생시킨다."
+      }
+    },
+    {
+      "question_number": 19,
+      "book_section": "II",
+      "book_question_number": 117,
+      "question_type": "correct_ordering",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래의 산술 연산자를 우선순위가 높은 순으로 나열한 것은?\n\n(), +, -, *, /"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "*, /, +, -, ()",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "+, -, *, /, ()",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "(), *, /, +, -",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "(), +, -, *, /",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "산술 연산자의 우선순위는 수학에서와 같이 (), *, /, +, -의 우선순위를 가진다."
+      }
+    },
+    {
+      "question_number": 20,
+      "book_section": "II",
+      "book_question_number": 118,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래와 같은 테이블에서 Department의 did가 '1'인 행이 삭제될 때, Employee의 did가 '1'인 행도 같이 삭제하도록 하는 방법으로 가장 적절한 것은?\n(단, Employee의 did는 Department에서 가져온 외래키이다.)"
+          }
+        },
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "Employee(eid, ename, did)\nDepartment(did, dname, budget)"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "Employee 릴레이션을 생성할 때 FOREIGN KEY(did) REFERENCES Department(did) ON DELETE RESTRICT 명령어를 추가한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "Department 릴레이션을 생성할 때 FOREIGN KEY(did) REFERENCES Employee(did) ON DELETE CASCADE 명령어를 추가한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "Employee 릴레이션을 생성할 때 FOREIGN KEY(did) REFERENCES Department(did) ON DELETE CASCADE 명령어를 추가한다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "Department 릴레이션을 생성할 때 FOREIGN KEY(did) REFERENCES Employee(did) ON DELETE RESTRICT 명령어를 추가한다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "CASCADE 명령어로 부모 테이블에서 행을 삭제할 경우 연결된 자식 테이블의 행이 함께 삭제되도록 할 수 있다."
+      }
+    },
+    {
+      "question_number": 21,
+      "book_section": "II",
+      "book_question_number": 119,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "DELETE 와 TRUNCATE, DROP 명령어에 대해 비교한 설명으로 가장 적절하지 않은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "특정 테이블에 대하여 WHERE 조건절이 없는 DELETE 명령을 수행하면 DROP TABLE 명령을 수행했을 때와 똑같은 결과를 얻을 수 있다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "DROP 명령어는 테이블 정의 자체를 삭제하고, TRUNCATE 명령어는 테이블을 초기상태로 만든다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "TRUNCATE 명령어는 UNDO를 위한 데이터를 생성하지 않기 때문에 동일 데이터량 삭제 시 DELETE보다 빠르다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "DROP과 TRUNCATE는 Auto Commit되고, DELETE는 사용자 Commit으로 수행된다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "[명령어 비교]\n- DROP: DDL, Rollback 불가능, Auto Commit, 테이블이 사용했던 Storage를 모두 Release, 테이블의 정의 자체를 완전히 삭제함\n- TRUNCATE: DDL, Rollback 불가능, Auto Commit, 최초 테이블 생성시 할당된 Storage만 남기고 Release, 테이블을 최초 생성된 초기상태로 만듦\n- DELETE: DML, Commit 이전 Rollback 가능, 사용자 Commit, 데이터를 모두 Delete해도 사용했던 Storage는 Release되지 않음, 데이터만 삭제"
+      }
+    },
+    {
+      "question_number": 22,
+      "book_section": "II",
+      "book_question_number": 120,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "데이터베이스 트랜잭션에 대한 설명으로 가장 적절하지 않은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "원자성(Atomicity): 트랜잭션에서 정의된 연산들은 모두 성공적으로 실행되든지 아니면 전혀 실행되지 않은 상태로 남아 있어야 한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "일관성(Consistency): 트랜잭션이 실행 되기 전의 데이터베이스 내용이 잘못 되어 있지 않다면 트랜잭션이 실행된 이후에도 데이터베이스의 내용에 잘못이 있으면 안 된다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "고립성(Isolation): 트랜잭션이 실행되는 도중에 다른 트랜잭션의 영향을 받아 잘못된 결과를 만들어서는 안 된다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "지속성(Durability): 트랜잭션을 취소하더라도 트랜잭션이 갱신한 내용이 데이터베이스에 저장되어야 한다.",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "데이터베이스 트랜잭션의 4가지 특성 중 지속성의 설명이 잘못되었다. 지속성(Durability): 트랜잭션이 성공적으로 수행되면 그 트랜잭션이 갱신한 데이터베이스의 내용은 영구적으로 저장된다."
+      }
+    },
+    {
+      "question_number": 23,
+      "book_section": "II",
+      "book_question_number": 121,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 SQL 실행 결과 테이블 A의 ID '001'에 해당하는 최종 VAL의 값이 오라클에서는 200, SQL Server에서는 100이 되었다고 할 때, 이에 대한 설명으로 가장 적절하지 않은 것은?\n(단, AUTO COMMIT은 FALSE로 설정되어 있다)"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "A",
+            "columns": [
+              "ID(PK)",
+              "VAL"
+            ],
+            "rows": [
+              {
+                "ID(PK)": "001",
+                "VAL": "100"
+              },
+              {
+                "ID(PK)": "002",
+                "VAL": "200"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "UPDATE A SET VAL = 200 WHERE ID = '001';\nCREATE TABLE B (ID CHAR(3) PRIMARY KEY);\nROLLBACK;"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "오라클에서는 CREATE TABLE 문장을 수행한 후, 묵시적으로 COMMIT이 수행되어 VAL 값은 200이 되었다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "SQL Server에서는 ROLLBACK 문장에 의해 UPDATE가 취소되어 VAL 값은 100이 되었다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "오라클에서는 CREATE TABLE 문장 수행에 의해 VAL 값은 200이 되었지만, ROLLBACK 실행으로 최종적으로 B 테이블은 생성되지 않았다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "SQL Server에서는 ROLLBACK 실행으로 인하여 UPDATE가 취소되었으며, 최종적으로 B 테이블은 생성되지 않았다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "오라클에서 DDL 문장의 수행은 내부적으로 트랜잭션을 종료시키고(자동 COMMIT) 작업을 반영하므로 B 테이블은 최종적으로 생성된다. 따라서 'B 테이블은 생성되지 않았다'는 설명은 틀린 것이다."
+      }
+    },
+    {
+      "question_number": 24,
+      "book_section": "II",
+      "book_question_number": 122,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "데이터베이스의 논리적 연산 단위를 가리키는 용어로 가장 적절한 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "keyword",
+          "choice_text": "뷰(View)",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "keyword",
+          "choice_text": "트랜잭션(Transaction)",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "keyword",
+          "choice_text": "프로시저(Procedure)",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "keyword",
+          "choice_text": "트리거(Trigger)",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "데이터베이스의 논리적 연산 단위를 가리키는 용어는 트랜잭션이다."
+      }
+    },
+    {
+      "question_number": 25,
+      "book_section": "II",
+      "book_question_number": 123,
+      "question_type": "predict_result",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 SQL의 실행 결과로 가장 적절한 것은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "품목",
+            "columns": [
+              "품목ID",
+              "단가"
+            ],
+            "rows": [
+              {
+                "품목ID": "001",
+                "단가": "1000"
+              },
+              {
+                "품목ID": "002",
+                "단가": "2000"
+              },
+              {
+                "품목ID": "003",
+                "단가": "1000"
+              },
+              {
+                "품목ID": "004",
+                "단가": "2000"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "BEGIN TRANSACTION\nINSERT INTO 품목(품목ID, 단가) VALUES('005', 2000)\nCOMMIT\nBEGIN TRANSACTION\nDELETE 품목 WHERE 품목ID='002'\nUPDATE 품목 SET 단가=2000 WHERE 단가=1000\nROLLBACK\nSELECT COUNT(품목ID) FROM 품목 WHERE 단가=2000"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "value",
+          "choice_text": "0",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "value",
+          "choice_text": "2",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "value",
+          "choice_text": "3",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "value",
+          "choice_text": "4",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "첫 번째 BEGIN TRANSACTION의 INSERT는 COMMIT으로 확정된다. 두 번째 BEGIN TRANSACTION의 ROLLBACK은 COMMIT되지 않은 DELETE, UPDATE만 취소한다. 따라서 품목ID 005(단가 2000)는 남아 있고, 단가가 2000인 품목은 '002', '004', '005' 3건이 된다."
+      }
+    },
+    {
+      "question_number": 26,
+      "book_section": "II",
+      "book_question_number": 124,
+      "question_type": "predict_result",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래를 참고할 때 상품ID '001'의 최종 상품명으로 가장 적절한 것은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "상품",
+            "columns": [
+              "상품ID",
+              "상품명"
+            ],
+            "rows": [
+              {
+                "상품ID": "001",
+                "상품명": "TV"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "BEGIN TRANSACTION;\nSAVE TRANSACTION SP1;\nUPDATE 상품 SET 상품명 = 'LCD-TV' WHERE 상품ID = '001';\nSAVE TRANSACTION SP2;\nUPDATE 상품 SET 상품명 = '평면-TV' WHERE 상품ID = '001';\nROLLBACK TRANSACTION SP2;\nCOMMIT;"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "value",
+          "choice_text": "TV",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "value",
+          "choice_text": "LCD-TV",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "value",
+          "choice_text": "평면-TV",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "오류가 발생한다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "ROLLBACK TRANSACTION SP2 문장에 의해 두 번째 UPDATE(상품명 = '평면-TV')가 ROLLBACK 되었고, 첫 번째 UPDATE 문장만 유효한 상태에서 COMMIT 되었으므로 첫 번째 UPDATE한 내역만 반영된다. 그러므로 최종 상품명은 LCD-TV가 된다."
+      }
+    },
+    {
+      "question_number": 27,
+      "book_section": "II",
+      "book_question_number": 125,
+      "question_type": "identify_sql",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 테이블에서 승리건수가 높은 순으로 3위까지 출력하되 3위의 승리 건수가 동일한 팀이 있다면 함께 출력하기 위한 SQL로 가장 적절한 것은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "팀별성적",
+            "columns": [
+              "팀명",
+              "승리건수",
+              "패배건수"
+            ],
+            "rows": [
+              {
+                "팀명": "A팀",
+                "승리건수": "120",
+                "패배건수": "80"
+              },
+              {
+                "팀명": "B팀",
+                "승리건수": "20",
+                "패배건수": "180"
+              },
+              {
+                "팀명": "C팀",
+                "승리건수": "10",
+                "패배건수": "190"
+              },
+              {
+                "팀명": "D팀",
+                "승리건수": "100",
+                "패배건수": "100"
+              },
+              {
+                "팀명": "E팀",
+                "승리건수": "110",
+                "패배건수": "90"
+              },
+              {
+                "팀명": "F팀",
+                "승리건수": "100",
+                "패배건수": "100"
+              },
+              {
+                "팀명": "G팀",
+                "승리건수": "70",
+                "패배건수": "130"
+              }
+            ]
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "sql_query",
+          "choice_text": "SELECT TOP(3) 팀명, 승리건수\nFROM 팀별성적\nORDER BY 승리건수 DESC;",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "sql_query",
+          "choice_text": "SELECT TOP(3) 팀명, 승리건수\nFROM 팀별성적;",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "sql_query",
+          "choice_text": "SELECT 팀명, 승리건수\nFROM 팀별성적\nWHERE ROWNUM <= 3\nORDER BY 승리건수 DESC;",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "sql_query",
+          "choice_text": "SELECT TOP(3) WITH TIES 팀명, 승리건수\nFROM 팀별성적\nORDER BY 승리건수 DESC;",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "SQL Server의 TOP N 질의문에서 N에 해당하는 값이 동일한 경우 함께 출력되도록 하는 WITH TIES 옵션을 ORDER BY 절과 함께 사용하여야 한다."
+      }
+    },
+    {
+      "question_number": 28,
+      "book_section": "II",
+      "book_question_number": 126,
+      "question_type": "identify_sql",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "부서 테이블의 담당자 변경을 위해 부서임시 테이블에 입력된 데이터를 활용하여 주기적으로 부서 테이블을 실행 결과와 같이 반영하기 위한 SQL로 가장 적절한 것은?\n(단, 부서임시 테이블에서 변경일자를 기준으로 가장 최근에 변경된 데이터를 기준으로 부서 테이블에 반영되어야 한다.)"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "부서",
+            "columns": [
+              "부서코드(PK)",
+              "부서명",
+              "상위부서코드",
+              "담당자"
+            ],
+            "rows": [
+              {
+                "부서코드(PK)": "A001",
+                "부서명": "대표이사",
+                "상위부서코드": "<NULL>",
+                "담당자": "김대표"
+              },
+              {
+                "부서코드(PK)": "A002",
+                "부서명": "영업본부",
+                "상위부서코드": "A001",
+                "담당자": "홍길동"
+              },
+              {
+                "부서코드(PK)": "A003",
+                "부서명": "경영지원본부",
+                "상위부서코드": "A001",
+                "담당자": "이순신"
+              },
+              {
+                "부서코드(PK)": "A004",
+                "부서명": "마케팅본부",
+                "상위부서코드": "A001",
+                "담당자": "강감찬"
+              },
+              {
+                "부서코드(PK)": "A005",
+                "부서명": "해외영업팀",
+                "상위부서코드": "A002",
+                "담당자": "이청용"
+              },
+              {
+                "부서코드(PK)": "A006",
+                "부서명": "국내영업팀",
+                "상위부서코드": "A002",
+                "담당자": "박지성"
+              },
+              {
+                "부서코드(PK)": "A007",
+                "부서명": "총무팀",
+                "상위부서코드": "A003",
+                "담당자": "차두리"
+              },
+              {
+                "부서코드(PK)": "A008",
+                "부서명": "인사팀",
+                "상위부서코드": "A003",
+                "담당자": "이민정"
+              },
+              {
+                "부서코드(PK)": "A009",
+                "부서명": "해외마케팅팀",
+                "상위부서코드": "A004",
+                "담당자": "이병헌"
+              },
+              {
+                "부서코드(PK)": "A010",
+                "부서명": "국내마케팅팀",
+                "상위부서코드": "A004",
+                "담당자": "차승원"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "부서임시",
+            "columns": [
+              "변경일자(PK)",
+              "부서코드(PK)",
+              "담당자"
+            ],
+            "rows": [
+              {
+                "변경일자(PK)": "2014.01.23",
+                "부서코드(PK)": "A007",
+                "담당자": "이달자"
+              },
+              {
+                "변경일자(PK)": "2015.01.25",
+                "부서코드(PK)": "A007",
+                "담당자": "홍경민"
+              },
+              {
+                "변경일자(PK)": "2015.01.25",
+                "부서코드(PK)": "A008",
+                "담당자": "유재석"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "result_table",
+          "payload": {
+            "columns": [
+              "부서코드(PK)",
+              "부서명",
+              "상위부서코드",
+              "담당자"
+            ],
+            "rows": [
+              {
+                "부서코드(PK)": "A001",
+                "부서명": "대표이사",
+                "상위부서코드": "<NULL>",
+                "담당자": "김대표"
+              },
+              {
+                "부서코드(PK)": "A002",
+                "부서명": "영업본부",
+                "상위부서코드": "A001",
+                "담당자": "홍길동"
+              },
+              {
+                "부서코드(PK)": "A003",
+                "부서명": "경영지원본부",
+                "상위부서코드": "A001",
+                "담당자": "이순신"
+              },
+              {
+                "부서코드(PK)": "A004",
+                "부서명": "마케팅본부",
+                "상위부서코드": "A001",
+                "담당자": "강감찬"
+              },
+              {
+                "부서코드(PK)": "A005",
+                "부서명": "해외영업팀",
+                "상위부서코드": "A002",
+                "담당자": "이청용"
+              },
+              {
+                "부서코드(PK)": "A006",
+                "부서명": "국내영업팀",
+                "상위부서코드": "A002",
+                "담당자": "박지성"
+              },
+              {
+                "부서코드(PK)": "A007",
+                "부서명": "총무팀",
+                "상위부서코드": "A003",
+                "담당자": "홍경민"
+              },
+              {
+                "부서코드(PK)": "A008",
+                "부서명": "인사팀",
+                "상위부서코드": "A003",
+                "담당자": "유재석"
+              },
+              {
+                "부서코드(PK)": "A009",
+                "부서명": "해외마케팅팀",
+                "상위부서코드": "A004",
+                "담당자": "이병헌"
+              },
+              {
+                "부서코드(PK)": "A010",
+                "부서명": "국내마케팅팀",
+                "상위부서코드": "A004",
+                "담당자": "차승원"
+              }
+            ]
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "sql_query",
+          "choice_text": "UPDATE 부서 A SET 담당자 = (SELECT C.부서코드\nFROM (SELECT 부서코드, MAX(변경일자) AS 변경일자\n      FROM 부서임시\n      GROUP BY 부서코드) B, 부서임시 C\nWHERE B.부서코드 = C.부서코드\nAND B.변경일자 = C.변경일자\nAND A.부서코드 = C.부서코드);",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "sql_query",
+          "choice_text": "UPDATE 부서 A SET 담당자 = (SELECT C.부서코드\nFROM (SELECT 부서코드, MAX(변경일자) AS 변경일자\n      FROM 부서임시\n      GROUP BY 부서코드) B, 부서임시 C\nWHERE B.부서코드 = C.부서코드\nAND B.변경일자 = C.변경일자\nAND A.부서코드 = C.부서코드)\nWHERE EXISTS (SELECT 1 FROM 부서 X WHERE A.부서코드 = X.부서코드);",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "sql_query",
+          "choice_text": "UPDATE 부서 A SET 담당자 = (SELECT B.담당자\nFROM 부서임시 B\nWHERE B.부서코드 = A.부서코드\nAND B.변경일자 = (SELECT MAX(C.변경일자)\n                FROM 부서임시 C\n                WHERE C.부서코드 = B.부서코드))\nWHERE 부서코드 IN (SELECT 부서코드 FROM 부서임시);",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "sql_query",
+          "choice_text": "UPDATE 부서 A SET 담당자 = (SELECT B.담당자\nFROM 부서임시 B\nWHERE B.부서코드 = A.부서코드\nAND B.변경일자 = '2015.01.25');",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "① 연관 서브쿼리를 활용한 UPDATE에서 WHERE 절은 UPDATE 대상이 되는 데이터의 범위를 결정하는데, WHERE 절이 누락되어 부서의 모든 데이터가 UPDATE 대상이 되므로 부서코드 A007, A008을 제외한 모든 데이터가 NULL 값으로 변경된다.\n② WHERE 절 조건이 부서임시가 아닌 부서 테이블이므로 A007, A008을 제외한 모든 데이터가 NULL 값으로 변경된다.\n④ ①과 같은 사유로 부서코드 A007, A008을 제외한 모든 데이터가 NULL 값으로 변경된다. 또한 변경일자를 하드 코딩하는 것은 답이 될 수 없다."
+      }
+    }
+  ]
+}

@@ -1,0 +1,906 @@
+{
+  "subject_id": 1,
+  "chapter_id": 2,
+  "questions": [
+    {
+      "question_number": 34,
+      "book_section": "I",
+      "book_question_number": 34,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "속성 a, b, c, d, e로 구성된 릴레이션에서 아래와 같은 함수 종속성(Functional Dependency)이 존재할 때, 이 릴레이션의 후보 키로 가장 적절하지 않은 것은?"
+          }
+        },
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "[아래]\nab -> cde\ne -> b\nd -> ab"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "keyword",
+          "choice_text": "d",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "keyword",
+          "choice_text": "ab",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "keyword",
+          "choice_text": "ac",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "keyword",
+          "choice_text": "ae",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "ab는 자신인 ab와 cde를 결정하므로 모든 속성을 결정한다. 따라서 후보 키가 된다. e -> b 양쪽에 a를 추가하면 ae -> ab 이고 ab -> cde 이므로 ae -> cde 이다. ae는 모든 속성을 결정한다. 따라서 후보 키가 된다. d -> ab이고, ab -> cde이므로 d -> cde이다. d는 모든 속성을 결정한다. 따라서 후보 키가 된다. ac는 모든 속성을 결정할 수 없다."
+      }
+    },
+    {
+      "question_number": 35,
+      "book_section": "I",
+      "book_question_number": 35,
+      "question_type": "identify_normal_form",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 주문상세 엔터티의 주식별자가 (주문번호, 상품번호)일 때, 이 엔터티가 만족하지 않는 정규형은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "주문상세",
+            "columns": ["주문번호", "상품번호", "상품명"],
+            "rows": [
+              {"주문번호": 10001, "상품번호": 901, "상품명": "DB 전문가 가이드"},
+              {"주문번호": 10001, "상품번호": 876, "상품명": "딥러닝 전문가 가이드"},
+              {"주문번호": 10002, "상품번호": 901, "상품명": "DB 전문가 가이드"},
+              {"주문번호": 10003, "상품번호": 901, "상품명": "DB 전문가 가이드"},
+              {"주문번호": 10004, "상품번호": 876, "상품명": "딥러닝 전문가 가이드"}
+            ],
+            "sub_kind": "generic"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "keyword",
+          "choice_text": "제1정규형",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "keyword",
+          "choice_text": "제2정규형",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "keyword",
+          "choice_text": "제3정규형",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "keyword",
+          "choice_text": "제4정규형",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "제2정규형에서 엔터티의 일반 속성은 주식별자에 함수 종속이다. 주문상세 엔터티(entity)의 주식별자는 (주문번호, 상품번호)이지만, 상품번호 -> 상품명의 함수 종속관계가 존재하므로 부분 함수 종속이 발생하여 제2정규형에 맞지 않는다."
+      }
+    },
+    {
+      "question_number": 36,
+      "book_section": "I",
+      "book_question_number": 36,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 엔터티에 필요한 정규화와 분리된 스키마 구조로 가장 적절한 것은?"
+          }
+        },
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "[보관금원장]\n관서번호, 납부자번호, 관리점번호, 관서명, 상태, 관서등록일자, 직급명, 통신번호\n\n함수종속성(FD):\n(관서번호, 납부자번호) -> (직급명, 통신번호)\n(관서번호) -> (관리점번호, 관서명, 상태, 관서등록일자)"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "2차 정규화 - 정규화테이블(관서번호, 납부자번호, 관리점번호, 관서명, 상태, 관서등록일자)",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "3차 정규화 - 정규화테이블(관서번호, 납부자번호, 관리점번호, 관서명, 상태, 관서등록일자)",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "2차 정규화 - 정규화테이블(관서번호, 관리점번호, 관서명, 상태, 관서등록일자)",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "3차 정규화 - 정규화테이블(관서번호, 관리점번호, 관서명, 상태, 관서등록일자)",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "함수 종속성의 규칙에 따라 (관서번호) -> (관리점번호, 관서명, 상태, 관서등록일자)인 부분 함수 종속성이 존재하므로 관서번호가 PK인 엔터티가 2차 정규화로 분리되어야 한다."
+      }
+    },
+    {
+      "question_number": 37,
+      "book_section": "I",
+      "book_question_number": 37,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "정규화와 성능에 대한 설명으로 가장 적절하지 않은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "정규화를 수행하면 중복 속성을 제거하여 용량을 최소화시킬 수 있다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "일반적으로 정규화 수행 시 데이터 처리 성능이 향상된다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "반정규화가 조회 성능을 항상 향상시키는 것은 아니며, 때로는 정규화에 의해 성능이 향상될 수도 있다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "정규화를 수행하면 조회 성능을 보장받을 수 있다.",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "정규화로 인해 테이블 조인이 발생하여 오히려 조회 성능이 저하될 수도 있다. 이 때문에 조회 성능을 높이기 위해 제한적으로 반정규화를 고려하게 된다."
+      }
+    },
+    {
+      "question_number": 38,
+      "book_section": "I",
+      "book_question_number": 38,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래와 같이 전제조건이 있을 때 테이블에서 나타날 수 있는 현상으로 가장 적절한 것은?"
+          }
+        },
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "[전제조건]\n유형기능분류코드에 해당하는 속성들은 분포도가 양호하며, SQL Where절에서 각각의 값이 상수 값으로 조건 입력될 수 있는 특징을 가진다.\n\n[모델 테이블]\n모델코드(PK), 모델명, 제품류코드, 물품가, 출하가, A유형기능분류코드1, B유형기능분류코드2, C유형기능분류코드3, ... , I유형기능분류코드9, 가로, 세로, 높이, 모델구분"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "조회 조건이 유형기능분류코드에 따라 반복되는 그룹이 칼럼단위로 되어 있으므로 제1정규형이라고 할 수 있다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "유형기능분류코드에 대해 where절에 조건으로 들어오는 값이 있으므로 PK와 이에 대한 인덱스만 있으면 SQL 문장은 빠르게 수행될 수 있다고 할 수 있다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "유형기능분류코드가 일반속성 안에서 반복적으로 속성이 구분되어 있기 때문에 이전종속을 수행해야 하는 제2정규형이라 할 수 있다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "조회 성능을 위해 유형기능분류코드 각각에 대하여 개별로 인덱스를 모두 생성할 경우 입력, 수정, 삭제 때 성능이 저하되므로 제1차 정규화를 수행한 후 인덱스를 적용하는 것이 좋다.",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "칼럼에 의한 반복적인 속성값을 갖는 형태는 속성의 원자성을 위배한 1차 정규화의 대상이 된다. 모든 반복 속성에 인덱스를 생성하면 검색 속도는 좋아지겠지만 반대로 너무 많은 인덱스 때문에 입력, 수정, 삭제의 성능이 저하되므로, 1차 정규화로 자연스럽게 문제가 해결될 수 있도록 해야 한다."
+      }
+    },
+    {
+      "question_number": 39,
+      "book_section": "I",
+      "book_question_number": 39,
+      "question_type": "derive_count",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 논리 데이터 모델을 3차 정규화까지 수행했을 때 도출되는 엔터티 수로 가장 적절한 것은? (단, 하나의 대출자에 대해 하나의 대출번호로 여러 개의 도서 대출/반납을 관리한다고 가정하고, 엔터티 통합은 고려하지 않음)"
+          }
+        },
+        {
+          "asset_type": "entity_schema",
+          "payload": {
+            "entities": [
+              {
+                "table": "학생",
+                "columns": [
+                  {"name": "학번", "key": "PK"},
+                  {"name": "성명"},
+                  {"name": "학과번호"},
+                  {"name": "학과명"},
+                  {"name": "LAB실이용신청일1~4"},
+                  {"name": "LAB실이용시작일1~4"},
+                  {"name": "LAB실이용만기일1~4"},
+                  {"name": "LAB실이용승인교수번호1~4"},
+                  {"name": "LAB실이용승인교수명1~4"}
+                ]
+              },
+              {
+                "table": "도서대출",
+                "columns": [
+                  {"name": "대출번호", "key": "PK"},
+                  {"name": "대출자번호", "key": "FK"},
+                  {"name": "대출자명"},
+                  {"name": "대출자신분구분(학생/교수)"},
+                  {"name": "대출일자"},
+                  {"name": "대출도서번호"},
+                  {"name": "대출도서명"},
+                  {"name": "출판사명"},
+                  {"name": "출판년월"},
+                  {"name": "대표저자명"},
+                  {"name": "ISSN"},
+                  {"name": "반납일자"}
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "value",
+          "choice_text": "5",
+          "payload": 5,
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "value",
+          "choice_text": "6",
+          "payload": 6,
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "value",
+          "choice_text": "7",
+          "payload": 7,
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "value",
+          "choice_text": "8",
+          "payload": 8,
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "3차 정규화까지 수행하면 학과, 학생, 교수, LAB실이용신청, (도서)대출, 대출도서, 도서 이렇게 총 7개의 엔터티가 도출된다."
+      }
+    },
+    {
+      "question_number": 40,
+      "book_section": "I",
+      "book_question_number": 40,
+      "question_type": "fill_blanks_multi",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래에서 빈칸에 들어갈 용어로 가장 적절한 것은?"
+          }
+        },
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "[아래]\n어떤 릴레이션 R이 (    ) 이고, 기본키에 속하지 않은 속성 모두가 기본키에 이행적 함수종속이 아닐 때 (    ) 에 속한다."
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "tuple",
+          "choice_text": "제1정규형, 제2정규형",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "tuple",
+          "choice_text": "제1정규형, 제3정규형",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "tuple",
+          "choice_text": "제2정규형, 제3정규형",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "tuple",
+          "choice_text": "제3정규형, 제2정규형",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "어떤 릴레이션 R이 제2정규형이고, 기본 키에 속하지 않은 속성 모두가 기본 키에 이행적 함수 종속이 아닐 때 제3정규형에 속한다."
+      }
+    },
+    {
+      "question_number": 41,
+      "book_section": "I",
+      "book_question_number": 41,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "데이터 모델링의 정규화에 대한 설명으로 가장 적절하지 않은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "정규화는 개념 데이터 모델의 일관성을 확보하고 중복을 제거하여 속성들이 가장 적절한 엔터티에 배치되도록 한다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "제1정규형은 모든 인스턴스가 반드시 하나의 값을 가져야 함을 의미한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "제3정규형을 만족하는 엔터티의 일반속성은 주식별자 전체에 종속적이다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "반정규화는 성능을 위해 데이터 중복을 허용하는 것이지만 성능의 향상을 항상 보장하는 것은 아니다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "정규화는 '개념 데이터 모델'이 아닌 '논리 데이터 모델' 상세화 과정의 대표적인 활동으로, 논리 데이터 모델의 일관성을 확보하고 중복을 제거하여 속성들이 가장 적절한 엔터티에 배치되도록 함으로써 신뢰성 있는 데이터구조를 얻는 데 목적이 있다."
+      }
+    },
+    {
+      "question_number": 42,
+      "book_section": "I",
+      "book_question_number": 42,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "관계(Relationship)와 조인(Join)에 대한 설명으로 가장 적절하지 않은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "조인(Join)이란 식별자를 상속하고, 상속된 속성을 매핑키로 활용하여 데이터를 결합하는 것을 의미한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "부모의 식별자를 자식의 일반속성으로 상속하면 식별 관계, 부모의 식별자를 자식의 식별자에 포함하면 비식별 관계라고 할 수 있다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "관계(Relationship)를 맺는다는 것은 식별자를 상속시키고 해당 식별자를 매핑키로 활용해 데이터를 결합해 보겠다는 것을 의미한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "\"SELECT B.고객명 FROM 주문 A, 고객 B WHERE A.고객번호 = B.고객번호\" 쿼리에서 조인키(Join Key)는 \"고객번호\"이다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "설명이 반대로 되었다. 부모의 식별자를 자식의 식별자에 포함하면 '식별 관계'이고, 부모의 식별자를 자식의 일반속성으로 상속하면 '비식별 관계'이다."
+      }
+    },
+    {
+      "question_number": 43,
+      "book_section": "I",
+      "book_question_number": 43,
+      "question_type": "identify_normal_form",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래에서 설명하는 정규형으로 가장 적절한 것은?"
+          }
+        },
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "[아래]\n엔터티의 일반속성은 주식별자 전체에 종속적이어야 한다."
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "keyword",
+          "choice_text": "제1정규형",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "keyword",
+          "choice_text": "제2정규형",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "keyword",
+          "choice_text": "제3정규형",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "keyword",
+          "choice_text": "보이스-코드 정규형",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "제2정규형에 대한 설명이다. 부분 함수 종속성을 제거하여 일반 속성이 주식별자 전체에 종속되도록 하는 것이 제2정규형이다."
+      }
+    },
+    {
+      "question_number": 44,
+      "book_section": "I",
+      "book_question_number": 44,
+      "question_type": "identify_normal_form",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래와 같이 수강지도 엔터티를 만들었을 때 이에 해당하는 정규형과 정규화의 대상으로 가장 적절한 것은?"
+          }
+        },
+        {
+          "asset_type": "functional_dependency",
+          "payload": {
+            "table": "수강지도",
+            "columns": ["학번", "과목코드", "성적", "지도교수명", "학과명"],
+            "pk": ["학번", "과목코드"],
+            "dependencies": [
+              {"determinants": ["학번", "과목코드"], "dependents": ["성적"]},
+              {"determinants": ["학번"], "dependents": ["지도교수명"]},
+              {"determinants": ["학번"], "dependents": ["학과명"]}
+            ]
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "tuple",
+          "choice_text": "1차 정규형, 2차 정규화 대상",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "tuple",
+          "choice_text": "2차 정규형, 3차 정규화 대상",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "tuple",
+          "choice_text": "3차 정규형, 보이스-코드 정규화대상",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "tuple",
+          "choice_text": "보이스-코드정규형, 4차 정규화 대상",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "PK에 대해 반복이 되는 그룹(Repeating)이 존재하지 않으므로 1차 정규형이라고 할 수 있으며, 부분 함수종속의 규칙을 가지고 있으므로 2차 정규형이라고 할 수 없음. 2차 정규화의 대상이 되는 엔터티임."
+      }
+    },
+    {
+      "question_number": 45,
+      "book_section": "I",
+      "book_question_number": 45,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "고객번호를 식별자로 하는 아래 엔터티에서 필요한 정규화 작업으로 가장 적절한 것은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "고객",
+            "columns": ["고객번호", "고객명", "주민등록번호", "취미코드", "취미명"],
+            "rows": [
+              {"고객번호": "10", "고객명": "김○○", "주민등록번호": "123456-7890123", "취미코드": "10,11", "취미명": "노래, 댄스"},
+              {"고객번호": "20", "고객명": "이○○", "주민등록번호": "234567-8901234", "취미코드": "12,13", "취미명": "검도, 게임"},
+              {"고객번호": "30", "고객명": "박○○", "주민등록번호": "345678-9012345", "취미코드": "11,15,16", "취미명": "댄스,등산,수영"}
+            ]
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "keyword",
+          "choice_text": "1차 정규화",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "keyword",
+          "choice_text": "2차 정규화",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "keyword",
+          "choice_text": "3차 정규화",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "keyword",
+          "choice_text": "4차 정규화",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "1정규화로 모든 속성은 반드시 하나의 값만을 가져야 한다. (취미코드와 취미명에 여러 값이 쉼표로 나열되어 있어 원자성을 위배함)"
+      }
+    },
+    {
+      "question_number": 46,
+      "book_section": "I",
+      "book_question_number": 46,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "NULL에 대한 설명으로 가장 적절하지 않은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "모르는 값을 의미한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "값의 부재를 의미한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "공백문자(Empty String) 혹은 숫자 0을 의미한다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "NULL과의 모든 비교(IS NULL 제외)는 알 수 없음(Unknown)을 반환한다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "NULL은 공백문자(Empty String) 혹은 숫자 0과 동일하지 않다. 아직 정의되지 않은 값이다."
+      }
+    },
+    {
+      "question_number": 47,
+      "book_section": "I",
+      "book_question_number": 47,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래와 같이 테이블을 변환하였을 때 이에 대한 설명으로 가장 적절하지 않은 것은? (단, (A)에서 주식별자는 (사번, 부서)이며, 함수 종속성 부서→사무실이 존재한다고 가정)"
+          }
+        },
+        {
+          "asset_type": "schema_variant_pair",
+          "payload": {
+            "variant_kind": "before_after",
+            "left": {
+              "label": "(A)",
+              "entities": [
+                {
+                  "table": "",
+                  "columns": [
+                    {"name": "사번", "key": "PK"},
+                    {"name": "부서", "key": "PK"},
+                    {"name": "사무실"}
+                  ],
+                  "rows": [
+                    {"사번": "001", "부서": "총무", "사무실": "서울"},
+                    {"사번": "002", "부서": "영업", "사무실": "부산"},
+                    {"사번": "003", "부서": "총무", "사무실": "서울"},
+                    {"사번": "004", "부서": "연구", "사무실": "대전"},
+                    {"사번": "005", "부서": "영업", "사무실": "부산"}
+                  ]
+                }
+              ]
+            },
+            "right": {
+              "label": "(B)",
+              "entities": [
+                {
+                  "table": "",
+                  "columns": [
+                    {"name": "사번"},
+                    {"name": "부서"}
+                  ],
+                  "rows": [
+                    {"사번": "001", "부서": "총무"},
+                    {"사번": "002", "부서": "영업"},
+                    {"사번": "003", "부서": "총무"},
+                    {"사번": "004", "부서": "연구"},
+                    {"사번": "005", "부서": "영업"}
+                  ]
+                },
+                {
+                  "table": "",
+                  "columns": [
+                    {"name": "부서"},
+                    {"name": "사무실"}
+                  ],
+                  "rows": [
+                    {"부서": "총무", "사무실": "서울"},
+                    {"부서": "영업", "사무실": "부산"},
+                    {"부서": "연구", "사무실": "대전"}
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "제1정규화를 수행한 것에 해당한다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "제2정규화를 수행한 것에 해당한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "(B)는 제3정규형을 만족한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "주어진 사번의 사무실을 검색하는 작업의 성능이 저하된다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "해당 작업은 제1정규화가 아닌 제2정규화를 수행한 것에 해당하며, (B)는 2차 정규형뿐만 아니라 3차 정규형도 만족한다. 또한 정규화를 수행하면(테이블이 분할되면 조인이 필요하여) 일반적으로 검색 작업의 성능이 저하된다."
+      }
+    },
+    {
+      "question_number": 48,
+      "book_section": "I",
+      "book_question_number": 48,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "순차적으로 수행되는 작업 A와 B가 반드시 모두 수행되거나 모두 수행되지 않아야 한다고 할 때, 이에 대한 설명으로 가장 적절하지 않은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "A와 B는 하나의 트랜잭션으로 묶여 처리되어야 한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "A와 B를 수행한 후 각각 커밋(Commit)을 해주어야 한다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "A와 B에 주어진 조건은 트랜잭션의 원자성(Atomicity)에 해당한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "A까지만 수행되고 시스템 장애가 발생했다면 A를 undo해야 한다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "A와 B가 하나의 트랜잭션으로 묶여 처리되어야 하므로 커밋(Commit)은 각각이 아니라 A와 B를 모두 수행한 다음에 한 번만 해주어야 한다."
+      }
+    },
+    {
+      "question_number": 49,
+      "book_section": "I",
+      "book_question_number": 49,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "NULL 값에 대한 설명으로 가장 적절한 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "NULL 값에 어떤 숫자를 더해도 결과는 항상 NULL이다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "NULL 값과 어떤 숫자의 크기를 비교해도 결과는 항상 NULL이다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "\"NULL = NULL\" 연산의 결과는 TRUE이다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "집계 함수를 계산할 때 NULL 값은 0으로 처리된다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "NULL 값과 어떤 숫자를 비교한 결과는 항상 unknown이다. \"NULL = NULL\" 연산의 결과는 FALSE 또는 unknown이다. 집계 함수를 계산할 때 NULL 값은 0이 아니라 계산에서 아예 제외된다."
+      }
+    },
+    {
+      "question_number": 50,
+      "book_section": "I",
+      "book_question_number": 50,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "본질식별자와 인조식별자에 대한 설명으로 가장 적절하지 않은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "인조식별자는 대체로 본질식별자가 복잡한 구성을 가질 때 만들어진다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "인조식별자를 사용하면 중복 데이터를 막기 어려워진다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "인조식별자를 사용하면 본질식별자를 사용할 때와 비교하여 추가적인 인덱스가 필요해진다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "인조식별자는 개발 편의성을 높여주기 때문에 되도록 사용하는 것이 바람직하다.",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "인조식별자는 단점도 존재하므로 꼭 필요한 경우에만 사용하는 것이 바람직하며, 무분별한 사용은 데이터 품질 저하를 초래할 수 있다."
+      }
+    }
+  ]
+}

@@ -1,0 +1,860 @@
+{
+  "subject_id": 3,
+  "chapter_id": 5,
+  "questions": [
+    {
+      "question_number": 1,
+      "book_section": "III",
+      "book_question_number": 68,
+      "question_type": "fill_blank",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 빈칸에 들어갈 내용으로 가장 적절한 것은?"
+          }
+        },
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "테이블 및 인덱스 등의 통계 정보를 활용하여 SQL문을 실행하는데 드는 처리시간 및 CPU, I/O 자원량 등을 계산하여 가장 효율적일 것으로 예상 되는 실행계획을 선택하는 옵티마이저를 [ 빈칸 ]라 한다."
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "Time Based Optimizer",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "Rule Based Optimizer",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "Statistics Based Optimizer",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "Cost Based Optimizer",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "CBO(Cost Based Optimizer)에 대한 설명이다."
+      }
+    },
+    {
+      "question_number": 2,
+      "book_section": "III",
+      "book_question_number": 69,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "DB 인스턴스를 실행한 직후, 아래 SQL을 포함하는 프로그램을 사원A와 B가 아래와 같이 각각 4회씩 연속적으로 수행하였다. 이 SQL에 대한 Hard Parsing 발생 횟수는?"
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "select 고객명, 전화번호, 주소, 최종방문일시\nfrom 고객\nwhere 고객번호 = :custno"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "실행 시나리오",
+            "columns": [
+              "시점",
+              "사원 A",
+              "사원 B"
+            ],
+            "rows": [
+              {
+                "시점": "t1",
+                "사원 A": ":custno에 1000 입력 후 조회",
+                "사원 B": ""
+              },
+              {
+                "시점": "t2",
+                "사원 A": "",
+                "사원 B": ":custno에 2000 입력 후 조회"
+              },
+              {
+                "시점": "t3",
+                "사원 A": ":custno에 2000 입력 후 조회",
+                "사원 B": ""
+              },
+              {
+                "시점": "t4",
+                "사원 A": "",
+                "사원 B": ":custno에 3000 입력 후 조회"
+              },
+              {
+                "시점": "t5",
+                "사원 A": ":custno에 3000 입력 후 조회",
+                "사원 B": ""
+              },
+              {
+                "시점": "t6",
+                "사원 A": "",
+                "사원 B": ":custno에 3000 입력 후 조회"
+              },
+              {
+                "시점": "t7",
+                "사원 A": ":custno에 2000 입력 후 조회",
+                "사원 B": ""
+              },
+              {
+                "시점": "t8",
+                "사원 A": "",
+                "사원 B": ":custno에 7000 입력 후 조회"
+              }
+            ]
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "1회",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "4회",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "6회",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "8회",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "SQL 커서의 공유와 재사용성에 관한 문제다. 캐싱된 SQL 커서는 반복하여 재사용할 수 있을 뿐만 아니라 여러 세션 간에 공유될 수 있다. 바인드 변수(:custno)를 사용하였으므로 최초 수행 시점(t1)에만 하드 파싱이 1회 발생하며 이후에는 캐시된 실행 계획을 공유하여 사용한다."
+      }
+    },
+    {
+      "question_number": 3,
+      "book_section": "III",
+      "book_question_number": 70,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "SQL*Plus나 TOAD 같은 쿼리 툴로 오라클 데이터베이스 ORDER 계정에 접속해서 아래 SQL을 각각 한 번씩 순차적으로 실행했다. SQL 파싱에 대한 설명으로 가장 적절한 것은?"
+          }
+        },
+        {
+          "asset_type": "list_items",
+          "payload": {
+            "items": [
+              "(1) select 고객번호, 고객명, 휴대폰번호 from 고객 where 고객명 like '010%';",
+              "(2) SELECT 고객번호, 고객명, 휴대폰번호 FROM 고객 WHERE 고객명 LIKE '010%';",
+              "(3) SELECT /* 고객조회 */ 고객번호, 고객명, 휴대폰번호 FROM 고객 WHERE 고객명 LIKE '010%';"
+            ]
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "첫 번째 수행될 때 각각 하드파싱을 일으키고, 다른 캐시 공간을 사용 할 것이다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "1번과 3번 SQL은 하드파싱이 일어나지만, 2번은 하드파싱이 일어나지 않는다. 즉, 1번 SQL과 공유된다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "1번과 2번 SQL은 하드파싱이 일어나지만, 3번은 하드파싱이 일어나지 않는다. 즉, 2번 SQL과 공유된다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "실행계획이 서로 다를 수 있다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "캐시에서 SQL과 실행계획을 식별하는 식별자는 SQL 문장 그 자체다. 따라서 옵티마이저는 대소문자나 주석 등 문자 하나만 달라도 서로 다른 SQL로 인식해 각각 하드파싱을 일으키고 다른 캐시 공간을 사용한다. 1~3번 SQL은 SQL Text가 서로 다르다. SQL Text가 달라 하드파싱은 각각 일어나지만, 의미상 전혀 차이가 없으므로 실행계획은 같다."
+      }
+    },
+    {
+      "question_number": 4,
+      "book_section": "III",
+      "book_question_number": 71,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "바인드 변수보다 Literal 상수 조건을 사용하는 것이 더 효율적인 경우로 가장 적절하지 않은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "수행빈도가 낮고 한 번 수행할 때 수십 초 이상 수행되는 SQL일 때",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "조건절 칼럼의 값 종류(Distinct Value)가 소수이고, 값 분포가 균일 하지 않을 때",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "사용자가 선택적으로 입력할 수 있는 조회 항목이 다양해서 조건절이 동적으로 바뀔 때",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "사용자가 입력할 수 있는 조회 항목이 아니어서 해당 조건절이 불변일 때",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "사용자의 입력 조건이 다양해서 조건절을 동적으로 구성하더라도 조건절 비교 값만큼은 바인드 변수를 사용하려고 노력해야 한다."
+      }
+    },
+    {
+      "question_number": 5,
+      "book_section": "III",
+      "book_question_number": 72,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래와 같이 작성된 프로그램의 문제점으로 가장 적절하지 않은 것은?"
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "plsql",
+            "code": "create function get_count(p_table varchar2, p_column varchar2, p_value varchar2)\nreturn number\nis\n  l_sql varchar2(4000);\n  l_count number;\nbegin\n  l_sql := 'select count(*) from ' || p_table;\n\n  if p_column is not null and p_value is not null then\n    l_sql := l_sql || ' where ' || p_column || ' = :1';\n    execute immediate l_sql into l_count using p_value;\n  else\n    execute immediate l_sql into l_count;\n  end if;\n\n  return l_count;\nend get_count;"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "불필요한 하드파싱을 많이 일으킨다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "테이블과 함수가 서로 종속적이지 않다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "인덱스 전략 수립이 어렵다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "실행계획을 제어하기 어렵다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "Dynamic SQL 방식으로 코딩했지만, 바인드 변수를 사용했으므로 불필요한 하드파싱을 많이 일으킨다고 말하기는 어렵다. 함수 내 선언된 SQL은 NDS(Native Dynamic SQL)로 호출 시 권한 및 문법 체크를 하므로 테이블의 DDL에 영향을 받지 않는다. 바인드 변수를 사용했으므로 칼럼 히스토그램은 활용하지 못하지만, 레코드 건수, 칼럼 값의 종류(NDV), Null 값 개수 등을 활용해 실행계획을 수립한다."
+      }
+    },
+    {
+      "question_number": 6,
+      "book_section": "III",
+      "book_question_number": 73,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "SQL 작성 방식에 대해 설명으로 가장 적절하지 않은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "Static SQL이란, String형 변수에 담지 않고 코드 사이에 직접 기술한 SQL문을 말한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "Dynamic SQL이란, String형 변수에 담아서 실행하는 SQL문을 말한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "Static SQL을 지원하는 개발환경에선 가급적 Static SQL로 작성하는 것이 바람직하다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "루프 내에서 반복적으로 수행되는 SQL에 Dynamic SQL을 사용하면, 공유 메모리에 캐싱된 SQL을 공유하지 못해 하드파싱이 반복적으로 일어난다.",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "바인드 변수를 사용하기만 하면 루프 내에서 반복 수행되는 SQL이더라도 캐싱된 SQL을 공유할 수 있다. 조건절을 바꾸지 않고 반복 수행하는 경우도 있으므로 ④는 옳지 않다. Static SQL은 PreCompile 과정을 거치므로 런타임 시 안정적인 프로그램 Build가 가능하다. 그리고 Dynamic SQL을 사용하면 애플리케이션 커서 캐싱이 작동하지 않는 경우가 있다. 따라서 Static SQL을 지원하는 개발환경에선 가급적 이 방식을 사용하는 것이 좋다."
+      }
+    },
+    {
+      "question_number": 7,
+      "book_section": "III",
+      "book_question_number": 74,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "비용기반 옵티마이저(CBO)는 쿼리 최적화 과정에 비용(Cost)을 계산한다. 비용(Cost)으로 가장 적절하지 않은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "비용이란 기본적으로 SQL 수행 과정에 수반될 것으로 예상되는 I/O 일양을 계산한 것이다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "데이터베이스 Call 발생량도 옵티마이저의 중요한 비용 요소다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "옵티마이저가 비용을 계산할 때, CPU 속도, 디스크 I/O 속도 등도 고려할 수 있다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "최신 옵티마이저는 I/O에 CPU 연산 비용을 더해서 비용을 계산한다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "데이터베이스 Call은 옵티마이저가 수립한 실행계획에 따라 SQL을 수행하는 과정에, 또는 옵티마이저에게 실행계획을 수립해 달라고 요청하는 과정에 발생한다. ①은 전통적인 I/O 비용 모델에서 사용하는 비용 개념이다. 3번과 4번은 최신의 CPU 비용 모델에서 사용하는 비용 개념이다. CPU 비용 모델에서도 I/O는 가장 중요한 비용 요소다."
+      }
+    },
+    {
+      "question_number": 8,
+      "book_section": "III",
+      "book_question_number": 75,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "규칙기반 옵티마이저(RBO)가 사용하는 규칙으로 가장 적절하지 않은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "고객유형코드에 인덱스가 있으면, 아래 SQL에 인덱스를 사용한다.\nselect * from 고객 where 고객유형코드 = 'CC0123'",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "고객명에 인덱스가 있으면, 아래 SQL에 인덱스를 사용해 order by 소트 연산을 대체한다.\nselect * from 고객 order by 고객명",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "연령과 연봉에 인덱스가 하나씩 있으면 between 조건(닫힌 조건)이 부등호 조건(열린 조건)보다 스캔 범위가 작을 가능성이 높으므로 아래 SQL에 연봉 인덱스를 사용한다.\nselect * from 사원 where 연령 >= 60 and 연봉 between 3000 and 6000",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "직급에 인덱스가 있고, 직급의 종류 개수가 5개 이상이면 인덱스를 사용한다.\nselect * from 사원 where 직급 = '대리'",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "직급의 종류 개수(NDV, Number Of Distinct Value)는 CBO가 사용하는 가장 대표적인 통계정보다. (RBO는 이와 같은 데이터의 분포도나 통계정보를 고려하지 않습니다.)"
+      }
+    },
+    {
+      "question_number": 9,
+      "book_section": "III",
+      "book_question_number": 76,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "전체범위 최적화(ALL_ROWS) 방식의 옵티마이저 모드에 대한 설명으로 가장 적절하지 않은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "쿼리의 최종 결과 집합을 끝까지 Fetch하는 것을 전제로, 시스템 리소스를 가장 적게 사용하는 실행계획을 선택한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "부분범위 최적화(FIRST_ROWS)와 비교할 때, Index Scan보다 Table Full Scan하는 실행계획을 더 많이 생성한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "DML 문장은 옵티마이저 모드와 상관없이 항상 전체범위 최적화 방식으로 최적화된다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "가장 빠른 응답속도(Response Time)를 목표로 한다.",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "전체범위 최적화는 빠른 Response Time보다 Throughput 중심으로 최적화를 시행한다."
+      }
+    },
+    {
+      "question_number": 10,
+      "book_section": "III",
+      "book_question_number": 77,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 설명에 해당하는 옵티마이저(Optimizer) 모드로 가장 적절한 것은?"
+          }
+        },
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "[아래]\n쿼리 최종 결과집합을 끝까지 Fetch하는 것을 전제로, 시스템 리소스를 가장 적게 사용하는 실행계획을 선택하는 옵티마이저 모드"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "RULE",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "FIRST_ROWS",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "FIRST_ROWS_N",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "ALL_ROWS",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "옵티마이저 모드 중 ALL_ROWS는 쿼리 최종 결과집합을 끝까지 Fetch 하는 것을 전제로 하는 옵티마이저 모드이다."
+      }
+    },
+    {
+      "question_number": 11,
+      "book_section": "III",
+      "book_question_number": 78,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "통계정보 수집 시 고려해야 할 사항으로 가장 적절하지 않은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "시간/주기 : 부하가 없는 시간대에 가능한 한 빠르게 수집을 완료해야 함",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "표본(Sample) 크기 : 가능한 한 많은 양의 데이터를 읽도록 해야 함",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "정확성 : 표본(Sample) 검사하더라도 전수 검사할 때의 통계치에 근접해야 함",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "안정성 : 데이터에 큰 변화가 없는데도 매번 통계치가 바뀌지 않아야 함",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "통계정보 수집 시 시스템에 많은 부하를 주므로 대용량 테이블에는 흔히 표본 검사 방식을 사용한다. 표본 검사 시, 가능한 한 적은 양의 데이터를 읽고도 전수 검사할 때의 통계치에 근접하도록 해야 한다."
+      }
+    },
+    {
+      "question_number": 12,
+      "book_section": "III",
+      "book_question_number": 79,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "가장 효율적인 SQL로 가장 적절한 것은? (단, ItemAmtFunc는 저장형 함수이고, 상품 테이블의 PK는 상품코드임)"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "sql_query",
+          "choice_text": "SELECT 상품코드,\n       ItemAmtFunc(상품코드, SYSDATE) 당일매출,\n       ItemAmtFunc(상품코드, SYSDATE-1) 전일매출,\n       (ItemAmtFunc(상품코드, SYSDATE) - ItemAmtFunc(상품코드, SYSDATE-1)) * 100 / ItemAmtFunc(상품코드, SYSDATE) 증감율\nFROM 상품\nWHERE 상품분류코드 = '110'",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "sql_query",
+          "choice_text": "SELECT 상품코드, 당일매출, 전일매출,\n       (당일매출 - 전일매출) * 100 / 당일매출 증감율\nFROM (SELECT ROWNUM, 상품코드,\n             ItemAmtFunc(상품코드, SYSDATE) 당일매출,\n             ItemAmtFunc(상품코드, SYSDATE-1) 전일매출\n      FROM 상품\n      WHERE 상품분류코드 = '110')",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "sql_query",
+          "choice_text": "SELECT 상품코드, 당일매출, 전일매출,\n       (당일매출 - 전일매출) * 100 / 당일매출 증감율\nFROM (SELECT 상품코드,\n             ItemAmtFunc(상품코드, SYSDATE) 당일매출,\n             ItemAmtFunc(상품코드, SYSDATE-1) 전일매출\n      FROM 상품\n      WHERE 상품분류코드 = '110')",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "sql_query",
+          "choice_text": "SELECT 상품코드,\n       (SELECT ItemAmtFunc(상품코드, SYSDATE) FROM DUAL) 당일매출,\n       (SELECT ItemAmtFunc(상품코드, SYSDATE-1) FROM DUAL) 전일매출,\n       (SELECT (ItemAmtFunc(상품코드, SYSDATE) - ItemAmtFunc(상품코드, SYSDATE-1)) * 100 / ItemAmtFunc(상품코드, SYSDATE) FROM DUAL) 증감율\nFROM 상품\nWHERE 상품분류코드 = '110'",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "③은 View Merging이 발생하기 때문에 함수호출 횟수가 1번과 같다. ④는 스칼라 서브쿼리의 캐싱효과를 이용해 함수호출 횟수를 줄이려 했지만, 상품 테이블에서 상품코드는 Unique하기 때문에 캐싱 효과가 없고 오히려 캐시를 탐색하는 비용만 추가된다. ②는 ROWNUM을 이용해 View Merging을 방지했으므로 성능 개선에 도움이 된다."
+      }
+    },
+    {
+      "question_number": 13,
+      "book_section": "III",
+      "book_question_number": 80,
+      "question_type": "fill_blank",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "뷰 머징(View Merging) 쿼리변환이 발생하지 않도록 빈칸에 들어갈 옵티마이저 힌트로 가장 적절한 것은? (단, DBMS는 오라클로 가정)"
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT A.DEPTNO, A.DNAME, B.SAL\nFROM DEPT A,\n     (SELECT /*+ [ 빈칸 ] */\n             DEPTNO, SUM(SAL) SAL\n      FROM EMP\n      GROUP BY DEPTNO\n     ) B\nWHERE A.DEPTNO = B.DEPTNO"
+          }
+        },
+        {
+          "asset_type": "execution_plan",
+          "payload": {
+            "text": "Id | Operation                       | Name\n 0 | SELECT STATEMENT                | \n 1 |   NESTED LOOPS                  | \n 2 |     NESTED LOOPS                | \n 3 |       VIEW                      | \n 4 |         HASH GROUP BY           | \n 5 |           TABLE ACCESS FULL     | EMP\n 6 |       INDEX UNIQUE SCAN         | DEPT_PK\n 7 |     TABLE ACCESS BY INDEX ROWID | DEPT"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "sql_fragment",
+          "choice_text": "NO_PUSH_PRED",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "sql_fragment",
+          "choice_text": "NO_UNNEST",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "sql_fragment",
+          "choice_text": "NO_MERGE",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "sql_fragment",
+          "choice_text": "NO_REWRITE",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "뷰 머징 쿼리변환이 발생하지 않도록 제어하는 옵티마이저 힌트는 NO_MERGE이다.\n* NO_PUSH_PRED: 조인조건 Pushdown을 방지\n* NO_UNNEST: 서브쿼리를 FILTER 방식으로 최적화\n* NO_REWRITE: 구체화 뷰의 쿼리 재작성 기능을 방지"
+      }
+    },
+    {
+      "question_number": 14,
+      "book_section": "III",
+      "book_question_number": 81,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "뷰 머징(View Merging)이 가능한 경우로 가장 적절한 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "뷰 안에 ROWNUM을 사용한 경우",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "뷰 안에 GROUP BY를 사용한 경우",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "뷰 안에 윈도우 함수(Window Function)를 사용한 경우",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "뷰 안에 UNION 연산자를 사용한 경우",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "GROUP BY를 포함한 뷰는 복합 뷰 머징(Complex View Merging)이 자주 발생한다. 반면 집합 연산자(UNION 등), CONNECT BY 절, ROWNUM pseudo 칼럼, 분석 함수(윈도우 함수) 등이 포함된 뷰는 Merging이 불가능하다."
+      }
+    },
+    {
+      "question_number": 15,
+      "book_section": "III",
+      "book_question_number": 82,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 SQL에 대한 설명으로 가장 적절한 것은? (단, 쿼리변환(Query Transformation)이 동작하는 것으로 가정함)"
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "select *\nfrom (select deptno, empno, ename, job, sal, sal * 1.1 sal2, hiredate\n      from emp\n      where job = 'CLERK'\n      union all\n      select deptno, empno, ename, job, sal, sal * 1.2 sal2, hiredate\n      from emp\n      where job = 'SALESMAN') v\nwhere v.deptno = 30"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "emp 테이블에 job + deptno로 구성된 인덱스를 만들면, job 조건만 인덱스 액세스 조건으로 사용되고, deptno 조건은 필터로 처리된다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "emp 테이블 job에 단일 칼럼 인덱스를 만들면, 이 인덱스를 정상적으로 사용할 수 없다. 즉, Index Range Scan할 수 없다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "emp 테이블에 deptno + job으로 구성된 인덱스를 만들면, job과 deptno에 대한 조건 모두를 인덱스 액세스 조건으로 사용할 수 있다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "emp 테이블 deptno에 단일 칼럼 인덱스를 만들면, 이 인덱스를 정상적으로 사용할 수 없다. 즉, Index Range Scan할 수 없다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "조건절 Pushdown 쿼리 변환이 발생하여 메인 쿼리의 deptno 조건이 인라인 뷰 안으로 파고 들어간다. 따라서 다음과 같이 변환된 SQL을 기준으로 문제를 풀면 쉽다.\nselect deptno, empno, ename, job, sal, sal * 1.1 sal2, hiredate\nfrom emp\nwhere job = 'CLERK'\nand deptno = 30\nunion all\nselect deptno, empno, ename, job, sal, sal * 1.2 sal2, hiredate\nfrom emp\nwhere job = 'SALESMAN'\nand deptno = 30"
+      }
+    },
+    {
+      "question_number": 16,
+      "book_section": "III",
+      "book_question_number": 83,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 SQL을 처리할 때 옵티마이저가 선택할 수 있는 옵션으로 가장 적절하지 않은 것은?"
+          }
+        },
+        {
+          "asset_type": "sql_ddl",
+          "payload": {
+            "dialect": "ansi",
+            "code": "alter table 과금 add constraint 과금_pk primary key(고객번호, 과금월);\nalter table 수납 add constraint 수납_pk primary key(고객번호, 수납일자);"
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "select e1.고객번호, e1.과금액, e2.수납액, e1.과금액 - e2.수납액 미수금액\nfrom (select 고객번호, sum(과금액) 과금액 from 과금 group by 고객번호) e1,\n     (select 고객번호, sum(수납액) 수납액\n      from 수납\n      where 고객번호 = 10\n      group by 고객번호) e2\nwhere e1.고객번호 = e2.고객번호\nand e2.수납액 > 0"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "두 인라인 뷰(Inline View)를 풀어(View Merging) 고객번호 조인을 먼저 처리한 후에, 고객번호로 group by하면서 과금액과 수납액을 구한다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "인라인 뷰 e2에 있는 '고객번호 = 10' 조건을 e1에 전달해 줌으로써 과금_pk 인덱스를 사용해 처리한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "메인 쿼리에 있는 '수납액 > 0' 조건을 인라인 뷰 e2에 제공함으로써 조인 연산 전에 필터링이 일어나도록 한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "사용자가 작성한 SQL 형태 그대로 각 인라인 뷰를 따로 최적화한 후에 조인한다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "①번 방식으로 처리할 경우, 조인 후에 GROUP BY를 수행하게 되면 Cartesian Product(카테시안 곱) 현상과 유사하게 데이터가 부풀려져 집계 결과(과금액, 수납액)가 틀려질 수 있다."
+      }
+    },
+    {
+      "question_number": 17,
+      "book_section": "III",
+      "book_question_number": 84,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "뷰머징(View Merging)이 가능한 SQL로 가장 적절한 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "sql_query",
+          "choice_text": "SELECT A.DNAME, B.JOB\nFROM DEPT A, (SELECT /*+ MERGE */\n                     B.DEPTNO, B.JOB\n              FROM EMP B\n              INTERSECT\n              SELECT B.DEPTNO, B.JOB\n              FROM EMP B\n             ) B\nWHERE B.DEPTNO = A.DEPTNO;",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "sql_query",
+          "choice_text": "SELECT A.DNAME, B.JOB\nFROM DEPT A, (SELECT /*+ MERGE */\n                     B.DEPTNO, MAX(B.JOB) AS JOB\n              FROM EMP B\n              GROUP BY B.DEPTNO\n             ) B\nWHERE B.DEPTNO = A.DEPTNO;",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "sql_query",
+          "choice_text": "SELECT A.DNAME, B.JOB\nFROM DEPT A, (SELECT /*+ MERGE */\n                     B.DEPTNO, B.JOB\n              FROM EMP B\n              START WITH B.MGR IS NULL\n              CONNECT BY PRIOR B.EMPNO = B.MGR\n             ) B\nWHERE B.DEPTNO = A.DEPTNO;",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "sql_query",
+          "choice_text": "SELECT A.DNAME, B.JOB\nFROM DEPT A, (SELECT /*+ MERGE */\n                     B.DEPTNO, B.JOB\n              FROM EMP B\n              WHERE ROWNUM <= 3\n             ) B\nWHERE B.DEPTNO = A.DEPTNO;",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "① 집합 연산자가 포함된 뷰는 Merging이 불가능하다.\n③ CONNECT BY절이 포함된 뷰는 Merging이 불가능하다.\n④ ROWNUM pseudo 칼럼이 포함된 뷰는 Merging이 불가능하다.\n(반면, ②번처럼 GROUP BY를 포함한 뷰는 복합 뷰 머징을 통해 머징이 가능합니다.)"
+      }
+    }
+  ]
+}
