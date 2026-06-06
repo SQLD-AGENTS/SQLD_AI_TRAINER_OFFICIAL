@@ -72,29 +72,41 @@ class AppState:
 
     # ------------------------------------------------------------------
     def _load_data(self) -> None:
+        """문제 마스터를 Postgres(questions 테이블)에서 단일 소스로 로드.
+
+        - create_tables() 가 lifespan 에서 먼저 호출되므로 테이블은 항상 존재(빈 테이블일 수 있음)
+        - choices(JSONB)는 psycopg2가 Python 객체로 역직렬화할 수 있어,
+          라우터(_parse_choices)가 기대하는 JSON '문자열'로 통일해 준다.
+        - user_logs.csv(시뮬레이션 학습 로그)는 오프라인 학습 산출물 → 있으면 로드(런타임 필수 아님).
+        """
         import json as _json
 
-        q_path = OUTPUTS_DIR / "questions.csv"
+        from api.database import engine  # 지연 import (순환 import 방지)
+
+        try:
+            self.questions_df = pd.read_sql_table("questions", engine)
+        except Exception as e:  # noqa: BLE001
+            print(f"[AppState] questions 테이블 로드 실패: {e}")
+            self.questions_df = pd.DataFrame()
+
+        # Postgres(JSONB)→객체 / SQLite(JSON=TEXT)→문자열 차이를 JSON 문자열로 통일
+        if "choices" in self.questions_df.columns:
+            self.questions_df["choices"] = self.questions_df["choices"].apply(
+                lambda v: v
+                if (v is None or isinstance(v, str))
+                else _json.dumps(v, ensure_ascii=False)
+            )
+
         l_path = OUTPUTS_DIR / "user_logs.csv"
-        self.questions_df = pd.read_csv(q_path)
-        self.logs_df = pd.read_csv(l_path)
+        self.logs_df = pd.read_csv(l_path) if l_path.exists() else None
 
-        if "choices" not in self.questions_df.columns and JSON_DIR.exists():
-            choices_map: dict = {}
-            for filepath in sorted(JSON_DIR.glob("*.json")):
-                data = _json.loads(filepath.read_text(encoding="utf-8"))
-                sid, cid = data["subject_id"], data["chapter_id"]
-                for q in data["questions"]:
-                    qid = f"{sid}_{cid}_{q['question_number']}"
-                    choices_map[qid] = _json.dumps(
-                        [{"number": c["choice_number"], "text": c.get("choice_text", "")}
-                         for c in q.get("choices", [])],
-                        ensure_ascii=False,
-                    )
-            self.questions_df["choices"] = self.questions_df["question_id"].map(choices_map)
-            print(f"[AppState] 선택지 텍스트 병합: {self.questions_df['choices'].notna().sum()}건")
-
-        print(f"[AppState] 데이터 로드: 문제 {len(self.questions_df)}건, 로그 {len(self.logs_df)}건")
+        n = len(self.questions_df)
+        if n == 0:
+            print(
+                "[AppState] ⚠ questions 테이블이 비어 있습니다. "
+                "seeding 이 필요합니다 (lifespan 자동 적재 또는 `cd backend && python load_questions.py`)."
+            )
+        print(f"[AppState] 데이터 로드: 문제 {n}건 (source=DB)")
 
     def _load_recommender(self) -> None:
         try:

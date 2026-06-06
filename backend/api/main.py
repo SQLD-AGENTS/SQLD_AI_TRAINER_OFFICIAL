@@ -22,7 +22,8 @@ from dotenv import load_dotenv
 
 logger = logging.getLogger("uvicorn.error")
 
-load_dotenv(pathlib.Path(__file__).resolve().parent.parent / ".env")
+# 저장소 루트 .env 로드 (JWT/GROQ/GEMINI/CORS/DATABASE_URL). 컨테이너엔 .env 없음 → no-op.
+load_dotenv(pathlib.Path(__file__).resolve().parent.parent.parent / ".env")
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -41,6 +42,40 @@ def _log_mem(label: str) -> None:
         pass
 
 
+def _seed_questions_if_empty() -> None:
+    """questions 테이블이 비어 있으면 JSON 으로부터 1회 적재 (idempotent).
+
+    Railway/Postgres 는 이미지 빌드 시점에 DB 에 접근할 수 없으므로,
+    seeding 은 빌드가 아니라 런타임(앱 시작)에 수행한다. merge 기반이라 재시작마다 안전.
+    """
+    from api.database import Question, SessionLocal
+
+    try:
+        with SessionLocal() as db:
+            count = db.query(Question).count()
+    except Exception as e:
+        print(f"[seed] questions 카운트 실패(테이블 미생성 가능): {e}", flush=True)
+        count = 0
+
+    if count > 0:
+        print(f"[seed] questions 이미 {count}건 → seeding 생략", flush=True)
+        return
+
+    print("[seed] questions 비어 있음 → load_questions 적재 시작", flush=True)
+    try:
+        from load_questions import build_dataframe, load
+        n = load(build_dataframe())
+        print(f"[seed] questions {n}건 적재 완료", flush=True)
+    except Exception as e:
+        print(f"[seed] 적재 실패(서버는 계속 실행, /health 가 미준비로 보고): {e}", flush=True)
+
+
+def _bootstrap() -> None:
+    """startup 동기 작업: questions seeding(빈 경우) → 앱 상태 로드. 실행기 스레드에서 호출."""
+    _seed_questions_if_empty()
+    app_state.load()
+
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     _log_mem("startup-begin")
@@ -48,7 +83,7 @@ async def lifespan(app: FastAPI):
     app.state.models = app_state
     loop = asyncio.get_running_loop()
     try:
-        await loop.run_in_executor(None, app_state.load)
+        await loop.run_in_executor(None, _bootstrap)
     except Exception as e:
         print(f"[FATAL] 데이터 로딩 실패: {e}", file=sys.stderr, flush=True)
         raise
@@ -108,7 +143,12 @@ def health_check():
 @app.get("/health", tags=["health"])
 def health():
     state = app.state.models if hasattr(app.state, "models") else None
-    data_ready = state is not None and state.questions_df is not None
+    # 빈 DataFrame(테이블은 있으나 0건)도 미준비로 본다 → seeding 실패를 헬스체크로 노출
+    data_ready = (
+        state is not None
+        and state.questions_df is not None
+        and len(state.questions_df) > 0
+    )
     body = {
         "status": "ok" if data_ready else "initializing",
         "data_ready": data_ready,
