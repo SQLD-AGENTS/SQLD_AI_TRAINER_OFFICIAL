@@ -6,6 +6,13 @@ python-jose[cryptography]>=3.3.0
 bcrypt>=4.0.0
 passlib[bcrypt]>=1.7.4
 sqlalchemy>=2.0.0
+# Postgres 드라이버 — bare 'postgresql://' URL 의 기본 다이얼렉트(psycopg2)용.
+# 없으면 DATABASE_URL=postgresql://... 일 때 import 시점에 ModuleNotFoundError 로 startup 크래시.
+psycopg2-binary>=2.9.0
+# pgvector — Postgres 벡터 타입(question_embeddings). 순수 파이썬이라 시스템 의존성 없음.
+pgvector>=0.3.0
+# Google Gemini 임베딩(gemini-embedding-001) — question_embeddings 적재용
+google-genai>=1.0.0
 python-multipart>=0.0.9
 pydantic[email]>=2.0.0
 
