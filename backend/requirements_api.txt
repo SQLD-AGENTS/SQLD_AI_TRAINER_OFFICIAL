@@ -16,15 +16,15 @@ google-genai>=1.0.0
 python-multipart>=0.0.9
 pydantic[email]>=2.0.0
 
-# LLM
-groq>=0.9.0
+# LLM (Ollama Cloud — 방식 A: 직접 클라우드 API)
+ollama>=0.4.0
 
-# ML/Data (already installed from Phase 1-4)
+# ML/Data (런타임: 추천기/예측기 sklearn·xgboost, DKT torch)
 pandas>=2.0.0
 numpy>=1.24.0
 scikit-learn>=1.3.0
 xgboost>=2.0.0
 joblib>=1.3.0
 torch>=2.0.0
-faiss-cpu>=1.7.4
-sentence-transformers>=2.2.0
+# faiss-cpu / sentence-transformers 제거 — RAG 유사검색이 pgvector(question_embeddings)로 이전됨.
+# (구 FAISS 임베더 src/models/embedder.py 는 오프라인 레거시 → 필요 시 개별 설치)
