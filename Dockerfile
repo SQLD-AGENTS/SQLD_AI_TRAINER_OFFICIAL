@@ -1,9 +1,6 @@
 FROM python:3.11-slim
 
-# stdout 버퍼링 비활성화 — 크래시 전 로그 손실 방지 및 await 동작 확인
-ENV PYTHONUNBUFFERED=1
-
-# FAISS가 필요로 하는 OpenMP 런타임
+# OpenMP 런타임 (xgboost / torch / sklearn 가 사용)
 RUN apt-get update && apt-get install -y --no-install-recommends \
     libgomp1 \
  && rm -rf /var/lib/apt/lists/*
