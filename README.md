@@ -1,49 +1,1010 @@
-# SQLD AI Trainer — 작업 총정리 (1~5)
+# SQLD AI 적응형 학습 플랫폼
 
-> 최종 업데이트: 2026-06-06
+![Python](https://img.shields.io/badge/Python-3.11-blue?logo=python)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.111+-green?logo=fastapi)
+![React](https://img.shields.io/badge/React-19-61DAFB?logo=react)
+![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-red?logo=pytorch)
+![Railway](https://img.shields.io/badge/Railway-Deployed-black?logo=railway)
+![Vercel](https://img.shields.io/badge/Vercel-Frontend-black?logo=vercel)
 
-SQLite → Railway Postgres(pgvector) 마이그레이션 및 문제 임베딩 파이프라인 구축 작업의 전체 요약.
-단계별 상세는 하단 [관련 상세 문서](#관련-상세-문서) 참조.
+SQLD(SQL 개발자 자격증) 기출 문제를 기반으로 **ML · DKT · RAG/LLM** 기술을 통합한 AI 기반 적응형 학습 플랫폼.
+
+**Live**
+- Backend API: https://sqldaitrainer-production.up.railway.app
+- API 문서: https://sqldaitrainer-production.up.railway.app/docs
+- Frontend: `https://sqld-ai-trainer.vercel.app` _(배포 예정)_
 
 ---
 
-## 1. 인프라: SQLite → Railway Postgres 마이그레이션
+## 목차
 
-| 항목 | 내용 |
+1. [프로젝트 개요](#프로젝트-개요)
+2. [시스템 아키텍처](#시스템-아키텍처)
+3. [데이터 전처리 및 파이프라인](#데이터-전처리-및-파이프라인)
+4. [AI 모델 상세](#ai-모델-상세)
+5. [백엔드](#백엔드)
+6. [프론트엔드](#프론트엔드)
+7. [코드 관리 전략](#코드-관리-전략)
+8. [로컬 실행](#로컬-실행)
+9. [배포](#배포)
+10. [API 명세](#api-명세)
+11. [데이터셋](#데이터셋)
+
+---
+
+## 프로젝트 개요
+
+### 문제 정의
+
+기존 자격증 학습 서비스는 모든 사용자에게 동일한 문제를 제공하고 단순 정답만 알려준다. 이미 아는 문제를 반복 풀이하거나, 취약한 개념을 파악하지 못한 채 시험에 임하는 비효율이 발생한다.
+
+### 해결 방식
+
+| 기존 문제 | 본 플랫폼의 접근 |
+|-----------|----------------|
+| 모든 사용자에게 동일 문제 제공 | DKT + 하이브리드 추천으로 개인화 |
+| 취약 영역 분석 부재 | 챕터별 정답률 + 오답 패턴 자동 분석 |
+| 이미 아는 문제 반복 | ZPD(Zone of Proximal Development) 기반 난이도 매칭 |
+| 단순 정답 제공 | Ollama Cloud LLM + RAG로 오답 원인 맞춤 해설 생성 |
+| 학습 순서 무관 | Knowledge Tracing으로 다음 학습 문제 예측 |
+
+### 주요 기능
+
+| 기능 | 설명 |
 |------|------|
-| 클라우드 DB | Railway Postgres (PG 18.4) + pgvector 0.8.2 |
-| 연결 | `DATABASE_URL` 환경변수 우선 → 없으면 로컬 SQLite 폴백 |
-| 드라이버 | `psycopg2-binary` 추가 (`postgres://` → `postgresql://` 자동 보정) |
-| 안정화 | TCP keepalive `connect_args` + `pool_pre_ping` (Railway 프록시 끊김 방지) |
-| 3대 수정 | ① 드라이버 누락 ② seeding을 빌드→런타임(lifespan) 이동 ③ `/health` 빈 테이블 게이트 |
+| 문제 풀이 | 297개 SQLD 기출 문제, 챕터·난이도 필터 |
+| 오답 확률 예측 | XGBoost 기반 문제별 오답 확률 실시간 표시 |
+| 개인화 추천 | DKT + 하이브리드 필터링으로 다음 학습 문제 추천 |
+| AI 해설 | Ollama Cloud LLM + pgvector RAG 파이프라인으로 맞춤 해설 생성 |
+| 학습 대시보드 | 챕터별 정답률 차트, 취약 영역 분석 |
+| 게스트 모드 | 회원가입 없이 문제 풀기 및 AI 해설 이용 가능 |
 
-## 2. 스키마 설계
+<br>
 
-- **provenance 5컬럼** (`questions` 테이블): `source`(original/generated) · `status`(active/pending/rejected) · `generated_from` · `fitness_score` · `created_at`
-  → 생성문제/기존문제 구분 + 재활용 플라이휠 대비
-- **`question_embeddings` 테이블** (pgvector): `vector(1536)` + FK CASCADE + HNSW cosine 인덱스
-- **방어적 설계**: `HAS_PGVECTOR` 가드 · `ensure_vector_extension()` · pgvector 없으면 코어 테이블만 생성(크래시 방지)
+> 메인 페이지
+<div align='center'>
+  <img width="700" height="380" alt="image" src="https://github.com/user-attachments/assets/64ee8657-7aff-41ff-bc16-309293511aeb" />  
+</div>
 
-## 3. 데이터 적재
+<br>
 
-| 스크립트 | 결과 |
-|----------|------|
-| `load_questions.py` (신규) | JSON → `questions` 297건 적재. 멱등 청크 ON CONFLICT upsert |
-| `vectorize_questions.py` (신규) | Gemini `gemini-embedding-001` 1536d, L2 정규화, `RETRIEVAL_DOCUMENT` → 297건 임베딩 적재 + HNSW 생성 |
+> 문제 목록
+<div align='center'>
+  <img width="700" height="380" alt="image" src="https://github.com/user-attachments/assets/04d8f03d-3d03-44fb-89b3-baec582a6995" />
+</div>
 
-## 4. 실행 / 환경 구성
+---
 
-- `run.py` (신규): `.env`의 `HOST`/`PORT`/`RELOAD` 기반 uvicorn 기동 (로컬 개발용)
-- `.env` ↔ `.env.example` 정리 — `DATABASE_URL`만 `.env`로 분리 (`EMBED_DIM`/모델명은 스키마 상수라 코드에 유지)
-- `requirements_api.txt` 에 `psycopg2-binary` · `pgvector` · `google-genai` 추가
-
-## 5. 검증 (Railway DB health check)
+## 시스템 아키텍처
 
 ```
-PostgreSQL 18.4 · pgvector 0.8.2
-questions 297 / question_embeddings 297 (100% 커버리지)
-embedding dim 1536 · source=original×297 · status=active×297
-HNSW 인덱스 ix_qemb_hnsw (vector_cosine_ops) ✅
+[Vercel]                           [Railway — Docker Container]
+React 19 + TypeScript              FastAPI + uvicorn
+(Vite 정적 빌드)         ←──────►   ├─ AppState (Singleton)
+                          HTTPS    │   ├─ TF-IDF Classifier
+                          REST     │   ├─ XGBoost Predictor
+                                   │   ├─ SVD + TF-IDF Recommender
+                                   │   ├─ DKT/LSTM (PyTorch)
+                                   │   ├─ pgvector (Gemini 1536-dim)
+                                   │   └─ RAGExplainer (Ollama Cloud)
+                                   ├─ Postgres + pgvector (users·logs·questions·embeddings)
+                                   └─ Ollama Cloud ──► qwen3.5:cloud
+```
+
+### 모델 로딩 전략
+
+서버 시작 시 ML 모델(약 2GB)을 로드하면 Railway 헬스체크 타임아웃이 발생한다. 이를 해결하기 위해 FastAPI `lifespan` 내에서 `app.state.models`를 먼저 바인딩한 뒤, 모델 로딩은 백그라운드 스레드에서 실행한다.
+
+```python
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    create_tables()
+    app.state.models = app_state          # /health 즉시 응답 가능
+    loop = asyncio.get_running_loop()
+    loop.run_in_executor(None, app_state.load)  # 백그라운드 로딩
+    yield
 ```
 
 ---
+
+## 데이터 전처리 및 파이프라인
+
+ML 모델 학습에 사용할 정형 데이터를 생성하는 오프라인 파이프라인이다. `backend/src/data/pipeline.py`를 진입점으로 세 단계가 순서대로 실행된다.
+
+```
+datasets/json/*.json (12개 챕터)
+        │
+        ▼  [1단계] json_parser.py
+  원시 DataFrame
+  (question_id, question_text, sql_code, choices, explanation ...)
+        │
+        ▼  [2단계] features.py
+  Feature DataFrame
+  (+ question_type_encoded, choice_kind_complexity, difficulty, difficulty_label)
+        │
+        ├──► outputs/questions.csv   ← API·ML 공용 문제 마스터 데이터
+        │
+        ▼  [3단계] simulator.py
+  시뮬레이션 학습 이력
+  (user_id, question_id, is_correct, solve_time_sec, submitted_at ...)
+        │
+        └──► outputs/user_logs.csv  ← ML 모델 학습용 이력 데이터
+```
+
+파이프라인 완료 후 `_verify()` 함수로 자동 품질 검증을 수행한다.
+- `question_id` 중복 여부 확인
+- 각 난이도(`Easy` / `Medium` / `Hard`) 비율이 5% 이상인지 확인
+
+---
+
+### 1단계 — JSON 파싱 (`json_parser.py`)
+
+12개 챕터 JSON 파일을 순회해 정형화된 DataFrame으로 변환한다.
+
+**question_id 생성 규칙**
+
+```
+question_id = f"{subject_id}_{chapter_id}_{question_number}"
+# 예: "2_1_5"  → Part II, Chapter 1, 5번 문제
+```
+
+중복 여부는 파싱 직후 `assert df["question_id"].is_unique`로 즉시 검증한다.
+
+**asset 추출**
+
+JSON의 `assets` 배열에는 문제 본문(`text_block`)과 SQL 코드(`sql_query`)가 혼재한다.
+
+```python
+def _extract_assets(assets):
+    texts = [a["payload"]["text"]         for a in assets if a["asset_type"] == "text_block"]
+    sqls  = [a["payload"].get("code", "") for a in assets if a["asset_type"] == "sql_query"]
+    return " ".join(texts), "\n".join(sqls)
+```
+
+SQL 코드가 하나라도 추출되면 `has_sql_asset = True`로 기록한다.
+
+**선택지 정보 추출**
+
+| 추출 항목 | 컬럼 | 설명 |
+|-----------|------|------|
+| 각 선택지의 `choice_kind` | `choice_kinds` | 쉼표 구분 문자열 (예: `"text,sql_query,keyword"`) |
+| 정답 번호 | `correct_choice` | `is_correct: true`인 `choice_number` |
+| 선택지 전체 | `choices` | JSON 문자열 (`[{"number": 1, "text": "..."}]`) |
+
+**파싱 결과 컬럼 목록**
+
+| 컬럼 | 타입 | 설명 |
+|------|------|------|
+| `question_id` | str | 고유 식별자 (`subject_chapter_number`) |
+| `subject_id` | int | 파트 번호 (1~3) |
+| `chapter_id` | int | 챕터 번호 |
+| `chapter_name` | str | 챕터명 (`CHAPTER_NAMES` 매핑) |
+| `question_type` | str | worst_choice / best_choice / fill_blank / different_result |
+| `question_text` | str | 문제 본문 (text_block 합산) |
+| `sql_code` | str | SQL 코드 블록 (없으면 빈 문자열) |
+| `has_sql_asset` | bool | SQL 포함 여부 |
+| `choice_kinds` | str | 선택지 유형 쉼표 목록 |
+| `correct_choice` | int | 정답 번호 |
+| `explanation` | str | 해설 텍스트 |
+
+---
+
+### 2단계 — Feature 엔지니어링 (`features.py`)
+
+원시 DataFrame에 ML 모델 입력용 수치 Feature 4개를 추가한다.
+
+**① question_type_encoded** — 문제 유형 정수 인코딩
+
+| question_type | 인코딩 값 |
+|---------------|-----------|
+| worst_choice | 0 |
+| best_choice | 1 |
+| fill_blank | 2 |
+| different_result | 3 |
+
+**② choice_kind_complexity** — 선택지 복잡도 점수 (0~3)
+
+선택지 유형마다 인지 부하를 점수화하고, 한 문제에 여러 유형이 섞인 경우 **가장 높은 점수**를 채택한다.
+
+| choice_kind | 점수 | 이유 |
+|-------------|------|------|
+| keyword | 0 | 단순 키워드 |
+| text | 1 | 자연어 보기 |
+| sql_fragment | 2 | SQL 일부 |
+| sql_query | 3 | 완전한 SQL문 |
+
+**③ difficulty / difficulty_label** — 규칙 기반 난이도 추정
+
+원본 JSON에 `difficulty` 필드가 없으므로 `question_type`과 `subject_id`, `has_sql_asset`을 조합해 자동 추정한다.
+
+```
+different_result            → Hard  (결과 비교는 실행 오류를 잡아야 함)
+fill_blank                  → Medium 기본
+best_choice / worst_choice  → Easy 기본
+
+위 기본값에서 아래 규칙으로 상향 조정:
+  has_sql_asset AND subject_id == 3  → Hard  (SQL 튜닝 파트 SQL 문제)
+  subject_id == 3 (SQL 튜닝 파트)    → 한 단계 상향 (Easy→Medium, Medium→Hard)
+```
+
+| difficulty 값 | difficulty_label | 적용 조건 요약 |
+|---------------|-----------------|----------------|
+| 0 | Easy | best/worst_choice, 비튜닝 파트 |
+| 1 | Medium | fill_blank 기본 / 튜닝 파트 Easy 문제 |
+| 2 | Hard | different_result / 튜닝 파트 SQL 포함 문제 |
+
+---
+
+### 3단계 — 시뮬레이션 학습 이력 (`simulator.py`)
+
+실제 사용자 이력이 없으므로 **가상 100명**의 풀이 이력을 수식 기반으로 생성한다. 재현성을 위해 `numpy.random.default_rng(seed=42)`를 사용한다.
+
+**사용자 분포**
+
+| 레벨 | 비율 | 기본 정답률 |
+|------|------|-------------|
+| beginner | 40% | 40% |
+| intermediate | 40% | 65% |
+| advanced | 20% | 85% |
+
+**정답 확률 계산식**
+
+각 풀이 시도에서 정답 확률 `acc`를 아래 식으로 계산한 뒤 베르누이 시행으로 `is_correct`를 결정한다.
+
+```
+acc = clamp(base_acc + difficulty_penalty + knowledge_gain × (attempt - 1), 0.05, 0.95)
+
+difficulty_penalty: Easy=0.0, Medium=-0.05, Hard=-0.15
+knowledge_gain:     동일 문제 재시도마다 +0.02 (반복 학습 효과)
+```
+
+예시: `intermediate` 사용자가 `Hard` 문제를 3번째 시도할 때
+```
+acc = clamp(0.65 + (-0.15) + 0.02 × 2, 0.05, 0.95) = 0.54
+```
+
+**풀이 시간 시뮬레이션**
+
+난이도별로 정규분포에서 샘플링한다.
+
+| difficulty | 평균(초) | 표준편차(초) |
+|------------|---------|-------------|
+| Easy | 30 | 10 |
+| Medium | 60 | 15 |
+| Hard | 90 | 20 |
+
+최소값 5초로 클램핑 (`max(5, sampled_time)`).
+
+**풀이 라운드 구성**
+
+각 사용자는 전체 297문제를 1~3라운드 무작위로 반복 풀이한다. 라운드 간 간격은 2주(`14일`)로 설정해 시간적 분포를 만든다.
+
+**생성 결과 컬럼**
+
+| 컬럼 | 설명 |
+|------|------|
+| `user_id` | 가상 사용자 ID (`user_001` ~ `user_100`) |
+| `question_id` | 풀이한 문제 ID |
+| `user_level` | beginner / intermediate / advanced |
+| `is_correct` | 정답 여부 (bool) |
+| `solve_time_sec` | 풀이 소요 시간(초) |
+| `submitted_at` | 제출 일시 (2025-01-01 기준 시뮬레이션) |
+| `attempt_count` | 해당 사용자의 해당 문제 누적 시도 횟수 |
+
+---
+
+## AI 모델 상세
+
+### Phase 2 — 머신러닝 모델
+
+#### 문제 분류기 (`classifier.py`)
+
+문제 텍스트를 분석해 `subject_id`(파트)와 `difficulty_label`(난이도)을 분류한다.
+
+**텍스트 표현**
+- TF-IDF Vectorizer: `analyzer="char_wb"`, `ngram_range=(2, 4)`, `max_features=3000`
+- 한국어 형태소 분석기 없이 음절 블록(character n-gram) 단위로 처리
+
+**Feature 구성**
+```
+TF-IDF 행렬 (sparse)
++ question_type OneHot (4차원)
++ has_sql_asset (0/1)
++ choice_kind_complexity (0~3)
+```
+
+**모델**: Logistic Regression (C=1.0) / LinearSVC — StratifiedKFold 5-fold 교차 검증
+
+---
+
+#### 트랜스포머 기반 의미 검색 (`rag_explainer.py`)
+
+> ⚠ 이 절은 초기 설계 기록이다. 현재 런타임 유사검색은 pgvector(Gemini 1536-dim)이며,
+> 별도의 `rag_explainer.py` 파일은 존재하지 않는다(해설 로직은 `explainer.py`).
+
+문제에 대한 해설을 생성할 때 RAG(Retrieval-Augmented Generation) 파이프라인의 Retrieval 단계에서 트랜스포머 임베딩 모델을 사용한다.
+
+**사용 모델**
+- `jhgan/ko-sroberta-multitask` — 한국어 특화 Sentence-BERT 계열 모델
+- Hugging Face `sentence-transformers` 라이브러리를 통해 로드
+
+**트랜스포머 임베딩 원리**
+
+| 단계 | 설명 |
+|------|------|
+| Tokenization | WordPiece 기반 서브워드 분절 (한국어 형태소 경계에 가깝게 처리) |
+| Encoder | 12-layer Transformer Encoder (BERT 구조), Self-Attention으로 문맥 벡터 생성 |
+| Pooling | Mean Pooling — 모든 토큰 임베딩의 평균으로 문장 단위 벡터(768차원) 산출 |
+| Fine-tuning | Multi-task 학습: NLI(자연어 추론) + STS(의미 유사도) 손실 동시 최적화 |
+
+**TF-IDF 대비 트랜스포머의 차이점**
+
+TF-IDF는 단어 빈도 기반의 sparse 벡터로, 단어가 다르면 유사도가 0에 가까워진다.  
+트랜스포머 임베딩은 Self-Attention을 통해 문맥을 고려한 dense 벡터를 생성하므로, 표현이 달라도 의미가 유사한 문장 간의 유사도를 측정할 수 있다.
+
+```
+TF-IDF:   "기본키 제약조건" ≠ "PK 설정" → 코사인 유사도 ≈ 0
+Transformer: "기본키 제약조건" ≈ "PK 설정" → 코사인 유사도 ≈ 0.85
+```
+
+**FAISS 인덱스 구조**
+
+```
+문제 텍스트 → Sentence Transformer → 768차원 dense 벡터
+                                              ↓
+                                   FAISS IndexFlatL2 (L2 거리 기반 ANN 탐색)
+                                              ↓
+                              top-k 유사 문서 → LLM 프롬프트에 삽입
+```
+
+- `IndexFlatL2`: 정확한 최근접 이웃 탐색 (근사 아닌 완전 탐색), 데이터셋 규모가 작아 속도 충분
+- 임베딩은 최초 `/explain` 요청 시 Lazy Loading으로 생성되어 `faiss_index.bin`에 저장
+
+**저장 아티팩트**: `tfidf_vectorizer.joblib`, `classifier_subject.joblib`, `classifier_difficulty.joblib`
+
+---
+
+#### 오답 확률 예측기 (`predictor.py`)
+
+(user, question) 쌍에 대해 오답 확률(0~1)을 예측하는 이진 분류 모델.
+
+<div align='center'>
+  <img width="580" height="380" alt="image" src="https://github.com/user-attachments/assets/70bb6d90-7120-4168-9c1b-3ef703ac58b3" />
+</div>
+
+**Feature 엔지니어링**
+
+유저 레벨 Feature는 `user_logs.csv` 전체 기준으로 집계된 통계값이다. NaN(풀이 이력 없는 챕터/유형)은 해당 사용자의 `user_overall_accuracy`로 대체한다.
+
+| Feature 그룹 | Feature 명 | 설명 |
+|-------------|-----------|------|
+| 유저 — 전체 | `user_overall_accuracy` | 전체 문제 정답률 |
+| 유저 — 난이도별 | `user_diff_0/1/2_accuracy` | Easy·Medium·Hard 각 정답률 |
+| 유저 — 챕터별 | `user_ch{N}_accuracy` | 각 챕터별 정답률 (wide format) |
+| 유저 — 유형별 | `user_qt_{type}_accuracy` | 문제 유형(worst/best/fill/diff)별 정답률 |
+| 유저 — 시간 | `user_avg_solve_time` | 평균 풀이 시간(초) |
+| 문제 | `question_type_encoded` | 문제 유형 정수 인코딩 (0~3) |
+| 문제 | `has_sql_asset` | SQL 포함 여부 (0/1) |
+| 문제 | `choice_kind_complexity` | 선택지 최대 복잡도 (0~3) |
+| 문제 | `subject_id`, `chapter_id` | 파트·챕터 번호 |
+| 문제 | `difficulty` | 규칙 기반 난이도 (0~2) |
+
+**XGBoost 학습 원리**
+
+XGBoost(eXtreme Gradient Boosting)는 여러 개의 약한 결정 트리를 순서대로 쌓아, 이전 트리의 **잔차(residual)**를 다음 트리가 보정하는 Gradient Boosting 방식이다.
+
+```
+초기 예측 F₀(x)
+    ↓
+1번 트리 h₁: F₀의 오차를 줄이는 방향으로 학습
+    ↓
+2번 트리 h₂: (F₀ + η·h₁)의 오차를 줄이는 방향으로 학습
+    ↓  (반복 200회)
+최종 예측 = F₀ + η·h₁ + η·h₂ + ... + η·h₂₀₀
+
+η (learning_rate) = 0.05  ← 각 트리의 기여도를 줄여 과적합 방지
+```
+
+RandomForest가 트리를 **병렬·독립적**으로 쌓는 것과 달리, XGBoost는 **순차적**으로 이전 오류에 집중하므로 일반적으로 더 높은 정확도를 보인다.
+
+**하이퍼파라미터 설명**
+
+| 파라미터 | 값 | 역할 |
+|----------|-----|------|
+| `n_estimators` | 200 | 결정 트리 개수 |
+| `max_depth` | 6 | 트리 최대 깊이 (과적합 제어) |
+| `learning_rate` | 0.05 | 각 트리의 기여 가중치 (작을수록 안정적) |
+| `subsample` | 0.8 | 트리마다 사용할 샘플 비율 (무작위성 추가) |
+| `colsample_bytree` | 0.8 | 트리마다 사용할 Feature 비율 |
+| `eval_metric` | auc | 학습 중 검증 지표 |
+
+**모델 비교 및 자동 선택**
+
+두 모델을 동일한 80/20 분할로 학습한 뒤 **테스트셋 AUC-ROC**가 높은 쪽을 `predictor_primary.joblib`으로 저장한다.
+
+| 모델 | n_estimators | max_depth | 특징 |
+|------|-------------|-----------|------|
+| RandomForest | 200 | 10 | 병렬 학습, `class_weight="balanced"` |
+| XGBoost | 200 | 6 | 순차 Boosting, subsample·colsample로 정규화 |
+
+**타겟 변수**: `is_correct=False → 1` (오답=양성), `is_correct=True → 0`
+
+**API 응답 (`POST /predict`)**
+```json
+{
+  "error_probability": 0.72,
+  "risk_level": "high",
+  "message": "이 문제는 틀릴 가능성이 높습니다.",
+  "source": "model"
+}
+```
+`risk_level` 기준: `< 0.4` → low, `0.4~0.65` → medium, `> 0.65` → high
+
+---
+
+#### 하이브리드 추천 시스템 (`recommender.py`)
+
+Content-Based + Collaborative Filtering 혼합 추천.
+
+**Stage 1 — Content-Based Filtering**
+- 최근 오답 문제 텍스트 TF-IDF 벡터와 전체 문제 코사인 유사도 계산
+- 유사한 개념의 문제를 우선 추천
+
+**Stage 2 — Collaborative Filtering**
+- User-Item 정답 행렬 → TruncatedSVD (n_components=20) → 유사 사용자 기반 추천
+
+**최종 점수**
+```
+score = 0.7 × content_score + 0.3 × cf_score
+```
+
+**ZPD(Zone of Proximal Development) 필터**
+
+DKT가 예측한 `P(correct)`가 `[zpd_low, zpd_high]` 범위(기본 0.3~0.6)에 있는 문제에 가중치를 부여해 적정 난이도 문제를 우선 추천한다.
+
+```
+"너무 쉽지도 너무 어렵지도 않은" 문제 → 학습 효과 최대화
+```
+
+**추천 제외 조건**: 이미 맞힌 문제, 약점 챕터 외 문제 (취약 챕터 상위 3개 우선)
+
+---
+
+### Phase 3 — 딥러닝
+
+#### DKT — Deep Knowledge Tracing (`knowledge_tracer.py`)
+
+사용자 풀이 이력 시퀀스를 LSTM으로 모델링해 다음 문제별 정답 확률 벡터를 예측한다.
+
+**아키텍처**
+
+```
+입력 시퀀스: [(question_idx × 2) + response + 1]  ← 1-indexed, 0=padding
+      ↓
+Embedding(num_questions × 2 + 1, embed_dim=128)
+      ↓
+LSTM(input=128, hidden=128, dropout=0.2)
+      ↓
+Linear(128 → 297)
+      ↓
+Sigmoid → P(correct) for each question (297개)
+```
+
+**학습 설정**
+
+| 항목 | 값 |
+|------|-----|
+| Epochs | 30 (Early Stopping patience=5) |
+| Batch Size | 32 |
+| Learning Rate | 1e-3 |
+| 손실 함수 | BCELoss |
+| 분할 | 80/20 (user-level stratified) |
+| 평가 | AUC-ROC |
+
+**저장 아티팩트**: `dkt_model.pth` (state_dict), `dkt_question_ids.joblib`
+
+---
+
+#### Dense 임베딩 + FAISS (`embedder.py`)
+
+> ⚠ 이 절의 FAISS(MiniLM 384-dim)는 **초기 구현**이다. 현재 런타임 RAG 유사검색은
+> pgvector(Gemini 1536-dim, `question_embeddings` 테이블)로 이전되었고, `embedder.py`는 오프라인 레거시다.
+
+**임베딩 모델**: `paraphrase-multilingual-MiniLM-L12-v2` (384-dim)
+- 50개 언어 지원 다국어 모델, 한국어 문장 의미 표현에 적합
+- MiniLM 구조로 BERT 대비 6배 빠른 추론, CPU 환경에서 실용적
+- sentence-transformers 라이브러리로 로드
+
+**임베딩 대상**: `question_text + " " + explanation` 합쳐서 인코딩
+- 문제 본문 단독보다 해설까지 합친 텍스트가 더 풍부한 의미 표현 제공
+- 배치 크기 32로 순차 인코딩, 결과는 `float32` ndarray (N×384)
+
+**FAISS란**
+
+FAISS(Facebook AI Similarity Search)는 Meta AI가 개발한 **고속 벡터 유사도 검색 라이브러리**다. 수십억 개의 벡터에서 주어진 쿼리 벡터와 가장 가까운 k개를 빠르게 찾는다.
+
+일반 반복문으로 N개 벡터와 순차 비교하면 O(N)이지만, FAISS는 인덱스 구조를 사전 구축해 탐색 복잡도를 줄인다.
+
+**IndexFlatIP와 코사인 유사도**
+
+```
+벡터 L2 정규화 (||v|| = 1 로 만들기)
+        ↓
+IndexFlatIP에 추가 (Inner Product 기반 완전 탐색)
+
+쿼리 시:
+  코사인 유사도 = (v₁ · v₂) / (||v₁|| × ||v₂||)
+              = v₁ · v₂   ← 이미 정규화됐으므로 내적 = 코사인
+```
+
+`IndexFlatIP`는 근사 없이 모든 벡터와 완전 탐색한다. 데이터셋이 297개로 작아 속도 문제가 없으므로 IVF(역색인) 등 근사 인덱스보다 정확도 우선으로 선택했다.
+
+**인덱스 구축 흐름**
+
+```
+question_text + explanation (297개)
+        ↓
+SentenceTransformer.encode()  → ndarray (297, 384)
+        ↓
+faiss.normalize_L2()           → 각 벡터를 단위 벡터로 정규화
+        ↓
+faiss.IndexFlatIP(dim=384)
+index.add(embeddings)          → 297개 벡터 등록
+```
+
+**추천에서의 활용**
+
+사용자의 최근 오답 문제 임베딩 벡터들을 **평균**내어 쿼리 벡터를 만들고, 전체 문제 임베딩과 내적 연산으로 유사도 점수를 산출한다. 이 점수가 하이브리드 추천의 Content-Based 점수(`alpha=0.7` 가중)로 사용된다.
+
+```python
+query_vec = embeddings[recent_wrong_indices].mean(axis=0)  # 오답 중심 벡터
+query_vec /= np.linalg.norm(query_vec)                     # 정규화
+scores = embeddings @ query_vec                            # 전체 문제 유사도 (297,)
+```
+
+**한글 경로 호환**: `faiss.write_index()`가 한글 경로를 지원하지 않아, 인덱스를 bytes로 직렬화한 뒤 joblib으로 저장한다.
+
+```python
+# 저장
+buf = faiss.serialize_index(index)
+joblib.dump(buf, "faiss_index.joblib")
+
+# 로드
+buf = joblib.load("faiss_index.joblib")
+index = faiss.deserialize_index(buf)
+```
+
+**저장 아티팩트**: `sentence_embeddings.npy` (N×384), `faiss_index.joblib`, `embed_question_ids.joblib`
+
+---
+
+### Phase 4 — RAG / LLM 해설 (`explainer.py`)
+
+> ⚠ 현재 런타임은 **pgvector(Gemini 1536-dim) 검색 + Ollama Cloud(qwen3.5:cloud)** 로 동작한다.
+> 아래 일부 설명·다이어그램은 초기 구현(FAISS·Groq) 기준이며, 검색 단계가 pgvector로, LLM이 Ollama로 이전되었다.
+
+#### RAG(Retrieval-Augmented Generation)란
+
+LLM(대형 언어 모델)은 학습 데이터에 없는 도메인 지식에 대해 잘못된 정보를 생성하는 **Hallucination** 문제가 있다. RAG는 이를 해결하기 위해 LLM이 답변을 생성하기 전에 **외부 지식 베이스에서 관련 문서를 검색(Retrieve)해 프롬프트에 함께 제공(Augment)** 하는 방식이다.
+
+```
+기존 LLM:  질문 → LLM → 답변 (학습 데이터에만 의존, Hallucination 위험)
+
+RAG:       질문 → [검색] 관련 문서 k개 → 질문 + 문서 → LLM → 근거 있는 답변
+```
+
+본 프로젝트에서는 LLM이 SQLD 기출 문제의 해설 데이터를 모른다는 전제 하에, **FAISS로 유사 문제를 검색해 컨텍스트로 제공**함으로써 SQLD 도메인에 특화된 정확한 해설을 생성한다.
+
+#### 구현 파이프라인
+
+**1단계 — 오프라인 인덱싱 (서버 시작 시 1회)**
+
+```
+297개 문제 전체
+      ↓
+question_text + explanation → sentence-transformers 인코딩 (384-dim)
+      ↓
+L2 정규화 (코사인 유사도를 내적으로 변환)
+      ↓
+FAISS IndexFlatIP 구축 → faiss_index.joblib 저장
+```
+
+**2단계 — 온라인 추론 (사용자 요청마다)**
+
+```
+오답 question_id
+      ↓
+해당 문제 임베딩 벡터 추출
+      ↓
+FAISS 검색: cosine similarity 상위 k=3개 유사 문제 반환
+      ↓
+프롬프트 구성
+  ├─ [문제 정보] 챕터, 난이도, 문제 텍스트, 기존 해설
+  ├─ [참고 컨텍스트] 유사 문제 3개 + 각 해설  ← RAG의 핵심
+  └─ [작성 지침] 핵심 개념, 오답 포인트, 유사 문제 연결, 기억 포인트
+      ↓
+Ollama Cloud (qwen3.5:cloud)
+      ↓
+한국어 맞춤 해설 반환
+```
+
+#### RAG가 단순 LLM 호출과 다른 점
+
+| 항목 | 단순 LLM | RAG (본 프로젝트) |
+|------|----------|-----------------|
+| 컨텍스트 | 없음 (LLM 파라미터에 의존) | SQLD 기출 해설 3개 제공 |
+| Hallucination | 발생 가능 | 실제 해설 기반으로 억제 |
+| 도메인 특화 | 낮음 | 높음 (SQLD 개념 정확도 향상) |
+| 비용 | 프롬프트 짧음 | 컨텍스트만큼 토큰 증가 |
+
+**Fallback 전략**
+- `OLLAMA_API_KEY` 미설정 또는 API 오류 → `original_explanation` 반환, `source: "fallback"`
+
+**캐싱**: `explain_cache[question_id]` — 동일 문제 중복 API 호출 방지
+
+---
+
+## 백엔드
+
+### 구조
+
+```
+backend/
+├── api/
+│   ├── main.py              # FastAPI 앱, lifespan, CORS 설정
+│   ├── database.py          # SQLAlchemy 엔진, 세션 관리
+│   ├── state.py             # AppState 싱글턴 (모든 모델 보유)
+│   ├── routers/
+│   │   ├── auth.py          # 회원가입·로그인·게스트 JWT 발급
+│   │   ├── questions.py     # 문제 목록·상세 조회
+│   │   ├── logs.py          # 풀이 결과 저장 및 정답 판정
+│   │   ├── predict.py       # XGBoost 오답 확률 예측
+│   │   ├── explain.py       # RAG AI 해설 생성
+│   │   ├── recommend.py     # DKT + 하이브리드 추천
+│   │   └── progress.py      # 챕터별 학습 진도 조회
+│   └── schemas/             # Pydantic 요청/응답 스키마
+├── src/
+│   ├── models/
+│   │   ├── classifier.py    # TF-IDF + Logistic Regression 분류기
+│   │   ├── predictor.py     # XGBoost / RandomForest 오답 예측기
+│   │   ├── recommender.py   # SVD + TF-IDF 하이브리드 추천기
+│   │   ├── knowledge_tracer.py  # PyTorch LSTM DKT
+│   │   └── embedder.py      # sentence-transformers + FAISS
+│   ├── data/
+│   │   ├── json_parser.py   # 챕터 JSON 파싱
+│   │   ├── features.py      # Feature 엔지니어링, 난이도 추정
+│   │   ├── simulator.py     # 시뮬레이션 학습 이력 생성
+│   │   └── pipeline.py      # 전체 데이터 파이프라인 오케스트레이션
+│   └── explainer.py         # RAG 파이프라인 (pgvector + Ollama)
+├── outputs/                 # 학습된 모델 아티팩트 (git 추적)
+│   ├── questions.csv
+│   ├── user_logs.csv
+│   ├── dkt_model.pth
+│   ├── faiss_index.joblib
+│   ├── sentence_embeddings.npy
+│   └── *.joblib             # 분류기, 예측기, 추천기 모델
+└── requirements_api.txt
+```
+
+### AppState — 모델 싱글턴
+
+모든 ML 모델을 `AppState` 단일 객체로 관리해 라우터에서 참조한다.
+
+```python
+class AppState:
+    classifier: dict              # tfidf_vectorizer, clf_subject, clf_difficulty
+    predictor_model: object       # XGBoost or RandomForest (AUC 기준 자동 선택)
+    predictor_feature_names: list
+    recommender: dict             # tfidf_matrix, user_factors, item_factors
+    dkt_model: DKTModel           # PyTorch LSTM
+    dkt_question_ids: list
+    device: torch.device          # CPU / CUDA / MPS 자동 감지
+    explainer: RAGExplainer       # pgvector + Ollama
+    questions_df: pd.DataFrame
+    logs_df: pd.DataFrame
+```
+
+### 인증
+
+- JWT Bearer 토큰 (python-jose)
+- 게스트: `POST /auth/guest` → 24시간 유효 토큰, 풀이 이력 미저장
+- 회원: `POST /auth/register` / `POST /auth/login` → 풀이 이력 저장 + 개인화 기능 이용
+
+---
+
+## 프론트엔드
+
+### 구조
+
+```
+frontend/
+├── src/
+│   ├── services/
+│   │   └── api.ts               # axios 인스턴스, API 함수 모음
+│   ├── contexts/
+│   │   └── AuthContext.tsx       # 인증 상태 전역 관리 (token, user, isGuest)
+│   ├── pages/
+│   │   ├── LandingPage.tsx
+│   │   ├── LoginPage.tsx
+│   │   ├── RegisterPage.tsx
+│   │   ├── QuestionListPage.tsx  # 챕터·난이도 필터, 페이지네이션
+│   │   ├── QuestionDetailPage.tsx # 풀이·채점·AI 해설·오답 확률
+│   │   ├── DashboardPage.tsx     # 챕터별 차트, 취약 영역
+│   │   └── RecommendPage.tsx     # DKT 추천 문제 목록
+│   └── components/
+│       ├── auth/AuthGuard.tsx    # 미인증 시 /login 리다이렉트
+│       ├── layout/              # TopBar, PageLayout
+│       ├── question/            # QuestionCard, ChoiceList, SqlBlock,
+│       │                        # AiExplanation, RiskIndicator, FilterPanel
+│       ├── dashboard/           # SummaryCard, AccuracyChart, WeakChapterList
+│       ├── recommend/           # RecommendCard
+│       └── ui/                  # DifficultyBadge, AiBadge, Spinner, Alert
+├── vercel.json                  # SPA 라우팅 (/* → index.html)
+└── package.json
+```
+
+### 라우팅
+
+| 경로 | 페이지 | 인증 |
+|------|--------|------|
+| `/` | 랜딩 페이지 | 불필요 |
+| `/login` | 로그인 | 불필요 |
+| `/register` | 회원가입 | 불필요 |
+| `/questions` | 문제 목록 | 불필요 |
+| `/questions/:id` | 문제 풀이 | 불필요 |
+| `/dashboard` | 학습 대시보드 | 필요 (AuthGuard) |
+| `/recommend` | 추천 문제 | 필요 (AuthGuard) |
+
+### API 클라이언트 (`services/api.ts`)
+
+axios 인스턴스에 요청 인터셉터를 설정해 `Authorization: Bearer <token>`을 자동 첨부한다.
+
+```typescript
+// 주요 API 함수
+authApi.login(email, password)
+authApi.register(username, email, password)
+authApi.guest()
+
+questionsApi.list({ chapter_name?, difficulty?, limit?, offset? })
+questionsApi.detail(id)
+
+logsApi.submit(question_id, selected_answer)
+predictApi.errorProb(user_id, question_id)
+explainApi.explain(question_id)
+progressApi.get(user_id)
+recommendApi.get(user_id, top_n, use_zpd)
+```
+
+---
+
+## 코드 관리 전략
+
+### 브랜치 전략
+
+```
+main   ─────────────────────────────────────► 프로덕션 브랜치
+          ↑ PR 병합                            Railway / Vercel 자동 배포
+dev    ──────────────────────────────────────► 개발 통합 브랜치
+        ↑ PR 병합
+feat/  ─ feat/#5 (로컬 연동 테스트)
+       ─ feat/#6 (Docker + Railway 배포 설정)
+fix/   ─ 버그 수정 커밋 (Railway 배포 이슈 대응)
+```
+
+- `feat/#N` / `fix/#N` 브랜치에서 작업 → `dev`로 PR 병합
+- `dev`가 안정화되면 `main`으로 병합 → Railway·Vercel 자동 재배포
+
+### 모노레포 구성
+
+하나의 GitHub 레포지토리에 백엔드·프론트엔드를 함께 관리한다.
+
+```
+SQLD_AI_TRAINER/    ← 레포 루트
+├── backend/        ← Python FastAPI (Railway 배포)
+├── frontend/       ← React + TypeScript (Vercel 배포)
+├── datasets/       ← 원본 JSON 데이터
+├── outputs/        ← 학습된 모델 아티팩트 (git 추적)
+├── Dockerfile      ← Railway용 (backend만 포함)
+└── railway.toml
+```
+
+**배포 분리**: Railway는 루트 `Dockerfile`을 빌드 (백엔드만), Vercel은 `frontend/` 디렉토리만 빌드.
+
+### 모델 아티팩트 관리
+
+학습된 모델(`outputs/*.joblib`, `dkt_model.pth`)을 git으로 추적한다.
+
+**이유**: ML 모델 재현성 확보, Railway 배포 시 별도 학습 불필요, GitHub Actions 없이 단순한 배포 파이프라인 유지.
+
+**`.gitignore` 전략**
+
+```
+.env               ← 비밀 키 (추적 제외)
+backend/*.db       ← SQLite DB (추적 제외)
+.venv/             ← Python 가상환경 (추적 제외)
+outputs/           ← 원칙적 제외, .gitignore에서 명시적 허용 처리
+```
+
+### 환경 변수 관리
+
+| 변수 | 위치 | 설명 |
+|------|------|------|
+| `DATABASE_URL` | Railway Variables | Postgres(pgvector) 연결 URL |
+| `JWT_SECRET_KEY` | Railway Variables | JWT 서명 키 (32자 이상) |
+| `OLLAMA_API_KEY` | Railway Variables | Ollama Cloud LLM API 키 |
+| `GEMINI_API_KEY` | Railway Variables | Gemini 임베딩(gemini-embedding-001) 키 |
+| `CORS_ORIGINS` | Railway Variables | Vercel 도메인 (콤마 구분) |
+| `VITE_API_URL` | Vercel Variables | Railway 백엔드 URL |
+
+로컬 개발 시 **프로젝트 루트 `.env`** 파일에 설정 (`.env.example` 참고). 앱이 루트 `.env`를 로드한다 (`api/database.py`, `api/main.py`).
+
+---
+
+## 로컬 실행
+
+### 환경 변수 설정
+
+```bash
+cp .env.example .env
+# 프로젝트 루트 .env 파일에서 DATABASE_URL, JWT_SECRET_KEY, OLLAMA_API_KEY, GEMINI_API_KEY 설정
+```
+
+### Backend
+
+```bash
+cd backend
+pip install -r requirements_api.txt
+uvicorn api.main:app --reload --port 8000
+```
+
+API 문서: http://localhost:8000/docs
+
+### Frontend
+
+```bash
+cd frontend
+cp .env.example .env   # VITE_API_URL=http://localhost:8000
+npm install
+npm run dev
+```
+
+앱: http://localhost:5173
+
+### Docker
+
+```bash
+docker build -t sqld-api .
+docker run -p 8000:8000 --env-file .env sqld-api
+```
+
+---
+
+## 배포
+
+### Backend — Railway
+
+Railway가 루트 `Dockerfile`을 빌드해 컨테이너를 배포한다.
+
+```toml
+# railway.toml
+[build]
+dockerfilePath = "Dockerfile"
+
+[deploy]
+healthcheckPath = "/health"
+healthcheckTimeout = 600   # ML 모델 로딩 시간 확보
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 3
+```
+
+**Railway 환경 변수 설정 (필수)**
+
+| 변수 | 값 |
+|------|-----|
+| `DATABASE_URL` | Railway Postgres(pgvector) 플러그인 연결 URL |
+| `JWT_SECRET_KEY` | 랜덤 32자 이상 문자열 |
+| `OLLAMA_API_KEY` | Ollama Cloud(ollama.com)에서 발급 |
+| `GEMINI_API_KEY` | Google AI Studio에서 발급 (문제 임베딩 적재용) |
+| `CORS_ORIGINS` | `https://<vercel-domain>.vercel.app` |
+
+### Frontend — Vercel
+
+| 항목 | 값 |
+|------|-----|
+| Root Directory | `frontend` |
+| Build Command | `npm run build` |
+| Output Directory | `dist` |
+| `VITE_API_URL` | `https://sqldaitrainer-production.up.railway.app` |
+
+`frontend/vercel.json`이 SPA 라우팅을 처리한다.
+
+```json
+{ "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }] }
+```
+
+---
+
+## API 명세
+
+| 메서드 | 경로 | 설명 | 인증 |
+|--------|------|------|------|
+| GET | `/health` | 서버·모델 상태 확인 | 불필요 |
+| POST | `/auth/register` | 회원가입 | 불필요 |
+| POST | `/auth/login` | 로그인 | 불필요 |
+| POST | `/auth/guest` | 게스트 토큰 발급 | 불필요 |
+| GET | `/questions` | 문제 목록 (limit/offset/chapter/difficulty) | 불필요 |
+| GET | `/questions/{id}` | 문제 상세 | 불필요 |
+| POST | `/logs` | 풀이 결과 저장 + 정답 판정 | 필요 |
+| POST | `/predict` | XGBoost 오답 확률 예측 | 필요 |
+| POST | `/explain` | pgvector + Ollama RAG 해설 생성 | 불필요 |
+| POST | `/recommend/{user_id}` | DKT + 하이브리드 문제 추천 | 필요 |
+| GET | `/progress/{user_id}` | 챕터별 학습 진도 | 필요 |
+
+---
+
+## 데이터셋
+
+`datasets/json/` 경로에 12개 챕터의 SQLD 기출 문제 JSON 파일.
+
+| subject_id | 파트 | 챕터 |
+|---|---|---|
+| 1 | Part I | 데이터 모델링의 이해, 데이터 모델과 SQL |
+| 2 | Part II | SQL 기본, SQL 활용, 관리구문 |
+| 3 | Part III | SQL 수행 구조, 인덱스 튜닝, 조인 튜닝, 옵티마이저, 고급 SQL 튜닝, Lock과 트랜잭션 |
+
+총 **297문제** — `question_type` 4종 (worst_choice, best_choice, fill_blank, different_result).
+
+**JSON 스키마**
+```json
+{
+  "subject_id": 2,
+  "chapter_id": 1,
+  "questions": [
+    {
+      "question_number": 1,
+      "book_section": "II",
+      "book_question_number": 1,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": { "text": "문제 본문" }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": { "sql": "SELECT ..." }
+        }
+      ],
+      "choices": [
+        { "choice_number": 1, "choice_kind": "keyword",  "choice_text": "INSERT",       "is_correct": false },
+        { "choice_number": 2, "choice_kind": "text",     "choice_text": "보기 텍스트",   "is_correct": false },
+        { "choice_number": 3, "choice_kind": "sql_query","choice_text": "SELECT * ...", "is_correct": true  }
+      ],
+      "answer": { "explanation": "해설 텍스트" }
+    }
+  ]
+}
+```
+
+> `sql_query` payload 형식은 파일마다 두 가지 중 하나로 표기된다.
+> - `{ "sql": "SELECT ..." }` — 대부분의 챕터
+> - `{ "dialect": "sql_server" | "plsql" | "ansi", "code": "SELECT ..." }` — dialect 명시가 필요한 챕터 (예: Lock과 트랜잭션)
+>
+> `choice_kind` 가능한 값: `"keyword"` · `"text"` · `"sql_query"` · `"sql_fragment"`
+
+---
+
+## 기술 스택 요약
+
+| 영역 | 기술 |
+|------|------|
+| API 서버 | FastAPI 0.111, uvicorn, SQLAlchemy 2.0, JWT |
+| ML 분류 | scikit-learn (TF-IDF + Logistic Regression) |
+| 오답 예측 | XGBoost 2.0, RandomForest |
+| 추천 | TruncatedSVD (CF) + TF-IDF 코사인 유사도 (CBF) |
+| Knowledge Tracing | PyTorch 2.0 LSTM (DKT) |
+| 벡터 검색 | pgvector (HNSW cosine), Gemini gemini-embedding-001 (1536-dim) |
+| LLM/RAG | Ollama Cloud (qwen3.5:cloud) |
+| DB | Postgres + pgvector (로컬은 SQLite 폴백, SQLAlchemy ORM) |
+| Frontend | React 19, TypeScript, Vite, axios, Recharts, TanStack Query |
+| 배포 | Docker (Railway), Vercel |

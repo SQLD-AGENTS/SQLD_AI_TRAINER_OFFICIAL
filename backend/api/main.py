@@ -8,8 +8,10 @@ Swagger UI:
     http://localhost:8000/docs
 
 환경 변수:
-    JWT_SECRET_KEY   JWT 서명 키 (기본값: dev용 임시 키)
-    GROQ_API_KEY     Groq LLM API 키 (없으면 RAG fallback)
+    DATABASE_URL     Postgres(pgvector) 연결 URL (없으면 로컬 SQLite 폴백)
+    JWT_SECRET_KEY   JWT 서명 키 (미설정 시 기동 실패)
+    OLLAMA_API_KEY   RAG 해설 LLM(Ollama Cloud) 키 (없으면 원본 해설 fallback)
+    GEMINI_API_KEY   문제 임베딩(gemini-embedding-001) 생성용 (적재/벡터화 시)
 """
 import asyncio
 import logging
@@ -22,7 +24,7 @@ from dotenv import load_dotenv
 
 logger = logging.getLogger("uvicorn.error")
 
-# 저장소 루트 .env 로드 (JWT/GROQ/GEMINI/CORS/DATABASE_URL). 컨테이너엔 .env 없음 → no-op.
+# 저장소 루트 .env 로드 (JWT/OLLAMA/GEMINI/CORS/DATABASE_URL). 컨테이너엔 .env 없음 → no-op.
 load_dotenv(pathlib.Path(__file__).resolve().parent.parent.parent / ".env")
 
 from fastapi import FastAPI

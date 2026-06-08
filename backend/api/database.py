@@ -166,7 +166,7 @@ if HAS_PGVECTOR:
     class QuestionEmbedding(Base):
         """문제 임베딩(pgvector). questions 와 1:1, Postgres 전용.
 
-        신규 생성 문제도 여기에 적재되면 즉시 유사도 검색 대상이 된다(FAISS 재빌드 불필요).
+        신규 생성 문제도 여기에 적재되면 즉시 유사도 검색 대상이 된다(인덱스 재빌드 불필요).
         HNSW(cosine) 인덱스는 vectorize_questions.py 에서 별도 생성.
         """
 

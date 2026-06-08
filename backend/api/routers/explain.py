@@ -9,7 +9,7 @@ router = APIRouter(prefix="/explain", tags=["explain"])
 @router.post("", response_model=ExplainResponse, summary="RAG AI 해설 생성 (공개)")
 def generate_explanation(body: ExplainRequest, request: Request):
     """
-    FAISS 유사 문제 검색 → LLM 해설 생성.
+    pgvector 유사 문제 검색 → LLM 해설 생성.
     게스트·비로그인 사용자도 이용 가능.
     동일 question_id 요청은 캐시에서 반환 (중복 API 호출 방지).
     """
