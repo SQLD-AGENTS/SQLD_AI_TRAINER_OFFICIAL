@@ -3,6 +3,7 @@ datasets/*.pdf
 datasets/*.PDF
 workflow/
 trouble_shooting/
+.claude/
 
 # 생성된 리포트
 reports/
