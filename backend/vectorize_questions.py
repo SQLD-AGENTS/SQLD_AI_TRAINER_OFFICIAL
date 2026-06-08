@@ -24,7 +24,6 @@ from dotenv import load_dotenv
 # 저장소 루트 .env 로드 → GEMINI_API_KEY 등. (DATABASE_URL 은 셸 환경 우선: override=False)
 load_dotenv(pathlib.Path(__file__).resolve().parent.parent / ".env")
 
-import numpy as np  # noqa: E402
 import pandas as pd  # noqa: E402
 from sqlalchemy import text  # noqa: E402
 from sqlalchemy.dialects.postgresql import insert as pg_insert  # noqa: E402
@@ -63,25 +62,10 @@ def _fetch_unembedded() -> pd.DataFrame:
 
 
 def _embed_batch(client, texts: list) -> list:
-    """Gemini 임베딩 호출 → L2 정규화된 (len(texts), EMBED_DIM) 리스트."""
-    from google.genai import types
+    """Gemini 임베딩 호출 → L2 정규화된 (len(texts), EMBED_DIM) 리스트. (공용 헬퍼 위임)"""
+    from api.embeddings import embed_texts
 
-    resp = client.models.embed_content(
-        model=EMBED_MODEL_NAME,
-        contents=texts,
-        config=types.EmbedContentConfig(
-            task_type=TASK_TYPE,
-            output_dimensionality=EMBED_DIM,
-        ),
-    )
-    out = []
-    for emb in resp.embeddings:
-        v = np.asarray(emb.values, dtype=np.float32)
-        norm = np.linalg.norm(v)
-        if norm > 0:
-            v = v / norm  # 1536차원은 수동 L2 정규화 필요(3072 외)
-        out.append(v.tolist())
-    return out
+    return embed_texts(texts, task_type=TASK_TYPE, client=client)
 
 
 def _embed_with_retry(client, texts: list, max_retries: int = 8) -> list:

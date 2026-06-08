@@ -130,7 +130,8 @@ class AppState:
     def _load_explainer(self) -> None:
         try:
             from explainer import RAGExplainer
-            self.explainer = RAGExplainer(MODEL_DIR, self.questions_df)
+            # pgvector(question_embeddings) 기반 검색 — FAISS 아티팩트 불필요
+            self.explainer = RAGExplainer(self.questions_df)
             print("[AppState] RAG 해설기 로드 완료")
         except Exception as e:
             print(f"[AppState] RAG 해설기 로드 실패: {e}")

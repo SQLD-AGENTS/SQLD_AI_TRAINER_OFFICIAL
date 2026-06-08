@@ -143,11 +143,11 @@ def run_phase4_rag_demo(
     import os
     import torch
 
-    api_key = os.environ.get("GROQ_API_KEY", "")
+    api_key = os.environ.get("OLLAMA_API_KEY", "")
     if not api_key:
-        print("[Phase 4] 경고: GROQ_API_KEY 미설정 — fallback 모드로 실행")
+        print("[Phase 4] 경고: OLLAMA_API_KEY 미설정 — fallback(원본 해설) 모드로 실행")
     else:
-        print(f"[Phase 4] GROQ_API_KEY 감지됨 (앞 8자: {api_key[:8]}...)")
+        print(f"[Phase 4] OLLAMA_API_KEY 감지됨 (앞 8자: {api_key[:8]}...)")
 
     questions_df = pd.read_csv(questions_path)
     logs_df = pd.read_csv(logs_path)
