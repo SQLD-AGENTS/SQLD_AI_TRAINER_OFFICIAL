@@ -94,6 +94,13 @@ class User(Base):
     username = Column(String, nullable=False)
     hashed_password = Column(String, nullable=False)
     created_at = Column(DateTime, default=datetime.datetime.utcnow)
+    updated_at = Column(
+        DateTime,
+        default=datetime.datetime.utcnow,
+        onupdate=datetime.datetime.utcnow,
+        nullable=True,
+    )
+    is_active = Column(Boolean, nullable=False, default=True)
 
 
 class Question(Base):
@@ -150,7 +157,12 @@ class AnswerLog(Base):
     __tablename__ = "answer_logs"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    user_id = Column(String, nullable=False, index=True)
+    user_id = Column(
+        String,
+        ForeignKey("users.user_id", ondelete="SET NULL"),
+        nullable=True,
+        index=True,
+    )
     # 문제 마스터가 DB에 생겼으므로 FK로 정합성 보장
     # (주의: FK 때문에 적재 순서는 questions 먼저, answer_logs 나중)
     question_id = Column(
