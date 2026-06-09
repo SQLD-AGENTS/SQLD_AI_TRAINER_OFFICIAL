@@ -85,7 +85,7 @@ export default function LoginPage() {
               <button
                 type="submit"
                 className="btn btn-primary btn-lg"
-                style={{ width: '100%', marginTop: 4 }}
+                style={{ width: '100%', marginTop: 36 }}
                 disabled={loading}
               >
                 {loading ? <Spinner size="sm" /> : '로그인'}
