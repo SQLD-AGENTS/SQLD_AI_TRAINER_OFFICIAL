@@ -1,12 +1,12 @@
-from typing import Optional
+from typing import Annotated, Optional
 
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, EmailStr, Field
 
 
 class RegisterRequest(BaseModel):
     email: EmailStr
-    username: str
-    password: str
+    username: Annotated[str, Field(min_length=1, max_length=50)]
+    password: Annotated[str, Field(min_length=8, max_length=100)]
 
 
 class LoginRequest(BaseModel):
