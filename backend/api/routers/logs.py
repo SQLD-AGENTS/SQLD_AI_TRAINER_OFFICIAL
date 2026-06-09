@@ -2,6 +2,7 @@ import datetime
 
 from fastapi import APIRouter, Depends, HTTPException, Request
 from sqlalchemy.orm import Session
+from sqlalchemy.exc import SQLAlchemyError
 
 from api.auth import require_auth
 from api.database import AnswerLog, get_db
@@ -46,8 +47,12 @@ def submit_answer(
         solve_time_sec=body.solve_time_sec,
         logged_at=datetime.datetime.utcnow(),
     )
-    db.add(log)
-    db.commit()
+    try:
+        db.add(log)
+        db.commit()
+    except SQLAlchemyError:
+        db.rollback()
+        raise HTTPException(status_code=500, detail="풀이 결과 저장 중 오류가 발생했습니다.")
 
     return AnswerSubmitResponse(
         question_id=body.question_id,
