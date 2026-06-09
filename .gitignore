@@ -86,5 +86,6 @@ backend/outputs/
 # backend/models/   ← Docker 빌드에 필요하므로 추적
 backend/*.db
 backend/*.sqlite
+backend/=*
 CLAUDE.md
 backend/run.py
