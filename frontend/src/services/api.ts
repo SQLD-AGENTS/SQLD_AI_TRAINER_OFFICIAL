@@ -67,3 +67,27 @@ export const recommendApi = {
   get: (user_id: string, top_n = 10, use_zpd = true) =>
     apiClient.post(`/recommend/${user_id}`, { top_n, use_zpd }),
 };
+
+// ── Profile ───────────────────────────────────────────
+export interface UserProfile {
+  user_id: string;
+  email: string;
+  username: string;
+  created_at: string | null;
+  updated_at: string | null;
+  is_active: boolean;
+}
+
+export interface UserUpdatePayload {
+  username?: string;
+  password?: string;
+}
+
+export const profileApi = {
+  getMe: () =>
+    apiClient.get<UserProfile>('/auth/users/me'),
+  updateMe: (payload: UserUpdatePayload) =>
+    apiClient.put<UserProfile>('/auth/users/me', payload),
+  deleteMe: () =>
+    apiClient.delete('/auth/users/me'),
+};
