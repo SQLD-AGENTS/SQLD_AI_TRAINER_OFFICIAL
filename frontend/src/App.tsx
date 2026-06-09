@@ -8,6 +8,7 @@ import QuestionListPage from './pages/QuestionListPage';
 import QuestionDetailPage from './pages/QuestionDetailPage';
 import DashboardPage from './pages/DashboardPage';
 import RecommendPage from './pages/RecommendPage';
+import ProfilePage from './pages/ProfilePage';
 
 export default function App() {
   return (
@@ -21,6 +22,7 @@ export default function App() {
           <Route path="/questions/:id" element={<QuestionDetailPage />} />
           <Route path="/dashboard" element={<AuthGuard><DashboardPage /></AuthGuard>} />
           <Route path="/recommend" element={<AuthGuard><RecommendPage /></AuthGuard>} />
+          <Route path="/profile" element={<AuthGuard><ProfilePage /></AuthGuard>} />
         </Routes>
       </AuthProvider>
     </BrowserRouter>
