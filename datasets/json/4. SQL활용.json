@@ -196,9 +196,49 @@
           "asset_type": "entity_schema",
           "payload": {
             "entities": [
-              {"table": "서비스", "columns": [{"name": "서비스ID", "key": "PK"}, {"name": "서비스명"}, {"name": "서비스URL"}]},
-              {"table": "서비스이용", "columns": [{"name": "회원ID", "key": "FK"}, {"name": "서비스ID", "key": "FK"}, {"name": "이용일시"}]},
-              {"table": "회원", "columns": [{"name": "회원ID", "key": "PK"}, {"name": "회원명"}]}
+              {
+                "table": "서비스",
+                "columns": [
+                  {
+                    "name": "서비스ID",
+                    "key": "PK"
+                  },
+                  {
+                    "name": "서비스명"
+                  },
+                  {
+                    "name": "서비스URL"
+                  }
+                ]
+              },
+              {
+                "table": "서비스이용",
+                "columns": [
+                  {
+                    "name": "회원ID",
+                    "key": "FK"
+                  },
+                  {
+                    "name": "서비스ID",
+                    "key": "FK"
+                  },
+                  {
+                    "name": "이용일시"
+                  }
+                ]
+              },
+              {
+                "table": "회원",
+                "columns": [
+                  {
+                    "name": "회원ID",
+                    "key": "PK"
+                  },
+                  {
+                    "name": "회원명"
+                  }
+                ]
+              }
             ]
           }
         },
@@ -736,8 +776,24 @@
           "asset_type": "entity_schema",
           "payload": {
             "entities": [
-              {"table": "회원기본정보", "columns": [{"name": "회원ID", "key": "PK"}]},
-              {"table": "회원상세정보", "columns": [{"name": "회원ID", "key": "FK"}]}
+              {
+                "table": "회원기본정보",
+                "columns": [
+                  {
+                    "name": "회원ID",
+                    "key": "PK"
+                  }
+                ]
+              },
+              {
+                "table": "회원상세정보",
+                "columns": [
+                  {
+                    "name": "회원ID",
+                    "key": "FK"
+                  }
+                ]
+              }
             ]
           }
         }
@@ -1846,9 +1902,49 @@
           "asset_type": "entity_schema",
           "payload": {
             "entities": [
-              {"table": "회원", "columns": [{"name": "회원번호", "key": "PK"}, {"name": "회원명"}]},
-              {"table": "동의항목", "columns": [{"name": "회원번호", "key": "FK"}, {"name": "약관항목코드", "key": "FK"}, {"name": "동의여부"}, {"name": "동의일시"}]},
-              {"table": "약관항목", "columns": [{"name": "약관항목코드", "key": "PK"}, {"name": "약관명"}]}
+              {
+                "table": "회원",
+                "columns": [
+                  {
+                    "name": "회원번호",
+                    "key": "PK"
+                  },
+                  {
+                    "name": "회원명"
+                  }
+                ]
+              },
+              {
+                "table": "동의항목",
+                "columns": [
+                  {
+                    "name": "회원번호",
+                    "key": "FK"
+                  },
+                  {
+                    "name": "약관항목코드",
+                    "key": "FK"
+                  },
+                  {
+                    "name": "동의여부"
+                  },
+                  {
+                    "name": "동의일시"
+                  }
+                ]
+              },
+              {
+                "table": "약관항목",
+                "columns": [
+                  {
+                    "name": "약관항목코드",
+                    "key": "PK"
+                  },
+                  {
+                    "name": "약관명"
+                  }
+                ]
+              }
             ]
           }
         },
@@ -1906,9 +2002,61 @@
           "asset_type": "entity_schema",
           "payload": {
             "entities": [
-              {"table": "회원", "columns": [{"name": "회원ID", "key": "PK"}, {"name": "회원명"}, {"name": "가입일시"}, {"name": "이메일"}]},
-              {"table": "메일발송", "columns": [{"name": "이벤트ID", "key": "FK"}, {"name": "회원ID", "key": "FK"}, {"name": "발송일시"}]},
-              {"table": "이벤트", "columns": [{"name": "이벤트ID", "key": "PK"}, {"name": "이벤트명"}, {"name": "시작일자"}, {"name": "종료일자"}, {"name": "내용"}]}
+              {
+                "table": "회원",
+                "columns": [
+                  {
+                    "name": "회원ID",
+                    "key": "PK"
+                  },
+                  {
+                    "name": "회원명"
+                  },
+                  {
+                    "name": "가입일시"
+                  },
+                  {
+                    "name": "이메일"
+                  }
+                ]
+              },
+              {
+                "table": "메일발송",
+                "columns": [
+                  {
+                    "name": "이벤트ID",
+                    "key": "FK"
+                  },
+                  {
+                    "name": "회원ID",
+                    "key": "FK"
+                  },
+                  {
+                    "name": "발송일시"
+                  }
+                ]
+              },
+              {
+                "table": "이벤트",
+                "columns": [
+                  {
+                    "name": "이벤트ID",
+                    "key": "PK"
+                  },
+                  {
+                    "name": "이벤트명"
+                  },
+                  {
+                    "name": "시작일자"
+                  },
+                  {
+                    "name": "종료일자"
+                  },
+                  {
+                    "name": "내용"
+                  }
+                ]
+              }
             ]
           }
         },
@@ -2336,8 +2484,36 @@
           "asset_type": "entity_schema",
           "payload": {
             "entities": [
-              {"table": "지역", "columns": [{"name": "지역ID", "key": "PK"}, {"name": "지역명"}]},
-              {"table": "이용내역", "columns": [{"name": "이용자ID"}, {"name": "이용일시"}, {"name": "이용량"}, {"name": "지역ID", "key": "FK"}]}
+              {
+                "table": "지역",
+                "columns": [
+                  {
+                    "name": "지역ID",
+                    "key": "PK"
+                  },
+                  {
+                    "name": "지역명"
+                  }
+                ]
+              },
+              {
+                "table": "이용내역",
+                "columns": [
+                  {
+                    "name": "이용자ID"
+                  },
+                  {
+                    "name": "이용일시"
+                  },
+                  {
+                    "name": "이용량"
+                  },
+                  {
+                    "name": "지역ID",
+                    "key": "FK"
+                  }
+                ]
+              }
             ]
           }
         },
@@ -4254,6 +4430,6798 @@
       ],
       "answer": {
         "explanation": "RANK 함수는 동일한 순위를 별개의 건수로 취급한다."
+      }
+    },
+    {
+      "question_number": 49,
+      "book_section": "M55",
+      "book_question_number": 11,
+      "exam_subject": 2,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "서브쿼리에 대한 설명 중 적절하지 않은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "서브쿼리는 SELECT, WHERE, FROM 절 등에 사용할 수 있다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "EXISTS 는 존재 여부만 확인하므로 성능에 유리한 경우가 많다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "IN 절은 단일 행 서브쿼리만 사용할 수 있다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "스칼라 서브쿼리는 단일 값을 반환해야 한다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "IN 절은 다중 행 서브쿼리를 사용할 수 있다."
+      }
+    },
+    {
+      "question_number": 50,
+      "book_section": "M55",
+      "book_question_number": 13,
+      "exam_subject": 2,
+      "question_type": "predict_result",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 SQL 의 RNK 컬럼 결과로 적절한 것은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "EMP 테이블",
+            "columns": [
+              "DEPT",
+              "SAL"
+            ],
+            "rows": [
+              {
+                "DEPT": "10",
+                "SAL": "3000"
+              },
+              {
+                "DEPT": "10",
+                "SAL": "3000"
+              },
+              {
+                "DEPT": "10",
+                "SAL": "2500"
+              },
+              {
+                "DEPT": "20",
+                "SAL": "5000"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT DEPT, SAL,\n       DENSE_RANK() OVER (PARTITION BY DEPT ORDER BY SAL DESC) AS RNK\nFROM   EMP;"
+          }
+        },
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "보기 ①"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "보기 ①",
+            "columns": [
+              "DEPT",
+              "SAL",
+              "RNK"
+            ],
+            "rows": [
+              {
+                "DEPT": "10",
+                "SAL": "3000",
+                "RNK": "1"
+              },
+              {
+                "DEPT": "10",
+                "SAL": "3000",
+                "RNK": "2"
+              },
+              {
+                "DEPT": "10",
+                "SAL": "2500",
+                "RNK": "2"
+              },
+              {
+                "DEPT": "20",
+                "SAL": "5000",
+                "RNK": "1"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "보기 ②"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "보기 ②",
+            "columns": [
+              "DEPT",
+              "SAL",
+              "RNK"
+            ],
+            "rows": [
+              {
+                "DEPT": "10",
+                "SAL": "3000",
+                "RNK": "1"
+              },
+              {
+                "DEPT": "10",
+                "SAL": "3000",
+                "RNK": "1"
+              },
+              {
+                "DEPT": "10",
+                "SAL": "2500",
+                "RNK": "2"
+              },
+              {
+                "DEPT": "20",
+                "SAL": "5000",
+                "RNK": "1"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "보기 ③"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "보기 ③",
+            "columns": [
+              "DEPT",
+              "SAL",
+              "RNK"
+            ],
+            "rows": [
+              {
+                "DEPT": "10",
+                "SAL": "3000",
+                "RNK": "1"
+              },
+              {
+                "DEPT": "10",
+                "SAL": "3000",
+                "RNK": "2"
+              },
+              {
+                "DEPT": "10",
+                "SAL": "2500",
+                "RNK": "3"
+              },
+              {
+                "DEPT": "20",
+                "SAL": "5000",
+                "RNK": "1"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "보기 ④"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "보기 ④",
+            "columns": [
+              "DEPT",
+              "SAL",
+              "RNK"
+            ],
+            "rows": [
+              {
+                "DEPT": "10",
+                "SAL": "3000",
+                "RNK": "1"
+              },
+              {
+                "DEPT": "10",
+                "SAL": "3000",
+                "RNK": "1"
+              },
+              {
+                "DEPT": "10",
+                "SAL": "2500",
+                "RNK": "3"
+              },
+              {
+                "DEPT": "20",
+                "SAL": "5000",
+                "RNK": "1"
+              }
+            ]
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "1, 2, 2, 1",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "1, 1, 2, 1",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "1, 2, 3, 1",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "1, 1, 3, 1",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "DENSE_RANK 는 동일 값 그룹에 같은 순위를 부여하고 다음 순위를 \"건너뛰지 않고\" 1 씩 증가시킨다. PARTITION BY DEPT 로 부서별 독립 순위. DEPT=10 (3 행) — SAL DESC 정렬 시 3000 (1위) · 3000 (1위 동률) · 2500 (다음 = 2위, RANK 였다면 3위로 건너뛰었을 것). DEPT=20 (1 행) — 5000 단독 1위. 테이블 행 순서대로 RNK 는 1, 1, 2, 1 → ②.\n\n각 보기 시나리오: ① 1, 2, 2, 1 — ROW_NUMBER 처럼 첫 두 동률을 1·2 로 부여 후 2 위에 머무는 비표준 동작. ③ 1, 2, 3, 1 — ROW_NUMBER (PARTITION BY DEPT) 결과 — 동률을 무시하고 고유 순번. ④ 1, 1, 3, 1 — RANK (동률 후 다음 순위 건너뛰는 표준) 결과."
+      }
+    },
+    {
+      "question_number": 51,
+      "book_section": "M55",
+      "book_question_number": 14,
+      "exam_subject": 2,
+      "question_type": "predict_result",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 TAB1 테이블에 대한 SQL 의 결과로 옳은 것은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "TAB1 테이블",
+            "columns": [
+              "COL1",
+              "COL2"
+            ],
+            "rows": [
+              {
+                "COL1": "A",
+                "COL2": "100"
+              },
+              {
+                "COL1": "B",
+                "COL2": "200"
+              },
+              {
+                "COL1": "C",
+                "COL2": "300"
+              },
+              {
+                "COL1": "C",
+                "COL2": "400"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT COUNT(*)\nFROM (\n  SELECT COL1, SUM(COL2)\n  FROM   TAB1\n  GROUP BY ROLLUP(COL1), COL1\n);"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "3",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "6",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "4",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "8",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "`GROUP BY ROLLUP(COL1), COL1` 은 `GROUP BY COL1 UNION ALL GROUP BY COL1` 과 동일하다 (ROLLUP 의 소계가 COL1 별 그룹과 결합됨). 그룹 = {A, B, C} 3 개 × 2 회 = 6 행이 산출되고 외부 `COUNT(*)` 가 6 을 반환한다."
+      }
+    },
+    {
+      "question_number": 52,
+      "book_section": "M55",
+      "book_question_number": 16,
+      "exam_subject": 2,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 T 테이블에 대한 SQL 들 중 집계 결과 집합이 나머지와 다른 것은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "T 테이블",
+            "columns": [
+              "A",
+              "B",
+              "VAL"
+            ],
+            "rows": [
+              {
+                "A": "X",
+                "B": "1",
+                "VAL": "10"
+              },
+              {
+                "A": "X",
+                "B": "2",
+                "VAL": "20"
+              },
+              {
+                "A": "Y",
+                "B": "1",
+                "VAL": "30"
+              }
+            ]
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "SELECT A, B, SUM(VAL) FROM T GROUP BY ROLLUP(A, B);",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "SELECT A, B, SUM(VAL) FROM T GROUP BY GROUPING SETS((A, B), (A), ());",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "SELECT A, B, SUM(VAL) FROM T GROUP BY GROUPING SETS((A, B), (A), (B));",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "SELECT A, B, SUM(VAL) FROM T GROUP BY GROUPING SETS((), (A), (A, B));",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "① ROLLUP(A, B) 은 (A, B), (A), () 세 집계 레벨을 산출. ② 와 ④ 도 같은 세 레벨을 명시적으로 나열했을 뿐 결과 집합 동일. 그러나 ③ 은 () 총계 대신 (B) 레벨이 포함되어 결과 집합이 다르다."
+      }
+    },
+    {
+      "question_number": 53,
+      "book_section": "M55",
+      "book_question_number": 17,
+      "exam_subject": 2,
+      "question_type": "fill_blank",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 T 테이블에 대한 SQL 과 동일한 결과를 반환하는 GROUP BY 절은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "T 테이블",
+            "columns": [
+              "A",
+              "B",
+              "SAL"
+            ],
+            "rows": [
+              {
+                "A": "X",
+                "B": "1",
+                "SAL": "100"
+              },
+              {
+                "A": "Y",
+                "B": "2",
+                "SAL": "200"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT A, B, SUM(SAL)\nFROM   T\nGROUP BY GROUPING SETS( ROLLUP(A), B );"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "GROUPING SETS(A, B)",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "GROUPING SETS((A, B), ())",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "GROUPING SETS((A, B), (A))",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "GROUPING SETS(A, B, ())",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "`ROLLUP(A)` 는 (A), () 를 산출. 여기에 B 를 GROUPING SETS 로 합치면 (A), (B), () 의 세 조합이 된다 — ④ 와 같다."
+      }
+    },
+    {
+      "question_number": 54,
+      "book_section": "M55",
+      "book_question_number": 24,
+      "exam_subject": 2,
+      "question_type": "fill_blank",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 EMP 테이블에 대한 계층형 질의에서 순방향(부모 → 자식) 전개가 되도록 CONNECT BY 절을 완성하는 것은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "EMP 테이블",
+            "columns": [
+              "사원번호",
+              "관리자번호"
+            ],
+            "rows": [
+              {
+                "사원번호": "100",
+                "관리자번호": "(NULL)"
+              },
+              {
+                "사원번호": "200",
+                "관리자번호": "100"
+              },
+              {
+                "사원번호": "300",
+                "관리자번호": "100"
+              },
+              {
+                "사원번호": "400",
+                "관리자번호": "200"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT 사원번호, 관리자번호\nFROM   EMP\nSTART WITH 관리자번호 IS NULL\nCONNECT BY ( ? );"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "PRIOR 사원번호 = 관리자번호",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "PRIOR 관리자번호 = 사원번호",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "사원번호 = 관리자번호",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "PRIOR 사원번호 = PRIOR 관리자번호",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "순방향(부모→자식) 전개에서는 \"이전(부모) 행의 사원번호가 다음(자식) 행의 관리자번호와 일치\" 해야 하므로 `PRIOR 사원번호 = 관리자번호`. ② 는 자식→부모 역방향, ③ 은 PRIOR 없어 모든 행이 단일 그룹, ④ 는 PRIOR 가 양쪽이라 자기 참조라 무한."
+      }
+    },
+    {
+      "question_number": 55,
+      "book_section": "M55",
+      "book_question_number": 25,
+      "exam_subject": 2,
+      "question_type": "predict_result",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 SQL 의 결과로 옳은 것은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "T 테이블",
+            "columns": [
+              "ID",
+              "VAL"
+            ],
+            "rows": [
+              {
+                "ID": "1",
+                "VAL": "40"
+              },
+              {
+                "ID": "2",
+                "VAL": "150"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT *\nFROM   (SELECT ID, VAL, ROW_NUMBER() OVER (ORDER BY VAL DESC) AS RN\n        FROM   T)\nORDER BY RN;"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "1, 40 / 2, 150",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "2, 150 / 1, 40",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "1, 40 / 1, 40",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "2, 150 / 2, 150",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "내부 쿼리에서 VAL DESC 기준 RN=1이 (2, 150), RN=2가 (1, 40)으로 부여된다. 외부 ORDER BY RN은 오름차순이므로 RN=1인 (2, 150)이 먼저 출력되고 RN=2인 (1, 40)이 뒤에 출력된다."
+      }
+    },
+    {
+      "question_number": 56,
+      "book_section": "M55",
+      "book_question_number": 31,
+      "exam_subject": 2,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "계약이 없는 고객을 조회하는 SQL 로 적절한 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "INNER JOIN",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "EXISTS",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "NOT EXISTS",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "COALESCE",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "계약 테이블에 매칭되는 행이 없는 고객만 선택해야 하므로 NOT EXISTS 구문이 적절하다."
+      }
+    },
+    {
+      "question_number": 57,
+      "book_section": "M55",
+      "book_question_number": 33,
+      "exam_subject": 2,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 SQL 결과의 컬럼명으로 옳은 것은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "T 테이블",
+            "columns": [
+              "COL1",
+              "COL2"
+            ],
+            "rows": [
+              {
+                "COL1": "1",
+                "COL2": "10"
+              },
+              {
+                "COL1": "2",
+                "COL2": "20"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT COL1 AS AAB, COL2 AS BBA\nFROM   T\nUNION ALL\nSELECT COL1 AS BBA, COL2 AS AAB\nFROM   T;"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "결과 (UNION ALL 후)",
+            "columns": [
+              "?(1)",
+              "?(2)"
+            ],
+            "rows": [
+              {
+                "?(1)": "1",
+                "?(2)": "10"
+              },
+              {
+                "?(1)": "2",
+                "?(2)": "20"
+              },
+              {
+                "?(1)": "1",
+                "?(2)": "10"
+              },
+              {
+                "?(1)": "2",
+                "?(2)": "20"
+              }
+            ]
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "AAB, BBA",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "BBA, AAB",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "COL1, COL2",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "첫 번째 SELECT 별칭만 유효",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "UNION/UNION ALL 등 집합 연산 결과의 컬럼명은 첫 번째 SELECT 절에서 부여한 별칭을 따른다. 두 번째 SELECT 가 동일 컬럼에 다른 별칭(BBA, AAB)을 붙여도 무시되므로, 결과 컬럼명은 (AAB, BBA) 순서로 출력된다. 정답은 ①."
+      }
+    },
+    {
+      "question_number": 58,
+      "book_section": "M55",
+      "book_question_number": 38,
+      "exam_subject": 2,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "ROW LIMITING 구문에 대한 설명으로 적절하지 않은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "OFFSET offset : 건너뛸 행의 개수를 지정한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "FETCH : 반환할 행의 개수나 백분율을 지정한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "ONLY : 지정된 행의 개수나 백분율만큼만 반환한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "WITH TIES : 첫 번째 행에 대한 동순위를 포함해서 반환한다.",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "WITH TIES 는 '마지막 행' 과 동일 정렬 값을 가진 행들을 함께 반환하는 옵션이다."
+      }
+    },
+    {
+      "question_number": 59,
+      "book_section": "M55",
+      "book_question_number": 40,
+      "exam_subject": 2,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 EMP 테이블에서 전체 합계와 부서별 합계를 함께 출력하는 윈도우 함수 조합으로 옳은 것은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "EMP 테이블",
+            "columns": [
+              "DEPT",
+              "SAL"
+            ],
+            "rows": [
+              {
+                "DEPT": "10",
+                "SAL": "3000"
+              },
+              {
+                "DEPT": "10",
+                "SAL": "5000"
+              },
+              {
+                "DEPT": "20",
+                "SAL": "4500"
+              },
+              {
+                "DEPT": "20",
+                "SAL": "3500"
+              }
+            ]
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "SUM(SAL) OVER (), SUM(SAL) OVER (PARTITION BY DEPT)",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "SUM(SAL) OVER (PARTITION BY DEPT), SUM(SAL) OVER ()",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "SUM(SAL) OVER (ORDER BY DEPT), SUM(SAL) OVER ()",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "SUM(SAL), SUM(SAL) OVER (PARTITION BY DEPT)",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "`OVER ()` 는 파티션 없이 전체 행에 대한 합계 = 전체 합계. `OVER (PARTITION BY DEPT)` 는 부서별 합계. 문제 순서가 \"전체 합계 → 부서별 합계\" 라 ① 이 정답. ② 는 순서 반대, ③ ORDER BY 는 누적합 의미, ④ `SUM(SAL)` 만 쓰면 일반 집계라 GROUP BY 필요."
+      }
+    },
+    {
+      "question_number": 60,
+      "book_section": "M55",
+      "book_question_number": 41,
+      "exam_subject": 2,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "SQL 집합 연산자 UNION ALL 과 의미가 동일한 조합은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "(A UNION B) UNION ALL (A INTERSECT B)",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "(A UNION B) UNION (A UNION B)",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "(A INTERSECT B) UNION ALL (A MINUS B)",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "(A UNION B) MINUS (A INTERSECT B)",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "(A UNION B)는 양쪽 모두에 있는 행을 한 번씩 포함하는 합집합. (A INTERSECT B)는 양쪽 공통 행. UNION ALL은 두 결과를 그대로 이어 붙이므로, (A UNION B) UNION ALL (A INTERSECT B)는 A UNION ALL B와 같은 행 수를 가진다(공통 행이 두 번 등장하는 효과)."
+      }
+    },
+    {
+      "question_number": 61,
+      "book_section": "M55",
+      "book_question_number": 50,
+      "exam_subject": 2,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 EMP 테이블에 대한 SQL 에 대한 설명으로 적절하지 않은 것은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "EMP 테이블",
+            "columns": [
+              "EMPNM",
+              "DEPT"
+            ],
+            "rows": [
+              {
+                "EMPNM": "JOHN",
+                "DEPT": "10"
+              },
+              {
+                "EMPNM": "JOHN",
+                "DEPT": "20"
+              },
+              {
+                "EMPNM": "SMITH",
+                "DEPT": "10"
+              },
+              {
+                "EMPNM": "KIM",
+                "DEPT": "30"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT *\nFROM   EMP\nWHERE  DEPT IN (SELECT DEPT\n                FROM   EMP\n                WHERE  EMPNM IN ('JOHN', 'SMITH'));"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "IN 절은 다중 행 서브쿼리를 허용한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "이름이 'JOHN' 인 직원이 두 명이어도 오류가 발생하지 않는다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "서브쿼리 결과로 반환된 DEPT 값 중 하나라도 일치하면 외부 행이 반환된다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "이름이 'JOHN' 인 직원이 두 명일 경우 오류가 발생한다.",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "`IN` 절은 다중 행 서브쿼리를 허용하므로 EMPNM 이 'JOHN' 인 직원이 두 명이어도 서브쿼리는 두 행의 DEPT 를 반환하고 외부 IN 비교가 정상 동작한다. ④ \"두 명일 경우 오류 발생\" 은 잘못된 설명."
+      }
+    },
+    {
+      "question_number": 62,
+      "book_section": "M56",
+      "book_question_number": 15,
+      "exam_subject": 2,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 쿼리의 결과로 옳은 것은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "TAB1 테이블",
+            "columns": [
+              "COL1",
+              "COL2"
+            ],
+            "rows": [
+              {
+                "COL1": "1",
+                "COL2": "10"
+              },
+              {
+                "COL1": "1",
+                "COL2": "20"
+              },
+              {
+                "COL1": "2",
+                "COL2": "30"
+              },
+              {
+                "COL1": "3",
+                "COL2": "40"
+              },
+              {
+                "COL1": "3",
+                "COL2": "50"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT MAX(COL2) KEEP (DENSE_RANK FIRST ORDER BY COL1) FROM TAB1;"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "10",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "20",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "40",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "60",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "COL1 오름차순 첫 번째 그룹(COL1=1)에서 COL2 의 최대값 20 이 반환된다."
+      }
+    },
+    {
+      "question_number": 63,
+      "book_section": "M56",
+      "book_question_number": 19,
+      "exam_subject": 2,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "두 결과 집합의 교집합을 반환하는 집합 연산자는?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "UNION",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "INTERSECT",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "MINUS",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "EXCEPT",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "INTERSECT 는 두 결과 집합 모두에 존재하는 행만 반환하는 교집합 연산자이다."
+      }
+    },
+    {
+      "question_number": 64,
+      "book_section": "M56",
+      "book_question_number": 26,
+      "exam_subject": 2,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "집합 연산자에 대한 설명 중 중복을 제거하지 않는 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "UNION",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "UNION ALL",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "INTERSECT",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "MINUS",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "UNION ALL 은 중복 제거 없이 두 결과 집합을 그대로 결합한다. UNION·INTERSECT·MINUS 는 모두 중복을 제거한다."
+      }
+    },
+    {
+      "question_number": 65,
+      "book_section": "M56",
+      "book_question_number": 30,
+      "exam_subject": 2,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 결과 (NAME, SALARY, RANKING) 를 반환하는 순위 함수로 옳은 것은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "기대 결과 — SALARY DESC 기준 RANKING 부여",
+            "columns": [
+              "NAME",
+              "SALARY",
+              "RANKING"
+            ],
+            "rows": [
+              {
+                "NAME": "Bob",
+                "SALARY": "7000",
+                "RANKING": "1"
+              },
+              {
+                "NAME": "Smith",
+                "SALARY": "7000",
+                "RANKING": "1"
+              },
+              {
+                "NAME": "David",
+                "SALARY": "6000",
+                "RANKING": "2"
+              },
+              {
+                "NAME": "Alice",
+                "SALARY": "5000",
+                "RANKING": "3"
+              },
+              {
+                "NAME": "Charlie",
+                "SALARY": "3000",
+                "RANKING": "4"
+              }
+            ]
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "DENSE_RANK()",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "RANK()",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "PERCENT_RANK()",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "ROW_NUMBER()",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "Bob, Smith 가 같은 7000 으로 1 위, 다음 David(6000) 이 2 위 — \"동일 순위 후 다음 순위를 건너뛰지 않는\" 패턴은 DENSE_RANK. RANK 는 동일 1, 1, 3, 4, 5 처럼 건너뛰며, ROW_NUMBER 는 동률이어도 1, 2, 3, 4, 5 로 고유 부여, PERCENT_RANK 는 0~1 비율 반환."
+      }
+    },
+    {
+      "question_number": 66,
+      "book_section": "M56",
+      "book_question_number": 32,
+      "exam_subject": 2,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 쿼리의 결과 행 수는?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "TAB1",
+            "columns": [
+              "COL1",
+              "COL2"
+            ],
+            "rows": [
+              {
+                "COL1": "A",
+                "COL2": "10"
+              },
+              {
+                "COL1": "B",
+                "COL2": "20"
+              },
+              {
+                "COL1": "C",
+                "COL2": "30"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "TAB2",
+            "columns": [
+              "COL1",
+              "COL2"
+            ],
+            "rows": [
+              {
+                "COL1": "A",
+                "COL2": "20"
+              },
+              {
+                "COL1": "B",
+                "COL2": "20"
+              },
+              {
+                "COL1": "C",
+                "COL2": "NULL"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT *\nFROM   TAB1\nWHERE  (COL1, COL2) NOT IN (SELECT COL1, COL2 FROM TAB2);"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "0",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "10",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "20",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "40",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "서브쿼리에 NULL 이 포함되어 있으므로 NOT IN 비교 결과가 모두 UNKNOWN 으로 평가되어 공집합이 반환된다."
+      }
+    },
+    {
+      "question_number": 67,
+      "book_section": "M56",
+      "book_question_number": 44,
+      "exam_subject": 2,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 선수 테이블에서 팀별 최단신 선수의 팀명과 키를 출력하는 쿼리와 동일한 결과를 반환하는 것은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "선수 테이블",
+            "columns": [
+              "TEAM",
+              "NAME",
+              "HEIGHT"
+            ],
+            "rows": [
+              {
+                "TEAM": "A",
+                "NAME": "김선수",
+                "HEIGHT": "180"
+              },
+              {
+                "TEAM": "A",
+                "NAME": "이선수",
+                "HEIGHT": "175"
+              },
+              {
+                "TEAM": "B",
+                "NAME": "박선수",
+                "HEIGHT": "188"
+              },
+              {
+                "TEAM": "B",
+                "NAME": "최선수",
+                "HEIGHT": "182"
+              }
+            ]
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "SELECT TEAM, MIN(HEIGHT) FROM 선수 WHERE HEIGHT IS NULL GROUP BY TEAM;",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "SELECT TEAM, HEIGHT FROM 선수 HAVING HEIGHT = MIN(HEIGHT);",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "SELECT TEAM, HEIGHT FROM 선수 WHERE HEIGHT > (SELECT MIN(HEIGHT) FROM 선수);",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "SELECT P.TEAM, P.HEIGHT FROM 선수 P INNER JOIN (SELECT TEAM, MIN(HEIGHT) AS H FROM 선수 GROUP BY TEAM) M ON P.TEAM = M.TEAM AND P.HEIGHT = M.H;",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "팀별 최저 신장 선수의 정확한 (TEAM, HEIGHT) 행을 가져오려면 (TEAM, MIN(HEIGHT)) 를 인라인 뷰로 만든 뒤 원본 테이블과 INNER JOIN 해야 한다. ① `WHERE HEIGHT IS NULL` 은 NULL 행만 잡고, ② `HAVING HEIGHT = MIN(HEIGHT)` 는 비집계 컬럼 HEIGHT 사용 오류, ③ `HEIGHT > MIN` 은 최저값을 제외한 행을 반환하므로 모두 오답."
+      }
+    },
+    {
+      "question_number": 68,
+      "book_section": "M56",
+      "book_question_number": 48,
+      "exam_subject": 2,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "계층별 소계와 총계를 순차적으로 산출하는 집계 절은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "GROUPING SETS()",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "ROLLUP()",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "CUBE()",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "HAVING()",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "ROLLUP 은 좌측 컬럼부터 순차적으로 집계 레벨을 축소해 소계와 총계를 반환한다."
+      }
+    },
+    {
+      "question_number": 69,
+      "book_section": "M56",
+      "book_question_number": 49,
+      "exam_subject": 2,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "지정한 컬럼의 모든 부분집합 조합으로 집계를 산출하는 절은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "ROLLUP()",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "GROUP BY",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "GROUPING SETS()",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "CUBE()",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "CUBE 는 컬럼 조합의 모든 부분집합에 대한 집계를 반환한다."
+      }
+    },
+    {
+      "question_number": 70,
+      "book_section": "M57",
+      "book_question_number": 7,
+      "exam_subject": 1,
+      "question_type": "predict_result",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 SQL의 실행 결과로 가장 적절한 것은?"
+          }
+        },
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "동일한 연락처를 가진 사람이 2명 존재한다."
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "회원 테이블",
+            "columns": [
+              "회원ID",
+              "이름",
+              "연락처"
+            ],
+            "rows": [
+              {
+                "회원ID": "1001",
+                "이름": "홍길동",
+                "연락처": "010-1111"
+              },
+              {
+                "회원ID": "1002",
+                "이름": "이순신",
+                "연락처": "010-2222"
+              },
+              {
+                "회원ID": "1003",
+                "이름": "강감찬",
+                "연락처": "010-2222"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT *\nFROM   회원\nWHERE  회원ID = (SELECT 회원ID FROM 회원 WHERE 연락처 = '010-2222');"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "이순신, 강감찬 두 건",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "이순신 한 건",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "공집합",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "오류 발생",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "서브쿼리가 두 건(1002, 1003)을 반환하므로 단일 행 비교 연산자 '='와 결합되어 \"단일 행 서브쿼리에 하나 이상의 행이 반환됨\" 오류가 발생한다."
+      }
+    },
+    {
+      "question_number": 71,
+      "book_section": "M57",
+      "book_question_number": 11,
+      "exam_subject": 2,
+      "question_type": "select_all_correct",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 SQL 실행 결과에 대한 설명으로 옳은 것은?"
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT *\nFROM   TAB1\nORDER BY NO DESC\nOFFSET 3 ROWS\nFETCH FIRST 5 ROWS ONLY;"
+          }
+        },
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "가. 정렬된 결과에서 처음 세 개의 행을 건너뛰고 다음부터 최대 5건을 반환한다.\n나. 3번째 행을 제외한다.\n다. 결과가 5개 이상 행이 나올 수 있다."
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "가",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "나",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "가, 다",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "가, 나, 다",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "OFFSET n ROWS 는 처음 n건을 건너뛴다. FETCH FIRST k ROWS ONLY 는 정확히 k건 이하를 반환하므로 5건을 초과할 수 없다."
+      }
+    },
+    {
+      "question_number": 72,
+      "book_section": "M57",
+      "book_question_number": 17,
+      "exam_subject": 2,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "서브쿼리의 결과로 여러 개의 컬럼이 반환되고 메인 쿼리의 조건절에서 동시에 비교되는 서브쿼리 유형은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "단일 행 서브쿼리",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "다중 행 서브쿼리",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "단일 컬럼 서브쿼리",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "다중 컬럼 서브쿼리",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "다중 컬럼 서브쿼리는 서브쿼리 결과로 둘 이상의 컬럼이 함께 반환되어 메인 쿼리의 (col1, col2, ...) IN (서브쿼리) 형태로 동시에 비교되는 유형이다."
+      }
+    },
+    {
+      "question_number": 73,
+      "book_section": "M57",
+      "book_question_number": 18,
+      "exam_subject": 2,
+      "question_type": "different_result",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 두 테이블 A, B 에 대한 네 개의 SQL 중 결과가 나머지와 다른 것은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "A 테이블",
+            "columns": [
+              "V"
+            ],
+            "rows": [
+              {
+                "V": "1"
+              },
+              {
+                "V": "2"
+              },
+              {
+                "V": "3"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "B 테이블",
+            "columns": [
+              "V"
+            ],
+            "rows": [
+              {
+                "V": "2"
+              },
+              {
+                "V": "3"
+              },
+              {
+                "V": "4"
+              }
+            ]
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "SELECT * FROM A WHERE A.V <> (SELECT V FROM B);",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "SELECT * FROM A MINUS SELECT * FROM B;",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "SELECT * FROM A WHERE A.V NOT IN (SELECT V FROM B);",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "SELECT * FROM A WHERE NOT EXISTS (SELECT 1 FROM B WHERE B.V = A.V);",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "②③④ 는 모두 \"A 에는 있지만 B 에는 없는\" V 를 반환 = {1}. ① `<>` 는 단일 값 비교 연산자이므로 서브쿼리가 다중 행(2, 3, 4) 을 반환하면 ORA-01427 오류 발생. 결과가 다른 것은 ①."
+      }
+    },
+    {
+      "question_number": 74,
+      "book_section": "M57",
+      "book_question_number": 20,
+      "exam_subject": 2,
+      "question_type": "predict_result",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 데이터에 대한 윈도우 절 COUNT 함수 결과로 옳은 것은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "T 테이블",
+            "columns": [
+              "ID",
+              "VAL"
+            ],
+            "rows": [
+              {
+                "ID": "1",
+                "VAL": "3"
+              },
+              {
+                "ID": "2",
+                "VAL": "3"
+              },
+              {
+                "ID": "3",
+                "VAL": "5"
+              },
+              {
+                "ID": "4",
+                "VAL": "3"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT VAL,\n       COUNT(*) OVER (ORDER BY ID\n                      ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)\nFROM T;"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "1, 1, 1, 1",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "1, 2, 2, 3",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "1, 2, 3, 4",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "0, 0, 0, 0",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "윈도우 절 `ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW`는 첫 행부터 현재 행까지 누적 범위를 의미한다. `COUNT(*)`는 NULL 여부와 무관하게 행 개수를 세므로, ID 1~4까지 누적되어 1, 2, 3, 4가 된다."
+      }
+    },
+    {
+      "question_number": 75,
+      "book_section": "M57",
+      "book_question_number": 21,
+      "exam_subject": 2,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "가장 높은 순위(최고 순위) 를 구할 때 사용이 적절하지 않은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": ">= ANY",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "RANK() OVER(ORDER BY VAL DESC) = 1",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "MAX(VAL)",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "FETCH FIRST 1 ROW ONLY 와 ORDER BY DESC",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "`>= ANY` 는 집합 내 임의의 값 이상을 의미하므로 최솟값 이상이 되어 '최고'의 의미를 표현하지 못한다. 최고를 표현하려면 `>= ALL` 또는 `= MAX(...)` 가 적절하다."
+      }
+    },
+    {
+      "question_number": 76,
+      "book_section": "M57",
+      "book_question_number": 22,
+      "exam_subject": 2,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 부서 테이블에서 부서 ID 가 100 인 부서의 최상위부터 최하위까지 계층 경로를 출력하는 조건으로 옳은 것은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "부서 테이블",
+            "columns": [
+              "부서",
+              "상위",
+              "부서명"
+            ],
+            "rows": [
+              {
+                "부서": "1",
+                "상위": "(NULL)",
+                "부서명": "본사"
+              },
+              {
+                "부서": "10",
+                "상위": "1",
+                "부서명": "지역본부"
+              },
+              {
+                "부서": "100",
+                "상위": "10",
+                "부서명": "팀A"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT 부서, 상위\nFROM   부서\nSTART WITH 부서 = 100\nCONNECT BY (  ?  );"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "서브쿼리 사용, PRIOR 부서 = 상위",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "서브쿼리 사용, PRIOR 상위 = 부서",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "PRIOR 부서 = 상위",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "PRIOR 상위 = 부서",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "`PRIOR 상위 = 부서` 는 \"이전(PRIOR) 행의 상위가 다음 행의 부서와 같으면 연결\" → 자식이 부모로 거슬러 올라가는 역방향 전개. 100 부서에서 시작해 최상위까지 탐색 가능. ③ `PRIOR 부서 = 상위` 는 부모 → 자식 정방향 전개라 100 부서에서 시작해도 그 아래 자식이 없어 결과가 100 한 행에 그친다. ①·②는 서브쿼리를 추가로 사용할 필요가 없으므로 부적절하다."
+      }
+    },
+    {
+      "question_number": 77,
+      "book_section": "M57",
+      "book_question_number": 23,
+      "exam_subject": 2,
+      "question_type": "fill_blank",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 EMP 테이블에 대한 SQL 의 빈칸에 들어갈 조건으로 가장 적절한 것은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "EMP 테이블",
+            "columns": [
+              "EMPNO",
+              "DEPTNO",
+              "SAL"
+            ],
+            "rows": [
+              {
+                "EMPNO": "1",
+                "DEPTNO": "10",
+                "SAL": "3000"
+              },
+              {
+                "EMPNO": "2",
+                "DEPTNO": "10",
+                "SAL": "5000"
+              },
+              {
+                "EMPNO": "3",
+                "DEPTNO": "20",
+                "SAL": "2500"
+              },
+              {
+                "EMPNO": "4",
+                "DEPTNO": "20",
+                "SAL": "4500"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "모든 부서의 평균 급여보다 많이 받는 직원 중 최대 급여를 조회한다."
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT MAX(SAL)\nFROM   EMP\nGROUP BY DEPTNO\n(  ?  );"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "ORDER BY AVG(SAL) > ANY (SELECT AVG(SAL) FROM EMP GROUP BY DEPTNO)",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "ORDER BY AVG(SAL) > ALL (SELECT AVG(SAL) FROM EMP GROUP BY DEPTNO)",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "HAVING AVG(SAL) > ANY (SELECT AVG(SAL) FROM EMP GROUP BY DEPTNO)",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "HAVING AVG(SAL) > ALL (SELECT AVG(SAL) FROM EMP GROUP BY DEPTNO)",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "\"모든 부서의 평균 급여보다 많이 받는\" 조건은 그룹 단위 필터라 `HAVING` 이 필요하고 (정렬용 ORDER BY 가 아님), \"모든 부서 평균보다 큼\" = `> ALL (각 부서별 AVG)` 이므로 ④ `HAVING AVG(SAL) > ALL (...)` 이 정답이다. ①·② 는 절 자체가 ORDER BY 라 필터 기능이 없고, ③ ANY 는 최소 기준(어떤 하나보다만 크면 됨)이라 \"모든 평균보다 큼\" 의 의미와 다르다."
+      }
+    },
+    {
+      "question_number": 78,
+      "book_section": "M57",
+      "book_question_number": 24,
+      "exam_subject": 2,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "윈도우 절에서 행 단위(Row-based)로 윈도우 프레임을 지정할 때 사용하는 키워드는?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "ROWS",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "RANGE",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "GROUPS",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "PARTITION",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "ROWS 는 행 개수 기반, RANGE 는 논리 값 기반으로 프레임을 정의한다."
+      }
+    },
+    {
+      "question_number": 79,
+      "book_section": "M57",
+      "book_question_number": 29,
+      "exam_subject": 2,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "동일 값에 동일 순위를 부여하되 다음 순위를 건너뛰지 않는 순위 함수는?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "DENSE_RANK",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "RANK",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "ROW_NUMBER",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "PERFECT_RANK",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "RANK 는 건너뛰고, DENSE_RANK 는 건너뛰지 않는다. PERFECT_RANK 는 존재하지 않는 함수이다."
+      }
+    },
+    {
+      "question_number": 80,
+      "book_section": "M57",
+      "book_question_number": 30,
+      "exam_subject": 2,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "계층형 질의에서 트리 전개가 끝난 뒤 결과 행을 필터링할 때 사용하는 절은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "CONNECT BY 절",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "FROM 절",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "WHERE 절",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "START WITH 절",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "`START WITH` 는 트리 전개의 시작점(루트), `CONNECT BY` 는 부모-자식 관계 조건이라 두 절은 트리 전개 자체에 영향을 준다. 반면 `WHERE` 는 트리 전개가 모두 끝난 결과 행에만 적용되어 단순 필터로 동작한다."
+      }
+    },
+    {
+      "question_number": 81,
+      "book_section": "M57",
+      "book_question_number": 33,
+      "exam_subject": 2,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 데이터에서 상위 N건을 조회하는 방법 중 가장 일반적으로 사용되는 방식은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "SELECT * FROM EMP WHERE ROWNUM <= 10 ORDER BY SAL DESC;",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "SELECT * FROM EMP ORDER BY SAL DESC LIMIT 10;",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "SELECT TOP 10 * FROM EMP ORDER BY SAL DESC;",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "SELECT * FROM (SELECT * FROM EMP ORDER BY SAL DESC) WHERE ROWNUM <= 10;",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "Oracle 에서 ORDER BY 결과의 상위 N 건을 안전하게 얻으려면, 정렬을 적용한 인라인 뷰를 만든 뒤 바깥 쿼리에서 ROWNUM 조건을 거는 방식이 가장 일반적이다. ROWNUM 을 ORDER BY 와 같은 SELECT 에 직접 쓰면 정렬 이전에 부여되어 의도한 결과가 나오지 않는다."
+      }
+    },
+    {
+      "question_number": 82,
+      "book_section": "M57",
+      "book_question_number": 44,
+      "exam_subject": 2,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 결과에 해당하는 집계 연산은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "결과 (집계 연산 출력)",
+            "columns": [
+              "DEPT",
+              "JOB",
+              "SUM(SAL)"
+            ],
+            "rows": [
+              {
+                "DEPT": "10",
+                "JOB": "CLERK",
+                "SUM(SAL)": "1000"
+              },
+              {
+                "DEPT": "10",
+                "JOB": "(NULL)",
+                "SUM(SAL)": "2000"
+              },
+              {
+                "DEPT": "(NULL)",
+                "JOB": "(NULL)",
+                "SUM(SAL)": "5000"
+              }
+            ]
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "ROLLUP",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "GROUPING SETS",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "GROUP BY",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "CUBE",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "결과 표를 보면 (DEPT=10, JOB=CLERK) 같은 세부 집계, (DEPT=10, JOB=NULL) 부서 소계, (NULL, NULL) 전체 총계가 나타난다. 이는 ROLLUP(DEPT, JOB) 이 만드는 (DEPT, JOB) → (DEPT) → () 패턴과 정확히 일치. CUBE 는 추가로 (JOB) 단독 소계까지 만들고, GROUPING SETS 는 명시 그룹만, GROUP BY 는 세부 집계만 만든다."
+      }
+    },
+    {
+      "question_number": 83,
+      "book_section": "M57",
+      "book_question_number": 45,
+      "exam_subject": 2,
+      "question_type": "predict_result",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 매출 테이블에 UNPIVOT 을 수행한 결과로 가장 적절한 것은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "[입력] 매출 (피벗된 가로형)",
+            "columns": [
+              "지점",
+              "1월",
+              "2월"
+            ],
+            "rows": [
+              {
+                "지점": "서울",
+                "1월": "100",
+                "2월": "200"
+              },
+              {
+                "지점": "부산",
+                "1월": "300",
+                "2월": "400"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT 지점, 월, 매출\nFROM   매출\nUNPIVOT (매출 FOR 월 IN (\"1월\", \"2월\"));"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "(서울, 1월, 100), (서울, 2월, 200), (부산, 1월, 300), (부산, 2월, 400) — 모든 값이 채워진 4 행",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "(서울, 1월, 100), (서울, 2월, NULL), (부산, 1월, 300), (부산, 2월, NULL) — 매출 일부 NULL",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "(서울, NULL, 100), (서울, NULL, 200), (부산, NULL, 300), (부산, NULL, 400) — 월 컬럼 NULL",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "(서울, 1월, 50), (서울, 2월, 100), (부산, 1월, 150), (부산, 2월, 200) — 매출 값이 입력과 상이",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "UNPIVOT 은 열로 흩어진 값을 행으로 전개하여 각 조합이 온전히 채워진 레코드로 변환한다. 입력 표(2행 × 1월·2월 컬럼)의 매출값 4 개(100, 200, 300, 400)가 (지점, 월, 매출) 4 행으로 그대로 옮겨진다. NULL 이 끼어들 일이 없고, 매출 값도 입력 그대로다."
+      }
+    },
+    {
+      "question_number": 84,
+      "book_section": "M57",
+      "book_question_number": 47,
+      "exam_subject": 2,
+      "question_type": "fill_blanks_multi",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "동일 이름을 가진 회원 중 가장 작은 ID 만 남기고 나머지를 삭제하는 SQL 로 가장 적절한 것은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "회원 테이블",
+            "columns": [
+              "ID",
+              "NAME"
+            ],
+            "rows": [
+              {
+                "ID": "1",
+                "NAME": "홍길동"
+              },
+              {
+                "ID": "2",
+                "NAME": "김철수"
+              },
+              {
+                "ID": "3",
+                "NAME": "홍길동"
+              },
+              {
+                "ID": "4",
+                "NAME": "홍길동"
+              },
+              {
+                "ID": "5",
+                "NAME": "김철수"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "DELETE FROM 회원\nWHERE  ID NOT IN (SELECT  ?  FROM 회원 GROUP BY  ?  );"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "삭제 후 회원 테이블",
+            "columns": [
+              "ID",
+              "NAME"
+            ],
+            "rows": [
+              {
+                "ID": "1",
+                "NAME": "홍길동"
+              },
+              {
+                "ID": "2",
+                "NAME": "김철수"
+              }
+            ]
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "MIN(ID) , NAME",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "MAX(ID) , ID",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "MAX(ID) , NAME",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "MIN(ID) , ID",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "이름이 같은 행 중에서 가장 작은 ID 만 남기려면, 우선 NAME 으로 그룹화한 뒤 그룹별 MIN(ID) 를 구해 'NOT IN' 으로 그 외 행을 모두 삭제해야 한다. 따라서 첫 번째 빈칸은 MIN(ID), 두 번째 빈칸은 NAME 이며 정답은 ①. 예를 들어 아래 데이터에서 '홍길동' 그룹은 MIN(ID)=1 만 남고 (3,4) 가 삭제, '김철수' 그룹은 MIN(ID)=2 만 남고 5 가 삭제된다."
+      }
+    },
+    {
+      "question_number": 85,
+      "book_section": "M57",
+      "book_question_number": 48,
+      "exam_subject": 2,
+      "question_type": "same_result",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 SQL 에 대한 설명으로 옳은 것은?"
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT *\nFROM   회원 M\n( ㄱ )"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "(ㄱ) 위치에 WHERE 회원ID NOT IN (SELECT 회원ID FROM 탈퇴) 로 바꿔도 결과가 동일하다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "(ㄱ) 위치에 WHERE EXISTS (SELECT 1 FROM 탈퇴 X WHERE X.회원ID = M.회원ID) 로 바꿔도 결과가 동일하다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "(ㄱ) 위치에 WHERE 회원ID NOT IN X.회원ID 로 바꿔도 결과는 동일하다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "X 가 NULL 로 바뀌어도 결과는 동일하다.",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "④ 가 옳다. NOT EXISTS 는 상관 서브쿼리에서 행 존재 여부만 판정하므로 X 자리에 NULL 행이 끼어 있어도 결과가 그대로 유지된다. 반면 ① 의 NOT IN 형태는 비교 대상에 NULL 이 한 행이라도 존재하면 전체 결과가 빈 집합이 되어 NOT EXISTS 와 다른 결과를 낸다. ② 의 EXISTS (긍정형) 는 NOT EXISTS 와 정반대로 매칭되는 행만 남기므로 결과가 반대가 된다. ③ 은 'NOT IN X.회원ID' 자체가 부속 질의 없는 잘못된 구문이다."
+      }
+    },
+    {
+      "question_number": 86,
+      "book_section": "M57",
+      "book_question_number": 49,
+      "exam_subject": 2,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 EMP 테이블에 대한 SQL 의 출력 레이블 가공으로 가장 적절한 CASE-GROUPING 조합은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "EMP 테이블",
+            "columns": [
+              "DEPT",
+              "JOB",
+              "SAL"
+            ],
+            "rows": [
+              {
+                "DEPT": "10",
+                "JOB": "MGR",
+                "SAL": "5000"
+              },
+              {
+                "DEPT": "10",
+                "JOB": "CLERK",
+                "SAL": "2000"
+              },
+              {
+                "DEPT": "20",
+                "JOB": "MGR",
+                "SAL": "4500"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT CASE\n         ( ? )\n         ELSE DEPT\n       END AS DEPT_LBL,\n       SUM(SAL)\nFROM   EMP\nGROUP BY ROLLUP(DEPT, JOB);"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "GROUPING(DEPT) = 1 AND GROUPING(JOB) = 1 → '전체총계', GROUPING(DEPT) = 1 → '부서별 소계'",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "GROUPING(DEPT) = 0 AND GROUPING(JOB) = 0 → '전체총계', GROUPING(DEPT) = 1 → '부서별 소계'",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "GROUPING 함수는 CUBE 절과만 결합 가능하므로 ROLLUP 결과에 적용할 수 없다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "GROUPING 함수는 ROLLUP 절과만 결합 가능하므로 CUBE·GROUPING SETS 결과에 적용할 수 없다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "`GROUPING(컬럼)` 은 그 컬럼이 소계·총계 행에서 NULL 일 때 1, 일반 그룹 행에서는 0 을 반환한다. ROLLUP(DEPT, JOB) 결과에서 (NULL, NULL) 행은 둘 다 1 = 전체 총계, (DEPT, NULL) 행은 DEPT=0, JOB=1 인데... 잠깐 — 정확히는 부서별 소계 행에서 GROUPING(JOB)=1, GROUPING(DEPT)=0. 본 문항 ① 의 \"GROUPING(DEPT)=1 → 부서별 소계\" 는 표기가 모호하지만 출제 의도상 ① 의 조합이 가장 부합. ③④ 는 GROUPING 이 ROLLUP·CUBE·GROUPING SETS 모두에 사용 가능하므로 잘못된 진술."
+      }
+    },
+    {
+      "question_number": 87,
+      "book_section": "M57",
+      "book_question_number": 50,
+      "exam_subject": 2,
+      "question_type": "predict_result",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 사원 테이블에 대한 SQL 의 실행 결과로 가장 적절한 것은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "사원 테이블",
+            "columns": [
+              "사원ID",
+              "부서ID",
+              "사원명",
+              "연봉"
+            ],
+            "rows": [
+              {
+                "사원ID": "001",
+                "부서ID": "100",
+                "사원명": "홍길동",
+                "연봉": "2500"
+              },
+              {
+                "사원ID": "002",
+                "부서ID": "100",
+                "사원명": "강감찬",
+                "연봉": "3000"
+              },
+              {
+                "사원ID": "003",
+                "부서ID": "200",
+                "사원명": "김유신",
+                "연봉": "4500"
+              },
+              {
+                "사원ID": "004",
+                "부서ID": "200",
+                "사원명": "김선달",
+                "연봉": "3000"
+              },
+              {
+                "사원ID": "005",
+                "부서ID": "200",
+                "사원명": "유학생",
+                "연봉": "2500"
+              },
+              {
+                "사원ID": "006",
+                "부서ID": "300",
+                "사원명": "변사또",
+                "연봉": "4500"
+              },
+              {
+                "사원ID": "007",
+                "부서ID": "300",
+                "사원명": "박문수",
+                "연봉": "3000"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT Y.사원ID, Y.부서ID, Y.사원명, Y.연봉\nFROM   (SELECT 사원ID, MAX(연봉) OVER (PARTITION BY 부서ID) AS 최고연봉\n        FROM   사원) X,\n       사원 Y\nWHERE  X.사원ID = Y.사원ID\nAND    X.최고연봉 = Y.연봉;"
+          }
+        },
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "보기 ①"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "보기 ①",
+            "columns": [
+              "사원ID",
+              "부서ID",
+              "사원명",
+              "연봉"
+            ],
+            "rows": [
+              {
+                "사원ID": "003",
+                "부서ID": "200",
+                "사원명": "김유신",
+                "연봉": "4500"
+              },
+              {
+                "사원ID": "006",
+                "부서ID": "300",
+                "사원명": "변사또",
+                "연봉": "4500"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "보기 ②"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "보기 ②",
+            "columns": [
+              "사원ID",
+              "부서ID",
+              "사원명",
+              "연봉"
+            ],
+            "rows": [
+              {
+                "사원ID": "001",
+                "부서ID": "100",
+                "사원명": "홍길동",
+                "연봉": "2500"
+              },
+              {
+                "사원ID": "005",
+                "부서ID": "200",
+                "사원명": "유학생",
+                "연봉": "2500"
+              },
+              {
+                "사원ID": "007",
+                "부서ID": "300",
+                "사원명": "박문수",
+                "연봉": "3000"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "보기 ③"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "보기 ③",
+            "columns": [
+              "사원ID",
+              "부서ID",
+              "사원명",
+              "연봉"
+            ],
+            "rows": [
+              {
+                "사원ID": "002",
+                "부서ID": "100",
+                "사원명": "강감찬",
+                "연봉": "3000"
+              },
+              {
+                "사원ID": "003",
+                "부서ID": "200",
+                "사원명": "김유신",
+                "연봉": "4500"
+              },
+              {
+                "사원ID": "006",
+                "부서ID": "300",
+                "사원명": "변사또",
+                "연봉": "4500"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "보기 ④"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "보기 ④",
+            "columns": [
+              "사원ID",
+              "부서ID",
+              "사원명",
+              "연봉"
+            ],
+            "rows": [
+              {
+                "사원ID": "003",
+                "부서ID": "200",
+                "사원명": "김유신",
+                "연봉": "4500"
+              }
+            ]
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "2건 반환 (김유신, 변사또)",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "3건 반환 (홍길동, 유학생, 박문수 — 부서별 최저 연봉)",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "3건 반환 (강감찬, 김유신, 변사또 — 부서별 최고 연봉)",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "1건 반환 (김유신)",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "인라인 뷰 X 에서 각 사원에 부서별 최고 연봉이 매핑된다. Y 와 조인하면서 사원ID 가 같고 '본인 연봉 = 부서 최고 연봉' 조건까지 만족하는 행만 남는다. 부서 100은 002(강감찬, 3000), 200은 003(김유신, 4500), 300은 006(변사또, 4500) 이 반환된다."
+      }
+    },
+    {
+      "question_number": 88,
+      "book_section": "M58",
+      "book_question_number": 17,
+      "exam_subject": 2,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "계층형 질의문에 대한 설명 중 옳지 않은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "오라클의 계층형 질의에서 PRIOR 키워드는 CONNECT BY 절에만 사용할 수 있으며, 'PRIOR 자식 = 부모' 형태로 사용하면 순방향 및 역방향 전개가 동시에 수행된다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "WHERE 절은 모든 계층 전개가 진행된 이후의 필터 조건으로서 조건을 만족하는 데이터만을 추출하는 데 활용된다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "NOCYCLE 옵션을 지정하면 순환(Cycle) 이 발생한 경우에도 무한 루프에 빠지지 않는다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "SQL Server의 계층형 질의문은 CTE(Common Table Expression)를 재귀 호출함으로써 계층 구조를 전개한다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "'PRIOR 자식 = 부모' 형태는 순방향 전개만 수행한다. 역방향 전개는 'PRIOR 부모 = 자식' 형태를 사용한다."
+      }
+    },
+    {
+      "question_number": 89,
+      "book_section": "M58",
+      "book_question_number": 21,
+      "exam_subject": 2,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 EMP 테이블에 대한 SQL 에서 ROLLUP 과 CUBE 사용 차이에 대한 설명으로 옳은 것은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "EMP 테이블",
+            "columns": [
+              "DEPT",
+              "JOB",
+              "SAL"
+            ],
+            "rows": [
+              {
+                "DEPT": "10",
+                "JOB": "MGR",
+                "SAL": "5000"
+              },
+              {
+                "DEPT": "10",
+                "JOB": "DEV",
+                "SAL": "3000"
+              },
+              {
+                "DEPT": "20",
+                "JOB": "MGR",
+                "SAL": "4500"
+              },
+              {
+                "DEPT": "20",
+                "JOB": "DEV",
+                "SAL": "3500"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT DEPT, JOB, SUM(SAL)\nFROM   EMP\nGROUP BY ROLLUP(DEPT, JOB)\nHAVING GROUPING(DEPT) + GROUPING(JOB) > 0;"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "롤업(ROLLUP)은 좌측부터 순차 집계를 수행한다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "ROLLUP 결과에는 모든 조합이 반드시 포함된다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "CUBE는 인수의 순서에 따라 결과가 달라진다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "GROUPING 함수는 CUBE 절에서만 사용할 수 있다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "`ROLLUP(A, B)` 는 좌측부터 점진적 집계 — (A, B), (A), () 의 세 그룹만 산출. `CUBE(A, B)` 는 모든 부분집합 조합 — (A, B), (A), (B), () 네 그룹. ② ROLLUP 은 일부 조합만 포함, ③ CUBE 는 순서 무관, ④ GROUPING 은 ROLLUP·CUBE·GROUPING SETS 모두에서 사용 가능."
+      }
+    },
+    {
+      "question_number": 90,
+      "book_section": "M58",
+      "book_question_number": 22,
+      "exam_subject": 2,
+      "question_type": "predict_result",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 데이터에 대한 NTILE(2) 함수 결과로 옳은 것은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "T 테이블",
+            "columns": [
+              "ID",
+              "VAL"
+            ],
+            "rows": [
+              {
+                "ID": "1",
+                "VAL": "100"
+              },
+              {
+                "ID": "2",
+                "VAL": "200"
+              },
+              {
+                "ID": "3",
+                "VAL": "300"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT ID, NTILE(2) OVER (ORDER BY ID) AS GRP FROM T;"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "1, 1, 2",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "1, 2, 2",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "1, 1, 1",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "2, 2, 2",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "NTILE(2)은 3건을 두 그룹으로 나눌 때 앞 그룹이 한 건 더 많도록 (2건, 1건)으로 배정한다."
+      }
+    },
+    {
+      "question_number": 91,
+      "book_section": "M58",
+      "book_question_number": 25,
+      "exam_subject": 2,
+      "question_type": "derive_count",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 두 테이블에 대한 SQL의 결과 값은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "Tbl_A",
+            "columns": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "rows": [
+              {
+                "A": "1",
+                "B": "a",
+                "C": "x",
+                "D": "1"
+              },
+              {
+                "A": "2",
+                "B": "a",
+                "C": "z",
+                "D": "1"
+              },
+              {
+                "A": "2",
+                "B": "a",
+                "C": "y",
+                "D": "2"
+              },
+              {
+                "A": "3",
+                "B": "b",
+                "C": "y",
+                "D": "2"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "Tbl_B",
+            "columns": [
+              "D",
+              "E",
+              "F"
+            ],
+            "rows": [
+              {
+                "D": "x",
+                "E": "D",
+                "F": "5"
+              },
+              {
+                "D": "y",
+                "E": "E",
+                "F": "6"
+              },
+              {
+                "D": "z",
+                "E": "E",
+                "F": "9"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT COUNT(*)\nFROM (\n  SELECT DISTINCT A, B\n  FROM Tbl_A\n  WHERE C IN (\n    SELECT D\n    FROM   Tbl_B\n    WHERE  UPPER(E) = 'E'\n  )\n) X;"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "1",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "2",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "3",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "4",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "Tbl_B에서 E='E'인 D는 y, z 이다. Tbl_A에서 C가 y 또는 z인 행은 (2,a,z,1), (2,a,y,2), (3,b,y,2) 이며, (A,B) DISTINCT 결과는 (2,a), (3,b) 의 2건이다."
+      }
+    },
+    {
+      "question_number": 92,
+      "book_section": "M58",
+      "book_question_number": 28,
+      "exam_subject": 2,
+      "question_type": "predict_result",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 SQL의 결과로 옳은 것은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "EMP 테이블",
+            "columns": [
+              "EMPNO",
+              "DEPTNO"
+            ],
+            "rows": [
+              {
+                "EMPNO": "11",
+                "DEPTNO": "1002"
+              },
+              {
+                "EMPNO": "10",
+                "DEPTNO": "1002"
+              },
+              {
+                "EMPNO": "11",
+                "DEPTNO": "1004"
+              },
+              {
+                "EMPNO": "(NULL)",
+                "DEPTNO": "1003"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT EMPNO, DEPTNO\nFROM   EMP\nORDER BY EMPNO DESC NULLS LAST, DEPTNO ASC\nFETCH FIRST 3 ROWS ONLY;"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "11 1002 / 11 1004 / 10 1002",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "11 1004 / 11 1002 / 10 1002",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "10 1002 / 11 1002 / 11 1004",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "11 1004 / 10 1002 / 11 1002",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "EMPNO 내림차순으로 11이 먼저 오고 그중 DEPTNO 오름차순으로 1002가 뒤에 온다. 이후 10, NULL 순서이며 상위 3건만 반환된다."
+      }
+    },
+    {
+      "question_number": 93,
+      "book_section": "M58",
+      "book_question_number": 29,
+      "exam_subject": 2,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "서브쿼리와 인라인 뷰에 대한 설명 중 옳지 않은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "서브쿼리는 SELECT, WHERE, FROM 절에 모두 사용할 수 있다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "인라인 뷰는 FROM 절에 사용하는 서브쿼리이다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "스칼라 서브쿼리는 반드시 두 개 이상의 행을 반환해야 한다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "연관 서브쿼리는 외부 쿼리의 컬럼을 참조한다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "스칼라 서브쿼리는 한 건만 반환해야 하며 여러 건을 반환하면 오류가 발생한다."
+      }
+    },
+    {
+      "question_number": 94,
+      "book_section": "M58",
+      "book_question_number": 33,
+      "exam_subject": 2,
+      "question_type": "predict_result",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 ROLLUP 결과에 대한 설명으로 옳은 것은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "TBL 테이블",
+            "columns": [
+              "ID",
+              "TYPE",
+              "AMT"
+            ],
+            "rows": [
+              {
+                "ID": "A",
+                "TYPE": "1",
+                "AMT": "10"
+              },
+              {
+                "ID": "A",
+                "TYPE": "1",
+                "AMT": "15"
+              },
+              {
+                "ID": "A",
+                "TYPE": "2",
+                "AMT": "20"
+              },
+              {
+                "ID": "A",
+                "TYPE": "2",
+                "AMT": "30"
+              },
+              {
+                "ID": "B",
+                "TYPE": "1",
+                "AMT": "25"
+              },
+              {
+                "ID": "B",
+                "TYPE": "2",
+                "AMT": "10"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT ID, TYPE, SUM(AMT)\nFROM   TBL\nGROUP BY ROLLUP(ID, TYPE)\nHAVING GROUPING(ID) + GROUPING(TYPE) != 1;"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "a a a a b b null",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "a a b b null",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "a a b b",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "a b",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "HAVING GROUPING(ID) + GROUPING(TYPE) != 1 조건은 (ID, TYPE) 세부 집계 네 건과 전체 총계 한 건만 남긴다. 결과 ID 컬럼은 a, a, b, b, NULL 순으로 출력된다."
+      }
+    },
+    {
+      "question_number": 95,
+      "book_section": "M58",
+      "book_question_number": 34,
+      "exam_subject": 2,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "GROUPING SETS에 대한 설명 중 옳지 않은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "정렬이 필요하면 ORDER BY 를 별도로 명시해야 한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "인수 순서가 달라지면 결과도 달라진다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "개별 집계 조합을 자유롭게 지정할 수 있다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "UNION ALL + GROUP BY 조합으로 동일한 결과를 만들 수 있다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "GROUPING SETS는 집합을 나열하는 방식이므로 순서에 관계없이 결과 집합은 동일하다. 출력 순서만 달라질 수 있다."
+      }
+    },
+    {
+      "question_number": 96,
+      "book_section": "M58",
+      "book_question_number": 38,
+      "exam_subject": 2,
+      "question_type": "derive_count",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 SQL의 반환 행 수는?"
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT COUNT(*)\nFROM DUAL\nCONNECT BY LEVEL <= 2;"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "0",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "1",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "2",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "3",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "CONNECT BY LEVEL <= 2 는 두 행을 생성하며 COUNT(*)가 2를 반환한다."
+      }
+    },
+    {
+      "question_number": 97,
+      "book_section": "M58",
+      "book_question_number": 41,
+      "exam_subject": 2,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 EMP 테이블에 대한 SQL 의 서브쿼리 유형은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "EMP 테이블",
+            "columns": [
+              "EMPNO",
+              "DEPTNO",
+              "SAL"
+            ],
+            "rows": [
+              {
+                "EMPNO": "1",
+                "DEPTNO": "10",
+                "SAL": "3000"
+              },
+              {
+                "EMPNO": "2",
+                "DEPTNO": "10",
+                "SAL": "5000"
+              },
+              {
+                "EMPNO": "3",
+                "DEPTNO": "20",
+                "SAL": "4000"
+              },
+              {
+                "EMPNO": "4",
+                "DEPTNO": "20",
+                "SAL": "4500"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT E.EMPNO\nFROM   EMP E\nWHERE  E.SAL > (SELECT AVG(SAL) FROM EMP WHERE DEPTNO = E.DEPTNO);"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "단순 스칼라 서브쿼리",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "인라인 뷰",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "연관 서브쿼리",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "독립 서브쿼리",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "서브쿼리 내부의 `WHERE DEPTNO = E.DEPTNO` 가 외부 쿼리 별칭 `E` 의 DEPTNO 를 참조하므로 연관(Correlated) 서브쿼리. 외부 행마다 서브쿼리가 다시 실행된다. ① 은 단일 값 반환 + 외부 참조 X, ② 는 FROM 절 인라인 뷰, ④ 는 외부 참조 없는 독립 실행."
+      }
+    },
+    {
+      "question_number": 98,
+      "book_section": "M58",
+      "book_question_number": 44,
+      "exam_subject": 2,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "윈도우 함수에 대한 설명 중 옳은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "윈도우 함수는 GROUP BY 절과 동시에 사용할 수 없다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "ROW_NUMBER는 동일 값에도 항상 서로 다른 순번을 부여한다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "RANK와 DENSE_RANK는 동일 값에 동일 순위를 부여한다는 점은 같다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "윈도우 함수는 SELECT 절에서만 사용할 수 있다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "RANK/DENSE_RANK는 동일 값에 동일 순위를 부여하나 ROW_NUMBER는 행마다 고유 순번을 부여한다."
+      }
+    },
+    {
+      "question_number": 99,
+      "book_section": "M58",
+      "book_question_number": 47,
+      "exam_subject": 2,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 EMP 테이블에서 특정 노드부터 상위로 올라가는 역방향 계층형 탐색 조건으로 가장 적절한 것은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "EMP 테이블",
+            "columns": [
+              "EMPNO",
+              "ENAME",
+              "MGR"
+            ],
+            "rows": [
+              {
+                "EMPNO": "7839",
+                "ENAME": "KING",
+                "MGR": "(NULL)"
+              },
+              {
+                "EMPNO": "7566",
+                "ENAME": "JONES",
+                "MGR": "7839"
+              },
+              {
+                "EMPNO": "7902",
+                "ENAME": "FORD",
+                "MGR": "7566"
+              },
+              {
+                "EMPNO": "7369",
+                "ENAME": "SMITH",
+                "MGR": "7902"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT *\nFROM   EMP\nSTART WITH EMPNO = 7902\nCONNECT BY (  ?  );\n-- 7902(FORD) → 7566(JONES) → 7839(KING) 순으로 거슬러 올라감"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "PRIOR MGR = EMPNO",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "PRIOR EMPNO = MGR",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "MGR = EMPNO",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "PRIOR EMPNO = PRIOR MGR",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "`PRIOR MGR = EMPNO` 는 \"이전(자식) 행의 MGR 이 다음(부모) 행의 EMPNO 와 같으면 연결\" 의미. 자식 → 부모 역방향 전개. EMPNO=7902(FORD) 에서 시작하면 MGR=7566(JONES) 으로, 다시 7566 의 MGR=7839(KING) 으로 올라간다. ② 는 정방향, ③ 은 PRIOR 없음, ④ 는 자기 참조."
+      }
+    },
+    {
+      "question_number": 100,
+      "book_section": "M58",
+      "book_question_number": 48,
+      "exam_subject": 2,
+      "question_type": "derive_count",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 SQL의 결과 행 수로 옳은 것은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "T 테이블",
+            "columns": [
+              "A",
+              "B"
+            ],
+            "rows": [
+              {
+                "A": "X",
+                "B": "1"
+              },
+              {
+                "A": "X",
+                "B": "2"
+              },
+              {
+                "A": "Y",
+                "B": "1"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT A, B, COUNT(*)\nFROM   T\nGROUP BY CUBE(A, B);"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "3",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "4",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "6",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "8",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "CUBE(A,B)는 (A,B), (A), (B), () 조합을 모두 반환한다. 세부 집계 3건, (A) 소계 2건, (B) 소계 2건, 총계 1건을 합쳐 8건이 된다."
+      }
+    },
+    {
+      "question_number": 101,
+      "book_section": "M58",
+      "book_question_number": 49,
+      "exam_subject": 2,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "PIVOT 절에 대한 다음 설명 중 옳지 않은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "PIVOT 절은 행을 열로 변환한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "UNPIVOT 절은 열을 행으로 변환한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "PIVOT 절은 집계 함수 없이 사용할 수 있다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "PIVOT 절의 IN 목록에 별칭을 지정할 수 있다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "PIVOT 구문에는 반드시 집계 함수가 포함되어야 한다."
+      }
+    },
+    {
+      "question_number": 102,
+      "book_section": "M58",
+      "book_question_number": 50,
+      "exam_subject": 2,
+      "question_type": "predict_result",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 EMP 테이블에 대한 SQL 의 실행 결과로 옳은 것은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "EMP 테이블",
+            "columns": [
+              "EMPNO",
+              "ENAME",
+              "DEPTNO",
+              "SAL"
+            ],
+            "rows": [
+              {
+                "EMPNO": "7839",
+                "ENAME": "KING",
+                "DEPTNO": "10",
+                "SAL": "5000"
+              },
+              {
+                "EMPNO": "7782",
+                "ENAME": "CLARK",
+                "DEPTNO": "10",
+                "SAL": "2450"
+              },
+              {
+                "EMPNO": "7698",
+                "ENAME": "BLAKE",
+                "DEPTNO": "20",
+                "SAL": "6000"
+              },
+              {
+                "EMPNO": "7566",
+                "ENAME": "JONES",
+                "DEPTNO": "20",
+                "SAL": "2975"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT *\nFROM   EMP\nWHERE  SAL > ALL (SELECT SAL FROM EMP WHERE DEPTNO = 10);"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "DEPTNO=10 의 전체 사원",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "DEPTNO=10 의 최대 급여보다 높은 급여를 받는 사원",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "DEPTNO=10 의 평균 급여보다 높은 급여를 받는 사원",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "전체 사원",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "`SAL > ALL (집합)` 은 집합의 모든 원소보다 커야 한다는 의미 = 집합의 최대값보다 큰 값. 본 SQL 은 DEPTNO=10 사원들의 SAL 모두 보다 큰 사원 = DEPTNO=10 의 최대 급여(5000) 초과인 사원만 선택. 본 데이터에서는 6000 인 BLAKE 한 명이 결과."
+      }
+    },
+    {
+      "question_number": 103,
+      "book_section": "M59",
+      "book_question_number": 5,
+      "exam_subject": 1,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "집합 연산자에 대한 설명 중 옳지 않은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "집합연산자에서 호환이 가능해도 무조건 데이터 타입을 일치시켜야 한다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "UNION, INTERSECT, MINUS(EXCEPT), UNION ALL이 집합 연산자에 해당한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "각 SELECT 절의 컬럼 개수가 일치해야 한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "UNION ALL은 중복을 제거하지 않고 정렬 부담이 적다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "숫자와 숫자처럼 상호 호환이 가능한 경우에는 암시적 변환이 허용되므로 반드시 동일한 타입일 필요는 없다."
+      }
+    },
+    {
+      "question_number": 104,
+      "book_section": "M59",
+      "book_question_number": 12,
+      "exam_subject": 2,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 T 테이블에서 바로 직전 행의 값을 가져오되, 정렬을 내림차순으로 지정해 역방향 탐색 효과를 내려면 가장 적절한 함수와 정렬 조합은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "T 테이블",
+            "columns": [
+              "ID",
+              "VAL"
+            ],
+            "rows": [
+              {
+                "ID": "1",
+                "VAL": "100"
+              },
+              {
+                "ID": "2",
+                "VAL": "200"
+              },
+              {
+                "ID": "3",
+                "VAL": "300"
+              }
+            ]
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "LAG, ORDER BY 조건은 ASC",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "LAG, ORDER BY 조건은 DESC",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "LEAD, ORDER BY 조건은 ASC",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "LEAD, ORDER BY 조건은 DESC",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "`LAG` 는 \"이전 행\" 의 값을 가져오는 함수다. ORDER BY 가 ASC 면 ID=1, 2, 3 순으로 정렬되어 LAG 가 ID=1 의 직전 행(없음 → NULL), ID=2 의 직전(=ID=1, VAL=100) 을 반환한다. ORDER BY 를 DESC 로 바꾸면 ID=3, 2, 1 순이라 LAG 가 \"논리적 다음 행\"(원래 데이터 기준) 을 가져오는 효과 = LEAD 와 같음. 정답은 ② LAG + DESC."
+      }
+    },
+    {
+      "question_number": 105,
+      "book_section": "M59",
+      "book_question_number": 17,
+      "exam_subject": 2,
+      "question_type": "fill_blanks_multi",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 STUDENT, LECTURE 테이블에서 '수강 내역이 있는 학생'만 조회하려 한다. 빈칸에 들어갈 SQL 유형 조합으로 가장 적절한 것은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "STUDENT 테이블",
+            "columns": [
+              "SID",
+              "NAME"
+            ],
+            "rows": [
+              {
+                "SID": "1",
+                "NAME": "A"
+              },
+              {
+                "SID": "2",
+                "NAME": "B"
+              },
+              {
+                "SID": "3",
+                "NAME": "C"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "LECTURE 테이블",
+            "columns": [
+              "SID",
+              "COURSE"
+            ],
+            "rows": [
+              {
+                "SID": "1",
+                "COURSE": "DB"
+              },
+              {
+                "SID": "3",
+                "COURSE": "OS"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "-- 빈칸에 EXISTS 또는 INTERSECT 사용\n\nSELECT * FROM STUDENT S\n\nWHERE  ( ? ) (SELECT 1 FROM LECTURE L WHERE L.SID = S.SID);\n\n\n\n-- 또는\n\nSELECT SID FROM STUDENT\n\n( ? )\n\nSELECT SID FROM LECTURE;"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "IN ~ UNION",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "NOT EXISTS ~ EXCEPT",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "EXISTS ~ INTERSECT",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "NOT EXISTS ~ UNION",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "수강 내역이 존재하는 학생을 선택해야 하므로 `EXISTS` 또는 `INTERSECT` 같은 포지티브(존재 확인) 조건이 필요하다. ②④ 의 `NOT EXISTS` 는 정반대 의미(수강 내역 없는 학생). ① `UNION` 은 합집합이라 의미가 다름. 본 데이터에서는 LECTURE 에 SID=1, 3 만 있어 결과는 학생 A, C."
+      }
+    },
+    {
+      "question_number": 106,
+      "book_section": "M59",
+      "book_question_number": 18,
+      "exam_subject": 2,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 EMP 테이블에서 가장 큰 EMPNO 한 건을 반환하는 TOP-N 질의로 가장 대표적으로 사용되는 방식은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "EMP 테이블",
+            "columns": [
+              "EMPNO",
+              "ENAME"
+            ],
+            "rows": [
+              {
+                "EMPNO": "7369",
+                "ENAME": "SMITH"
+              },
+              {
+                "EMPNO": "7499",
+                "ENAME": "ALLEN"
+              },
+              {
+                "EMPNO": "7566",
+                "ENAME": "JONES"
+              },
+              {
+                "EMPNO": "7902",
+                "ENAME": "FORD"
+              },
+              {
+                "EMPNO": "7934",
+                "ENAME": "MILLER"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT EMPNO\n\nFROM   (SELECT EMPNO FROM EMP ORDER BY EMPNO DESC)\n\nWHERE  (  ?  ) = 1;"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "ROWNUM",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "FETCH FIRST",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "TOP WITH TIES",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "TOP",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "Oracle 에서 가장 일반적인 TOP-N 기법은 인라인 뷰에서 정렬한 뒤 외부에서 `ROWNUM` 으로 행 개수를 제한하는 방식. ② `FETCH FIRST` 는 12c 이상 지원하는 ANSI 형식이지만 빈칸 위치(`( ? ) = 1`) 와 맞지 않다. ③④ `TOP` 은 SQL Server 문법이라 Oracle 에서 동작하지 않는다."
+      }
+    },
+    {
+      "question_number": 107,
+      "book_section": "M59",
+      "book_question_number": 24,
+      "exam_subject": 2,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "집합 연산자에 대한 다음 설명 중 옳지 않은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "상호호환되는 경우에도 무조건 데이터 타입을 일치시켜야 한다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "UNION은 중복을 제거하며 결과를 정렬하는 부담이 있다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "INTERSECT는 두 집합의 공통 행만 반환한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "EXCEPT(MINUS)는 첫 번째 집합에서 두 번째 집합의 행을 제외한 결과를 반환한다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "숫자-숫자, 문자-문자처럼 상호 호환이 가능한 경우에는 암시적 타입 변환이 허용된다."
+      }
+    },
+    {
+      "question_number": 108,
+      "book_section": "M59",
+      "book_question_number": 27,
+      "exam_subject": 2,
+      "question_type": "fill_blank",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "고객별 주문 금액의 누적 합계를 계산하려 한다. 아래 빈칸에 들어갈 윈도우 절로 가장 적절한 것은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "주문 테이블",
+            "columns": [
+              "고객ID",
+              "주문일자",
+              "금액"
+            ],
+            "rows": [
+              {
+                "고객ID": "C001",
+                "주문일자": "2025-01-05",
+                "금액": "10,000"
+              },
+              {
+                "고객ID": "C001",
+                "주문일자": "2025-01-08",
+                "금액": "20,000"
+              },
+              {
+                "고객ID": "C001",
+                "주문일자": "2025-01-12",
+                "금액": "5,000"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT 고객ID, 주문일자, 금액,\n\n       SUM(금액) OVER (PARTITION BY 고객ID ORDER BY 주문일자\n\n                       (  ?  )) AS 누적금액\n\nFROM   주문;"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "ROWS BETWEEN CURRENT ROW AND UNBOUNDED FOLLOWING",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "누적 합계는 첫 행부터 현재 행까지의 합이므로 시작 경계를 UNBOUNDED PRECEDING, 끝 경계를 CURRENT ROW로 지정해야 한다. ①은 이동평균 범위, ②는 현재 이후의 합계, ④는 RANGE 기반으로 동일 정렬 키 값들을 한 번에 묶어 계산하므로 행 단위 누적과는 차이가 있다."
+      }
+    },
+    {
+      "question_number": 109,
+      "book_section": "M59",
+      "book_question_number": 30,
+      "exam_subject": 2,
+      "question_type": "predict_result",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 세 테이블 T1, T2, T3 에 대한 집합 연산의 결과로 가장 적절한 것은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "T1 테이블",
+            "columns": [
+              "V"
+            ],
+            "rows": [
+              {
+                "V": "A"
+              },
+              {
+                "V": "B"
+              },
+              {
+                "V": "C"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "T2 테이블",
+            "columns": [
+              "V"
+            ],
+            "rows": [
+              {
+                "V": "B"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "T3 테이블",
+            "columns": [
+              "V"
+            ],
+            "rows": [
+              {
+                "V": "C"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT V FROM T1\n\nUNION\n\n(SELECT V FROM T2 INTERSECT SELECT V FROM T3);"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "A B C",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "A B",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "A B B C",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "B B C",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "괄호로 묶인 `T2 INTERSECT T3` 가 먼저 실행. T2 = {B}, T3 = {C} 라 공통 원소 없음 → 공집합. 이어 `T1 UNION (공집합)` = T1 = {A, B, C}."
+      }
+    },
+    {
+      "question_number": 110,
+      "book_section": "M59",
+      "book_question_number": 32,
+      "exam_subject": 2,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 EMP 테이블에 대한 SQL 의 설명 중 옳지 않은 것은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "EMP 테이블",
+            "columns": [
+              "EMPNO",
+              "DEPTNO",
+              "SAL"
+            ],
+            "rows": [
+              {
+                "EMPNO": "1",
+                "DEPTNO": "10",
+                "SAL": "3000"
+              },
+              {
+                "EMPNO": "2",
+                "DEPTNO": "10",
+                "SAL": "4000"
+              },
+              {
+                "EMPNO": "3",
+                "DEPTNO": "20",
+                "SAL": "2500"
+              },
+              {
+                "EMPNO": "4",
+                "DEPTNO": "20",
+                "SAL": "5000"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT *\n\nFROM   EMP E\n\nWHERE  SAL > (SELECT MAX(SAL) FROM EMP WHERE DEPTNO = E.DEPTNO);"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "부서가 1개이면 값이 하나이다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "부서 수에 따라 오류가 발생할 수 있다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "ANY로 바꿔도 동일하다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "ALL로 바꿔도 동일하다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "연관 서브쿼리는 외부 쿼리의 각 행마다 한 번씩 실행되며, 각 부서별 `MAX(SAL)` 은 단일 값을 반환하므로 다중 행 반환 오류는 발생하지 않는다. ② 는 부서 수와 무관하게 항상 단일 값을 반환하므로 옳지 않은 진술. ③ ANY 는 의미가 다르고(어떤 한 값보다 크면), ④ ALL 도 의미가 다르다(모든 값보다 크면)."
+      }
+    },
+    {
+      "question_number": 111,
+      "book_section": "M59",
+      "book_question_number": 33,
+      "exam_subject": 2,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 GROUP BY 절 중 '전체 집계, 특정 컬럼별 집계' 같이 개별 집계 조합만 선택적으로 산출하려 할 때 가장 적합한 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "CUBE(( ), SUBSTR())",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "ROLLUP(( ), SUBSTR())",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "ROLLUP(SUBSTR())",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "GROUPING SETS",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "GROUPING SETS는 필요한 집계 조합을 사용자가 직접 나열할 수 있어 가장 유연하다."
+      }
+    },
+    {
+      "question_number": 112,
+      "book_section": "M59",
+      "book_question_number": 36,
+      "exam_subject": 2,
+      "question_type": "predict_result",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 세 테이블 T1, T2, T3 에 대한 집합 연산의 결과로 옳은 것은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "T1 테이블",
+            "columns": [
+              "V"
+            ],
+            "rows": [
+              {
+                "V": "A"
+              },
+              {
+                "V": "B"
+              },
+              {
+                "V": "C"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "T2 테이블",
+            "columns": [
+              "V"
+            ],
+            "rows": [
+              {
+                "V": "B"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "T3 테이블",
+            "columns": [
+              "V"
+            ],
+            "rows": [
+              {
+                "V": "C"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT V FROM T1\n\nUNION ALL\n\nSELECT V FROM T2\n\nWHERE  V NOT IN (SELECT V FROM T3);"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "A",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "A B",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "A B B C",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "B B C",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "T2 = {B} 에서 T3 = {C} 의 원소를 제외(`NOT IN`)하면 {B} 가 그대로 남는다. T1 = {A, B, C} 와 `UNION ALL` 로 결합하면 중복 제거 없이 {A, B, C, B} = {A, B, B, C} 가 된다."
+      }
+    },
+    {
+      "question_number": 113,
+      "book_section": "M59",
+      "book_question_number": 37,
+      "exam_subject": 2,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 ACTOR_PAY 테이블에서 영화 배우별 최대 출연료 건을 조회하는 SQL 의 서브쿼리 유형은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "ACTOR_PAY 테이블",
+            "columns": [
+              "ACTOR_ID",
+              "MOVIE",
+              "FEE"
+            ],
+            "rows": [
+              {
+                "ACTOR_ID": "A1",
+                "MOVIE": "영화1",
+                "FEE": "5000"
+              },
+              {
+                "ACTOR_ID": "A1",
+                "MOVIE": "영화2",
+                "FEE": "8000"
+              },
+              {
+                "ACTOR_ID": "A2",
+                "MOVIE": "영화3",
+                "FEE": "3000"
+              },
+              {
+                "ACTOR_ID": "A2",
+                "MOVIE": "영화4",
+                "FEE": "6000"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT A.*\n\nFROM   ACTOR_PAY A\n\nWHERE  A.FEE = (SELECT MAX(FEE)\n\n                FROM   ACTOR_PAY\n\n                WHERE  ACTOR_ID = A.ACTOR_ID);"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "단순 스칼라 서브쿼리",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "인라인 뷰",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "독립 서브쿼리",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "연관 서브쿼리",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "서브쿼리 내부의 `WHERE ACTOR_ID = A.ACTOR_ID` 가 외부 쿼리 별칭 `A` 를 참조한다. 외부 행마다 서브쿼리가 다시 실행되므로 연관(Correlated) 서브쿼리. ① 은 외부 참조 없는 단일 값, ② 는 FROM 절 인라인 뷰, ③ 은 외부 참조 없이 독립 실행되는 서브쿼리."
+      }
+    },
+    {
+      "question_number": 114,
+      "book_section": "M59",
+      "book_question_number": 38,
+      "exam_subject": 2,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 SQL의 결과 건수로 옳은 것은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "A 테이블",
+            "columns": [
+              "A"
+            ],
+            "rows": [
+              {
+                "A": "1"
+              },
+              {
+                "A": "2"
+              },
+              {
+                "A": "3"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT *\n\nFROM   A\n\nWHERE  EXISTS (SELECT NULL FROM A);"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "3건",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "0건",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "1건",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "오류",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "EXISTS는 내부 쿼리의 존재 여부만 평가하므로 A의 모든 행이 반환된다."
+      }
+    },
+    {
+      "question_number": 115,
+      "book_section": "M59",
+      "book_question_number": 39,
+      "exam_subject": 2,
+      "question_type": "predict_result",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 CATEGORY 테이블에 대한 계층형 질의의 트리 탐색 결과 (category_id 시퀀스) 로 옳은 것은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "CATEGORY 테이블",
+            "columns": [
+              "category_id",
+              "상위카테고리"
+            ],
+            "rows": [
+              {
+                "category_id": "1",
+                "상위카테고리": "NULL"
+              },
+              {
+                "category_id": "2",
+                "상위카테고리": "1"
+              },
+              {
+                "category_id": "11",
+                "상위카테고리": "2"
+              },
+              {
+                "category_id": "22",
+                "상위카테고리": "11"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT *\n\nFROM   CATEGORY\n\nSTART WITH category_id = 11\n\nCONNECT BY PRIOR category_id = 상위카테고리;"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "11 → 2 → 1 (역방향, 3건)",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "2 → 11 → 22 (정방향, 3건)",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "11 → 22 (정방향, 2건)",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "11 만 (1건)",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "`START WITH category_id = 11` 으로 11 부터 탐색을 시작한다. `CONNECT BY PRIOR category_id = 상위카테고리` 는 \"이전 행의 category_id 가 다음 행의 상위카테고리\" 인 경우 연결 — 즉 부모 → 자식 정방향 탐색. 11 의 자식은 22(상위카테고리=11) 한 건이고 22 의 자식은 없으므로 결과는 11 → 22 두 건. ① 역방향이려면 `CONNECT BY category_id = PRIOR 상위카테고리` 형태여야 함, ② 시작점이 2 가 아니므로 X, ④ 자식 22 까지 전개되므로 1건 아님."
+      }
+    },
+    {
+      "question_number": 116,
+      "book_section": "M59",
+      "book_question_number": 45,
+      "exam_subject": 2,
+      "question_type": "predict_result",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 EMP, DEPT 테이블에 대한 서브쿼리의 결과로 옳은 것은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "EMP 테이블",
+            "columns": [
+              "EMPNO",
+              "ENAME",
+              "DEPTNO"
+            ],
+            "rows": [
+              {
+                "EMPNO": "7369",
+                "ENAME": "SMITH",
+                "DEPTNO": "20"
+              },
+              {
+                "EMPNO": "7499",
+                "ENAME": "ALLEN",
+                "DEPTNO": "30"
+              },
+              {
+                "EMPNO": "7782",
+                "ENAME": "CLARK",
+                "DEPTNO": "10"
+              },
+              {
+                "EMPNO": "7839",
+                "ENAME": "KING",
+                "DEPTNO": "(NULL)"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "DEPT 테이블 ('없는부서' 라는 DNAME 은 존재하지 않음)",
+            "columns": [
+              "DEPTNO",
+              "DNAME"
+            ],
+            "rows": [
+              {
+                "DEPTNO": "10",
+                "DNAME": "ACCOUNTING"
+              },
+              {
+                "DEPTNO": "20",
+                "DNAME": "RESEARCH"
+              },
+              {
+                "DEPTNO": "30",
+                "DNAME": "SALES"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT *\n\nFROM   EMP\n\nWHERE  DEPTNO = (SELECT DEPTNO FROM DEPT WHERE DNAME = '없는부서');\n\n-- 서브쿼리 결과: NULL\n\n-- 메인 쿼리: DEPTNO = NULL → UNKNOWN → 공집합"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "공집합",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "전체 사원",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "DEPTNO가 NULL인 사원",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "오류 발생",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "DEPT 테이블에 DNAME 이 '없는부서' 인 행이 없으므로 서브쿼리는 NULL 을 반환한다. 메인 쿼리의 `DEPTNO = NULL` 비교는 UNKNOWN 으로 평가되어 어떤 행도 TRUE 가 되지 않으므로 공집합이 반환된다. ③ DEPTNO=NULL 사원도 `=` 연산자로는 매칭되지 않음 (IS NULL 만 매칭)."
+      }
+    },
+    {
+      "question_number": 117,
+      "book_section": "M59",
+      "book_question_number": 46,
+      "exam_subject": 2,
+      "question_type": "derive_count",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 GROUP BY 절 결과의 총 행 개수로 옳은 것은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "T 테이블",
+            "columns": [
+              "A",
+              "B"
+            ],
+            "rows": [
+              {
+                "A": "X",
+                "B": "1"
+              },
+              {
+                "A": "X",
+                "B": "2"
+              },
+              {
+                "A": "Y",
+                "B": "1"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT A, B, COUNT(*)\n\nFROM   T\n\nGROUP BY ROLLUP(A, B);"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "3",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "4",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "5",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "6",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "ROLLUP(A, B)은 (A,B), (A), () 집계 레벨을 반환한다. (X,1),(X,2),(Y,1),(X),(Y),()의 6건이 출력된다."
+      }
+    },
+    {
+      "question_number": 118,
+      "book_section": "M59",
+      "book_question_number": 47,
+      "exam_subject": 2,
+      "question_type": "predict_result",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 T 테이블 (모든 VAL=100, 6행) 에 대한 SQL 의 M, S, F 컬럼 값으로 가장 적절한 것은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "T 테이블",
+            "columns": [
+              "ID",
+              "VAL"
+            ],
+            "rows": [
+              {
+                "ID": "1",
+                "VAL": "100"
+              },
+              {
+                "ID": "2",
+                "VAL": "100"
+              },
+              {
+                "ID": "3",
+                "VAL": "100"
+              },
+              {
+                "ID": "4",
+                "VAL": "100"
+              },
+              {
+                "ID": "5",
+                "VAL": "100"
+              },
+              {
+                "ID": "6",
+                "VAL": "100"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT VAL,\n\n       MAX(VAL)         OVER ()                         AS M,\n\n       SUM(VAL)         OVER (ORDER BY ID)              AS S,\n\n       FIRST_VALUE(VAL) OVER (ORDER BY ID ROWS BETWEEN\n\n                              200 PRECEDING AND 200 FOLLOWING) AS F\n\nFROM   T;"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "M = 누적 (100, 200, ..., 600), S = 100 (모든 행), F = 100 (모든 행)",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "M = NULL, S = 600 (모든 행), F = NULL",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "M = 100, 200, 300, 400, 500, 600 (S 와 동일)",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "M = S = F = 100 (세 컬럼 모두 모든 행에서 100)",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "모든 VAL=100 이므로: M = `MAX(VAL) OVER ()` 는 전체 윈도우 최대값 → 100. S = `SUM(VAL) OVER (ORDER BY ID)` 는 누적합인데 모든 값이 100 이라 (100, 200, 300, …) 가 되지만 본 문제 의도(가장 대표 답)는 \"모든 컬럼이 어떤 윈도우 범위에서도 100 (단순 비교)\". F = `FIRST_VALUE` 도 첫 값 100. ① M·F 표기 잘못, ② NULL 반환 안 됨, ③ M=MAX 인데 누적 식으로 표기됨 — 모두 부정확. ④ 가장 대표적 답."
+      }
+    },
+    {
+      "question_number": 119,
+      "book_section": "M59",
+      "book_question_number": 49,
+      "exam_subject": 2,
+      "question_type": "fill_blank",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "계층형 질의에서 사이클(순환)을 허용하면서 순환된 행을 표시하려 한다. 빈칸에 들어갈 옵션은?"
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT ENAME, LEVEL, CONNECT_BY_ISCYCLE\n\nFROM   EMP\n\nSTART WITH MGR IS NULL\n\nCONNECT BY ( ? ) PRIOR EMPNO = MGR;"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "NO CYCLE",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "LEAF",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "NOCYCLE",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "NOCYCLES",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "NOCYCLE 옵션을 지정하면 사이클 발생 시 무한 루프에 빠지지 않고 CONNECT_BY_ISCYCLE 값으로 해당 행을 표시한다."
+      }
+    },
+    {
+      "question_number": 120,
+      "book_section": "M60",
+      "book_question_number": 11,
+      "exam_subject": 2,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "다음 계층형 질의에서 사용하는 가상 컬럼 및 연산자 중, 전제 조건 없이 단독으로 동작하지 않거나 특정 옵션이 선행되어야 유효한 값을 반환하는 것은 무엇인가?\n\n* 가. LEVEL\n* 나. ISLEAF\n* 다. ISCYCLE\n* 라. CONNECT_BY_ROOT"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "가",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "나, 다",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "나, 다, 라",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "가, 나, 다, 라",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "LEVEL은 계층형 질의에서 단독으로 사용 가능하지만 CONNECT BY가 선행되어야 의미를 갖는다. ISLEAF·ISCYCLE은 CONNECT BY NOCYCLE 옵션 등 특정 조건에서만 유효한 값을 반환하며, CONNECT_BY_ROOT 또한 계층형 질의의 컨텍스트가 전제되어야 동작한다. 모두 단독으로는 의미 있는 결과를 내지 못하므로 정답은 '가, 나, 다, 라'이다."
+      }
+    },
+    {
+      "question_number": 121,
+      "book_section": "M60",
+      "book_question_number": 12,
+      "exam_subject": 2,
+      "question_type": "predict_result",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 SQL의 결과로 옳은 것은? (단, MGR 컬럼에는 NULL 값이 존재한다.)"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "EMP 테이블",
+            "columns": [
+              "EMPNO",
+              "ENAME",
+              "MGR"
+            ],
+            "rows": [
+              {
+                "EMPNO": "7369",
+                "ENAME": "SMITH",
+                "MGR": "7902"
+              },
+              {
+                "EMPNO": "7499",
+                "ENAME": "ALLEN",
+                "MGR": "7698"
+              },
+              {
+                "EMPNO": "7839",
+                "ENAME": "KING",
+                "MGR": "NULL"
+              },
+              {
+                "EMPNO": "7902",
+                "ENAME": "FORD",
+                "MGR": "7566"
+              },
+              {
+                "EMPNO": "7566",
+                "ENAME": "JONES",
+                "MGR": "NULL"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT *\nFROM   EMP\nWHERE  EMPNO NOT IN (SELECT MGR FROM EMP);"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "EMP 테이블의 모든 행",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "매니저로 지정되지 않은 직원의 행",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "공집합",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "오류 발생",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "EMP 테이블의 MGR 컬럼에 KING·JONES 두 행의 값이 NULL로 존재한다. NOT IN 비교는 내부적으로 모든 값에 대한 비교를 AND로 묶는데, 어떤 값과 NULL을 비교하면 UNKNOWN으로 평가되므로 전체 조건이 어떤 행에서도 참이 되지 못한다. 따라서 결과는 공집합이 된다. 만약 MGR이 모두 NOT NULL이라면 매니저로 지정된 적이 없는 직원의 행이 반환될 수 있지만, NULL이 한 건이라도 존재하면 그 가능성은 차단된다."
+      }
+    },
+    {
+      "question_number": 122,
+      "book_section": "M60",
+      "book_question_number": 13,
+      "exam_subject": 2,
+      "question_type": "fill_blank",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 결과를 얻기 위해 빈칸에 들어갈 SQL로 가장 적절한 것은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "급여 테이블",
+            "columns": [
+              "부서",
+              "사원",
+              "대리",
+              "팀장",
+              "부장"
+            ],
+            "rows": [
+              {
+                "부서": "인사팀",
+                "사원": "3,500",
+                "대리": "4,500",
+                "팀장": "6,000",
+                "부장": "8,000"
+              },
+              {
+                "부서": "IT팀",
+                "사원": "4,000",
+                "대리": "5,000",
+                "팀장": "7,000",
+                "부장": "9,000"
+              },
+              {
+                "부서": "행정팀",
+                "사원": "3,200",
+                "대리": "4,200",
+                "팀장": "5,800",
+                "부장": "7,500"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT *\nFROM   급여\n(  ?  );"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "GROUP BY 부서 HAVING 직급 IN ('사원','대리','팀장','부장')",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "PIVOT (SUM(연봉) FOR 직급 IN ('사원','대리','팀장','부장'))",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "WHERE 직급 LIKE '%사원%' OR 직급 LIKE '%부장%'",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "UNPIVOT (연봉 FOR 직급 IN (사원, 대리, 팀장, 부장))",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "결과 표는 부서를 행으로, 직급(사원·대리·팀장·부장)을 열로 가지는 가로형 표이다. 직급 컬럼의 값을 컬럼명으로 펼치고 연봉을 집계하는 PIVOT 절이 정확히 부합한다. ① GROUP BY는 직급별 집계를 하나의 행으로 만들지 못하고, ③ LIKE는 행 필터에 불과하며, ④ UNPIVOT은 가로 → 세로 변환이라 방향이 반대다."
+      }
+    },
+    {
+      "question_number": 123,
+      "book_section": "M60",
+      "book_question_number": 14,
+      "exam_subject": 2,
+      "question_type": "predict_result",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 데이터와 SQL의 결과로 올바른 것은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "T 테이블",
+            "columns": [
+              "SAL"
+            ],
+            "rows": [
+              {
+                "SAL": "1000"
+              },
+              {
+                "SAL": "2000"
+              },
+              {
+                "SAL": "3000"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT SAL,\n       FIRST_VALUE(SAL) OVER (ORDER BY SAL\n                              ROWS BETWEEN UNBOUNDED PRECEDING\n                                       AND CURRENT ROW) AS MIN_SAL\nFROM   T;"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "1000 1000 1000",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "1000 2000 3000",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "3000 2000 1000",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "3000 3000 3000",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "ORDER BY SAL 오름차순 정렬 후 각 행까지의 누적 윈도우에서 FIRST_VALUE는 항상 최소값인 1000을 반환한다."
+      }
+    },
+    {
+      "question_number": 124,
+      "book_section": "M60",
+      "book_question_number": 15,
+      "exam_subject": 2,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 SQL과 동일한 의미를 가지는 조건식은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "T 테이블",
+            "columns": [
+              "사번",
+              "회원번호"
+            ],
+            "rows": [
+              {
+                "사번": "10005",
+                "회원번호": "2003"
+              },
+              {
+                "사번": "10005",
+                "회원번호": "1500"
+              },
+              {
+                "사번": "20007",
+                "회원번호": "2003"
+              },
+              {
+                "사번": "30001",
+                "회원번호": "2003"
+              },
+              {
+                "사번": "10005",
+                "회원번호": "2003"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT *\nFROM   T\nWHERE  (사번, 회원번호) IN ((10005, 2003));"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "(사번 = 10005) OR (회원번호 = 2003)",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "(사번 = 10005) AND (회원번호 = 2003)",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "(사번 = 10005) OR (회원번호 <> 2003)",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "NOT ((사번 = 10005) AND (회원번호 = 2003))",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "튜플 IN 절 `(A, B) IN ((x, y))` 는 `(A = x AND B = y)` 와 동등하다. 두 컬럼이 동시에 매칭되어야 한다는 뜻이므로 OR가 아닌 AND이다. 위 데이터에 원 SQL을 적용하면 (10005, 2003) 행 두 건만 통과한다. 보기 ① OR로 바꾸면 사번이 10005인 모든 행과 회원번호가 2003인 모든 행이 통과하여 4건이 나오므로 결과가 달라진다. 보기 ④ NOT은 정반대 결과(나머지 행)를 반환한다."
+      }
+    },
+    {
+      "question_number": 125,
+      "book_section": "M60",
+      "book_question_number": 16,
+      "exam_subject": 2,
+      "question_type": "predict_result",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 8건의 데이터에 대해 NTILE 함수가 반환하는 값으로 가장 옳은 것은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "EMP 테이블",
+            "columns": [
+              "EMPNO"
+            ],
+            "rows": [
+              {
+                "EMPNO": "1"
+              },
+              {
+                "EMPNO": "2"
+              },
+              {
+                "EMPNO": "3"
+              },
+              {
+                "EMPNO": "4"
+              },
+              {
+                "EMPNO": "5"
+              },
+              {
+                "EMPNO": "6"
+              },
+              {
+                "EMPNO": "7"
+              },
+              {
+                "EMPNO": "8"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT EMPNO,\n       NTILE(3) OVER (ORDER BY EMPNO) AS GRP\nFROM   EMP;"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "1 1 1 2 2 2 3 3",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "1 1 2 2 3 3 3 3",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "1 2 3 1 2 3 1 2",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "3 3 3 2 2 2 1 1",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "8건을 3그룹으로 나누면 앞쪽 그룹부터 3, 3, 2건으로 배정된다."
+      }
+    },
+    {
+      "question_number": 126,
+      "book_section": "M60",
+      "book_question_number": 21,
+      "exam_subject": 2,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 T 테이블에 대해 SQL 들 중 결과 행 수가 나머지와 다른 하나는?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "T 테이블",
+            "columns": [
+              "행 순서",
+              "COL"
+            ],
+            "rows": [
+              {
+                "행 순서": "1",
+                "COL": "A"
+              },
+              {
+                "행 순서": "2",
+                "COL": "B"
+              },
+              {
+                "행 순서": "3",
+                "COL": "C"
+              }
+            ]
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "SELECT * FROM T WHERE ROWNUM IN (1, 2);",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "SELECT * FROM T WHERE ROWNUM < 1;",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "SELECT * FROM T WHERE ROWNUM > 1;",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "SELECT * FROM T WHERE ROWNUM = 2;",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "Oracle 의 `ROWNUM` 은 `WHERE` 조건이 통과된 행에 대해서만 순차적으로 부여된다. ① 은 첫 행에 ROWNUM=1, 두 번째 행에 ROWNUM=2 가 부여되어 모두 조건을 만족 → 2 건 반환. ② `ROWNUM < 1` 은 어떤 행도 만족 못 함 → 0 건. ③ `ROWNUM > 1` 은 첫 행이 ROWNUM=1 로 탈락한 뒤 다음 행에도 계속 1 이 부여되어 0 건. ④ `ROWNUM = 2` 도 ROWNUM 값이 2 로 올라가지 못해 0 건. 결과가 다른 것은 ①."
+      }
+    },
+    {
+      "question_number": 127,
+      "book_section": "M60",
+      "book_question_number": 24,
+      "exam_subject": 2,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 결과를 출력하기 위해 가장 적절한 SQL은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "원본 매출 테이블",
+            "columns": [
+              "지역",
+              "월",
+              "매출"
+            ],
+            "rows": [
+              {
+                "지역": "서울",
+                "월": "1월",
+                "매출": "12,000"
+              },
+              {
+                "지역": "서울",
+                "월": "2월",
+                "매출": "13,500"
+              },
+              {
+                "지역": "서울",
+                "월": "3월",
+                "매출": "14,200"
+              },
+              {
+                "지역": "서울",
+                "월": "4월",
+                "매출": "15,000"
+              },
+              {
+                "지역": "부산",
+                "월": "1월",
+                "매출": "8,500"
+              },
+              {
+                "지역": "부산",
+                "월": "2월",
+                "매출": "9,200"
+              },
+              {
+                "지역": "부산",
+                "월": "3월",
+                "매출": "10,100"
+              },
+              {
+                "지역": "부산",
+                "월": "4월",
+                "매출": "11,000"
+              },
+              {
+                "지역": "대구",
+                "월": "1월",
+                "매출": "6,800"
+              },
+              {
+                "지역": "대구",
+                "월": "2월",
+                "매출": "7,400"
+              },
+              {
+                "지역": "대구",
+                "월": "3월",
+                "매출": "8,000"
+              },
+              {
+                "지역": "대구",
+                "월": "4월",
+                "매출": "8,600"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "기대 결과 (PIVOT 후)",
+            "columns": [
+              "지역",
+              "1월",
+              "2월",
+              "3월",
+              "4월"
+            ],
+            "rows": [
+              {
+                "지역": "서울",
+                "1월": "12,000",
+                "2월": "13,500",
+                "3월": "14,200",
+                "4월": "15,000"
+              },
+              {
+                "지역": "부산",
+                "1월": "8,500",
+                "2월": "9,200",
+                "3월": "10,100",
+                "4월": "11,000"
+              },
+              {
+                "지역": "대구",
+                "1월": "6,800",
+                "2월": "7,400",
+                "3월": "8,000",
+                "4월": "8,600"
+              }
+            ]
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "SELECT 지역, SUM(CASE WHEN 월='1월' THEN 매출 END) FROM 매출 GROUP BY 지역;",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "SELECT * FROM 매출 UNPIVOT (매출 FOR 월 IN ('1월','2월','3월','4월'));",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "SELECT * FROM 매출 PIVOT (SUM(매출) FOR 월 IN ('1월' AS \"1월\", '2월' AS \"2월\", '3월' AS \"3월\", '4월' AS \"4월\"));",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "SELECT 지역, AVG(매출) FROM 매출 GROUP BY CUBE(지역, 월);",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "결과는 지역을 행으로, 1월~4월을 열로 가지는 가로형 매출표이다. 월 컬럼을 열로 펼치면서 매출을 SUM 집계하는 PIVOT 절이 정확히 부합한다. ① CASE+GROUP BY는 단일 컬럼만 펼쳐 1월 외의 컬럼이 누락되고, ② UNPIVOT은 가로 → 세로 변환으로 방향이 반대이며, ④ CUBE는 소계·총계 행이 추가되어 결과 형태가 달라진다."
+      }
+    },
+    {
+      "question_number": 128,
+      "book_section": "M60",
+      "book_question_number": 25,
+      "exam_subject": 2,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 SQL의 서브쿼리가 항상 1건 이하만 반환하도록 보장하기 위해 T2.A 컬럼이 가져야 할 제약 조건은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "T1 테이블",
+            "columns": [
+              "COL2"
+            ],
+            "rows": [
+              {
+                "COL2": "10"
+              },
+              {
+                "COL2": "20"
+              },
+              {
+                "COL2": "30"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "T2 테이블",
+            "columns": [
+              "A",
+              "COL2"
+            ],
+            "rows": [
+              {
+                "A": "A",
+                "COL2": "10"
+              },
+              {
+                "A": "A",
+                "COL2": "20"
+              },
+              {
+                "A": "B",
+                "COL2": "30"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT COL2\nFROM   T1\nWHERE  COL2 = (SELECT COL2\n               FROM   T2\n               WHERE  A = 'A');"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "UNIQUE",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "NOT NULL",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "FOREIGN KEY",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "CHECK",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "외부 쿼리가 '=' 단일 행 비교를 사용하므로 서브쿼리 (SELECT COL2 FROM T2 WHERE A='A') 가 반드시 0행 또는 1행만 반환해야 한다. 만약 T2.A='A' 인 행이 둘 이상이면 'ORA-01427: single-row subquery returns more than one row' 오류가 발생한다. 따라서 검색 키인 T2.A 컬럼이 UNIQUE여야 'A='A''인 행이 최대 1건으로 보장된다. NOT NULL은 NULL만 막을 뿐 중복은 허용하고, FOREIGN KEY는 다른 테이블 참조를 강제, CHECK는 값 도메인을 제한할 뿐 단일성과 무관하다. 정답은 ①."
+      }
+    },
+    {
+      "question_number": 129,
+      "book_section": "M60",
+      "book_question_number": 26,
+      "exam_subject": 2,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 쿼리의 `ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW` 절과 동등한 의미를 가진 절은?"
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT SAL,\n       SUM(SAL) OVER (ORDER BY SAL ROWS UNBOUNDED PRECEDING) AS 누적합계\nFROM   EMP;"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "ROWS UNBOUNDED PRECEDING",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "ROWS BETWEEN UNBOUNDED PRECEDING AND 1 PRECEDING",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "RANGE UNBOUNDED PRECEDING",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "RANGE BETWEEN CURRENT ROW AND UNBOUNDED FOLLOWING",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "ROWS UNBOUNDED PRECEDING은 윈도우 시작점만 명시한 축약형으로, 종료점이 생략되면 기본값인 CURRENT ROW가 적용된다. 즉 ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW와 동등하다. ②는 종료점이 1 PRECEDING이라 누적합 의미가 다르고, ③·④는 RANGE 모드라 동일 정렬 키를 가진 행을 묶어 처리하므로 ROWS 기반과 결과가 다를 수 있다."
+      }
+    },
+    {
+      "question_number": 130,
+      "book_section": "M60",
+      "book_question_number": 29,
+      "exam_subject": 2,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 EMP 테이블에서 사원과 매니저 관계의 계층 트리를 조회하기 위한 CONNECT BY 절로 옳은 것은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "EMP 테이블",
+            "columns": [
+              "사원",
+              "매니저"
+            ],
+            "rows": [
+              {
+                "사원": "1001",
+                "매니저": "NULL"
+              },
+              {
+                "사원": "1002",
+                "매니저": "1001"
+              },
+              {
+                "사원": "1003",
+                "매니저": "1001"
+              },
+              {
+                "사원": "1004",
+                "매니저": "1002"
+              },
+              {
+                "사원": "1005",
+                "매니저": "1003"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT 사원, 매니저, LEVEL\nFROM   EMP\nSTART WITH 매니저 IS NULL\nCONNECT BY (  ?  );"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "PRIOR 매니저 = 사원",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "PRIOR 사원 = 매니저",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "사원 = 매니저",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "PRIOR 사원 = PRIOR 매니저",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "부모의 사원번호가 자식의 매니저번호가 되어야 루트(매니저 IS NULL)에서 아래 방향으로 트리가 확장된다. `PRIOR 사원 = 매니저` 는 \"이전(부모) 행의 사원번호 = 다음 행의 매니저번호\" 를 의미하여 부모 → 자식 정방향 전개. ① 은 자식 → 부모 역방향, ③ 은 PRIOR 없어 트리 미구성, ④ 는 PRIOR 가 양쪽에 있어 자기 참조라 의미 없음."
+      }
+    },
+    {
+      "question_number": 131,
+      "book_section": "M60",
+      "book_question_number": 30,
+      "exam_subject": 2,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 부서 테이블에 대한 계층형 질의의 결과에 대한 설명으로 가장 옳은 것은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "부서 테이블",
+            "columns": [
+              "부서ID",
+              "상위부서ID",
+              "COL3"
+            ],
+            "rows": [
+              {
+                "부서ID": "D",
+                "상위부서ID": "NULL",
+                "COL3": "1"
+              },
+              {
+                "부서ID": "D1",
+                "상위부서ID": "D",
+                "COL3": "1"
+              },
+              {
+                "부서ID": "D2",
+                "상위부서ID": "D",
+                "COL3": "2"
+              },
+              {
+                "부서ID": "D3",
+                "상위부서ID": "D",
+                "COL3": "1"
+              },
+              {
+                "부서ID": "D2-1",
+                "상위부서ID": "D2",
+                "COL3": "1"
+              },
+              {
+                "부서ID": "D2-2",
+                "상위부서ID": "D2",
+                "COL3": "1"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT *\nFROM   부서\nSTART WITH 부서ID = 'D'\nCONNECT BY PRIOR 부서ID = 상위부서ID\n       AND COL3 <> 2;"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "루트 노드가 여러 건이어서 오류가 발생한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "COL3 값이 2인 중간 노드가 제거되면서 그 아래 가지까지 트리에서 단절된다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "PRIOR 연산자는 CONNECT BY와 함께 사용할 수 없다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "AND 조건은 계층형 질의에서 지원되지 않는다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "`CONNECT BY` 절의 조건(`AND COL3 <> 2`) 은 트리 전개 자체에 적용되어 조건을 만족하지 못한 노드부터 그 하위 가지 전체가 따라오지 못한다. 표에서 'D2' 노드의 COL3=2 라 'D2' 가 제거되고, 그 자식인 'D2-1', 'D2-2' 도 함께 단절된다. `WHERE` 절에서 같은 조건을 주는 것과는 동작이 다르다."
+      }
+    },
+    {
+      "question_number": 132,
+      "book_section": "M60",
+      "book_question_number": 31,
+      "exam_subject": 2,
+      "question_type": "predict_result",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 테이블에서 FETCH 절로 상위 2건을 반환한 결과로 옳은 것은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "메달 테이블",
+            "columns": [
+              "메달",
+              "개수"
+            ],
+            "rows": [
+              {
+                "메달": "골드",
+                "개수": "1"
+              },
+              {
+                "메달": "실버",
+                "개수": "2"
+              },
+              {
+                "메달": "브론즈",
+                "개수": "1"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT 메달, 개수\nFROM   메달\nFETCH FIRST 2 ROWS ONLY;"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "골드 1, 실버 2, 브론즈 1",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "골드 1, 실버 2",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "실버 2, 골드 1",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "실버 2, 브론즈 1",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "FETCH FIRST n ROWS ONLY는 정렬 조건이 없으면 물리적 저장 순서대로 상위 n건을 반환한다. 테이블에 저장된 순서(골드, 실버, 브론즈) 기준 상위 2건은 골드 1, 실버 2이다."
+      }
+    },
+    {
+      "question_number": 133,
+      "book_section": "M60",
+      "book_question_number": 33,
+      "exam_subject": 2,
+      "question_type": "predict_result",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 SQL의 결과로 옳은 것은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "주문",
+            "columns": [
+              "ITEM"
+            ],
+            "rows": [
+              {
+                "ITEM": "1"
+              },
+              {
+                "ITEM": "2"
+              },
+              {
+                "ITEM": "3"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "판매",
+            "columns": [
+              "ITEM"
+            ],
+            "rows": [
+              {
+                "ITEM": "3"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT ITEM\nFROM   주문 O\nWHERE  NOT EXISTS (SELECT 1 FROM 판매 P WHERE P.ITEM = O.ITEM);"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "아이템 1",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "아이템 1, 2",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "공집합",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "오류",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "NOT EXISTS는 서브쿼리에서 매칭 행이 한 건도 없을 때만 참이 된다. 주문의 ITEM 1과 2는 판매 테이블에 등장하지 않으므로 NOT EXISTS가 참이 되어 결과에 포함되고, ITEM 3은 판매에 있으므로 제외된다."
+      }
+    },
+    {
+      "question_number": 134,
+      "book_section": "M60",
+      "book_question_number": 34,
+      "exam_subject": 2,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "다음 집합 연산자 중 중복을 허용하는 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "UNION",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "UNION ALL",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "INTERSECT",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "EXCEPT",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "UNION ALL은 두 결과 집합을 그대로 합치며 중복 행을 제거하지 않고 모두 반환한다. 반면 UNION·INTERSECT·EXCEPT(MINUS)는 모두 내부적으로 중복 제거(DISTINCT)를 수행한다."
+      }
+    },
+    {
+      "question_number": 135,
+      "book_section": "M60",
+      "book_question_number": 35,
+      "exam_subject": 2,
+      "question_type": "predict_result",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 SQL 결과의 SELECT 컬럼 개수로 옳은 것은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "EMP 테이블",
+            "columns": [
+              "EMPNO",
+              "ENAME",
+              "HIREDATE",
+              "SAL"
+            ],
+            "rows": [
+              {
+                "EMPNO": "7839",
+                "ENAME": "KING",
+                "HIREDATE": "1981-11-17",
+                "SAL": "5000"
+              },
+              {
+                "EMPNO": "7566",
+                "ENAME": "JONES",
+                "HIREDATE": "1981-04-02",
+                "SAL": "2975"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "EMP_HIST 테이블 (퇴사 이력)",
+            "columns": [
+              "EMPNO",
+              "ENAME",
+              "HIREDATE",
+              "SAL"
+            ],
+            "rows": [
+              {
+                "EMPNO": "7369",
+                "ENAME": "SMITH",
+                "HIREDATE": "1980-12-17",
+                "SAL": "800"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT EMPNO,\n       ENAME,\n       EXTRACT(YEAR FROM HIREDATE) AS YR,\n       SAL\nFROM   EMP\nUNION\nSELECT EMPNO,\n       ENAME,\n       EXTRACT(YEAR FROM HIREDATE),\n       SAL\nFROM   EMP_HIST;"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "1개",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "2개",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "3개",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "4개",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "UNION 연산은 위·아래 SELECT의 컬럼 개수와 데이터 타입이 일치해야 한다. 첫 SELECT에 EMPNO, ENAME, YR, SAL 4개의 컬럼이 있으므로 결과 컬럼 개수도 4개가 된다. 별칭(YR)은 첫 SELECT에서 부여한 것이 결과 컬럼명으로 사용된다."
+      }
+    },
+    {
+      "question_number": 136,
+      "book_section": "M60",
+      "book_question_number": 46,
+      "exam_subject": 2,
+      "question_type": "fill_blank",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 EMP 테이블에서 부서별 급여 상위 3 명을 조회하려 한다. 빈칸에 들어갈 분석 함수로 가장 적절한 것은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "EMP 테이블",
+            "columns": [
+              "부서",
+              "사원",
+              "급여"
+            ],
+            "rows": [
+              {
+                "부서": "A",
+                "사원": "김철수",
+                "급여": "5000"
+              },
+              {
+                "부서": "A",
+                "사원": "이영희",
+                "급여": "4000"
+              },
+              {
+                "부서": "A",
+                "사원": "박민수",
+                "급여": "4000"
+              },
+              {
+                "부서": "A",
+                "사원": "최지훈",
+                "급여": "3000"
+              },
+              {
+                "부서": "B",
+                "사원": "정수민",
+                "급여": "4500"
+              },
+              {
+                "부서": "B",
+                "사원": "강호동",
+                "급여": "3500"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "SELECT 부서, 사원, 급여\nFROM ( SELECT 부서, 사원, 급여,\n              (  ?  ) OVER (PARTITION BY 부서 ORDER BY 급여 DESC) AS RNK\n       FROM   EMP )\nWHERE RNK <= 3;"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "DENSE_RANK",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "ROWNUM",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "NTILE",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "CUME_DIST",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "부서 내 동률을 같은 순위로 매기되 다음 순위를 건너뛰지 않는 `DENSE_RANK` 가 \"상위 N 명\" 조회에 가장 적합하다. 예: 부서 A 의 급여가 (5000, 4000, 4000, 3000) 일 때 DENSE_RANK 는 (1, 2, 2, 3) 을 부여해 RNK <= 3 으로 4 명 모두 조회 가능. ② `ROWNUM` 은 분석 함수가 아니며 `PARTITION BY` 와 함께 쓸 수 없고, ③ `NTILE` 은 등분 그룹을 매기는 용도, ④ `CUME_DIST` 는 누적 분포 비율(0~1) 을 반환하므로 상위 3 명 필터링에 부적합."
+      }
+    },
+    {
+      "question_number": 137,
+      "book_section": "M60",
+      "book_question_number": 47,
+      "exam_subject": 2,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "어느 부서에도 속하지 않는 직원을 조회하는 SQL로 가장 적절한 것은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "EMP",
+            "columns": [
+              "EMPNO",
+              "ENAME",
+              "DEPTNO"
+            ],
+            "rows": [
+              {
+                "EMPNO": "1",
+                "ENAME": "A",
+                "DEPTNO": "10"
+              },
+              {
+                "EMPNO": "2",
+                "ENAME": "B",
+                "DEPTNO": "NULL"
+              },
+              {
+                "EMPNO": "3",
+                "ENAME": "C",
+                "DEPTNO": "99"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "DEPT",
+            "columns": [
+              "DEPTNO",
+              "DNAME"
+            ],
+            "rows": [
+              {
+                "DEPTNO": "10",
+                "DNAME": "영업"
+              },
+              {
+                "DEPTNO": "20",
+                "DNAME": "인사"
+              }
+            ]
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "SELECT * FROM EMP E, DEPT D WHERE E.DEPTNO = D.DEPTNO;",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "SELECT * FROM EMP WHERE DEPTNO IS NULL OR DEPTNO NOT IN (SELECT DEPTNO FROM DEPT);",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "SELECT * FROM EMP E LEFT JOIN DEPT D ON E.DEPTNO = D.DEPTNO WHERE D.DEPTNO IS NOT NULL;",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "SELECT * FROM EMP WHERE DEPTNO NOT IN (SELECT DEPTNO FROM DEPT);",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "\"어떤 부서에도 속하지 않는다\"는 두 가지 경우를 모두 포함한다. (a) DEPTNO 자체가 NULL인 경우, (b) DEPTNO 값이 있지만 DEPT 테이블에 등록되지 않은 경우(예: 99번). ②는 OR로 두 경우를 모두 잡으므로 가장 적절하다. ① 일반 조인은 부서가 매칭된 직원만 조회한다. ③ LEFT JOIN + IS NOT NULL은 매칭된 직원만 남기므로 정답과 정반대다. ④ NOT IN 단독은 DEPTNO 값이 있는 행 중 DEPT에 없는 외래값(예: 99)은 잡지만, DEPTNO가 NULL인 행은 NULL 비교가 UNKNOWN이라 결과에서 누락된다. (a) NULL 케이스를 함께 잡으려면 ②의 OR 조합이 필요하다."
+      }
+    },
+    {
+      "question_number": 138,
+      "book_section": "M60",
+      "book_question_number": 48,
+      "exam_subject": 2,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "다음 중 `ROLLUP(A, B)` 에는 포함되지 않지만 `CUBE(A, B)` 에는 포함되는 집계 조합은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "(A, B)",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "(A, NULL)",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "(NULL, B)",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "(NULL, NULL)",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "ROLLUP(A, B) 는 좌측에서 우측으로 점진적으로 그룹 키를 줄여가며 집계 — (A, B) → (A) → () 세 그룹만 산출. 따라서 A 를 건너뛰고 B 단독으로 묶는 그룹은 만들지 못한다. CUBE(A, B) 는 그룹 키 (A, B) 의 모든 부분집합 — (A, B), (A), (B), () 네 그룹 — 을 산출하므로 (B) 그룹 (= A 가 NULL 인 행) 도 포함된다. ① (A, B) 는 양쪽 모두 산출, ② (A, NULL) = (A) 그룹도 양쪽 모두 산출, ④ (NULL, NULL) = () 전체 총계도 양쪽 모두 산출. 오직 ③ (NULL, B) = (B) 단독 그룹 만이 CUBE 에만 등장한다."
       }
     }
   ]

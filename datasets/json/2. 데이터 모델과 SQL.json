@@ -3,7 +3,7 @@
   "chapter_id": 2,
   "questions": [
     {
-      "question_number": 34,
+      "question_number": 1,
       "book_section": "I",
       "book_question_number": 34,
       "question_type": "worst_choice",
@@ -52,7 +52,7 @@
       }
     },
     {
-      "question_number": 35,
+      "question_number": 2,
       "book_section": "I",
       "book_question_number": 35,
       "question_type": "identify_normal_form",
@@ -67,15 +67,38 @@
           "asset_type": "data_table",
           "payload": {
             "name": "주문상세",
-            "columns": ["주문번호", "상품번호", "상품명"],
-            "rows": [
-              {"주문번호": 10001, "상품번호": 901, "상품명": "DB 전문가 가이드"},
-              {"주문번호": 10001, "상품번호": 876, "상품명": "딥러닝 전문가 가이드"},
-              {"주문번호": 10002, "상품번호": 901, "상품명": "DB 전문가 가이드"},
-              {"주문번호": 10003, "상품번호": 901, "상품명": "DB 전문가 가이드"},
-              {"주문번호": 10004, "상품번호": 876, "상품명": "딥러닝 전문가 가이드"}
+            "columns": [
+              "주문번호",
+              "상품번호",
+              "상품명"
             ],
-            "sub_kind": "generic"
+            "rows": [
+              {
+                "주문번호": 10001,
+                "상품번호": 901,
+                "상품명": "DB 전문가 가이드"
+              },
+              {
+                "주문번호": 10001,
+                "상품번호": 876,
+                "상품명": "딥러닝 전문가 가이드"
+              },
+              {
+                "주문번호": 10002,
+                "상품번호": 901,
+                "상품명": "DB 전문가 가이드"
+              },
+              {
+                "주문번호": 10003,
+                "상품번호": 901,
+                "상품명": "DB 전문가 가이드"
+              },
+              {
+                "주문번호": 10004,
+                "상품번호": 876,
+                "상품명": "딥러닝 전문가 가이드"
+              }
+            ]
           }
         }
       ],
@@ -110,7 +133,7 @@
       }
     },
     {
-      "question_number": 36,
+      "question_number": 3,
       "book_section": "I",
       "book_question_number": 36,
       "question_type": "best_choice",
@@ -159,7 +182,7 @@
       }
     },
     {
-      "question_number": 37,
+      "question_number": 4,
       "book_section": "I",
       "book_question_number": 37,
       "question_type": "worst_choice",
@@ -202,7 +225,7 @@
       }
     },
     {
-      "question_number": 38,
+      "question_number": 5,
       "book_section": "I",
       "book_question_number": 38,
       "question_type": "best_choice",
@@ -251,7 +274,7 @@
       }
     },
     {
-      "question_number": 39,
+      "question_number": 6,
       "book_section": "I",
       "book_question_number": 39,
       "question_type": "derive_count",
@@ -269,32 +292,77 @@
               {
                 "table": "학생",
                 "columns": [
-                  {"name": "학번", "key": "PK"},
-                  {"name": "성명"},
-                  {"name": "학과번호"},
-                  {"name": "학과명"},
-                  {"name": "LAB실이용신청일1~4"},
-                  {"name": "LAB실이용시작일1~4"},
-                  {"name": "LAB실이용만기일1~4"},
-                  {"name": "LAB실이용승인교수번호1~4"},
-                  {"name": "LAB실이용승인교수명1~4"}
+                  {
+                    "name": "학번",
+                    "key": "PK"
+                  },
+                  {
+                    "name": "성명"
+                  },
+                  {
+                    "name": "학과번호"
+                  },
+                  {
+                    "name": "학과명"
+                  },
+                  {
+                    "name": "LAB실이용신청일1~4"
+                  },
+                  {
+                    "name": "LAB실이용시작일1~4"
+                  },
+                  {
+                    "name": "LAB실이용만기일1~4"
+                  },
+                  {
+                    "name": "LAB실이용승인교수번호1~4"
+                  },
+                  {
+                    "name": "LAB실이용승인교수명1~4"
+                  }
                 ]
               },
               {
                 "table": "도서대출",
                 "columns": [
-                  {"name": "대출번호", "key": "PK"},
-                  {"name": "대출자번호", "key": "FK"},
-                  {"name": "대출자명"},
-                  {"name": "대출자신분구분(학생/교수)"},
-                  {"name": "대출일자"},
-                  {"name": "대출도서번호"},
-                  {"name": "대출도서명"},
-                  {"name": "출판사명"},
-                  {"name": "출판년월"},
-                  {"name": "대표저자명"},
-                  {"name": "ISSN"},
-                  {"name": "반납일자"}
+                  {
+                    "name": "대출번호",
+                    "key": "PK"
+                  },
+                  {
+                    "name": "대출자번호",
+                    "key": "FK"
+                  },
+                  {
+                    "name": "대출자명"
+                  },
+                  {
+                    "name": "대출자신분구분(학생/교수)"
+                  },
+                  {
+                    "name": "대출일자"
+                  },
+                  {
+                    "name": "대출도서번호"
+                  },
+                  {
+                    "name": "대출도서명"
+                  },
+                  {
+                    "name": "출판사명"
+                  },
+                  {
+                    "name": "출판년월"
+                  },
+                  {
+                    "name": "대표저자명"
+                  },
+                  {
+                    "name": "ISSN"
+                  },
+                  {
+                    "name": "반납일자"
+                  }
                 ]
               }
             ]
@@ -306,28 +374,24 @@
           "choice_number": 1,
           "choice_kind": "value",
           "choice_text": "5",
-          "payload": 5,
           "is_correct": false
         },
         {
           "choice_number": 2,
           "choice_kind": "value",
           "choice_text": "6",
-          "payload": 6,
           "is_correct": false
         },
         {
           "choice_number": 3,
           "choice_kind": "value",
           "choice_text": "7",
-          "payload": 7,
           "is_correct": true
         },
         {
           "choice_number": 4,
           "choice_kind": "value",
           "choice_text": "8",
-          "payload": 8,
           "is_correct": false
         }
       ],
@@ -336,7 +400,7 @@
       }
     },
     {
-      "question_number": 40,
+      "question_number": 7,
       "book_section": "I",
       "book_question_number": 40,
       "question_type": "fill_blanks_multi",
@@ -385,7 +449,7 @@
       }
     },
     {
-      "question_number": 41,
+      "question_number": 8,
       "book_section": "I",
       "book_question_number": 41,
       "question_type": "worst_choice",
@@ -428,7 +492,7 @@
       }
     },
     {
-      "question_number": 42,
+      "question_number": 9,
       "book_section": "I",
       "book_question_number": 42,
       "question_type": "worst_choice",
@@ -471,7 +535,7 @@
       }
     },
     {
-      "question_number": 43,
+      "question_number": 10,
       "book_section": "I",
       "book_question_number": 43,
       "question_type": "identify_normal_form",
@@ -520,7 +584,7 @@
       }
     },
     {
-      "question_number": 44,
+      "question_number": 11,
       "book_section": "I",
       "book_question_number": 44,
       "question_type": "identify_normal_form",
@@ -535,12 +599,43 @@
           "asset_type": "functional_dependency",
           "payload": {
             "table": "수강지도",
-            "columns": ["학번", "과목코드", "성적", "지도교수명", "학과명"],
-            "pk": ["학번", "과목코드"],
+            "columns": [
+              "학번",
+              "과목코드",
+              "성적",
+              "지도교수명",
+              "학과명"
+            ],
+            "pk": [
+              "학번",
+              "과목코드"
+            ],
             "dependencies": [
-              {"determinants": ["학번", "과목코드"], "dependents": ["성적"]},
-              {"determinants": ["학번"], "dependents": ["지도교수명"]},
-              {"determinants": ["학번"], "dependents": ["학과명"]}
+              {
+                "determinants": [
+                  "학번",
+                  "과목코드"
+                ],
+                "dependents": [
+                  "성적"
+                ]
+              },
+              {
+                "determinants": [
+                  "학번"
+                ],
+                "dependents": [
+                  "지도교수명"
+                ]
+              },
+              {
+                "determinants": [
+                  "학번"
+                ],
+                "dependents": [
+                  "학과명"
+                ]
+              }
             ]
           }
         }
@@ -576,7 +671,7 @@
       }
     },
     {
-      "question_number": 45,
+      "question_number": 12,
       "book_section": "I",
       "book_question_number": 45,
       "question_type": "best_choice",
@@ -591,11 +686,35 @@
           "asset_type": "data_table",
           "payload": {
             "name": "고객",
-            "columns": ["고객번호", "고객명", "주민등록번호", "취미코드", "취미명"],
+            "columns": [
+              "고객번호",
+              "고객명",
+              "주민등록번호",
+              "취미코드",
+              "취미명"
+            ],
             "rows": [
-              {"고객번호": "10", "고객명": "김○○", "주민등록번호": "123456-7890123", "취미코드": "10,11", "취미명": "노래, 댄스"},
-              {"고객번호": "20", "고객명": "이○○", "주민등록번호": "234567-8901234", "취미코드": "12,13", "취미명": "검도, 게임"},
-              {"고객번호": "30", "고객명": "박○○", "주민등록번호": "345678-9012345", "취미코드": "11,15,16", "취미명": "댄스,등산,수영"}
+              {
+                "고객번호": "10",
+                "고객명": "김○○",
+                "주민등록번호": "123456-7890123",
+                "취미코드": "10,11",
+                "취미명": "노래, 댄스"
+              },
+              {
+                "고객번호": "20",
+                "고객명": "이○○",
+                "주민등록번호": "234567-8901234",
+                "취미코드": "12,13",
+                "취미명": "검도, 게임"
+              },
+              {
+                "고객번호": "30",
+                "고객명": "박○○",
+                "주민등록번호": "345678-9012345",
+                "취미코드": "11,15,16",
+                "취미명": "댄스,등산,수영"
+              }
             ]
           }
         }
@@ -631,7 +750,7 @@
       }
     },
     {
-      "question_number": 46,
+      "question_number": 13,
       "book_section": "I",
       "book_question_number": 46,
       "question_type": "worst_choice",
@@ -674,7 +793,7 @@
       }
     },
     {
-      "question_number": 47,
+      "question_number": 14,
       "book_section": "I",
       "book_question_number": 47,
       "question_type": "worst_choice",
@@ -695,16 +814,44 @@
                 {
                   "table": "",
                   "columns": [
-                    {"name": "사번", "key": "PK"},
-                    {"name": "부서", "key": "PK"},
-                    {"name": "사무실"}
+                    {
+                      "name": "사번",
+                      "key": "PK"
+                    },
+                    {
+                      "name": "부서",
+                      "key": "PK"
+                    },
+                    {
+                      "name": "사무실"
+                    }
                   ],
                   "rows": [
-                    {"사번": "001", "부서": "총무", "사무실": "서울"},
-                    {"사번": "002", "부서": "영업", "사무실": "부산"},
-                    {"사번": "003", "부서": "총무", "사무실": "서울"},
-                    {"사번": "004", "부서": "연구", "사무실": "대전"},
-                    {"사번": "005", "부서": "영업", "사무실": "부산"}
+                    {
+                      "사번": "001",
+                      "부서": "총무",
+                      "사무실": "서울"
+                    },
+                    {
+                      "사번": "002",
+                      "부서": "영업",
+                      "사무실": "부산"
+                    },
+                    {
+                      "사번": "003",
+                      "부서": "총무",
+                      "사무실": "서울"
+                    },
+                    {
+                      "사번": "004",
+                      "부서": "연구",
+                      "사무실": "대전"
+                    },
+                    {
+                      "사번": "005",
+                      "부서": "영업",
+                      "사무실": "부산"
+                    }
                   ]
                 }
               ]
@@ -715,27 +862,59 @@
                 {
                   "table": "",
                   "columns": [
-                    {"name": "사번"},
-                    {"name": "부서"}
+                    {
+                      "name": "사번"
+                    },
+                    {
+                      "name": "부서"
+                    }
                   ],
                   "rows": [
-                    {"사번": "001", "부서": "총무"},
-                    {"사번": "002", "부서": "영업"},
-                    {"사번": "003", "부서": "총무"},
-                    {"사번": "004", "부서": "연구"},
-                    {"사번": "005", "부서": "영업"}
+                    {
+                      "사번": "001",
+                      "부서": "총무"
+                    },
+                    {
+                      "사번": "002",
+                      "부서": "영업"
+                    },
+                    {
+                      "사번": "003",
+                      "부서": "총무"
+                    },
+                    {
+                      "사번": "004",
+                      "부서": "연구"
+                    },
+                    {
+                      "사번": "005",
+                      "부서": "영업"
+                    }
                   ]
                 },
                 {
                   "table": "",
                   "columns": [
-                    {"name": "부서"},
-                    {"name": "사무실"}
+                    {
+                      "name": "부서"
+                    },
+                    {
+                      "name": "사무실"
+                    }
                   ],
                   "rows": [
-                    {"부서": "총무", "사무실": "서울"},
-                    {"부서": "영업", "사무실": "부산"},
-                    {"부서": "연구", "사무실": "대전"}
+                    {
+                      "부서": "총무",
+                      "사무실": "서울"
+                    },
+                    {
+                      "부서": "영업",
+                      "사무실": "부산"
+                    },
+                    {
+                      "부서": "연구",
+                      "사무실": "대전"
+                    }
                   ]
                 }
               ]
@@ -774,7 +953,7 @@
       }
     },
     {
-      "question_number": 48,
+      "question_number": 15,
       "book_section": "I",
       "book_question_number": 48,
       "question_type": "worst_choice",
@@ -817,7 +996,7 @@
       }
     },
     {
-      "question_number": 49,
+      "question_number": 16,
       "book_section": "I",
       "book_question_number": 49,
       "question_type": "best_choice",
@@ -860,7 +1039,7 @@
       }
     },
     {
-      "question_number": 50,
+      "question_number": 17,
       "book_section": "I",
       "book_question_number": 50,
       "question_type": "worst_choice",
@@ -900,6 +1079,648 @@
       ],
       "answer": {
         "explanation": "인조식별자는 단점도 존재하므로 꼭 필요한 경우에만 사용하는 것이 바람직하며, 무분별한 사용은 데이터 품질 저하를 초래할 수 있다."
+      }
+    },
+    {
+      "question_number": 18,
+      "book_section": "M55",
+      "book_question_number": 4,
+      "exam_subject": 1,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 설명에 해당하는 정규화 단계는?\n\n[내용]\n주식별자 컬럼 두 개를 하나씩 나누어 테이블을 분리함으로써, 일반 속성이 주식별자에 부분적으로 종속되는 현상을 해결한다."
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "제1 정규화",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "제2 정규화",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "제3 정규화",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "BCNF",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "부분 함수 종속을 제거하는 단계가 제2 정규화이다."
+      }
+    },
+    {
+      "question_number": 19,
+      "book_section": "M55",
+      "book_question_number": 5,
+      "exam_subject": 1,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "제1 정규형에 대한 설명으로 적절하지 않은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "모든 속성이 원자값을 가진다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "일반 속성은 주식별자 전체에 종속적이다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "반복되는 속성 그룹이 존재하지 않는다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "하나의 행은 유일하게 식별될 수 있다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "\"주식별자 전체에 종속\" 조건은 제2 정규형의 특성이다."
+      }
+    },
+    {
+      "question_number": 20,
+      "book_section": "M55",
+      "book_question_number": 7,
+      "exam_subject": 1,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "트랜잭션의 특성 중 \"모두 수행되거나 모두 수행되지 않아야 한다\" 는 특성은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "원자성(Atomicity)",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "일관성(Consistency)",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "고립성(Isolation)",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "영속성(Durability)",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "원자성(Atomicity)은 트랜잭션의 모든 연산이 모두 수행되거나 전혀 수행되지 않아야 한다는 특성이다."
+      }
+    },
+    {
+      "question_number": 21,
+      "book_section": "M56",
+      "book_question_number": 9,
+      "exam_subject": 1,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "모든 일반 속성이 주식별자에 완전 함수 종속된 정규형은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "제1 정규형",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "제2 정규형",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "제3 정규형",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "보이스-코드 정규형",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "제2 정규형은 부분 함수 종속을 제거하여 모든 일반 속성이 주식별자에 완전 함수 종속되는 상태를 의미한다."
+      }
+    },
+    {
+      "question_number": 22,
+      "book_section": "M56",
+      "book_question_number": 10,
+      "exam_subject": 1,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "정규화에 대한 설명 중 옳지 않은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "정규화 시 유연성이 떨어진다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "일반 속성 간 종속을 제거하는 것은 제3 정규형이다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "반정규화는 데이터 중복으로 독립성이 떨어진다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "정규화를 많이 할수록 성능이 저하된다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "정규화는 중복을 줄이고 유연성을 높이는 과정이다. 유연성이 저하된다는 설명은 옳지 않다."
+      }
+    },
+    {
+      "question_number": 23,
+      "book_section": "M57",
+      "book_question_number": 3,
+      "exam_subject": 1,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 [직원] 테이블을 제1정규화 하기 위한 방법으로 가장 옳은 것은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "직원 테이블 (제1정규화 전)",
+            "columns": [
+              "부서코드",
+              "직원명"
+            ],
+            "rows": [
+              {
+                "부서코드": "D10",
+                "직원명": "홍길동, 이순신"
+              },
+              {
+                "부서코드": "D20",
+                "직원명": "강감찬"
+              }
+            ]
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "직원 속성 값이 두 개인 경우가 있어 원자성을 위배하므로 직원1 컬럼, 직원2 컬럼을 둔다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "부서코드를 별도의 테이블로 분리한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "직원 속성 값을 각 행에 하나씩만 담도록 개개 레코드로 분해한다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "직원명을 관계형 배열 타입으로 저장한다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "제1정규형은 모든 속성이 원자값을 가져야 한다. 값을 컬럼으로 반복 확장하는 방식은 원자성을 보장하지 못한다."
+      }
+    },
+    {
+      "question_number": 24,
+      "book_section": "M58",
+      "book_question_number": 2,
+      "exam_subject": 1,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "3정규형에 대한 설명 중 옳지 않은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "3정규형은 이행 함수 종속성을 배제하지 않는다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "1정규형은 모든 속성이 원자값을 가지는 상태이다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "2정규형은 부분 함수 종속을 제거한 상태이다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "3정규형은 2정규형을 만족하면서 이행 종속을 제거한 상태이다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "3정규형의 핵심은 이행 함수 종속성을 제거하는 것이다. 이를 배제하지 않는다는 설명은 3정규형의 정의와 상반된다."
+      }
+    },
+    {
+      "question_number": 25,
+      "book_section": "M58",
+      "book_question_number": 7,
+      "exam_subject": 1,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 함수 종속 관계에서 이행 함수 종속에 해당하는 것은?"
+          }
+        },
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "사번 → 부서번호, 부서번호 → 부서위치"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "사번 → 부서번호",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "부서번호 → 부서위치",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "사번 → 부서위치",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "부서위치 → 사번",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "A→B, B→C 관계가 성립할 때 A→C 를 이행 함수 종속이라 한다. 3정규화는 이를 제거한다."
+      }
+    },
+    {
+      "question_number": 26,
+      "book_section": "M59",
+      "book_question_number": 7,
+      "exam_subject": 1,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "다음 중 이행적 함수 종속(Transitive Dependency)을 제거하는 정규화 단계는?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "1정규형",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "2정규형",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "3정규형",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "BCNF",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "이행적 종속 제거는 3정규화의 목적이다. 2정규화는 부분 함수 종속을, BCNF는 결정자이면서 후보키가 아닌 종속을 제거한다."
+      }
+    },
+    {
+      "question_number": 27,
+      "book_section": "M59",
+      "book_question_number": 8,
+      "exam_subject": 1,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "트랜잭션의 특성(ACID)에 해당하지 않는 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "원자성(Atomicity)",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "상호성(Interactivity)",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "일관성(Consistency)",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "영속성(Durability)",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "트랜잭션의 네 가지 특성은 원자성(Atomicity), 일관성(Consistency), 고립성(Isolation), 영속성(Durability)이다. 상호성(Interactivity)은 ACID와 무관한 개념이므로 정답이다."
+      }
+    },
+    {
+      "question_number": 28,
+      "book_section": "M59",
+      "book_question_number": 21,
+      "exam_subject": 2,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "정규화에 대한 설명 중 옳지 않은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "정규화는 데이터의 중복성과 유연성을 최소화하기 위해 사용된다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "정규화를 수행하면 테이블 간의 독립성이 향상된다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "정규형에는 1정규형, 2정규형, 3정규형, BCNF 정규형 등이 있다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "단일 속성 값을 가지면 1정규형을 만족한다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "정규화는 중복을 최소화하고 유연성을 향상시키는 것이 목적이다. 유연성까지 최소화한다는 설명은 옳지 않다."
+      }
+    },
+    {
+      "question_number": 29,
+      "book_section": "M60",
+      "book_question_number": 9,
+      "exam_subject": 1,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "다음 중 주식별자 선정과 가장 관련이 적은 정규화는?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "1정규화",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "2정규화",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "3정규화",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "BCNF",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "1·2정규화와 BCNF는 모두 키(결정자)를 기준으로 수행하지만, 3정규화는 비주식별자 간의 이행적 종속을 제거하는 단계로 주식별자 자체와의 관련성이 가장 낮다."
+      }
+    },
+    {
+      "question_number": 30,
+      "book_section": "M60",
+      "book_question_number": 10,
+      "exam_subject": 1,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "인조 식별자와 본질 식별자에 대한 설명 중 옳지 않은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "본질 식별자는 업무 수행 과정에서 쉽게 파악된다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "본질 식별자는 어떠한 업무 행위 없이도 부여될 수 있다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "인조 식별자는 본질 식별자가 존재함에도 관리 편의를 위해 별도로 부여될 수 있다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "본질 식별자는 업무 규칙 변화에 따라 값이 변경될 수 있다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "본질 식별자는 업무 행위를 통해 그 값이 결정되는 속성이므로, 업무 행위가 전혀 없는 상태에서 부여되는 값은 본질 식별자로 적절하지 않다. 업무 행위 없이 부여되는 것은 인조 식별자의 특성이다."
+      }
+    },
+    {
+      "question_number": 31,
+      "book_section": "M60",
+      "book_question_number": 27,
+      "exam_subject": 1,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "트랜잭션의 고립성(Isolation)에 대한 설명으로 가장 옳은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "다른 트랜잭션으로부터 영향을 받지 않는다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "트랜잭션 전후 데이터 정합성이 유지된다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "전체가 반영되거나 전혀 반영되지 않는다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "커밋된 결과는 시스템 장애에도 보존된다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "고립성은 실행 중인 트랜잭션의 중간 결과가 다른 트랜잭션의 영향을 받지 않음을 보장한다."
       }
     }
   ]
