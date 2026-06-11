@@ -16,14 +16,18 @@ import uuid
 from dotenv import load_dotenv
 from sqlalchemy import (
     Boolean,
+    CheckConstraint,
     Column,
     DateTime,
     Float,
     ForeignKey,
+    Index,
     Integer,
+    SmallInteger,
     String,
     Text,
     create_engine,
+    text,
 )
 from sqlalchemy.orm import DeclarativeBase, sessionmaker
 from sqlalchemy.types import JSON  # SQLite=JSON(TEXT) / Postgres=JSONB 로 매핑됨
@@ -152,6 +156,40 @@ class Question(Base):
     fitness_score = Column(Float, nullable=True)
     created_at = Column(DateTime, default=datetime.datetime.utcnow)
 
+    # --- v4 스키마: 원본 자산 보존 + 시험지 과목 + 임베딩 동기화 ---
+    # assets: 원본 asset 배열(text_block/data_table/sql_query/erd) 무손실 보존(single source of truth).
+    #         question_text/sql_code/has_sql_asset 등 파생 컬럼은 여기서 생성된다.
+    assets = Column(JSON, nullable=True)
+    # exam_subject: 원본 시험지 과목(기출 M55~M60 만 값). 주제 기반 재분류로 subject_id 와 교차하는 3건 대응.
+    exam_subject = Column(SmallInteger, nullable=True)
+    # content_hash: md5(question_text + sql_code + explanation). 내용 변경 시 재임베딩/재계산 대상 식별.
+    content_hash = Column(String, nullable=False, default="")
+    updated_at = Column(
+        DateTime,
+        default=datetime.datetime.utcnow,
+        onupdate=datetime.datetime.utcnow,
+        nullable=True,
+    )
+
+    __table_args__ = (
+        CheckConstraint(
+            "status IN ('active','pending','rejected','retired')", name="ck_q_status"
+        ),
+        CheckConstraint("source IN ('original','generated')", name="ck_q_source"),
+        # 생성 문제 ↔ 부모 존재 쌍조건: generated 이면 generated_from 필수, 아니면 NULL
+        CheckConstraint(
+            "(source = 'generated') = (generated_from IS NOT NULL)", name="ck_q_origin"
+        ),
+        # 기출 중복 적재 방지: 같은 회차·번호가 두 챕터에 들어가는 사고 차단 (Postgres 부분 유니크)
+        Index(
+            "ux_q_exam",
+            "book_section",
+            "book_question_number",
+            unique=True,
+            postgresql_where=text("book_section LIKE 'M%'"),
+        ),
+    )
+
 
 class AnswerLog(Base):
     __tablename__ = "answer_logs"
@@ -173,6 +211,70 @@ class AnswerLog(Base):
     logged_at = Column(DateTime, default=datetime.datetime.utcnow)
 
 
+class QuestionDedupLog(Base):
+    """중복 처리 이력 — v3 canonical_id(논리 통합) 대체.
+
+    순수 감사·캘리브레이션 테이블. 플라이휠 dedup 게이트의 폐기 이력과 판정 근거(similarity)를
+    남겨 게이트 임계값 보정·중복 수렴 추적에 쓴다.
+    (모의고사 복원 기능 폐지로 복원 스냅샷 4컬럼 — book_section/book_question_number/
+     exam_subject/removed_assets — 제거)
+    removed_question_id 는 이미 삭제(또는 retired)된 문항이라 questions FK 를 걸지 않는다.
+    """
+
+    __tablename__ = "question_dedup_log"
+
+    removed_question_id = Column(String, primary_key=True)
+    kept_question_id = Column(
+        String, ForeignKey("questions.question_id"), nullable=False
+    )
+    # 판정 근거 (캘리브레이션 데이터)
+    similarity = Column(Float, nullable=True)
+    method = Column(String, nullable=False, default="manual")  # manual / flywheel_gate
+    removed_at = Column(DateTime, default=datetime.datetime.utcnow)
+
+    __table_args__ = (
+        CheckConstraint(
+            "removed_question_id <> kept_question_id", name="ck_dedup_distinct"
+        ),
+        Index("ix_dedup_kept", "kept_question_id"),
+    )
+
+
+class QuestionSimilar(Base):
+    """유사도 사전 매핑 — /explain 무쿼리화 + 추천 쿨다운 + 플라이휠 dedup 사전 필터.
+
+    이웃 풀은 serving(status='active')만. refresh_similarities.py 가 풀 리프레시로 채운다.
+    PK=(question_id, similar_question_id) — 관계가 곧 키. 중복 이웃을 스키마 차원에서 차단하고,
+    순위는 similarity DESC 정렬로 도출(rank 컬럼 폐지). 모델 교체는 model_name 으로 추적.
+    """
+
+    __tablename__ = "question_similar"
+
+    question_id = Column(
+        String,
+        ForeignKey("questions.question_id", ondelete="CASCADE"),
+        primary_key=True,
+    )
+    similar_question_id = Column(
+        String,
+        ForeignKey("questions.question_id", ondelete="CASCADE"),
+        primary_key=True,
+    )
+    similarity = Column(Float, nullable=False)
+    model_name = Column(String, nullable=False)
+    computed_at = Column(DateTime(timezone=True), default=datetime.datetime.utcnow)
+
+    __table_args__ = (
+        CheckConstraint(
+            "similarity > 0 AND similarity <= 1", name="ck_qsim_similarity"
+        ),
+        CheckConstraint(
+            "question_id <> similar_question_id", name="ck_qsim_distinct"
+        ),
+        Index("ix_qsim_reverse", "similar_question_id"),
+    )
+
+
 if HAS_PGVECTOR:
 
     class QuestionEmbedding(Base):
@@ -191,6 +293,8 @@ if HAS_PGVECTOR:
         )
         embedding = Column(Vector(EMBED_DIM), nullable=False)
         model_name = Column(String, nullable=False, default=EMBED_MODEL_NAME)
+        # content_hash: 임베딩 생성 시점의 questions.content_hash. 스테일(문항 수정·모델 교체) 검출용.
+        content_hash = Column(String, nullable=False, default="")
         updated_at = Column(
             DateTime,
             default=datetime.datetime.utcnow,
@@ -220,15 +324,37 @@ def ensure_vector_extension() -> bool:
         return False
 
 
+def create_views() -> None:
+    """serving_questions 뷰 — 추천·연습·RAG 컨텍스트 공통 서빙 풀(status='active').
+
+    CREATE OR REPLACE 는 SQLite 미지원이라 DROP+CREATE 로 통일(양 DB 호환·멱등).
+    """
+    with engine.begin() as conn:
+        conn.execute(text("DROP VIEW IF EXISTS serving_questions"))
+        conn.execute(
+            text(
+                "CREATE VIEW serving_questions AS "
+                "SELECT * FROM questions WHERE status = 'active'"
+            )
+        )
+
+
 def create_tables() -> None:
     # FK 의존성에 따라 questions → answer_logs 순서로 알아서 생성됨
     vector_ok = ensure_vector_extension()
     if QuestionEmbedding is not None and vector_ok:
         Base.metadata.create_all(bind=engine)  # 코어 + question_embeddings
     else:
-        # 벡터 미지원 환경 → 코어 테이블만 (question_embeddings 생략해 크래시 방지)
-        core = [User.__table__, Question.__table__, AnswerLog.__table__]
+        # 벡터 미지원 환경 → 벡터 의존 테이블(question_embeddings)만 생략, 나머지 코어 전부 생성
+        core = [
+            User.__table__,
+            Question.__table__,
+            AnswerLog.__table__,
+            QuestionDedupLog.__table__,
+            QuestionSimilar.__table__,
+        ]
         Base.metadata.create_all(bind=engine, tables=core)
+    create_views()
 
 
 def get_db():

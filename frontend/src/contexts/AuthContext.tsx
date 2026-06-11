@@ -16,6 +16,7 @@ interface AuthContextValue extends AuthState {
   login: (token: string, user: User) => void;
   loginAsGuest: (token: string, user_id: string) => void;
   logout: () => void;
+  updateUsername: (newUsername: string) => void;
 }
 
 const AuthContext = createContext<AuthContextValue | null>(null);
@@ -64,8 +65,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setState({ token: null, user: null, isGuest: false });
   }, []);
 
+  const updateUsername = useCallback((newUsername: string) => {
+    setState((prev) => {
+      if (!prev.user) return prev;
+      const updated = { ...prev.user, username: newUsername };
+      localStorage.setItem(USER_KEY, JSON.stringify(updated));
+      return { ...prev, user: updated };
+    });
+  }, []);
+
   return (
-    <AuthContext.Provider value={{ ...state, login, loginAsGuest, logout }}>
+    <AuthContext.Provider value={{ ...state, login, loginAsGuest, logout, updateUsername }}>
       {children}
     </AuthContext.Provider>
   );
