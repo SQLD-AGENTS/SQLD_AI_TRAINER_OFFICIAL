@@ -21,7 +21,7 @@ export const authApi = {
     apiClient.post('/auth/register', { username, email, password }),
   guest: () => apiClient.post('/auth/guest'),
   googleLogin: (accessToken: string) =>
-    apiClient.post<{ access_token: string; user_id: string; username: string; is_new_user: boolean }>('/auth/google', { access_token: accessToken }),
+    apiClient.post<{ access_token: string; user_id: string; username: string; is_new_user: boolean; avatar_url?: string | null }>('/auth/google', { access_token: accessToken }),
   checkUsername: (username: string) =>
     apiClient.get<{ available: boolean }>('/auth/check-username', { params: { username } }),
   findUsername: (email: string) =>
@@ -47,9 +47,23 @@ export const questionsApi = {
 };
 
 // ── Logs ──────────────────────────────────────────────
+export interface SolvedSummary {
+  solved_ids: string[];
+  correct_ids: string[];
+}
+
+export interface CheckSolvedResult {
+  is_solved: boolean;
+  is_correct: boolean | null;
+}
+
 export const logsApi = {
   submit: (question_id: string, selected: number) =>
     apiClient.post('/logs', { question_id, selected_answer: selected }),
+  getSolvedSummary: () =>
+    apiClient.get<SolvedSummary>('/logs/solved'),
+  checkSolved: (question_id: string) =>
+    apiClient.get<CheckSolvedResult>(`/logs/check/${question_id}`),
 };
 
 // ── Predict ───────────────────────────────────────────
