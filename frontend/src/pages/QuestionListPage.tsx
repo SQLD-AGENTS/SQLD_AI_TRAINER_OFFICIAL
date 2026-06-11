@@ -1,16 +1,52 @@
-import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
+import { useSearchParams } from 'react-router-dom';
 import PageLayout from '../components/layout/PageLayout';
 import FilterPanel, { type Filters } from '../components/question/FilterPanel';
 import QuestionCard from '../components/question/QuestionCard';
 import Spinner from '../components/ui/Spinner';
-import { questionsApi } from '../services/api';
+import { questionsApi, logsApi } from '../services/api';
+import { useAuth } from '../contexts/AuthContext';
 
 const DEFAULT_FILTERS: Filters = { chapters: [], difficulty: '전체', question_type: '전체' };
 
+function buildPageWindow(current: number, total: number): (number | '…')[] {
+  if (total <= 9) return Array.from({ length: total }, (_, i) => i + 1);
+  const delta = 2;
+  const left = Math.max(2, current - delta);
+  const right = Math.min(total - 1, current + delta);
+  const pages: (number | '…')[] = [1];
+  if (left > 2) pages.push('…');
+  for (let i = left; i <= right; i++) pages.push(i);
+  if (right < total - 1) pages.push('…');
+  pages.push(total);
+  return pages;
+}
+
 export default function QuestionListPage() {
-  const [filters, setFilters] = useState<Filters>(DEFAULT_FILTERS);
-  const [page, setPage] = useState(1);
+  const { user, isGuest, showSolvedStatus, toggleShowSolvedStatus } = useAuth();
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const filters: Filters = {
+    chapters: searchParams.get('chapters')?.split(',').filter(Boolean) ?? [],
+    difficulty: searchParams.get('difficulty') ?? '전체',
+    question_type: searchParams.get('question_type') ?? '전체',
+  };
+  const page = Number(searchParams.get('page') ?? '1');
+
+  const setFilters = (next: Filters) => {
+    const p = new URLSearchParams();
+    if (next.chapters.length > 0) p.set('chapters', next.chapters.join(','));
+    if (next.difficulty !== '전체') p.set('difficulty', next.difficulty);
+    if (next.question_type !== '전체') p.set('question_type', next.question_type);
+    p.set('page', '1');
+    setSearchParams(p, { replace: true });
+  };
+
+  const setPage = (n: number) => {
+    const p = new URLSearchParams(searchParams);
+    p.set('page', String(n));
+    setSearchParams(p, { replace: true });
+  };
 
   const PAGE_SIZE = 12;
   const params = {
@@ -20,6 +56,16 @@ export default function QuestionListPage() {
     limit: PAGE_SIZE,
     offset: (page - 1) * PAGE_SIZE,
   };
+
+  const { data: solvedData } = useQuery({
+    queryKey: ['solved-summary'],
+    queryFn: () => logsApi.getSolvedSummary().then((r) => r.data),
+    enabled: !!user && !isGuest,
+    staleTime: 60 * 1000,
+  });
+
+  const solvedSet = new Set(solvedData?.solved_ids ?? []);
+  const correctSet = new Set(solvedData?.correct_ids ?? []);
 
   const { data, isLoading } = useQuery({
     queryKey: ['questions', params],
@@ -45,24 +91,22 @@ export default function QuestionListPage() {
 
   const removeFilter = (label: string) => {
     if (filters.chapters.includes(label)) {
-      setFilters((f) => ({ ...f, chapters: f.chapters.filter((c) => c !== label) }));
+      setFilters({ ...filters, chapters: filters.chapters.filter((c) => c !== label) });
     } else if (label === filters.difficulty) {
-      setFilters((f) => ({ ...f, difficulty: '전체' }));
+      setFilters({ ...filters, difficulty: '전체' });
     } else {
-      setFilters((f) => ({ ...f, question_type: '전체' }));
+      setFilters({ ...filters, question_type: '전체' });
     }
   };
 
   return (
     <PageLayout wide>
-      <div className="row" style={{ justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 20 }}>
-        <div>
-          <h1 className="t-h1">문제 목록</h1>
-          <p className="t-body-2" style={{ margin: '6px 0 0' }}>
-            {data ? `총 ${data.total}문제` : '로딩 중…'} · 필터 결과{' '}
-            <strong style={{ color: 'var(--text)' }}>{total}문제</strong>
-          </p>
-        </div>
+      <div style={{ marginBottom: 20 }}>
+        <h1 className="t-h1">문제 목록</h1>
+        <p className="t-body-2" style={{ margin: '6px 0 0' }}>
+          {data ? `총 ${data.total}문제` : '로딩 중…'} · 필터 결과{' '}
+          <strong style={{ color: 'var(--text)' }}>{total}문제</strong>
+        </p>
       </div>
 
       {activeFilters.length > 0 && (
@@ -77,7 +121,7 @@ export default function QuestionListPage() {
           <button
             className="link-pill"
             style={{ marginLeft: 4, background: 'none', border: 'none', cursor: 'pointer' }}
-            onClick={() => { setFilters(DEFAULT_FILTERS); setPage(1); }}
+            onClick={() => setFilters(DEFAULT_FILTERS)}
           >
             모두 지우기
           </button>
@@ -86,10 +130,22 @@ export default function QuestionListPage() {
 
       <div className="row" style={{ alignItems: 'flex-start', gap: 24 }}>
         <aside style={{ width: 240, flexShrink: 0 }}>
+          {user && !isGuest && (
+            <div
+              style={{
+                display: 'flex', alignItems: 'center', gap: 8,
+                marginBottom: 12, cursor: 'pointer',
+              }}
+              onClick={toggleShowSolvedStatus}
+            >
+              <div className={`toggle${showSolvedStatus ? '' : ' is-off'}`} />
+              <span className="t-body-2" style={{ userSelect: 'none' }}>풀이 여부 표시</span>
+            </div>
+          )}
           <FilterPanel
             filters={filters}
-            onChange={(f) => { setFilters(f); setPage(1); }}
-            onReset={() => { setFilters(DEFAULT_FILTERS); setPage(1); }}
+            onChange={setFilters}
+            onReset={() => setFilters(DEFAULT_FILTERS)}
           />
         </aside>
 
@@ -105,7 +161,12 @@ export default function QuestionListPage() {
           ) : (
             <div className="grid-2">
               {questions.map((q: Parameters<typeof QuestionCard>[0]['q']) => (
-                <QuestionCard key={q.question_id} q={q} />
+                <QuestionCard
+                  key={q.question_id}
+                  q={q}
+                  isSolved={showSolvedStatus ? solvedSet.has(q.question_id) : undefined}
+                  isCorrect={showSolvedStatus ? correctSet.has(q.question_id) : undefined}
+                />
               ))}
             </div>
           )}
@@ -113,9 +174,13 @@ export default function QuestionListPage() {
           {totalPages > 1 && (
             <div className="pager" style={{ marginTop: 24 }}>
               <span className={`p${page === 1 ? ' is-dis' : ''}`} onClick={() => page > 1 && setPage(page - 1)}>‹</span>
-              {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
-                <span key={p} className={`p${p === page ? ' is-active' : ''}`} onClick={() => setPage(p)}>{p}</span>
-              ))}
+              {buildPageWindow(page, totalPages).map((p, idx) =>
+                p === '…' ? (
+                  <span key={`ellipsis-${idx}`} className="p" style={{ cursor: 'default' }}>…</span>
+                ) : (
+                  <span key={p} className={`p${p === page ? ' is-active' : ''}`} onClick={() => setPage(p)}>{p}</span>
+                )
+              )}
               <span className={`p${page === totalPages ? ' is-dis' : ''}`} onClick={() => page < totalPages && setPage(page + 1)}>›</span>
             </div>
           )}
