@@ -1,9 +1,11 @@
-import { Link, useMatch } from 'react-router-dom';
+import { Link, useMatch, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
+import Avatar from '../ui/Avatar';
 
 export default function TopBar() {
   const { user, isGuest, logout } = useAuth();
   const isUser = !!user && !isGuest;
+  const navigate = useNavigate();
 
   const questionsActive = useMatch('/questions/*');
   const dashboardActive = useMatch('/dashboard');
@@ -39,7 +41,15 @@ export default function TopBar() {
           </>
         ) : (
           <>
-            <span className="t-caption" style={{ color: 'var(--text-2)' }}>{user.username}</span>
+            <button
+              className="btn-icon"
+              onClick={() => navigate('/profile')}
+              title="프로필"
+              style={{ display: 'flex', alignItems: 'center', gap: 8, background: 'none', border: 'none', cursor: 'pointer', padding: '4px 8px', borderRadius: 8 }}
+            >
+              <Avatar username={user.username} size={32} fontSize={13} imageUrl={user.avatar_url ?? null} />
+              <span className="t-caption" style={{ color: 'var(--text-2)' }}>{user.username}</span>
+            </button>
             <button className="btn btn-outline btn-sm" onClick={logout}>로그아웃</button>
           </>
         )}

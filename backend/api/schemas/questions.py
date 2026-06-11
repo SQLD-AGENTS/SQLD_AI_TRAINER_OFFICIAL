@@ -36,3 +36,13 @@ class AnswerSubmitResponse(BaseModel):
     is_correct: bool
     correct_answer: Optional[Any] = None
     message: str
+
+
+class SolvedSummaryResponse(BaseModel):
+    solved_ids: list[str]
+    correct_ids: list[str]
+
+
+class CheckSolvedResponse(BaseModel):
+    is_solved: bool
+    is_correct: Optional[bool] = None

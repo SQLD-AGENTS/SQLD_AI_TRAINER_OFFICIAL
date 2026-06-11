@@ -3,6 +3,7 @@ datasets/*.pdf
 datasets/*.PDF
 workflow/
 trouble_shooting/
+.claude/
 
 # 생성된 리포트
 reports/
@@ -85,3 +86,6 @@ backend/outputs/
 # backend/models/   ← Docker 빌드에 필요하므로 추적
 backend/*.db
 backend/*.sqlite
+backend/=*
+CLAUDE.md
+backend/run.py

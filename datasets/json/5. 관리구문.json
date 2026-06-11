@@ -582,7 +582,7 @@
           }
         },
         {
-          "asset_type": "sql_dml",
+          "asset_type": "sql_query",
           "payload": {
             "dialect": "ansi",
             "code": "MERGE INTO t1 a\nUSING T2 B\nON (B.EMPNO = A.EMPNO)\nWHEN MATCHED THEN\n  UPDATE SET A.SAL = B.SAL + 500\n  WHERE A.JOB = 'CLERK'\n  DELETE WHERE A.SAL < 2000\nWHEN NOT MATCHED THEN\n  INSERT (A.EMPNO, A.ENAME, A.JOB)\n  VALUES (B.EMPNO, B.ENAME, B.JOB)\n  WHERE B.JOB = 'CLERK';"
@@ -1984,6 +1984,1826 @@
       ],
       "answer": {
         "explanation": "① 연관 서브쿼리를 활용한 UPDATE에서 WHERE 절은 UPDATE 대상이 되는 데이터의 범위를 결정하는데, WHERE 절이 누락되어 부서의 모든 데이터가 UPDATE 대상이 되므로 부서코드 A007, A008을 제외한 모든 데이터가 NULL 값으로 변경된다.\n② WHERE 절 조건이 부서임시가 아닌 부서 테이블이므로 A007, A008을 제외한 모든 데이터가 NULL 값으로 변경된다.\n④ ①과 같은 사유로 부서코드 A007, A008을 제외한 모든 데이터가 NULL 값으로 변경된다. 또한 변경일자를 하드 코딩하는 것은 답이 될 수 없다."
+      }
+    },
+    {
+      "question_number": 29,
+      "book_section": "M55",
+      "book_question_number": 15,
+      "exam_subject": 2,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 DDL 에서 오류가 발생하는 위치는?"
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "CREATE TABLE 1234_TBL (  -- (1)\n  COL1 VARCHAR2(20),     -- (2)\n  COL2 NUMBER             -- (3)\n);                        -- (4)"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "(1) 테이블명은 숫자로 시작할 수 없다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "(2) VARCHAR2 타입이 허용되지 않는다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "(3) NUMBER 타입에 크기를 지정하지 않을 수 없다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "(4) 세미콜론 위치 오류",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "Oracle 식별자 규칙상 테이블명은 영문자로 시작해야 하며 숫자로 시작할 수 없다. VARCHAR2(20)·NUMBER(크기 생략 허용)·세미콜론은 모두 정상 구문이다."
+      }
+    },
+    {
+      "question_number": 30,
+      "book_section": "M55",
+      "book_question_number": 35,
+      "exam_subject": 2,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 SQL 중 오류가 발생하는 문장은?"
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "CREATE TABLE SQLD_55_34_01 (\n  COL1 VARCHAR2(50),\n  COL2 NUMBER,\n  COL3 VARCHAR2(50),\n  CONSTRAINT PK_01 PRIMARY KEY (COL1)\n);\n\nCREATE TABLE SQLD_55_34_02 (\n  COL4 VARCHAR2(50),\n  COL5 NUMBER,\n  COL1 VARCHAR2(50),\n  CONSTRAINT PK_02 PRIMARY KEY (COL4),\n  CONSTRAINT FK_02_01 FOREIGN KEY (COL1) REFERENCES SQLD_55_34_01(COL1)\n);\n\n-- (1) INSERT INTO SQLD_55_34_01 VALUES ('A', 100, '가');\n-- (2) INSERT INTO SQLD_55_34_02 VALUES ('02_A', 100, NULL);\n-- (3) INSERT INTO SQLD_55_34_02 VALUES ('02_B', 200, 'A');\n-- (4) UPDATE SQLD_55_34_02 SET COL1 = 'B' WHERE COL4 = '02_A';"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "(1)",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "(2)",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "(3)",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "(4)",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "SQLD_55_34_01 에 'B' 키가 없으므로 외래키 무결성 제약조건 위반 오류(ORA-02291) 가 발생한다."
+      }
+    },
+    {
+      "question_number": 31,
+      "book_section": "M55",
+      "book_question_number": 36,
+      "exam_subject": 2,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 트랜잭션 수행 후 COMMIT 으로 데이터베이스에 영구 반영되는 SQL 의 조합으로 옳은 것은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "각 SQL 의 최종 운명",
+            "columns": [
+              "라벨",
+              "실행 시점",
+              "ROLLBACK 영향",
+              "COMMIT 반영"
+            ],
+            "rows": [
+              {
+                "라벨": "(가)",
+                "실행 시점": "트랜잭션 시작 직후",
+                "ROLLBACK 영향": "받지 않음 (SAVEPOINT A 이전)",
+                "COMMIT 반영": "✓"
+              },
+              {
+                "라벨": "(나)",
+                "실행 시점": "SAVEPOINT A 이후",
+                "ROLLBACK 영향": "취소됨",
+                "COMMIT 반영": "✗"
+              },
+              {
+                "라벨": "(다)",
+                "실행 시점": "SAVEPOINT B 이후",
+                "ROLLBACK 영향": "취소됨",
+                "COMMIT 반영": "✗"
+              },
+              {
+                "라벨": "(라)",
+                "실행 시점": "ROLLBACK 이후",
+                "ROLLBACK 영향": "받지 않음 (이후 실행)",
+                "COMMIT 반영": "✓"
+              },
+              {
+                "라벨": "(마)",
+                "실행 시점": "ROLLBACK 이후",
+                "ROLLBACK 영향": "받지 않음 (이후 실행)",
+                "COMMIT 반영": "✓"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "-- 트랜잭션 시작\n(가) SQL1   -- 첫 번째 변경\nSAVEPOINT A;\n(나) SQL2   -- A 이후 변경\nSAVEPOINT B;\n(다) SQL3   -- B 이후 변경\nROLLBACK TO SAVEPOINT A;   -- (나)·(다) 취소, (가) 는 유지\n(라) SQL4   -- 다시 변경 시작\n(마) SQL5\nCOMMIT;     -- 누적된 (가)·(라)·(마) 영구 반영"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "가, 라, 마",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "가, 나, 라, 마",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "가, 나, 다, 라, 마",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "가, 마",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "트랜잭션은 위에서 아래 순서로 실행되며, ROLLBACK TO SAVEPOINT 는 해당 SAVEPOINT 이후의 모든 변경을 취소하고 그 시점 상태로 되돌린다.\n\n단계별 분석:\n1. (가) 실행 → 변경 적용\n2. SAVEPOINT A → 현재 상태 저장점 A\n3. (나) 실행 → 변경 적용\n4. SAVEPOINT B → 저장점 B\n5. (다) 실행 → 변경 적용\n6. ROLLBACK TO SAVEPOINT A → A 이후의 변경인 (나)·(다) 취소. (가) 의 효과는 유지.\n7. (라) 실행 → 변경 적용\n8. (마) 실행 → 변경 적용\n9. COMMIT → 현재까지의 모든 누적 변경 ((가)·(라)·(마)) 영구 반영.\n\n따라서 영구 반영되는 SQL = (가), (라), (마) → 정답 ①. ② 는 (나) 가 ROLLBACK 으로 취소되었음을 놓쳤고, ③ 는 (다) 까지 모두 살았다고 잘못 판단, ④ 는 (라) 가 ROLLBACK 영향을 받지 않음을 놓쳤다."
+      }
+    },
+    {
+      "question_number": 32,
+      "book_section": "M55",
+      "book_question_number": 43,
+      "exam_subject": 2,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "테이블 구조는 유지한 채 행만 삭제하는 명령어로 적절한 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "DELETE, TRUNCATE",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "DROP, DELETE",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "TRUNCATE, DROP",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "UPDATE, DELETE",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "DROP 은 테이블 구조까지 삭제하므로 해당되지 않는다."
+      }
+    },
+    {
+      "question_number": 33,
+      "book_section": "M55",
+      "book_question_number": 46,
+      "exam_subject": 2,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "기존 테이블에 새로운 컬럼을 추가하는 DDL 로 적절한 것은?"
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "-- 직원 테이블에 직장우편번호(OFFI_POST_NUMBER) 컬럼을 추가한다."
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "CREATE TABLE EMP ADD OFFI_POST_NUMBER VARCHAR2(80);",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "ALTER TABLE EMP ADD (OFFI_POST_NUMBER VARCHAR2(80));",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "UPDATE TABLE EMP ADD OFFI_POST_NUMBER VARCHAR2(80);",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "INSERT INTO EMP (OFFI_POST_NUMBER) VALUES (NULL);",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "기존 테이블에 컬럼을 추가할 때는 ALTER TABLE ... ADD (컬럼명 데이터타입) 구문을 사용한다. CREATE는 신규 생성, UPDATE는 데이터 수정, INSERT는 행 추가용이다."
+      }
+    },
+    {
+      "question_number": 34,
+      "book_section": "M55",
+      "book_question_number": 47,
+      "exam_subject": 2,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "참조 무결성을 구현해 주는 키로 적절한 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "기본키",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "외래키",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "대체키",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "후보키",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "개체 무결성은 PRIMARY KEY, 참조 무결성은 FOREIGN KEY, 도메인 무결성은 CHECK 로 구현된다."
+      }
+    },
+    {
+      "question_number": 35,
+      "book_section": "M55",
+      "book_question_number": 48,
+      "exam_subject": 2,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "무결성 제약조건 위배에 대한 설명 중 옳지 않은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "도서관 테이블의 회원ID 컬럼에 FOREIGN KEY 제약이 정의되지 않았더라도 다른 테이블에 없는 회원ID 값을 넣으면 참조 무결성이 위배된다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "PRIMARY KEY 컬럼에 중복 값을 삽입하면 개체 무결성이 위배된다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "CHECK 제약을 벗어난 값이 입력되면 도메인 무결성이 위배된다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "NOT NULL 컬럼에 NULL 이 들어가면 개체 무결성이 위배된다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "참조 무결성은 FOREIGN KEY 제약이 정의된 경우에만 적용된다. FK 제약이 없는 컬럼은 일반 데이터 컬럼일 뿐이라, 다른 테이블에 없는 값을 넣어도 참조 무결성과 무관하다. 따라서 ① 은 옳지 않은 설명. ② PK 중복은 개체 무결성, ③ CHECK 벗어남은 도메인 무결성, ④ NOT NULL 위반은 개체 무결성(주식별자 NULL 금지의 연장 해석)으로 분류되어 모두 옳다."
+      }
+    },
+    {
+      "question_number": 36,
+      "book_section": "M56",
+      "book_question_number": 20,
+      "exam_subject": 2,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "TRUNCATE 에 대한 설명 중 옳은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "데이터 구조와 데이터를 모두 삭제한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "TRUNCATE 이후 ROLLBACK 으로 데이터를 복구할 수 있다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "특정 행만 삭제하는 것은 불가능하다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "모든 행을 제거할 경우 DELETE 보다 성능이 떨어진다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "TRUNCATE 는 WHERE 조건을 지정할 수 없으므로 특정 행만 삭제할 수 없다."
+      }
+    },
+    {
+      "question_number": 37,
+      "book_section": "M56",
+      "book_question_number": 28,
+      "exam_subject": 2,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "ROLLBACK 에 대한 설명 중 옳지 않은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "ROLLBACK 은 트랜잭션 전체를 되돌린다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "SAVEPOINT 이후의 작업만 부분 롤백할 수 있다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "COMMIT 이전으로 롤백할 수 있다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "ROLLBACK 이후에는 해당 트랜잭션의 변경 내용이 모두 취소된다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "COMMIT 이 수행되면 트랜잭션이 영구히 반영되므로 그 이전 상태로 되돌릴 수 없다."
+      }
+    },
+    {
+      "question_number": 38,
+      "book_section": "M56",
+      "book_question_number": 33,
+      "exam_subject": 2,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 TAB1, TAB2 테이블에 대한 UPDATE 쿼리와 동일한 결과를 산출하는 것은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "TAB1 테이블 (UPDATE 전)",
+            "columns": [
+              "COL1"
+            ],
+            "rows": [
+              {
+                "COL1": "100"
+              },
+              {
+                "COL1": "200"
+              },
+              {
+                "COL1": "300"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "TAB2 테이블",
+            "columns": [
+              "COL2"
+            ],
+            "rows": [
+              {
+                "COL2": "200"
+              },
+              {
+                "COL2": "300"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "UPDATE TAB1 T1\nSET    COL1 = (SELECT MAX(NULL)\n               FROM   TAB2 T2\n               WHERE  T1.COL1 = T2.COL2\n               AND    T1.COL1 >= 200);"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "UPDATE TAB1 SET COL1 = (SELECT MAX(COL2) FROM TAB2 T2 WHERE T1.COL1 = T2.COL2 AND T1.COL1 >= 200);",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "UPDATE TAB1 SET COL1 = (SELECT COALESCE(MAX(NULL), 0) FROM TAB2 T2 WHERE T1.COL1 = T2.COL2);",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "UPDATE TAB1 SET COL1 = (SELECT MAX(0) FROM TAB2 T2 WHERE T1.COL1 = T2.COL2 AND T1.COL1 >= 200);",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "UPDATE TAB1 SET COL1 = NULL;",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "서브쿼리가 `SELECT MAX(NULL) FROM TAB2 ...` 이라 항상 NULL 을 반환 (MAX 의 입력이 NULL 상수). WHERE 조건과 무관하게 모든 TAB1 행의 COL1 이 NULL 로 갱신된다 = ④ `UPDATE TAB1 SET COL1 = NULL;` 과 동일."
+      }
+    },
+    {
+      "question_number": 39,
+      "book_section": "M56",
+      "book_question_number": 38,
+      "exam_subject": 2,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "제약조건에 대한 설명 중 옳은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "기본키는 한 컬럼에 하나의 속성만 가질 수 있다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "외래키는 여러 컬럼으로 구성된 복합 외래키로 정의될 수 있다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "UNIQUE 는 NULL 을 허용하지 않는다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "FOREIGN KEY 는 동일 테이블 내에서는 정의할 수 없다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "외래키는 단일 컬럼뿐 아니라 복합 컬럼으로도 정의되어 부모 테이블의 복합 기본키를 참조할 수 있다."
+      }
+    },
+    {
+      "question_number": 40,
+      "book_section": "M56",
+      "book_question_number": 50,
+      "exam_subject": 2,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 SQL 수행 후 COUNT(*) 결과로 옳은 것은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "TAB1 초기 INSERT 직후",
+            "columns": [
+              "COL1",
+              "COL2"
+            ],
+            "rows": [
+              {
+                "COL1": "1",
+                "COL2": "2"
+              },
+              {
+                "COL1": "2",
+                "COL2": "1"
+              },
+              {
+                "COL1": "3",
+                "COL2": "4"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "CREATE TABLE TAB1 (COL1 NUMBER, COL2 NUMBER);\nINSERT INTO TAB1 VALUES (1, 2);\nINSERT INTO TAB1 VALUES (2, 1);\nINSERT INTO TAB1 VALUES (3, 4);\nSAVEPOINT SP1;\n\nUPDATE TAB1 SET COL1 = 4 WHERE COL2 <= 2;   -- (4,2),(4,1),(3,4)\nSAVEPOINT SP2;\n\nDELETE FROM TAB1 WHERE COL2 = 2;\nROLLBACK TO SAVEPOINT SP2;                  -- (4,2),(4,1),(3,4) 복원\n\nINSERT INTO TAB1 VALUES (4, 1);             -- (4,2),(4,1),(3,4),(4,1)\nCOMMIT;\n\nSELECT COUNT(*) FROM TAB1 WHERE COL1 = 4;   -- 3"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "최종 TAB1 상태",
+            "columns": [
+              "COL1",
+              "COL2"
+            ],
+            "rows": [
+              {
+                "COL1": "4",
+                "COL2": "2"
+              },
+              {
+                "COL1": "4",
+                "COL2": "1"
+              },
+              {
+                "COL1": "3",
+                "COL2": "4"
+              },
+              {
+                "COL1": "4",
+                "COL2": "1"
+              }
+            ]
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "1",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "2",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "3",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "4",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "UPDATE 로 COL2≤2 인 두 행의 COL1 이 4 로 갱신되고, DELETE 는 SP2 로 되돌려지므로 (4,2),(4,1),(3,4) 가 남는다. 마지막 INSERT (4,1) 가 더해져 COL1=4 인 행은 세 건이다."
+      }
+    },
+    {
+      "question_number": 41,
+      "book_section": "M57",
+      "book_question_number": 13,
+      "exam_subject": 2,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "COMMIT에 대한 설명 중 옳지 않은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "COMMIT 이후에는 다른 사용자가 변경된 데이터를 조회할 수 있다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "COMMIT 이전에도 본인 세션에서는 SELECT로 참조할 수 있다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "COMMIT 이전에 외부 사용자가 변경된 데이터를 확인할 수 있다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "COMMIT 이전에 수정은 가능하다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "일반적인 READ COMMITTED 고립 수준에서는 COMMIT 이전의 변경을 다른 사용자가 볼 수 없다."
+      }
+    },
+    {
+      "question_number": 42,
+      "book_section": "M57",
+      "book_question_number": 26,
+      "exam_subject": 2,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "고유키(UNIQUE) 제약조건에 대한 설명 중 옳지 않은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "고유키 컬럼에는 NULL 값이 여러 개 올 수 없다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "기본키는 고유키와 NOT NULL 제약조건이 합쳐진 상태이다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "고유키는 한 테이블에 여러 개 정의할 수 있다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "고유키 컬럼에는 기본적으로 인덱스가 자동 생성된다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "고유키 컬럼은 NULL 을 허용하며 여러 개의 NULL 값을 저장할 수 있다."
+      }
+    },
+    {
+      "question_number": 43,
+      "book_section": "M57",
+      "book_question_number": 28,
+      "exam_subject": 2,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "다음 설명 중 옳지 않은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "디폴트를 설정하면 전체 성능이 떨어진다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "NUMBER 형 크기를 키우는 것은 가능하지만 줄이는 것은 불가능하다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "NULL 이 중복되지 않을 때만 NOT NULL 제약조건을 설정할 수 있다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "PRIMARY KEY 제약을 추가하려면 대상 컬럼에 중복 값이 없어야 한다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "DEFAULT 설정은 값 입력 편의를 위한 것이며 성능과 직접 관련이 없다."
+      }
+    },
+    {
+      "question_number": 44,
+      "book_section": "M57",
+      "book_question_number": 42,
+      "exam_subject": 2,
+      "question_type": "predict_result",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "MERGE 문 수행 후의 결과로 옳은 것은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "TGT",
+            "columns": [
+              "ID",
+              "VAL"
+            ],
+            "rows": [
+              {
+                "ID": "1",
+                "VAL": "a"
+              },
+              {
+                "ID": "2",
+                "VAL": "a"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "SRC",
+            "columns": [
+              "ID",
+              "VAL"
+            ],
+            "rows": [
+              {
+                "ID": "1",
+                "VAL": "b"
+              },
+              {
+                "ID": "4",
+                "VAL": "c"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "MERGE INTO TGT T\nUSING SRC S ON (T.ID = S.ID)\nWHEN MATCHED     THEN UPDATE SET T.VAL = S.VAL\nWHEN NOT MATCHED THEN INSERT (ID, VAL) VALUES (S.ID, S.VAL);"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "1.a 2.a",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "1.a 2.a 4.c",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "1.b 2.a 4.c",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "1.b 4.c",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "ID=1 은 UPDATE 로 b 가 되고, ID=2 는 유지, ID=4 는 새로 INSERT 된다."
+      }
+    },
+    {
+      "question_number": 45,
+      "book_section": "M58",
+      "book_question_number": 14,
+      "exam_subject": 2,
+      "question_type": "predict_result",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 GRANT/REVOKE 수행 결과로 R 테이블에 대해 SELECT 권한을 보유한 사용자의 집합은?"
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "DBA : GRANT SELECT, INSERT, DELETE ON R TO U1;\nDBA : GRANT SELECT ON R TO U2 WITH GRANT OPTION;\nU2  : GRANT SELECT ON R TO U3;\nDBA : REVOKE SELECT ON R FROM U2 RESTRICT;"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "DBA, U1",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "DBA",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "DBA, U1, U3",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "DBA, U1, U2, U3",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "RESTRICT 옵션은 권한을 다시 부여한 사용자(U3)가 존재하면 REVOKE를 거부하여 오류가 발생한다. 따라서 네 사용자의 SELECT 권한이 모두 그대로 유지된다."
+      }
+    },
+    {
+      "question_number": 46,
+      "book_section": "M58",
+      "book_question_number": 30,
+      "exam_subject": 2,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 MERGE 문 수행 결과에 대한 설명으로 옳은 것은?"
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "MERGE INTO TGT T\nUSING SRC S ON (T.ID = S.ID)\nWHEN MATCHED THEN UPDATE SET T.V = S.V\nWHEN NOT MATCHED THEN INSERT (ID, V) VALUES (S.ID, S.V);"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "MATCHED와 NOT MATCHED 절 중 하나만 사용할 수 있다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "INSERT, UPDATE, DELETE를 하나의 문장으로 결합할 수 있다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "MERGE 문은 반드시 트랜잭션 외부에서 실행되어야 한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "ON 조건에 상수 FALSE를 주면 오류가 발생한다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "MERGE 문은 ON 조건의 매칭 여부에 따라 WHEN MATCHED(기존 행 UPDATE/DELETE)와 WHEN NOT MATCHED(신규 행 INSERT)를 한 문장에 결합할 수 있다. 따라서 INSERT·UPDATE·DELETE를 단일 문장으로 처리할 수 있다는 ②가 옳다. ① 두 절은 함께 사용 가능하고, ③ 트랜잭션 내부에서 정상 실행되며, ④ ON 조건이 항상 거짓이어도 오류 없이 NOT MATCHED 분기만 수행된다."
+      }
+    },
+    {
+      "question_number": 47,
+      "book_section": "M58",
+      "book_question_number": 43,
+      "exam_subject": 2,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 T1, T2 테이블 구조에서 `DROP TABLE T1 CASCADE CONSTRAINTS` 수행 결과로 옳은 것은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "T1 테이블 (부모, PK = ID)",
+            "columns": [
+              "ID"
+            ],
+            "rows": [
+              {
+                "ID": "1"
+              },
+              {
+                "ID": "2"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "T2 테이블 (자식, FK: T1_ID → T1.ID)",
+            "columns": [
+              "ID",
+              "T1_ID"
+            ],
+            "rows": [
+              {
+                "ID": "10",
+                "T1_ID": "1"
+              },
+              {
+                "ID": "20",
+                "T1_ID": "2"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "DROP TABLE T1 CASCADE CONSTRAINTS;\n-- 결과: T1 삭제 + T2 의 FK 제약 삭제\n-- T2 테이블 자체는 그대로 남음"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "부모 테이블이 함께 삭제된다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "T1 테이블과 T1 테이블을 참조하는 FK 제약 조건을 함께 삭제한다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "자식 테이블의 기본키가 삭제된다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "자식 테이블 전체가 삭제된다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "`CASCADE CONSTRAINTS` 옵션은 대상 테이블(T1) 을 삭제하면서, T1 을 참조하는 다른 테이블의 외래키(FK) 제약 조건까지 함께 제거한다. 본 케이스에서는 T2 의 FK 제약(REFERENCES T1) 만 삭제되고 T2 테이블 자체는 그대로 남는다. ①, ④ 는 T2 가 삭제되지 않으므로 오답, ③ T2 의 PK 도 그대로."
+      }
+    },
+    {
+      "question_number": 48,
+      "book_section": "M59",
+      "book_question_number": 11,
+      "exam_subject": 2,
+      "question_type": "select_all_correct",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "DCL에 관한 다음 설명 중 옳은 것으로만 묶은 것은?"
+          }
+        },
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "가. DCL은 데이터 정의 언어이다.\n\n나. GRANT는 자신이 가진 권한을 다른 사용자에게 부여할 수 있다.\n\n다. REVOKE는 실행 후 물리 디스크에 저장한다.\n\n라. ROLE 권한은 데이터에 대한 접근 권한의 집합이다."
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "가, 나",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "나, 다",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "나, 라",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "가, 나, 라",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "가는 DCL이 데이터 제어 언어이므로 오답이며, 다는 REVOKE가 권한 회수 명령으로서 물리 디스크 저장과는 무관하므로 오답이다."
+      }
+    },
+    {
+      "question_number": 49,
+      "book_section": "M59",
+      "book_question_number": 19,
+      "exam_subject": 2,
+      "question_type": "derive_count",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 트랜잭션 시나리오의 최종 행 개수는?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "T 테이블 (초기 상태 — 0건)",
+            "columns": [
+              "COL"
+            ],
+            "rows": [
+              {
+                "COL": "(empty)"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "-- T 테이블 초기 상태: 0건\n\n\n\nINSERT INTO T ... 15건;        -- 15건, 미커밋\n\nCOMMIT;                         -- 15건 확정\n\n\n\nINSERT INTO T ... 15건;        -- 30건, 미커밋\n\nCREATE INDEX IDX_T ON T(COL);   -- DDL → 묵시적 커밋 (30건 확정)\n\n\n\nINSERT INTO T ... 20건;        -- 50건, 미커밋\n\nROLLBACK;                       -- 마지막 INSERT 취소\n\n\n\nSELECT COUNT(*) FROM T;"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "0",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "15",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "30",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "NULL",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "DDL 실행 시점에 묵시적 커밋이 발생해 직전까지의 30건이 확정된다. 이후 INSERT는 ROLLBACK으로 취소되므로 최종 30건이 남는다."
+      }
+    },
+    {
+      "question_number": 50,
+      "book_section": "M59",
+      "book_question_number": 25,
+      "exam_subject": 2,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "CTAS(CREATE TABLE AS SELECT)에 대한 설명 중 옳지 않은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "데이터 속성을 재정의해야 한다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "NOT NULL은 전달되지 않는다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "기본키, 외래키 등 제약사항은 전달되지 않는다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "컬럼 타입은 전달되지 않는다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "CTAS는 컬럼 타입과 NOT NULL 제약을 그대로 전달하므로 데이터 속성을 일일이 재정의할 필요가 없다."
+      }
+    },
+    {
+      "question_number": 51,
+      "book_section": "M59",
+      "book_question_number": 26,
+      "exam_subject": 2,
+      "question_type": "find_erroneous",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "다음 INSERT 문 중 입력 오류가 발생하는 것은?"
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "CREATE TABLE TABLE1 (\n\n  A NUMBER,\n\n  B DATE,\n\n  C VARCHAR2(10)\n\n);"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "INSERT INTO TABLE1 VALUES (1, SYSDATE, '001');",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "INSERT INTO TABLE1 VALUES (1, TO_DATE('2024-06-06', 'YYYY-MM-DD'), '001');",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "INSERT INTO TABLE1 VALUES (1, DATE '2024-06-06', '001');",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "INSERT INTO TABLE1 VALUES (1, 20240606, '001');",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "B 컬럼은 DATE 타입인데 숫자 리터럴 20240606이 직접 입력되어 자동 변환이 이루어지지 않으므로 타입 불일치 오류가 발생한다."
+      }
+    },
+    {
+      "question_number": 52,
+      "book_section": "M59",
+      "book_question_number": 41,
+      "exam_subject": 2,
+      "question_type": "select_all_correct",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "TCL 관련 설명 중 옳은 것으로만 묶은 것은?"
+          }
+        },
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "가. DDL은 수행 전후 묵시적 COMMIT이 발생한다.\n\n나. 트랜잭션의 논리 단위는 여러 SQL 문장으로 구성될 수 있다.\n\n다. SAVEPOINT를 지정하면 해당 지점까지 부분 롤백이 가능하다."
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "가",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "다",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "나, 다",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "가, 나, 다",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "세 진술 모두 TCL과 트랜잭션 기본 개념에 부합한다."
+      }
+    },
+    {
+      "question_number": 53,
+      "book_section": "M59",
+      "book_question_number": 44,
+      "exam_subject": 2,
+      "question_type": "predict_result",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 PARENT, CHILD 테이블에 대한 DDL/DML 수행 결과에 대한 설명으로 옳은 것은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "PARENT 테이블 (DELETE 전)",
+            "columns": [
+              "ID"
+            ],
+            "rows": [
+              {
+                "ID": "1"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "CHILD 테이블 (DELETE 전, FK ON DELETE CASCADE)",
+            "columns": [
+              "ID",
+              "PAR_ID"
+            ],
+            "rows": [
+              {
+                "ID": "10",
+                "PAR_ID": "1"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "CREATE TABLE PARENT (ID NUMBER PRIMARY KEY);\n\nCREATE TABLE CHILD  (\n\n  ID     NUMBER PRIMARY KEY,\n\n  PAR_ID NUMBER REFERENCES PARENT(ID) ON DELETE CASCADE\n\n);\n\n\n\nINSERT INTO PARENT VALUES (1);\n\nINSERT INTO CHILD  VALUES (10, 1);\n\nDELETE FROM PARENT WHERE ID = 1;"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "PARENT만 삭제되고 CHILD는 그대로 남는다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "CHILD만 삭제되고 PARENT는 그대로 남는다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "외래키 참조 무결성 오류로 삭제가 실패한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "ON DELETE CASCADE 옵션에 의해 PARENT와 CHILD 모두 삭제된다.",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "PARENT 의 ID=1 행이 삭제될 때 CHILD 의 `PAR_ID` 컬럼은 `ON DELETE CASCADE` 로 선언되어 있어 부모 행 삭제와 함께 자식 행(ID=10) 도 자동으로 함께 삭제된다. 결과적으로 두 테이블에서 해당 행이 모두 제거되어 빈 테이블이 된다."
+      }
+    },
+    {
+      "question_number": 54,
+      "book_section": "M60",
+      "book_question_number": 18,
+      "exam_subject": 2,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "사용자 R1이 테이블을 생성하고 접속을 종료한 뒤, 다른 사용자 R2가 접속하여 R1의 테이블을 조회하려 하자 오류가 발생하였다. 해결 방안으로 가장 적절한 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "R2가 R1의 계정으로 재로그인하여 조회한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "GRANT로 SELECT 권한을 부여한다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "R2 계정에서 SYNONYM만 생성하면 자동으로 접근이 허용된다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "R2가 관리자 권한으로 테이블을 강제 복제한다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "다른 사용자의 객체에 접근하려면 객체 소유자가 GRANT 명령으로 SELECT 권한을 부여해야 한다. ①은 보안상 부적절하고, ③ SYNONYM은 객체에 대한 별칭일 뿐 권한을 자동 부여하지 않으며, ④ 강제 복제는 정상적인 권한 관리 방식이 아니다."
+      }
+    },
+    {
+      "question_number": 55,
+      "book_section": "M60",
+      "book_question_number": 28,
+      "exam_subject": 2,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "기본키(Primary Key) 컬럼이 반드시 만족해야 하는 제약 조건의 조합은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "NULL 허용 + UNIQUE",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "NULL 허용 + NOT NULL",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "NOT NULL + UNIQUE",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "NOT NULL 단독",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "기본키는 행을 유일하게 식별해야 하므로 중복 불가 `UNIQUE` 와 NULL 불가 `NOT NULL` 을 동시에 만족해야 한다. NULL 을 허용하면 식별 불가능하고, `NOT NULL` 만으로는 중복이 생길 수 있어 식별자 역할을 할 수 없다."
+      }
+    },
+    {
+      "question_number": 56,
+      "book_section": "M60",
+      "book_question_number": 32,
+      "exam_subject": 2,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "다음 중 ALTER TABLE 수행 시 오류가 발생하지 않는 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "이미 값이 들어 있는 NOT NULL 제약을 추가하는 경우",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "기존 자릿수보다 짧게 NUMBER 크기를 변경하는 경우",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "중복 값이 있는 컬럼에 PRIMARY KEY를 추가하는 경우",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "TIMESTAMP 컬럼을 추가하는 경우",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "컬럼 추가는 기존 데이터에 영향을 주지 않으므로 TIMESTAMP 컬럼 추가는 오류 없이 수행된다."
+      }
+    },
+    {
+      "question_number": 57,
+      "book_section": "M60",
+      "book_question_number": 39,
+      "exam_subject": 2,
+      "question_type": "predict_result",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 TGT, SRC 테이블에 대해 MERGE 문 수행 후 TGT의 ID=2 행의 V1, V2, V3 값으로 옳은 것은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "TGT 테이블 (MERGE 전)",
+            "columns": [
+              "ID",
+              "V1",
+              "V2",
+              "V3"
+            ],
+            "rows": [
+              {
+                "ID": "1",
+                "V1": "10",
+                "V2": "20",
+                "V3": "NULL"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "SRC 테이블",
+            "columns": [
+              "ID"
+            ],
+            "rows": [
+              {
+                "ID": "2"
+              }
+            ]
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "MERGE INTO TGT T\nUSING SRC S\nON (T.ID = S.ID)\nWHEN MATCHED THEN\n  UPDATE SET T.V1 = 100, T.V2 = 100\nWHEN NOT MATCHED THEN\n  INSERT (ID, V1, V2, V3) VALUES (S.ID, 100, 100, 100);"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "100 100 100",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "100 100 NULL",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "NULL 100 100",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "100 NULL 100",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "TGT.ID = (1) 이고 SRC.ID = (2) 라 ON 조건 (T.ID = S.ID) 이 매칭되지 않는다. 따라서 NOT MATCHED 분기가 실행되어 SRC 의 ID=2 행이 TGT 에 INSERT 되며, INSERT 절에서 V1·V2·V3 모두 100 을 명시했으므로 새 행은 (2, 100, 100, 100) 이 된다. MATCHED 분기가 실행되었다면 V3 는 UPDATE 대상에 없어 기존 NULL 이 남았겠지만 이 문제는 NOT MATCHED 가 동작한다."
+      }
+    },
+    {
+      "question_number": 58,
+      "book_section": "M60",
+      "book_question_number": 43,
+      "exam_subject": 2,
+      "question_type": "predict_result",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 CREATE TABLE과 INSERT 수행 후 최종 COUNT 값으로 옳은 것은?"
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "CREATE TABLE T (\n  ID  NUMBER GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1),\n  VAL NUMBER CHECK (VAL > 0)\n);\n\nINSERT INTO T(VAL) VALUES (-1);\nINSERT INTO T(VAL) VALUES ( 0);\nINSERT INTO T(VAL) VALUES ( 1);\nCOMMIT;\n\nSELECT COUNT(*) FROM T;"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "0",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "1",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "2",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "3",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "CHECK 제약을 통과한 행은 VAL=1 한 건뿐이므로 COUNT 결과는 1이다."
+      }
+    },
+    {
+      "question_number": 59,
+      "book_section": "M60",
+      "book_question_number": 44,
+      "exam_subject": 2,
+      "question_type": "predict_result",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "DROP TABLE ... RESTRICT 옵션 사용 시 해당 테이블을 참조하는 뷰가 존재하는 경우의 결과로 옳은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "어떤 객체도 삭제되지 않는다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "테이블만 삭제되고 뷰는 남는다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "테이블과 뷰가 함께 삭제된다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "뷰가 먼저 삭제된 뒤 테이블이 삭제된다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "RESTRICT 옵션은 참조하는 객체가 있으면 삭제를 거부한다. 오류가 발생하고 아무 것도 삭제되지 않는다."
+      }
+    },
+    {
+      "question_number": 60,
+      "book_section": "M60",
+      "book_question_number": 49,
+      "exam_subject": 2,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 DDL에서 성별 컬럼에 'M' 또는 'F'만 허용하도록 강제하는 제약 조건은?"
+          }
+        },
+        {
+          "asset_type": "sql_query",
+          "payload": {
+            "dialect": "ansi",
+            "code": "CREATE TABLE MEMBER (\n  ID  VARCHAR2(10) PRIMARY KEY,\n  NAME VARCHAR2(30) NOT NULL,\n  SEX  CHAR(1)  (  ?  ) (SEX IN ('M','F'))\n);"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "NOT NULL",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "CHECK",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "PRIMARY KEY",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "FOREIGN KEY",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "특정 컬럼이 지정한 값 집합에 한정되도록 강제하려면 CHECK 제약 조건을 사용한다. NOT NULL은 NULL 금지만, PRIMARY KEY는 유일성+NOT NULL을, FOREIGN KEY는 다른 테이블 참조를 강제할 뿐 값 도메인을 제한하지 못한다."
       }
     }
   ]

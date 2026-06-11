@@ -2,10 +2,11 @@ import datetime
 
 from fastapi import APIRouter, Depends, HTTPException, Request
 from sqlalchemy.orm import Session
+from sqlalchemy.exc import SQLAlchemyError
 
 from api.auth import require_auth
 from api.database import AnswerLog, get_db
-from api.schemas.questions import AnswerSubmitRequest, AnswerSubmitResponse
+from api.schemas.questions import AnswerSubmitRequest, AnswerSubmitResponse, CheckSolvedResponse, SolvedSummaryResponse
 
 router = APIRouter(prefix="/logs", tags=["logs"])
 
@@ -46,8 +47,12 @@ def submit_answer(
         solve_time_sec=body.solve_time_sec,
         logged_at=datetime.datetime.utcnow(),
     )
-    db.add(log)
-    db.commit()
+    try:
+        db.add(log)
+        db.commit()
+    except SQLAlchemyError:
+        db.rollback()
+        raise HTTPException(status_code=500, detail="풀이 결과 저장 중 오류가 발생했습니다.")
 
     return AnswerSubmitResponse(
         question_id=body.question_id,
@@ -55,3 +60,50 @@ def submit_answer(
         correct_answer=correct_answer,
         message="정답입니다!" if is_correct else "오답입니다. AI 해설을 확인해보세요.",
     )
+
+
+@router.get("/solved", response_model=SolvedSummaryResponse, summary="내가 푼 문제 요약 (인증 필요)")
+def get_solved_summary(
+    user: dict = Depends(require_auth),
+    db: Session = Depends(get_db),
+):
+    """
+    현재 로그인 사용자가 1회 이상 시도한 문제 ID와 정답을 맞춘 문제 ID를 반환합니다.
+    """
+    user_id = user["sub"]
+
+    solved_rows = (
+        db.query(AnswerLog.question_id)
+        .filter(AnswerLog.user_id == user_id)
+        .distinct()
+        .all()
+    )
+    correct_rows = (
+        db.query(AnswerLog.question_id)
+        .filter(AnswerLog.user_id == user_id, AnswerLog.is_correct == True)  # noqa: E712
+        .distinct()
+        .all()
+    )
+
+    return SolvedSummaryResponse(
+        solved_ids=[r[0] for r in solved_rows],
+        correct_ids=[r[0] for r in correct_rows],
+    )
+
+
+@router.get("/check/{question_id}", response_model=CheckSolvedResponse, summary="특정 문제 풀이 기록 확인 (인증 필요)")
+def check_solved(
+    question_id: str,
+    user: dict = Depends(require_auth),
+    db: Session = Depends(get_db),
+):
+    user_id = user["sub"]
+    log = (
+        db.query(AnswerLog)
+        .filter(AnswerLog.user_id == user_id, AnswerLog.question_id == question_id)
+        .order_by(AnswerLog.logged_at.desc())
+        .first()
+    )
+    if log is None:
+        return CheckSolvedResponse(is_solved=False, is_correct=None)
+    return CheckSolvedResponse(is_solved=True, is_correct=log.is_correct)

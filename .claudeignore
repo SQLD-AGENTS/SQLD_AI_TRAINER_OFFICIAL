@@ -58,6 +58,19 @@ secrets.yaml
 models/
 faiss_index/
 
+# 프론트엔드 빌드 산출물 / 캐시
+frontend/dist/
+frontend/.vite/
+
+# 사용자 업로드 파일 (아바타 이미지 등 바이너리)
+backend/uploads/
+
+# 백엔드 출력물
+backend/outputs/
+
+# 로그 파일
+*.log
+
 # IDE
 .vscode/
 .idea/

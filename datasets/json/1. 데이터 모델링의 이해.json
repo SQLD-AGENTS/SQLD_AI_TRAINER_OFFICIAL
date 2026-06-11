@@ -688,42 +688,106 @@
             "left": {
               "label": "[변경 전]",
               "entities": [
-                {"table": "주문", "columns": [
-                  {"name": "주문번호", "key": "PK"},
-                  {"name": "주문일자"},
-                  {"name": "고객번호"},
-                  {"name": "고객명"},
-                  {"name": "주문고객휴대폰번호"}
-                ]},
-                {"table": "주문상품", "columns": [
-                  {"name": "주문번호", "key": "PK,FK"},
-                  {"name": "주문상품코드", "key": "PK"},
-                  {"name": "주문상품명"},
-                  {"name": "주문상품가격"},
-                  {"name": "주문상품수량"}
-                ]}
+                {
+                  "table": "주문",
+                  "columns": [
+                    {
+                      "name": "주문번호",
+                      "key": "PK"
+                    },
+                    {
+                      "name": "주문일자"
+                    },
+                    {
+                      "name": "고객번호"
+                    },
+                    {
+                      "name": "고객명"
+                    },
+                    {
+                      "name": "주문고객휴대폰번호"
+                    }
+                  ]
+                },
+                {
+                  "table": "주문상품",
+                  "columns": [
+                    {
+                      "name": "주문번호",
+                      "key": "PK,FK"
+                    },
+                    {
+                      "name": "주문상품코드",
+                      "key": "PK"
+                    },
+                    {
+                      "name": "주문상품명"
+                    },
+                    {
+                      "name": "주문상품가격"
+                    },
+                    {
+                      "name": "주문상품수량"
+                    }
+                  ]
+                }
               ]
             },
             "right": {
               "label": "[변경 후]",
               "entities": [
-                {"table": "주문", "columns": [
-                  {"name": "주문번호", "key": "PK"},
-                  {"name": "주문일자"},
-                  {"name": "고객번호"},
-                  {"name": "고객명"},
-                  {"name": "주문고객휴대폰번호"}
-                ]},
-                {"table": "상품", "columns": [
-                  {"name": "상품코드", "key": "PK"},
-                  {"name": "상품명"},
-                  {"name": "상품가격"}
-                ]},
-                {"table": "주문상품", "columns": [
-                  {"name": "주문번호", "key": "PK,FK"},
-                  {"name": "상품코드", "key": "PK,FK"},
-                  {"name": "주문수량"}
-                ]}
+                {
+                  "table": "주문",
+                  "columns": [
+                    {
+                      "name": "주문번호",
+                      "key": "PK"
+                    },
+                    {
+                      "name": "주문일자"
+                    },
+                    {
+                      "name": "고객번호"
+                    },
+                    {
+                      "name": "고객명"
+                    },
+                    {
+                      "name": "주문고객휴대폰번호"
+                    }
+                  ]
+                },
+                {
+                  "table": "상품",
+                  "columns": [
+                    {
+                      "name": "상품코드",
+                      "key": "PK"
+                    },
+                    {
+                      "name": "상품명"
+                    },
+                    {
+                      "name": "상품가격"
+                    }
+                  ]
+                },
+                {
+                  "table": "주문상품",
+                  "columns": [
+                    {
+                      "name": "주문번호",
+                      "key": "PK,FK"
+                    },
+                    {
+                      "name": "상품코드",
+                      "key": "PK,FK"
+                    },
+                    {
+                      "name": "주문수량"
+                    }
+                  ]
+                }
               ]
             }
           }
@@ -1312,41 +1376,84 @@
           "choice_number": 1,
           "choice_kind": "tuple",
           "choice_text": "사원 (사원번호(PK): NUMBER(10), 주민등록번호: NUMBER(13))",
-          "payload": {"table": "사원", "columns": [
-            {"name": "사원번호", "type": "NUMBER(10)", "key": "PK"},
-            {"name": "주민등록번호", "type": "NUMBER(13)"}
-          ]},
+          "payload": {
+            "table": "사원",
+            "columns": [
+              {
+                "name": "사원번호",
+                "type": "NUMBER(10)",
+                "key": "PK"
+              },
+              {
+                "name": "주민등록번호",
+                "type": "NUMBER(13)"
+              }
+            ]
+          },
           "is_correct": false
         },
         {
           "choice_number": 2,
           "choice_kind": "tuple",
           "choice_text": "사원 (이름(PK): VARCHAR2(20), 사원번호: NUMBER(10))",
-          "payload": {"table": "사원", "columns": [
-            {"name": "이름", "type": "VARCHAR2(20)", "key": "PK"},
-            {"name": "사원번호", "type": "NUMBER(10)"}
-          ]},
+          "payload": {
+            "table": "사원",
+            "columns": [
+              {
+                "name": "이름",
+                "type": "VARCHAR2(20)",
+                "key": "PK"
+              },
+              {
+                "name": "사원번호",
+                "type": "NUMBER(10)"
+              }
+            ]
+          },
           "is_correct": true
         },
         {
           "choice_number": 3,
           "choice_kind": "tuple",
           "choice_text": "사원 (주민번호(PK): NUMBER(13), 사원번호: NUMBER(10))",
-          "payload": {"table": "사원", "columns": [
-            {"name": "주민번호", "type": "NUMBER(13)", "key": "PK"},
-            {"name": "사원번호", "type": "NUMBER(10)"}
-          ]},
+          "payload": {
+            "table": "사원",
+            "columns": [
+              {
+                "name": "주민번호",
+                "type": "NUMBER(13)",
+                "key": "PK"
+              },
+              {
+                "name": "사원번호",
+                "type": "NUMBER(10)"
+              }
+            ]
+          },
           "is_correct": false
         },
         {
           "choice_number": 4,
           "choice_kind": "tuple",
           "choice_text": "사원 (일련번호(PK): VARCHAR2(10), 주민등록번호: CHAR(18), 사원번호: NUMBER(10))",
-          "payload": {"table": "사원", "columns": [
-            {"name": "일련번호", "type": "VARCHAR2(10)", "key": "PK"},
-            {"name": "주민등록번호", "type": "CHAR(18)"},
-            {"name": "사원번호", "type": "NUMBER(10)"}
-          ]},
+          "payload": {
+            "table": "사원",
+            "columns": [
+              {
+                "name": "일련번호",
+                "type": "VARCHAR2(10)",
+                "key": "PK"
+              },
+              {
+                "name": "주민등록번호",
+                "type": "CHAR(18)"
+              },
+              {
+                "name": "사원번호",
+                "type": "NUMBER(10)"
+              }
+            ]
+          },
           "is_correct": false
         }
       ],
@@ -1481,28 +1588,48 @@
           "choice_number": 1,
           "choice_kind": "tuple",
           "choice_text": "(가) 보조식별자 (나) 실질식별자 (다) 인조식별자 (라) 복합식별자",
-          "payload": { "(가)": "보조식별자", "(나)": "실질식별자", "(다)": "인조식별자", "(라)": "복합식별자" },
+          "payload": {
+            "(가)": "보조식별자",
+            "(나)": "실질식별자",
+            "(다)": "인조식별자",
+            "(라)": "복합식별자"
+          },
           "is_correct": false
         },
         {
           "choice_number": 2,
           "choice_kind": "tuple",
           "choice_text": "(가) 보조식별자 (나) 인조식별자 (다) 본질식별자 (라) 복합식별자",
-          "payload": { "(가)": "보조식별자", "(나)": "인조식별자", "(다)": "본질식별자", "(라)": "복합식별자" },
+          "payload": {
+            "(가)": "보조식별자",
+            "(나)": "인조식별자",
+            "(다)": "본질식별자",
+            "(라)": "복합식별자"
+          },
           "is_correct": false
         },
         {
           "choice_number": 3,
           "choice_kind": "tuple",
           "choice_text": "(가) 주식별자 (나) 보조식별자 (다) 본질식별자 (라) 외부식별자",
-          "payload": { "(가)": "주식별자", "(나)": "보조식별자", "(다)": "본질식별자", "(라)": "외부식별자" },
+          "payload": {
+            "(가)": "주식별자",
+            "(나)": "보조식별자",
+            "(다)": "본질식별자",
+            "(라)": "외부식별자"
+          },
           "is_correct": true
         },
         {
           "choice_number": 4,
           "choice_kind": "tuple",
           "choice_text": "(가) 주식별자 (나) 보조식별자 (다) 인조식별자 (라) 외부식별자",
-          "payload": { "(가)": "주식별자", "(나)": "보조식별자", "(다)": "인조식별자", "(라)": "외부식별자" },
+          "payload": {
+            "(가)": "주식별자",
+            "(나)": "보조식별자",
+            "(다)": "인조식별자",
+            "(라)": "외부식별자"
+          },
           "is_correct": false
         }
       ],
@@ -1600,6 +1727,2150 @@
       ],
       "answer": {
         "explanation": "업무분석을 통해 바로 정의한 속성을 기본속성(Basic Attribute), 원래 업무상 존재하지는 않지만 설계를 하면서 도출해 내는 속성을 설계속성(Designed Attribute), 다른 속성으로부터 계산이나 변형이 되어 생성되는 속성을 파생속성(Derived Attribute)이라고 한다."
+      }
+    },
+    {
+      "question_number": 34,
+      "book_section": "M55",
+      "book_question_number": 1,
+      "exam_subject": 1,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "내부 스키마에 대한 설명으로 적절한 것을 모두 고른 것은?\n\n[내용]\n가. 외부 사용자 관점에서 데이터를 표현한다.\n나. 물리적 저장 구조 및 저장 장치에서의 저장 방식을 표현한다.\n다. 조직 전체의 통합적 데이터 관점을 나타낸다.\n라. 내부 단계와 내부 스키마로 구성되며 DB 가 물리적으로 저장되는 형식을 정의한다."
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "가, 다",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "나, 라",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "가, 라",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "나, 다",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "내부 스키마는 물리적 저장 구조 및 저장 방식을 다루는 단계이다."
+      }
+    },
+    {
+      "question_number": 35,
+      "book_section": "M55",
+      "book_question_number": 2,
+      "exam_subject": 1,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "엔터티명에 대한 설명으로 적절하지 않은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "현업 업무에서 사용하는 용어를 사용한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "가능하면 약어로 사용한다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "단수 명사를 사용한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "모든 엔터티에서 유일하게 이름이 부여되어야 한다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "엔터티명은 가능하면 약어를 사용하지 않는 것이 명명 원칙이다."
+      }
+    },
+    {
+      "question_number": 36,
+      "book_section": "M55",
+      "book_question_number": 3,
+      "exam_subject": 1,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "기본 엔터티에 대한 설명으로 적절하지 않은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "업무에 원래부터 존재하는 정보를 다룬다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "다른 엔터티와 관계에 의해 생성되지 않고 독립적으로 생성된다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "다른 엔터티로부터 주식별자를 상속받는다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "자신의 고유한 주식별자를 가진다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "기본 엔터티는 자신의 고유한 주식별자를 가지며 타 엔터티로부터 주식별자를 상속받지 않는다."
+      }
+    },
+    {
+      "question_number": 37,
+      "book_section": "M55",
+      "book_question_number": 6,
+      "exam_subject": 1,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "식별자 관계에 대한 설명으로 적절하지 않은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "부모의 주식별자가 자식의 주식별자에 포함된다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "부모 엔터티와 자식 엔터티의 관계는 항상 1:1 관계이다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "자식이 부모 속성만으로 주식별자를 구성하면 1:1 관계가 된다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "부모 속성과 다른 속성을 함께 주식별자로 구성하면 1:M 관계가 된다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "식별자 관계는 구성에 따라 1:1 또는 1:M 로 나타날 수 있다."
+      }
+    },
+    {
+      "question_number": 38,
+      "book_section": "M55",
+      "book_question_number": 8,
+      "exam_subject": 1,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "계층형 데이터 모델에 대한 설명으로 적절하지 않은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "트리 구조로 데이터를 표현한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "개체 간의 관계는 1:1 이다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "루트 노드에서 하위 노드로 확장된다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "동일 레벨의 개체 간에는 관계가 표현되지 않는다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "계층형 모델의 관계는 부모 1 : 자식 N 의 1:M 관계이다."
+      }
+    },
+    {
+      "question_number": 39,
+      "book_section": "M55",
+      "book_question_number": 9,
+      "exam_subject": 1,
+      "question_type": "fill_blank",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 빈칸에 들어갈 데이터 모델 구성 요소의 순서로 올바른 것은?\n\n[내용]\n( ㉠ ) → ( ㉡ ) → ( ㉢ ) → ( ㉣ )"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "인스턴스 - 엔터티 - 속성값 - 속성",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "엔터티 - 속성 - 인스턴스 - 속성값",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "속성 - 인스턴스 - 엔터티 - 속성값",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "엔터티 - 인스턴스 - 속성 - 속성값",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "데이터 모델의 구성 요소는 엔터티(집합) → 인스턴스(개별 행) → 속성(컬럼) → 속성값(셀 값) 순서의 포함 관계로 정의된다."
+      }
+    },
+    {
+      "question_number": 40,
+      "book_section": "M56",
+      "book_question_number": 1,
+      "exam_subject": 1,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "데이터베이스 스키마의 종류가 아닌 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "응용 스키마",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "외부 스키마",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "개념 스키마",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "내부 스키마",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "스키마는 외부·개념·내부의 3계층으로 구분된다. 응용 스키마는 표준 스키마 계층에 포함되지 않는다."
+      }
+    },
+    {
+      "question_number": 41,
+      "book_section": "M56",
+      "book_question_number": 2,
+      "exam_subject": 1,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "데이터 모델링에 대한 설명으로 옳지 않은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "업무에서 사용되는 모든 데이터를 포함해야 한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "현실 세계를 추상화하여 데이터 관점으로 표현한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "업무 프로세스를 이해하고 참여자들과 의사소통하는 도구가 된다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "업무 규칙이 모델에 포함되지 않아도 된다.",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "업무 규칙은 데이터 모델이 반드시 반영해야 하는 핵심 요소이다."
+      }
+    },
+    {
+      "question_number": 42,
+      "book_section": "M56",
+      "book_question_number": 3,
+      "exam_subject": 1,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "발생 시점에 따라 구분되는 엔터티의 유형으로 적절하지 않은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "관계 엔터티",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "행위 엔터티",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "중심 엔터티",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "기본 엔터티",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "발생 시점 기준 분류는 기본·중심·행위 세 가지이다."
+      }
+    },
+    {
+      "question_number": 43,
+      "book_section": "M56",
+      "book_question_number": 4,
+      "exam_subject": 1,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 설명 중 옳지 않은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "고객과 상품은 기본 엔터티이다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "주문은 사건 엔터티이다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "주문 상품 엔터티는 주문과 상품의 관계에 의해 생성된다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "주문 상품 엔터티는 주문과 상품 간 M:N 관계의 중간 엔터티이다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "주문 상품은 주문 발생이라는 업무 행위에 의해 생성되는 행위 엔터티이다. 주문과 상품의 관계 자체에 의해 자동 생성되는 것이 아니다."
+      }
+    },
+    {
+      "question_number": 44,
+      "book_section": "M56",
+      "book_question_number": 5,
+      "exam_subject": 1,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "다른 속성을 이용하여 결과를 도출하는 속성은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "설계 속성",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "기본 속성",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "파생 속성",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "관계 속성",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "파생 속성은 다른 속성의 값을 계산·가공하여 도출되는 속성이다."
+      }
+    },
+    {
+      "question_number": 45,
+      "book_section": "M56",
+      "book_question_number": 6,
+      "exam_subject": 1,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "다음 속성 분류에 대한 설명 중 옳은 것을 모두 고르시오."
+          }
+        },
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "가. 주소는 시·군·구 등으로 나누어지므로 복합 속성이다.\n나. 나이는 단순 속성이다.\n다. 주민번호는 단일 값 속성이다.\n라. 연락처는 휴대폰 번호와 집 전화번호가 될 수 있기 때문에 다중 값 속성이다."
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "가, 라",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "가, 나, 다",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "나, 다, 라",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "가, 나, 다, 라",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "복합·단순·단일 값·다중 값 속성에 대한 네 개의 설명이 모두 옳다."
+      }
+    },
+    {
+      "question_number": 46,
+      "book_section": "M56",
+      "book_question_number": 7,
+      "exam_subject": 1,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 ERD에 대한 설명 중 옳지 않은 것은?"
+          }
+        },
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "병원·의사·수술 ERD — 관계 라벨 ㄱ(병원-의사), ㄴ(의사-수술), ㄷ(병원-수술 직접)"
+          }
+        },
+        {
+          "asset_type": "erd",
+          "payload": "erDiagram\n    병원 ||--o| 의사 : \"ㄱ\"\n    의사 ||--o| 수술 : \"ㄴ\"\n    병원 ||--o| 수술 : \"ㄷ\""
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "ㄷ은 ㄱ과 ㄴ을 합한 것과 의미가 같다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "의사가 없는 병원이 있을 수 있다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "수술이 없는 의사가 있을 수 있다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "의사가 집도하지 않는 수술이 있을 수 있다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "세 관계는 각각 독립적인 의미를 가지며 단순 합성으로 대체할 수 없다."
+      }
+    },
+    {
+      "question_number": 47,
+      "book_section": "M56",
+      "book_question_number": 8,
+      "exam_subject": 1,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "업무에 의해 만들어진 식별자로 가장 적절한 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "외부 식별자",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "내부 식별자",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "본질 식별자",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "인조 식별자",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "본질 식별자는 업무상 자연스럽게 부여되는 식별자이며, 인조 식별자는 시스템이 편의상 생성한 식별자이다."
+      }
+    },
+    {
+      "question_number": 48,
+      "book_section": "M57",
+      "book_question_number": 1,
+      "exam_subject": 1,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 설명에 해당하는 스키마 구조로 가장 적절한 것은?"
+          }
+        },
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "모든 사용자 관점을 통합한 조직 전체 관점의 통합적 표현"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "외부 스키마",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "개념 스키마",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "내부 스키마",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "논리 스키마",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "외부 스키마는 사용자 관점, 내부 스키마는 물리적 저장 관점이며, 전체 조직 관점의 통합 표현은 개념 스키마이다."
+      }
+    },
+    {
+      "question_number": 49,
+      "book_section": "M57",
+      "book_question_number": 2,
+      "exam_subject": 1,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "엔터티의 생성 시점에 따른 분류가 아닌 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "기본 엔터티",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "중심 엔터티",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "사건 엔터티",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "행위 엔터티",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "생성 시점에 따른 엔터티 분류는 기본·중심·행위 세 가지이다."
+      }
+    },
+    {
+      "question_number": 50,
+      "book_section": "M57",
+      "book_question_number": 4,
+      "exam_subject": 1,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "다른 속성으로부터 계산이나 변형을 통해 생성되는 속성은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "기본 속성",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "설계 속성",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "일반 속성",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "파생 속성",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "파생 속성은 다른 속성의 값을 기반으로 계산·변환하여 도출되는 속성이다. 기본 속성은 업무에서 직접 발생하고, 설계 속성은 모델링 과정에서 부여되며, 일반 속성은 고유 의미를 갖는 속성이다."
+      }
+    },
+    {
+      "question_number": 51,
+      "book_section": "M57",
+      "book_question_number": 5,
+      "exam_subject": 1,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "주식별자에 대한 설명 중 옳지 않은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "주식별자는 NULL이어도 된다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "유일해야 한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "유일성을 만족하는 선에서 최소의 값을 가져야 한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "자주 변하지 않아야 한다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "주식별자는 NOT NULL 이어야 한다. NULL을 허용한다는 설명은 옳지 않다."
+      }
+    },
+    {
+      "question_number": 52,
+      "book_section": "M57",
+      "book_question_number": 6,
+      "exam_subject": 1,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 ERD 해석에 대한 설명 중 옳지 않은 것은?"
+          }
+        },
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "고객-계약-납부자 ERD (고객 1:N 계약, 계약 N:1 납부자)"
+          }
+        },
+        {
+          "asset_type": "erd",
+          "payload": "erDiagram\n    고객 ||--o{ 계약 : \"체결\"\n    납부자 ||--o{ 계약 : \"납부\""
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "계약은 고객과 납부자 사이의 이벤트성 엔터티이다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "계약은 고객과 납부 사이의 관계 테이블이다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "한 명의 고객이 여러 개의 계약을 가입할 경우 납부자로부터 식별자를 상속받아야 한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "고객이 계약하고 납부하면 고객 테이블과 납부자 테이블을 합칠 수 있다.",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "고객과 납부자는 역할이 다른 독립 엔터티이므로 계약 발생을 이유로 두 테이블을 통합할 수 없다."
+      }
+    },
+    {
+      "question_number": 53,
+      "book_section": "M57",
+      "book_question_number": 8,
+      "exam_subject": 1,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "식별자에 대한 다음 설명 중 옳지 않은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "주식별자는 엔터티 내 인스턴스를 유일하게 구별한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "외래키(FK)는 내부 식별자이다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "인조 식별자는 업무와 무관하게 시스템이 부여한 식별자이다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "본질 식별자는 업무상 의미를 가지는 식별자이다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "외래키는 다른 엔터티의 주식별자를 참조하여 들여온 외부 식별자이다."
+      }
+    },
+    {
+      "question_number": 54,
+      "book_section": "M57",
+      "book_question_number": 9,
+      "exam_subject": 1,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 ERD에 대한 해석 중 옳지 않은 것은?"
+          }
+        },
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "학생·수강·과목 ERD (M:N 정규화 — [수강] 교차 엔터티)"
+          }
+        },
+        {
+          "asset_type": "erd",
+          "payload": "erDiagram\n    학생 ||--o{ 수강 : \"수강\"\n    과목 ||--o{ 수강 : \"개설\""
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "한 학생은 수강하지 않을 수도 있다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "한 과목은 여러 학생이 수강할 수 있다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "수강 엔터티는 학생과 과목 사이의 관계 엔터티이다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "과목 인스턴스 추가하려면 학생 필요하다.",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "과목은 학생 없이도 독립적으로 등록될 수 있다. 과목 추가에 학생 존재를 강제하지 않는다."
+      }
+    },
+    {
+      "question_number": 55,
+      "book_section": "M57",
+      "book_question_number": 10,
+      "exam_subject": 1,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 ERD 해석 중 옳지 않은 것은?"
+          }
+        },
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "상품·주문·주문항목 ERD"
+          }
+        },
+        {
+          "asset_type": "erd",
+          "payload": "erDiagram\n    상품 ||--o{ 주문 : \"주문\"\n    주문 ||--o{ 주문항목 : \"포함\""
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "상품엔 주문이 무조건 포함된다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "주문엔 상품이 무조건 포함된다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "하나의 상품은 여러 주문에 포함될 수 있다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "주문 없이도 상품은 등록될 수 있다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "상품은 주문 이전에 독립적으로 등록될 수 있으므로 상품이 반드시 주문에 포함되어야 하는 것은 아니다."
+      }
+    },
+    {
+      "question_number": 56,
+      "book_section": "M58",
+      "book_question_number": 1,
+      "exam_subject": 1,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 ERD에서 키 엔터티에 해당하지 않는 것은?"
+          }
+        },
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "회사·부서·사원·프로젝트 ERD (모두 1:M 식별자 관계)"
+          }
+        },
+        {
+          "asset_type": "erd",
+          "payload": "erDiagram\n    회사 ||--o{ 부서 : \"보유\"\n    부서 ||--o{ 사원 : \"소속\"\n    사원 ||--o{ 프로젝트 : \"참여\""
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "사원",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "프로젝트",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "회사",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "부서",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "회사·부서·사원은 업무에 원래부터 존재하여 독립적으로 생성되는 기본(키) 엔터티이다. 반면 프로젝트는 사원의 업무 수행을 통해 발생하는 중심 엔터티로, 기본 엔터티로부터 파생되어 업무의 주 대상이 된다. 따라서 키 엔터티(기본 엔터티)에 해당하지 않는 것은 프로젝트이다."
+      }
+    },
+    {
+      "question_number": 57,
+      "book_section": "M58",
+      "book_question_number": 3,
+      "exam_subject": 1,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "데이터 모델링 시 엔터티와 속성의 관계에 대한 설명 중 옳지 않은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "엔터티는 서로 다른 두 개 이상의 인스턴스로 구성된다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "하나의 속성은 여러 개의 속성 값을 동시에 가질 수 없다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "엔터티는 반드시 하나의 속성만으로 구성될 수 있다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "엔터티는 업무상 관리할 가치가 있는 대상이어야 한다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "엔터티는 두 개 이상의 속성을 가져야 한다."
+      }
+    },
+    {
+      "question_number": 58,
+      "book_section": "M58",
+      "book_question_number": 4,
+      "exam_subject": 1,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 [출판사]·[도서] ERD를 해석한 내용 중 옳지 않은 것은?"
+          }
+        },
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "출판사-도서 ERD (출판사 측 1, 도서 측 0..N)"
+          }
+        },
+        {
+          "asset_type": "erd",
+          "payload": "erDiagram\n    출판사 ||--o{ 도서 : \"발행\"\n    도서 {\n        string ISBN PK\n        string 제목\n        string 출판사 FK\n    }"
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "도서",
+            "columns": [
+              "ISBN",
+              "제목",
+              "출판사"
+            ],
+            "rows": [
+              {
+                "ISBN": "978-1",
+                "제목": "SQL 입문",
+                "출판사": "A출판사"
+              },
+              {
+                "ISBN": "978-2",
+                "제목": "SQL 입문",
+                "출판사": "B출판사"
+              },
+              {
+                "ISBN": "978-3",
+                "제목": "데이터 모델링",
+                "출판사": "A출판사"
+              }
+            ]
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "제목이 중복되는 경우가 있다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "출판사별로 여러 도서를 보유할 수 있다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "도서의 주식별자는 ISBN이다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "도서 엔터티는 출판사 엔터티가 없어도 독립적으로 존재할 수 있다.",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "도서는 출판사에 종속되므로 출판사 없이는 등록될 수 없다."
+      }
+    },
+    {
+      "question_number": 59,
+      "book_section": "M58",
+      "book_question_number": 5,
+      "exam_subject": 1,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 [컴퓨터]·[마더보드] ERD를 해석한 내용 중 옳지 않은 것은?"
+          }
+        },
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "컴퓨터-마더보드 ERD (1:1 필수 — 양쪽 모두 필수 1, 별도 PK)"
+          }
+        },
+        {
+          "asset_type": "erd",
+          "payload": "erDiagram\n    컴퓨터 ||--|| 마더보드 : \"포함\"\n    컴퓨터 {\n        string 컴퓨터번호 PK\n        string 모델명\n    }\n    마더보드 {\n        string 마더보드번호 PK\n        string 컴퓨터번호 FK\n    }"
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "마더보드는 하나의 컴퓨터에만 장착된다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "컴퓨터에 마더보드를 사용할 수도 있고 사용하지 않을 수도 있다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "컴퓨터 없이도 마더보드는 독립적으로 존재할 수 있다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "마더보드의 주식별자는 컴퓨터 번호와 별개로 구성된다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "양쪽 참여가 필수(1:1 필수)인 ERD 에서 컴퓨터 인스턴스는 반드시 마더보드를 가진다. ② '마더보드 사용 여부 선택' 서술은 ERD 의 양쪽 필수 카디널리티(컴퓨터 측 1)와 정면으로 어긋남 — 옳지 않은 정답. ① 1:1 이라 한 마더보드는 한 컴퓨터에만 장착, 옳음. ③ '마더보드 독립 존재'는 식별자/모델링 측면(별도 PK 보유, 비식별 관계)으로 해석하면 옳음 — 마더보드 PK 가 컴퓨터 PK 와 분리되어 있어 식별자 측면 독립 가능. (인스턴스 측면에서는 양쪽 필수라 동반 존재하지만, 출제 의도는 식별자 독립성으로 해석.) ④ ERD 컬럼 정의에서 마더보드 PK = '마더보드번호' 로 컴퓨터번호와 별개 식별자, 옳음."
+      }
+    },
+    {
+      "question_number": 60,
+      "book_section": "M58",
+      "book_question_number": 6,
+      "exam_subject": 1,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "엔터티 간 생명주기(Life Cycle)가 동일해야 하는 관계에 대한 설명 중 옳은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "독립 관계에서는 부모와 자식의 생명주기가 반드시 일치한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "비식별 관계는 부모와 자식 엔터티의 생명주기가 다를 수 있다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "식별 관계는 부모 엔터티가 삭제되어도 자식 엔터티는 유지된다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "생명주기가 동일한 엔터티는 반드시 1:1 관계로만 설계되어야 한다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "식별 관계에서는 부모가 사라지면 자식도 사라지지만, 비식별 관계는 별도의 주식별자를 갖기 때문에 생명주기가 분리될 수 있다."
+      }
+    },
+    {
+      "question_number": 61,
+      "book_section": "M58",
+      "book_question_number": 8,
+      "exam_subject": 1,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "다음 중 상호배타적(Arc) 관계를 표현한 ERD로 가장 적절한 것은?"
+          }
+        },
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "보기 ① — 1:1 관계 (차량과 소유자가 1:1 필수)"
+          }
+        },
+        {
+          "asset_type": "erd",
+          "payload": "erDiagram\n    차량 ||--|| 소유자 : \"보유\""
+        },
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "보기 ② — 1:N 관계 (한 부서에 여러 사원)"
+          }
+        },
+        {
+          "asset_type": "erd",
+          "payload": "erDiagram\n    부서 ||--o{ 사원 : \"소속\""
+        },
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "보기 ③ — 자기 참조(재귀) 관계 (사원이 다른 사원을 매니저로 가짐)"
+          }
+        },
+        {
+          "asset_type": "erd",
+          "payload": "erDiagram\n    사원 ||--o{ 사원 : \"관리\""
+        },
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "보기 ④ — Arc(상호배타적) 관계 — 차량은 [법인 소유자] 또는 [개인 소유자] 중 하나에만 연결"
+          }
+        },
+        {
+          "asset_type": "erd",
+          "payload": "erDiagram\n    차량 }o--|| 법인소유자 : \"보유 (Arc)\"\n    차량 }o--|| 개인소유자 : \"보유 (Arc)\""
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "보기 ①",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "보기 ②",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "보기 ③",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "보기 ④",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "하나의 엔터티가 복수의 엔터티 중 반드시 하나와만 연결되고 서로 공존할 수 없는 관계를 상호배타적(Arc) 관계라 한다. 분기되는 두 관계선을 가로지르는 반원(◠)과 \"Arc\" 라벨로 표기한다. ①은 1:1 관계, ②는 1:N 관계, ③은 자기 자신을 참조하는 재귀 관계를 의미하며, ④ 는 두 관계선을 가로지르는 반원과 Arc 라벨로 상호배타적 관계를 표현 — 정답."
+      }
+    },
+    {
+      "question_number": 62,
+      "book_section": "M58",
+      "book_question_number": 9,
+      "exam_subject": 1,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 학생·수강 ERD에 대한 설명 중 옳지 않은 것은?"
+          }
+        },
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "학생·수강·과목 ERD — [수강] 교차 엔터티 (학생/과목 측 0..N 선택)"
+          }
+        },
+        {
+          "asset_type": "erd",
+          "payload": "erDiagram\n    학생 ||--o{ 수강 : \"수강\"\n    과목 ||--o{ 수강 : \"개설\"\n    수강 {\n        string 수강번호 PK\n        string 학번 FK\n        string 과목코드 FK\n    }"
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "수강",
+            "columns": [
+              "수강번호",
+              "학번",
+              "과목코드"
+            ],
+            "rows": [
+              {
+                "수강번호": "S001",
+                "학번": "1001",
+                "과목코드": "DB"
+              },
+              {
+                "수강번호": "S002",
+                "학번": "1001",
+                "과목코드": "OS"
+              },
+              {
+                "수강번호": "S003",
+                "학번": "1002",
+                "과목코드": "DB"
+              }
+            ]
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "수강번호는 중복되지 않는다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "학생 테이블에 등록된 학생은 반드시 수강목록에 존재해야 한다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "수강 테이블의 학생ID는 학생 테이블의 학생ID를 참조하는 외래키이다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "하나의 학생은 여러 개의 수강 이력을 가질 수 있다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "수강을 하지 않은 학생도 존재할 수 있으므로 학생 존재만으로 수강 이력이 강제되지는 않는다. 따라서 옵션 2번이 옳지 않다. (수정 이력: 2026-04-26 사용자 제보 — 옵션 2 주어 명시 + 옵션 3 변별 강화)"
+      }
+    },
+    {
+      "question_number": 63,
+      "book_section": "M59",
+      "book_question_number": 1,
+      "exam_subject": 1,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "데이터 모델링의 특징이 아닌 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "추상화",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "단순화",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "명확화",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "최적화",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "데이터 모델링의 세 가지 특징은 추상화, 단순화, 명확화이다. 최적화는 포함되지 않는다."
+      }
+    },
+    {
+      "question_number": 64,
+      "book_section": "M59",
+      "book_question_number": 2,
+      "exam_subject": 1,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 사례에 대한 설명 중 옳지 않은 것은?"
+          }
+        },
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "우리은행은 예금분류(일반예금, 특별예금 등)의 원금, 예치기간, 이자율을 관리할 필요가 있다. 또한 원금에 이자율을 적용하여 산출되는 이자도 속성으로 관리하고자 한다. 예를 들어 원금이 1,000원이고 예치기간이 5개월이며 이자율이 5.0%이다. 일반예금이나 특별예금 등에 대해서는 코드를 부여(예: 01-일반예금, 02-특별예금)하여 관리한다."
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "일반예금은 코드 엔터티를 별도로 구분하고 값에는 코드값만 포함한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "원금, 예치기간은 기본 속성이다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "이자와 이자율은 파생 속성이다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "예금분류는 설계 속성이다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "원금과 이자율로부터 계산되어 도출되는 값은 이자뿐이다. 이자율은 기본 속성이므로 \"이자와 이자율 모두가 파생 속성\"이라는 설명은 옳지 않다."
+      }
+    },
+    {
+      "question_number": 65,
+      "book_section": "M59",
+      "book_question_number": 3,
+      "exam_subject": 1,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "보기가 설명하는 개념은?"
+          }
+        },
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "속성이 가질 수 있는 값(데이터 타입 등)의 범위를 정의한 것"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "제약조건",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "도메인",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "식별자",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "관계",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "도메인은 속성이 가질 수 있는 값의 범위(데이터 타입, 길이, 제약 등)를 정의한 개념이다. 제약조건은 데이터 무결성 규칙, 식별자는 엔터티의 인스턴스를 구분하는 속성, 관계는 엔터티 간 연관성을 의미한다."
+      }
+    },
+    {
+      "question_number": 66,
+      "book_section": "M59",
+      "book_question_number": 4,
+      "exam_subject": 1,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "관계(Relationship)의 표기법 요소가 아닌 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "관계명",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "관계차수",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "관계선택사양",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "관계 빈도",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "관계의 표기법은 관계명(Relationship Name), 관계차수(Cardinality), 관계선택사양(Optionality)의 세 요소로 구성된다. 관계 빈도는 표기 요소에 해당하지 않는다."
+      }
+    },
+    {
+      "question_number": 67,
+      "book_section": "M59",
+      "book_question_number": 6,
+      "exam_subject": 1,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 네 개의 테이블이 1:M 관계로 연결된 모델에서 식별자·비식별자 관계에 대한 설명 중 옳지 않은 것은?"
+          }
+        },
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "A·B·C·D 식별자 관계 ERD (모두 1:N — A 의 PK 가 D 까지 순차 전파)"
+          }
+        },
+        {
+          "asset_type": "erd",
+          "payload": "erDiagram\n\n    A ||--o{ B : \"갖는다\"\n\n    B ||--o{ C : \"갖는다\"\n\n    C ||--o{ D : \"갖는다\""
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "1:M으로 연결되어 있다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "비식별로 바꾸면 조회가 빠르다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "A테이블 키는 내부식별자, B테이블은 외부식별자이다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "B테이블의 FK를 비식별자로 바꾸면 C테이블에서 조인할 때 더 편하다.",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "비식별자 관계로 바꾸면 부모의 키가 자식의 PK에 포함되지 않아 하위 테이블까지 키가 전파되지 않는다. 이로 인해 상위 조상까지 접근하려면 추가 조인이 필요해져 조인이 더 복잡해진다."
+      }
+    },
+    {
+      "question_number": 68,
+      "book_section": "M59",
+      "book_question_number": 9,
+      "exam_subject": 1,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "본질 식별자와 인조 식별자에 대한 설명 중 옳지 않은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "본질 식별자는 업무에 의해 자연스럽게 부여되는 식별자이다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "주민등록번호는 업무에서 자연 발생한 본질 식별자에 해당한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "두 개 이상의 속성을 결합해 만든 식별자는 보조식별자, 본질식별자, 복합식별자 등으로 분류된다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "인조 식별자는 일련번호 형태로 시스템이 부여하는 경우가 많다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "③ 번이 옳지 않은 진술이다. 보조/본질/복합 식별자는 서로 다른 분류 기준이며 (보조=대표성 여부, 본질=업무 자연 발생 여부, 복합=속성 수) 단순히 '두 개 이상 속성을 결합' 했다는 사실만으로 세 유형 모두를 포괄한다고 볼 수 없다. ① 본질 식별자 정의, ② 주민등록번호는 본질 식별자, ④ 인조 식별자는 시스템 부여 — 모두 옳은 진술."
+      }
+    },
+    {
+      "question_number": 69,
+      "book_section": "M59",
+      "book_question_number": 10,
+      "exam_subject": 1,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 ERD 해석 중 옳지 않은 것은?"
+          }
+        },
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "학생·수강·과목 ERD — [수강] 교차 엔터티 (학생/과목 측 0..N 선택)"
+          }
+        },
+        {
+          "asset_type": "erd",
+          "payload": "erDiagram\n\n    학생 ||--o{ 수강 : \"수강\"\n\n    과목 ||--o{ 수강 : \"개설\""
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "학생과 수강은 1:M 관계이다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "한 학생은 수강하지 않을 수도 있다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "한 과목은 여러 학생이 수강할 수 있다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "학생은 반드시 한 개 이상의 수강 이력을 가져야 한다.",
+          "is_correct": true
+        }
+      ],
+      "answer": {
+        "explanation": "ERD의 선택사양이 Optional(원)으로 표기되어 있으므로 학생은 수강을 하지 않아도 존재할 수 있다."
+      }
+    },
+    {
+      "question_number": 70,
+      "book_section": "M60",
+      "book_question_number": 1,
+      "exam_subject": 1,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "다음 설명에 해당하는 엔터티 분류는?\n\n해당 엔터티는 업무 수행 과정에서 지속적으로 이벤트가 쌓이므로 데이터가 자주 변경되고 저장되는 양 또한 매우 많다."
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "행위 엔터티",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "개념 엔터티",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "중심 엔터티",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "기본 엔터티",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "행위 엔터티는 업무 수행 과정에서 이벤트가 지속적으로 발생하여 데이터가 자주 변경·축적되는 엔터티이다. 주문, 청구, 납부처럼 업무 행위의 결과로 데이터가 쌓이는 대상이 이에 해당한다. 개념·기본 엔터티는 비교적 정적이며 행위 엔터티의 모태가 된다."
+      }
+    },
+    {
+      "question_number": 71,
+      "book_section": "M60",
+      "book_question_number": 2,
+      "exam_subject": 1,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 [직원] 엔터티의 속성 중 성격이 나머지와 다른 것은?"
+          }
+        },
+        {
+          "asset_type": "data_table",
+          "payload": {
+            "name": "직원 엔터티",
+            "columns": [
+              "속성명",
+              "예시 값"
+            ],
+            "rows": [
+              {
+                "속성명": "사번",
+                "예시 값": "E1001"
+              },
+              {
+                "속성명": "생년월일",
+                "예시 값": "1990-05-14"
+              },
+              {
+                "속성명": "연령",
+                "예시 값": "35"
+              },
+              {
+                "속성명": "부서코드",
+                "예시 값": "D10"
+              }
+            ]
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "연령",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "사번",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "생년월일",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "부서코드",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "사번·생년월일·부서코드는 업무에서 직접 관리되어 입력되는 기본 속성이다. 반면 연령은 생년월일로부터 계산되어 도출되는 파생 속성에 해당하므로 성격이 다르다."
+      }
+    },
+    {
+      "question_number": 72,
+      "book_section": "M60",
+      "book_question_number": 3,
+      "exam_subject": 1,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "엔터티·인스턴스·속성에 대한 설명 중 옳지 않은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "엔터티는 두 개 이상의 인스턴스를 가진다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "하나의 속성에는 두 개 이상의 값이 들어갈 수 있다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "인스턴스는 두 가지의 속성값을 가진다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "하나의 엔터티는 두 개 이상의 속성을 가진다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "인스턴스가 가지는 속성 값의 수는 엔터티가 설계한 속성의 개수에 따라 달라진다. 특정 숫자로 고정되지 않는다."
+      }
+    },
+    {
+      "question_number": 73,
+      "book_section": "M60",
+      "book_question_number": 4,
+      "exam_subject": 1,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "아래 ERD에 포함된 각 엔터티의 성격 분류에 대한 설명 중 옳지 않은 것은?\n\n[서비스·서비스이용·청구·납부 ERD]"
+          }
+        },
+        {
+          "asset_type": "erd",
+          "payload": "erDiagram\n    서비스 ||--o{ 서비스이용 : \"이용\"\n    서비스이용 ||--o{ 청구 : \"발행\"\n    청구 ||--o{ 납부 : \"수행\""
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "서비스는 기본 엔터티에 해당한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "서비스이용은 개념 엔터티에 해당한다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "청구는 행위 엔터티에 해당한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "납부는 행위 엔터티에 해당한다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "서비스이용은 고객이 서비스를 실제로 사용한 사실을 기록하는 행위 엔터티이므로, 개념 엔터티로 분류하는 것은 옳지 않다."
+      }
+    },
+    {
+      "question_number": 74,
+      "book_section": "M60",
+      "book_question_number": 6,
+      "exam_subject": 1,
+      "question_type": "worst_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "비식별자 관계에 대한 설명 중 옳지 않은 것은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "부모의 기본키를 자식의 일반 속성으로 상속한다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "부모 엔터티의 생성과 자식 엔터티의 생성 시점이 분리될 수 있다.",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "주식별자와 식별자가 같다.",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "자식 엔터티에서 독립된 주식별자를 정의할 수 있다.",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "비식별자 관계는 부모의 기본키를 자식의 일반 속성(외래키)으로만 상속하므로 자식은 별도의 주식별자를 정의한다. 따라서 부모 식별자가 곧 자식 주식별자가 되는 식별자 관계와 달리 '주식별자와 식별자가 같다'는 설명은 옳지 않다. ③은 식별자 관계의 특성에 가까우며, 비식별자 관계와는 구분된다."
+      }
+    },
+    {
+      "question_number": 75,
+      "book_section": "M60",
+      "book_question_number": 7,
+      "exam_subject": 1,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "피터 첸(Peter Chen) ERD 표기법에서 '관계(Relationship)'를 나타내는 도형은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "□",
+          "is_correct": false
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "△",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "◇",
+          "is_correct": true
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "○",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "피터 첸 표기법은 엔터티를 사각형(□), 속성을 타원(○), 관계를 마름모(◇)로 표현하며, 주식별자 속성에는 밑줄을 긋는다. 관계는 두 엔터티 사이에 마름모로 배치되어 엔터티 간 연관을 명시한다."
+      }
+    },
+    {
+      "question_number": 76,
+      "book_section": "M60",
+      "book_question_number": 8,
+      "exam_subject": 1,
+      "question_type": "best_choice",
+      "assets": [
+        {
+          "asset_type": "text_block",
+          "payload": {
+            "text": "주식별자를 구성하는 속성 중 한 개가 삭제되었을 때 인스턴스가 구분되지 않는다. 이러한 주식별자가 충족해야 하는 특성은?"
+          }
+        }
+      ],
+      "choices": [
+        {
+          "choice_number": 1,
+          "choice_kind": "text",
+          "choice_text": "최소성",
+          "is_correct": true
+        },
+        {
+          "choice_number": 2,
+          "choice_kind": "text",
+          "choice_text": "대표성",
+          "is_correct": false
+        },
+        {
+          "choice_number": 3,
+          "choice_kind": "text",
+          "choice_text": "불변성",
+          "is_correct": false
+        },
+        {
+          "choice_number": 4,
+          "choice_kind": "text",
+          "choice_text": "고립성",
+          "is_correct": false
+        }
+      ],
+      "answer": {
+        "explanation": "최소성은 주식별자를 구성하는 속성의 수가 유일성을 보장하는 최소한이어야 한다는 특성이다."
       }
     }
   ]
