@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useGoogleLogin } from '@react-oauth/google';
 import TopBar from '../components/layout/TopBar';
 import Spinner from '../components/ui/Spinner';
-import { authApi } from '../services/api';
+import { authApi, profileApi } from '../services/api';
 import { useAuth } from '../contexts/AuthContext';
 
 interface FieldErrors {
@@ -44,7 +44,7 @@ export default function RegisterPage() {
   const handleEmailBlur = async () => {
     if (!form.email.includes('@')) return;
     try {
-      const res = await authApi.checkEmail(form.email);
+      const res = await profileApi.checkEmail(form.email);
       if (!res.data.available) setFieldError('email', '이미 사용 중인 이메일입니다.');
     } catch {
       // 네트워크 오류는 조용히 무시

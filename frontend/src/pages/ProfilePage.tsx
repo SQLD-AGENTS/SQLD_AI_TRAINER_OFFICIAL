@@ -19,7 +19,7 @@ const TABS: { id: TabId; label: string; comingSoon?: boolean; danger?: boolean }
 ];
 
 export default function ProfilePage() {
-  const { user, isGuest } = useAuth();
+  const { isGuest } = useAuth();
   const [searchParams, setSearchParams] = useSearchParams();
   const activeTab = (searchParams.get('tab') as TabId) ?? 'basic';
 
