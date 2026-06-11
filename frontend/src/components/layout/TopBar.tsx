@@ -47,7 +47,7 @@ export default function TopBar() {
               title="프로필"
               style={{ display: 'flex', alignItems: 'center', gap: 8, background: 'none', border: 'none', cursor: 'pointer', padding: '4px 8px', borderRadius: 8 }}
             >
-              <Avatar username={user.username} size={32} fontSize={13} />
+              <Avatar username={user.username} size={32} fontSize={13} imageUrl={user.avatar_url ?? null} />
               <span className="t-caption" style={{ color: 'var(--text-2)' }}>{user.username}</span>
             </button>
             <button className="btn btn-outline btn-sm" onClick={logout}>로그아웃</button>

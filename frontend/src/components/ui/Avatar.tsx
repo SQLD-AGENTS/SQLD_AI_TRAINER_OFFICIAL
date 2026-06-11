@@ -2,10 +2,27 @@ interface AvatarProps {
   username: string;
   size?: number;
   fontSize?: number;
+  imageUrl?: string | null;
 }
 
-export default function Avatar({ username, size = 36, fontSize = 15 }: AvatarProps) {
+export default function Avatar({ username, size = 36, fontSize = 15, imageUrl }: AvatarProps) {
   const initial = username.trim().charAt(0).toUpperCase() || '?';
+
+  if (imageUrl) {
+    return (
+      <img
+        src={imageUrl}
+        alt={username}
+        style={{
+          width: size,
+          height: size,
+          borderRadius: '50%',
+          objectFit: 'cover',
+          flexShrink: 0,
+        }}
+      />
+    );
+  }
 
   return (
     <div
