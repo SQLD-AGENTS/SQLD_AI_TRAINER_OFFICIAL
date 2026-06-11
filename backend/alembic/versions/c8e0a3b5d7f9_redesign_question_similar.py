@@ -1,13 +1,20 @@
-"""redesign question_similar: top3(rank PK) → 관계-키 모델(question_id, similar_question_id)
+"""finalize schema: redesign question_similar + slim question_dedup_log
 
-확정 스키마(스키마 구조 변경.md) 반영:
+확정 스키마(스키마 구조 변경.md / 테이블별 설계근거서) 반영:
+
+[1] question_similar 재설계 (top3 → 관계-키 모델)
 - 테이블명 question_similar_top3 → question_similar
 - PK (question_id, rank) → (question_id, similar_question_id) : 중복 이웃을 키로 차단,
   순위는 similarity DESC 정렬로 도출(rank 컬럼 폐지)
 - similarity CHECK (0 초과 1 이하) 추가, ck_qsim_rank 제거
 - computed_at → timestamptz
 
-top3 테이블은 아직 미적재(Phase 2 미실행)이므로 DROP 후 재생성으로 단순화.
+[2] question_dedup_log 축소 (모의고사 복원 기능 폐지)
+- 복원 스냅샷 4컬럼 제거: book_section, book_question_number, exam_subject,
+  removed_assets (+ ix_dedup_exam) → 순수 감사·캘리브레이션 테이블
+- 잔존: removed_question_id(PK), kept_question_id(FK), similarity, method, removed_at
+
+두 테이블 모두 아직 미적재(Phase 1/2 미실행)이므로 데이터 손실 없음.
 
 Revision ID: c8e0a3b5d7f9
 Revises: b7d9f2a4c6e8
@@ -29,7 +36,7 @@ depends_on: Union[str, Sequence[str], None] = None
 
 def upgrade() -> None:
     """Upgrade schema."""
-    # 기존 top3(미적재) 제거 후 관계-키 모델로 재생성
+    # [1] question_similar: 기존 top3(미적재) 제거 후 관계-키 모델로 재생성
     op.drop_index("ix_qsim_reverse", table_name="question_similar_top3")
     op.drop_table("question_similar_top3")
 
@@ -56,9 +63,36 @@ def upgrade() -> None:
     )
     op.create_index("ix_qsim_reverse", "question_similar", ["similar_question_id"])
 
+    # [2] question_dedup_log: 복원 스냅샷 4컬럼 제거 → 순수 감사·캘리브레이션
+    op.drop_index("ix_dedup_exam", table_name="question_dedup_log")
+    op.drop_column("question_dedup_log", "removed_assets")
+    op.drop_column("question_dedup_log", "exam_subject")
+    op.drop_column("question_dedup_log", "book_question_number")
+    op.drop_column("question_dedup_log", "book_section")
+
 
 def downgrade() -> None:
     """Downgrade schema."""
+    # [2] question_dedup_log: 복원 스냅샷 4컬럼 복원
+    op.add_column(
+        "question_dedup_log", sa.Column("book_section", sa.String(), nullable=True)
+    )
+    op.add_column(
+        "question_dedup_log",
+        sa.Column("book_question_number", sa.Integer(), nullable=True),
+    )
+    op.add_column(
+        "question_dedup_log",
+        sa.Column("exam_subject", sa.SmallInteger(), nullable=True),
+    )
+    op.add_column(
+        "question_dedup_log", sa.Column("removed_assets", sa.JSON(), nullable=True)
+    )
+    op.create_index(
+        "ix_dedup_exam", "question_dedup_log", ["book_section", "book_question_number"]
+    )
+
+    # [1] question_similar → top3 복원
     op.drop_index("ix_qsim_reverse", table_name="question_similar")
     op.drop_table("question_similar")
 

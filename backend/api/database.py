@@ -214,9 +214,10 @@ class AnswerLog(Base):
 class QuestionDedupLog(Base):
     """중복 처리 이력 — v3 canonical_id(논리 통합) 대체.
 
-    하드 삭제로 사라진 두 기능을 떠받친다:
-      ① 모의고사 복원 시 삭제 슬롯을 kept 문항으로 대체 출제
-      ② 플라이휠 dedup 게이트의 폐기 감사 이력
+    순수 감사·캘리브레이션 테이블. 플라이휠 dedup 게이트의 폐기 이력과 판정 근거(similarity)를
+    남겨 게이트 임계값 보정·중복 수렴 추적에 쓴다.
+    (모의고사 복원 기능 폐지로 복원 스냅샷 4컬럼 — book_section/book_question_number/
+     exam_subject/removed_assets — 제거)
     removed_question_id 는 이미 삭제(또는 retired)된 문항이라 questions FK 를 걸지 않는다.
     """
 
@@ -226,12 +227,7 @@ class QuestionDedupLog(Base):
     kept_question_id = Column(
         String, ForeignKey("questions.question_id"), nullable=False
     )
-    # 복원용 스냅샷 (행이 사라지므로 출처 메타를 여기 보존)
-    book_section = Column(String, nullable=True)
-    book_question_number = Column(Integer, nullable=True)
-    exam_subject = Column(SmallInteger, nullable=True)
-    removed_assets = Column(JSON, nullable=True)
-    # 판정 근거
+    # 판정 근거 (캘리브레이션 데이터)
     similarity = Column(Float, nullable=True)
     method = Column(String, nullable=False, default="manual")  # manual / flywheel_gate
     removed_at = Column(DateTime, default=datetime.datetime.utcnow)
@@ -240,7 +236,6 @@ class QuestionDedupLog(Base):
         CheckConstraint(
             "removed_question_id <> kept_question_id", name="ck_dedup_distinct"
         ),
-        Index("ix_dedup_exam", "book_section", "book_question_number"),
         Index("ix_dedup_kept", "kept_question_id"),
     )
 
