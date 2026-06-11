@@ -113,14 +113,16 @@ app = FastAPI(
 
 # CORS — 로컬 개발 서버 + Vercel 프로덕션/프리뷰 + 환경변수로 추가 오리진 허용
 _extra_origins = [o.strip() for o in os.getenv("CORS_ORIGINS", "").split(",") if o.strip()]
+print(f"[CORS] env CORS_ORIGINS={os.getenv('CORS_ORIGINS')!r} → extra={_extra_origins}", flush=True)
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:3000",
         "http://localhost:5173",
-        "https://sqld-ai-trainer.vercel.app",
         *_extra_origins,
     ],
+    allow_origin_regex=r"https://sqld-ai-trainer.*\.vercel\.app",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
