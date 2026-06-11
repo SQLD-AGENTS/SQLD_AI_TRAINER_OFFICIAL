@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { useQuery, useMutation } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import PageLayout from '../components/layout/PageLayout';
 import DifficultyBadge from '../components/ui/DifficultyBadge';
 import Spinner from '../components/ui/Spinner';
@@ -18,12 +18,15 @@ export default function QuestionDetailPage() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { user, isGuest } = useAuth();
+  const queryClient = useQueryClient();
 
   const [selected, setSelected] = useState<number | null>(null);
   const [stage, setStage] = useState<Stage>('pre');
   const [explanation, setExplanation] = useState('');
   const [similarQuestions, setSimilarQuestions] = useState<Parameters<typeof AiExplanation>[0]['similarQuestions']>([]);
   const [aiLoading, setAiLoading] = useState(false);
+  const [prevIsCorrect, setPrevIsCorrect] = useState<boolean | null>(null);
+  const [isFromHistory, setIsFromHistory] = useState(false);
 
   const qid = id ?? '';
 
@@ -32,7 +35,22 @@ export default function QuestionDetailPage() {
     setStage('pre');
     setExplanation('');
     setSimilarQuestions([]);
+    setPrevIsCorrect(null);
+    setIsFromHistory(false);
   }, [qid]);
+
+  useEffect(() => {
+    if (!qid || !user || isGuest) return;
+    let cancelled = false;
+    logsApi.checkSolved(qid).then((res) => {
+      if (!cancelled && res.data.is_solved) {
+        setPrevIsCorrect(res.data.is_correct);
+        setIsFromHistory(true);
+        setStage('post');
+      }
+    }).catch(() => {});
+    return () => { cancelled = true; };
+  }, [qid, user, isGuest]);
 
   const { data: question, isLoading } = useQuery({
     queryKey: ['question', qid],
@@ -49,7 +67,12 @@ export default function QuestionDetailPage() {
 
   const submitMutation = useMutation({
     mutationFn: ({ sel }: { sel: number }) => logsApi.submit(qid, sel),
-    onSuccess: () => setStage('post'),
+    onSuccess: () => {
+      setPrevIsCorrect(null);
+      setIsFromHistory(false);
+      queryClient.invalidateQueries({ queryKey: ['solved-summary'] });
+      setStage('post');
+    },
   });
 
   const handleSubmit = () => {
@@ -93,12 +116,14 @@ export default function QuestionDetailPage() {
     );
   }
 
+  const correct = question.correct_answer != null ? Number(question.correct_answer) : null;
+  const resultIsCorrect = isFromHistory && prevIsCorrect !== null ? prevIsCorrect : selected === correct;
+
   const choiceCount = question.choices?.length ?? (question as { choice_count?: number }).choice_count ?? 4;
   const rawChoices: { number: number; text: string }[] = Array.isArray(question.choices)
     ? question.choices
     : Array.from({ length: choiceCount }, (_, i) => ({ number: i + 1, text: `선택지 ${i + 1}` }));
   const choices = rawChoices;
-  const correct = question.correct_answer != null ? Number(question.correct_answer) : null;
 
   return (
     <PageLayout narrow>
@@ -114,10 +139,10 @@ export default function QuestionDetailPage() {
           <span style={{ marginLeft: 'auto' }} className="t-caption">문제 #{qid}</span>
           {stage === 'post' && (
             <span className="tag" style={{
-              background: selected === correct ? 'var(--success-soft)' : 'var(--danger-soft)',
-              color: selected === correct ? 'var(--success)' : 'var(--danger)',
+              background: resultIsCorrect ? 'var(--success-soft)' : 'var(--danger-soft)',
+              color: resultIsCorrect ? 'var(--success)' : 'var(--danger)',
             }}>
-              {selected === correct ? '정답' : '오답'}
+              {resultIsCorrect ? '정답' : '오답'}
             </span>
           )}
         </div>
@@ -175,6 +200,14 @@ export default function QuestionDetailPage() {
             <div className="row" style={{ justifyContent: 'space-between', marginTop: 24, gap: 12 }}>
               <div className="row gap-8">
                 <button className="btn btn-outline" onClick={() => navigate('/questions')}>목록으로</button>
+                {isFromHistory && (
+                  <button className="btn btn-outline" onClick={() => {
+                    setStage('pre');
+                    setSelected(null);
+                    setPrevIsCorrect(null);
+                    setIsFromHistory(false);
+                  }}>다시 풀기</button>
+                )}
               </div>
               {stage === 'post' && (
                 <button
@@ -182,7 +215,7 @@ export default function QuestionDetailPage() {
                   onClick={handleShowAI}
                   style={{ flexDirection: 'column', alignItems: 'center', gap: 2 }}
                 >
-                  {selected === correct
+                  {resultIsCorrect
                     ? <span style={{ fontSize: 12, opacity: 0.85 }}>정답입니다! 계속 풀어볼까요?</span>
                     : <span style={{ fontSize: 12, opacity: 0.85 }}>오답입니다. 해설을 확인해보세요.</span>
                   }
