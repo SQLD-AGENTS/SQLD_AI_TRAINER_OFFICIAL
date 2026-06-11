@@ -27,12 +27,19 @@ logger = logging.getLogger("uvicorn.error")
 # 저장소 루트 .env 로드 (JWT/OLLAMA/GEMINI/CORS/DATABASE_URL). 컨테이너엔 .env 없음 → no-op.
 load_dotenv(pathlib.Path(__file__).resolve().parent.parent.parent / ".env")
 
+import pathlib
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 
 from api.database import create_tables
 from api.routers import auth, explain, logs, predict, progress, questions, recommend
 from api.state import app_state
+
+UPLOADS_DIR = pathlib.Path(__file__).resolve().parent.parent / "uploads"
+UPLOADS_DIR.mkdir(exist_ok=True)
+(UPLOADS_DIR / "avatars").mkdir(exist_ok=True)
 
 
 def _log_mem(label: str) -> None:
@@ -126,6 +133,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# 정적 파일 서빙 (업로드 아바타 이미지)
+app.mount("/static", StaticFiles(directory=str(UPLOADS_DIR)), name="static")
 
 # 라우터 등록
 app.include_router(auth.router)
