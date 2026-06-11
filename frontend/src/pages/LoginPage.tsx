@@ -28,6 +28,7 @@ export default function LoginPage() {
         user_id: res.data.user_id,
         username: res.data.username ?? 'User',
         email,
+        avatar_url: res.data.avatar_url,
       });
       navigate(from, { replace: true });
     } catch {
@@ -56,6 +57,7 @@ export default function LoginPage() {
         user_id: res.data.user_id,
         username: res.data.username ?? 'User',
         email: '',
+        avatar_url: res.data.avatar_url,
       });
       navigate(from, { replace: true });
     } catch {

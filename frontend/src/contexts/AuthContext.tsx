@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useCallback, type ReactNode } from 'react';
+import { useQueryClient } from '@tanstack/react-query';
 
 interface User {
   user_id: string;
@@ -11,6 +12,7 @@ interface AuthState {
   token: string | null;
   user: User | null;
   isGuest: boolean;
+  showSolvedStatus: boolean;
 }
 
 interface AuthContextValue extends AuthState {
@@ -19,6 +21,7 @@ interface AuthContextValue extends AuthState {
   logout: () => void;
   updateUsername: (newUsername: string) => void;
   updateAvatarUrl: (url: string | null) => void;
+  toggleShowSolvedStatus: () => void;
 }
 
 const AuthContext = createContext<AuthContextValue | null>(null);
@@ -26,24 +29,28 @@ const AuthContext = createContext<AuthContextValue | null>(null);
 const TOKEN_KEY = 'sqld_token';
 const USER_KEY = 'sqld_user';
 const GUEST_KEY = 'sqld_is_guest';
+const SOLVED_TOGGLE_KEY = 'sqld_show_solved';
 
 function loadInitialState(): AuthState {
   try {
     const token = localStorage.getItem(TOKEN_KEY);
     const user = localStorage.getItem(USER_KEY);
     const isGuest = localStorage.getItem(GUEST_KEY) === 'true';
+    const showSolvedStatus = localStorage.getItem(SOLVED_TOGGLE_KEY) !== 'false';
     return {
       token,
       user: user ? JSON.parse(user) : null,
       isGuest,
+      showSolvedStatus,
     };
   } catch {
-    return { token: null, user: null, isGuest: false };
+    return { token: null, user: null, isGuest: false, showSolvedStatus: true };
   }
 }
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [state, setState] = useState<AuthState>(loadInitialState);
+  const queryClient = useQueryClient();
 
   const login = useCallback((token: string, user: User) => {
     localStorage.setItem(TOKEN_KEY, token);
@@ -64,8 +71,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     localStorage.removeItem(TOKEN_KEY);
     localStorage.removeItem(USER_KEY);
     localStorage.removeItem(GUEST_KEY);
-    setState({ token: null, user: null, isGuest: false });
-  }, []);
+    setState((prev) => ({ token: null, user: null, isGuest: false, showSolvedStatus: prev.showSolvedStatus }));
+    queryClient.clear();
+  }, [queryClient]);
 
   const updateUsername = useCallback((newUsername: string) => {
     setState((prev) => {
@@ -85,8 +93,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     });
   }, []);
 
+  const toggleShowSolvedStatus = useCallback(() => {
+    setState((prev) => {
+      const next = !prev.showSolvedStatus;
+      localStorage.setItem(SOLVED_TOGGLE_KEY, String(next));
+      return { ...prev, showSolvedStatus: next };
+    });
+  }, []);
+
   return (
-    <AuthContext.Provider value={{ ...state, login, loginAsGuest, logout, updateUsername, updateAvatarUrl }}>
+    <AuthContext.Provider value={{ ...state, login, loginAsGuest, logout, updateUsername, updateAvatarUrl, toggleShowSolvedStatus }}>
       {children}
     </AuthContext.Provider>
   );

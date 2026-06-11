@@ -45,8 +45,8 @@ export default function AccuracyChart({ data }: { data: ChapterStat[] }) {
         </div>
       </div>
 
-      <div style={{ marginTop: 16, height: 240 }}>
-        <ResponsiveContainer width="100%" height="100%">
+      <div style={{ marginTop: 16 }}>
+        <ResponsiveContainer width="100%" height={240}>
           <BarChart data={chartData} margin={{ top: 8, right: 12, bottom: 0, left: -16 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="var(--border-soft)" vertical={false} />
             <XAxis dataKey="name" tick={{ fontSize: 11, fill: 'var(--text-3)' }} axisLine={false} tickLine={false} />
