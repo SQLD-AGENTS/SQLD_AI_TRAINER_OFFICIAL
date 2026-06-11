@@ -4,6 +4,7 @@ interface User {
   user_id: string;
   username: string;
   email: string;
+  avatar_url?: string | null;
 }
 
 interface AuthState {
@@ -17,6 +18,7 @@ interface AuthContextValue extends AuthState {
   loginAsGuest: (token: string, user_id: string) => void;
   logout: () => void;
   updateUsername: (newUsername: string) => void;
+  updateAvatarUrl: (url: string | null) => void;
 }
 
 const AuthContext = createContext<AuthContextValue | null>(null);
@@ -74,8 +76,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     });
   }, []);
 
+  const updateAvatarUrl = useCallback((url: string | null) => {
+    setState((prev) => {
+      if (!prev.user) return prev;
+      const updated = { ...prev.user, avatar_url: url };
+      localStorage.setItem(USER_KEY, JSON.stringify(updated));
+      return { ...prev, user: updated };
+    });
+  }, []);
+
   return (
-    <AuthContext.Provider value={{ ...state, login, loginAsGuest, logout, updateUsername }}>
+    <AuthContext.Provider value={{ ...state, login, loginAsGuest, logout, updateUsername, updateAvatarUrl }}>
       {children}
     </AuthContext.Provider>
   );
