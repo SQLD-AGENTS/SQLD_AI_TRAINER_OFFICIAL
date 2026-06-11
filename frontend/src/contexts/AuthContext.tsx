@@ -56,7 +56,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     localStorage.setItem(TOKEN_KEY, token);
     localStorage.setItem(USER_KEY, JSON.stringify(user));
     localStorage.removeItem(GUEST_KEY);
-    setState({ token, user, isGuest: false });
+    setState((prev) => ({ ...prev, token, user, isGuest: false }));
   }, []);
 
   const loginAsGuest = useCallback((token: string, user_id: string) => {
@@ -64,7 +64,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     localStorage.setItem(TOKEN_KEY, token);
     localStorage.setItem(USER_KEY, JSON.stringify(guestUser));
     localStorage.setItem(GUEST_KEY, 'true');
-    setState({ token, user: guestUser, isGuest: true });
+    setState((prev) => ({ ...prev, token, user: guestUser, isGuest: true }));
   }, []);
 
   const logout = useCallback(() => {
