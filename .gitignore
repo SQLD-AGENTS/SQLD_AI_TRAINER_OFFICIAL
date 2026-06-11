@@ -79,6 +79,7 @@ frontend/node_modules/
 frontend/dist/
 frontend/.env.local
 frontend/.env
+frontend/.env.production
 
 # Backend (경로 변경 반영)
 backend/.venv/
