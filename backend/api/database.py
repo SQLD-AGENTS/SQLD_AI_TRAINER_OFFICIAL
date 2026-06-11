@@ -245,31 +245,34 @@ class QuestionDedupLog(Base):
     )
 
 
-class QuestionSimilarTop3(Base):
+class QuestionSimilar(Base):
     """유사도 사전 매핑 — /explain 무쿼리화 + 추천 쿨다운 + 플라이휠 dedup 사전 필터.
 
     이웃 풀은 serving(status='active')만. refresh_similarities.py 가 풀 리프레시로 채운다.
+    PK=(question_id, similar_question_id) — 관계가 곧 키. 중복 이웃을 스키마 차원에서 차단하고,
+    순위는 similarity DESC 정렬로 도출(rank 컬럼 폐지). 모델 교체는 model_name 으로 추적.
     """
 
-    __tablename__ = "question_similar_top3"
+    __tablename__ = "question_similar"
 
     question_id = Column(
         String,
         ForeignKey("questions.question_id", ondelete="CASCADE"),
         primary_key=True,
     )
-    rank = Column(SmallInteger, primary_key=True)
     similar_question_id = Column(
         String,
         ForeignKey("questions.question_id", ondelete="CASCADE"),
-        nullable=False,
+        primary_key=True,
     )
     similarity = Column(Float, nullable=False)
     model_name = Column(String, nullable=False)
-    computed_at = Column(DateTime, default=datetime.datetime.utcnow)
+    computed_at = Column(DateTime(timezone=True), default=datetime.datetime.utcnow)
 
     __table_args__ = (
-        CheckConstraint("rank BETWEEN 1 AND 3", name="ck_qsim_rank"),
+        CheckConstraint(
+            "similarity > 0 AND similarity <= 1", name="ck_qsim_similarity"
+        ),
         CheckConstraint(
             "question_id <> similar_question_id", name="ck_qsim_distinct"
         ),
@@ -353,7 +356,7 @@ def create_tables() -> None:
             Question.__table__,
             AnswerLog.__table__,
             QuestionDedupLog.__table__,
-            QuestionSimilarTop3.__table__,
+            QuestionSimilar.__table__,
         ]
         Base.metadata.create_all(bind=engine, tables=core)
     create_views()
