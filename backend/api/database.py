@@ -22,6 +22,7 @@ from sqlalchemy import (
     Float,
     ForeignKey,
     Index,
+    func,
     Integer,
     SmallInteger,
     String,
@@ -40,9 +41,22 @@ try:
 except ImportError:  # pragma: no cover
     HAS_PGVECTOR = False
 
-# 임베딩: Google Gemini(gemini-embedding-001).
+# 임베딩 정체성 — 단일 원천(SSOT). 적재(vectorize)·단건(embeddings.upsert)·검증(verify V5)
+# 전 경로가 이 상수만 참조한다(문자열 하드코딩 금지).
+#   EMBED_MODEL      : Gemini API 에 넘기는 실제 모델 id (model= 인자)
+#   EMBED_TASK_TYPE  : 임베딩 task_type. 문항↔문항 대칭 유사도이므로 SEMANTIC_SIMILARITY.
+#   EMBED_MODEL_NAME : DB(model_name 컬럼) 저장·스테일 비교용 '파생' 식별자.
+#                      task_type 태그를 접미(:ss 등)해, task_type 교체가 스테일 체인
+#                      (e.model_name <> 현행)으로 자동 재임베딩되게 추적한다.
 # 1536차원 = 3072 동급 품질(MTEB 68.17) + pgvector HNSW 인덱스 한계(2000) 이내.
-EMBED_MODEL_NAME = "gemini-embedding-001"
+EMBED_MODEL = "gemini-embedding-001"
+EMBED_TASK_TYPE = "SEMANTIC_SIMILARITY"
+_EMBED_TASK_TAG = {
+    "SEMANTIC_SIMILARITY": "ss",
+    "RETRIEVAL_DOCUMENT": "rd",
+    "RETRIEVAL_QUERY": "rq",
+}
+EMBED_MODEL_NAME = f"{EMBED_MODEL}:{_EMBED_TASK_TAG[EMBED_TASK_TYPE]}"
 EMBED_DIM = 1536
 
 # ---------------------------------------------------------------------------
@@ -268,7 +282,11 @@ class QuestionSimilar(Base):
     )
     similarity = Column(Float, nullable=False)
     model_name = Column(String, nullable=False)
-    computed_at = Column(DateTime(timezone=True), default=datetime.datetime.utcnow)
+    # server_default=now(): raw INSERT(refresh/플라이휠) 경로에서 NULL 유입을 DB 레벨 차단.
+    # NOT NULL 과 함께 — server_default 만으로는 명시적 NULL INSERT 를 못 막으므로.
+    computed_at = Column(
+        DateTime(timezone=True), server_default=func.now(), nullable=False
+    )
 
     __table_args__ = (
         CheckConstraint(
@@ -330,21 +348,6 @@ def ensure_vector_extension() -> bool:
         return False
 
 
-def create_views() -> None:
-    """serving_questions 뷰 — 추천·연습·RAG 컨텍스트 공통 서빙 풀(status='active').
-
-    CREATE OR REPLACE 는 SQLite 미지원이라 DROP+CREATE 로 통일(양 DB 호환·멱등).
-    """
-    with engine.begin() as conn:
-        conn.execute(text("DROP VIEW IF EXISTS serving_questions"))
-        conn.execute(
-            text(
-                "CREATE VIEW serving_questions AS "
-                "SELECT * FROM questions WHERE status = 'active'"
-            )
-        )
-
-
 def create_tables() -> None:
     # FK 의존성에 따라 questions → answer_logs 순서로 알아서 생성됨
     vector_ok = ensure_vector_extension()
@@ -360,7 +363,6 @@ def create_tables() -> None:
             QuestionSimilar.__table__,
         ]
         Base.metadata.create_all(bind=engine, tables=core)
-    create_views()
 
 
 def get_db():
