@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { profileApi } from '../../services/api';
 
 function getStrengthLabel(pw: string): { label: string; color: string } {
@@ -15,19 +15,31 @@ export default function ProfilePasswordChange() {
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const [isSocialOnly, setIsSocialOnly] = useState(false);
+  const [hasPassword, setHasPassword] = useState(true);
+  const [profileLoading, setProfileLoading] = useState(true);
+
+  useEffect(() => {
+    profileApi.getMe().then((res) => {
+      const profile = res.data;
+      const social = !!profile.social_provider;
+      setIsSocialOnly(social);
+      setHasPassword(!social);
+    }).catch(() => {}).finally(() => setProfileLoading(false));
+  }, []);
 
   const strength = getStrengthLabel(newPw);
   const mismatch = confirmPw.length > 0 && newPw !== confirmPw;
 
   async function handleSave() {
+    if (!currentPw) { setError('현재 비밀번호를 입력해주세요.'); return; }
     if (newPw !== confirmPw) { setError('새 비밀번호가 일치하지 않습니다.'); return; }
     if (newPw.length < 8) { setError('비밀번호는 8자 이상이어야 합니다.'); return; }
     setSaving(true);
     setError('');
     setSuccess('');
     try {
-      // current_password는 Phase 2 백엔드 수정 후 payload에 포함 예정
-      await profileApi.updateMe({ password: newPw });
+      await profileApi.updateMe({ password: newPw, current_password: currentPw });
       setSuccess('비밀번호가 변경되었습니다.');
       setCurrentPw('');
       setNewPw('');
@@ -40,27 +52,41 @@ export default function ProfilePasswordChange() {
     }
   }
 
+  if (profileLoading) return <section style={{ minHeight: 200 }} />;
+
+  if (isSocialOnly) {
+    return (
+      <section style={{ maxWidth: 480 }}>
+        <h2 style={{ marginTop: 0, marginBottom: 8, fontSize: 18 }}>비밀번호 변경</h2>
+        <p style={{ margin: '0 0 16px', fontSize: 13, color: 'var(--text-2)' }}>
+          구글 소셜 로그인 계정은 비밀번호 변경이 불가합니다.
+        </p>
+        <div style={{ padding: '14px 16px', background: 'var(--surface-2, #f7fafc)', borderRadius: 8, fontSize: 13, color: 'var(--text-3)' }}>
+          소셜 계정으로 가입하셨습니다. Google 계정 설정에서 비밀번호를 관리해주세요.
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section style={{ maxWidth: 480 }}>
       <h2 style={{ marginTop: 0, marginBottom: 8, fontSize: 18 }}>비밀번호 변경</h2>
       <p style={{ margin: '0 0 24px', fontSize: 13, color: 'var(--text-2)' }}>
-        현재 비밀번호 검증은 Phase 2에서 추가될 예정입니다.
+        {hasPassword ? '현재 비밀번호 확인 후 새 비밀번호로 변경합니다.' : '소셜 계정에 비밀번호를 새로 설정합니다.'}
       </p>
 
-      <div className="form-group" style={{ marginBottom: 16 }}>
+      {hasPassword && <div className="form-group" style={{ marginBottom: 16 }}>
         <label style={{ display: 'block', marginBottom: 6, fontSize: 13, fontWeight: 500 }}>
-          현재 비밀번호 <span style={{ fontSize: 11, color: 'var(--text-2)' }}>(Phase 2 연동 대기)</span>
+          현재 비밀번호
         </label>
         <input
           className="input"
           type="password"
           value={currentPw}
-          onChange={(e) => setCurrentPw(e.target.value)}
+          onChange={(e) => { setCurrentPw(e.target.value); setError(''); setSuccess(''); }}
           placeholder="현재 비밀번호 입력"
-          disabled
-          style={{ background: 'var(--surface-2)', cursor: 'not-allowed' }}
         />
-      </div>
+      </div>}
 
       <div className="form-group" style={{ marginBottom: 16 }}>
         <label style={{ display: 'block', marginBottom: 6, fontSize: 13, fontWeight: 500 }}>새 비밀번호</label>
@@ -97,7 +123,7 @@ export default function ProfilePasswordChange() {
       <button
         className="btn btn-primary"
         onClick={handleSave}
-        disabled={saving || !newPw || !confirmPw || mismatch}
+        disabled={saving || (hasPassword && !currentPw) || !newPw || !confirmPw || mismatch}
       >
         {saving ? '변경 중...' : '비밀번호 변경'}
       </button>

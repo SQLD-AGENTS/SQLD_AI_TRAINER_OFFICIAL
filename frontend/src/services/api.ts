@@ -20,6 +20,14 @@ export const authApi = {
   register: (username: string, email: string, password: string) =>
     apiClient.post('/auth/register', { username, email, password }),
   guest: () => apiClient.post('/auth/guest'),
+  googleLogin: (accessToken: string) =>
+    apiClient.post<{ access_token: string; user_id: string; username: string; is_new_user: boolean }>('/auth/google', { access_token: accessToken }),
+  checkUsername: (username: string) =>
+    apiClient.get<{ available: boolean }>('/auth/check-username', { params: { username } }),
+  findUsername: (email: string) =>
+    apiClient.post<{ username: string }>('/auth/find-username', { email }),
+  resetPassword: (email: string) =>
+    apiClient.post<{ temp_password: string }>('/auth/reset-password', { email }),
 };
 
 // ── Questions ─────────────────────────────────────────
@@ -73,14 +81,18 @@ export interface UserProfile {
   user_id: string;
   email: string;
   username: string;
+  avatar_url?: string | null;
   created_at: string | null;
   updated_at: string | null;
   is_active: boolean;
+  social_provider?: string | null;
 }
 
 export interface UserUpdatePayload {
   username?: string;
+  email?: string;
   password?: string;
+  current_password?: string;
 }
 
 export const profileApi = {
@@ -88,6 +100,21 @@ export const profileApi = {
     apiClient.get<UserProfile>('/auth/users/me'),
   updateMe: (payload: UserUpdatePayload) =>
     apiClient.put<UserProfile>('/auth/users/me', payload),
-  deleteMe: () =>
-    apiClient.delete('/auth/users/me'),
+  deleteMe: (password: string) =>
+    apiClient.delete('/auth/users/me', { data: { password } }),
+  checkEmail: (email: string) =>
+    apiClient.get<{ available: boolean }>('/auth/check-email', { params: { email } }),
+  uploadAvatar: (file: File) => {
+    const form = new FormData();
+    form.append('file', file);
+    return apiClient.post<UserProfile>('/auth/users/me/avatar', form, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    });
+  },
+  deleteAvatar: () =>
+    apiClient.delete<UserProfile>('/auth/users/me/avatar'),
+  revokeAllSessions: () =>
+    apiClient.post<{ access_token: string; user_id: string; username: string }>('/auth/users/me/revoke-all'),
 };
+
+export { BASE_URL };

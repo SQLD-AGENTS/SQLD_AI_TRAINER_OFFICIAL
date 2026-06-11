@@ -34,7 +34,6 @@ from api.database import create_tables
 from api.routers import auth, explain, logs, predict, progress, questions, recommend
 from api.state import app_state
 
-
 def _log_mem(label: str) -> None:
     try:
         import resource

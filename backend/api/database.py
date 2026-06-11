@@ -26,6 +26,7 @@ from sqlalchemy import (
     SmallInteger,
     String,
     Text,
+    UniqueConstraint,
     create_engine,
     text,
 )
@@ -92,11 +93,16 @@ class Base(DeclarativeBase):
 # ---------------------------------------------------------------------------
 class User(Base):
     __tablename__ = "users"
+    __table_args__ = (UniqueConstraint("username", name="uq_users_username"),)
 
     user_id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
     email = Column(String, unique=True, nullable=False, index=True)
     username = Column(String, nullable=False)
-    hashed_password = Column(String, nullable=False)
+    hashed_password = Column(String, nullable=True)
+    avatar_url = Column(String, nullable=True)
+    token_version = Column(Integer, nullable=False, default=0)
+    social_provider = Column(String(32), nullable=True)
+    social_id = Column(String(256), nullable=True)
     created_at = Column(DateTime, default=datetime.datetime.utcnow)
     updated_at = Column(
         DateTime,

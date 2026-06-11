@@ -1,26 +1,56 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { profileApi } from '../../services/api';
 import { useAuth } from '../../contexts/AuthContext';
 import DeleteAccountModal from './DeleteAccountModal';
 
 export default function ProfileDangerZone() {
-  const { logout } = useAuth();
+  const { logout, login, user } = useAuth();
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
   const [deleting, setDeleting] = useState(false);
+  const [revoking, setRevoking] = useState(false);
   const [error, setError] = useState('');
+  const [revokeSuccess, setRevokeSuccess] = useState('');
+  const [isSocialOnly, setIsSocialOnly] = useState(false);
+
+  useEffect(() => {
+    profileApi.getMe().then((res) => {
+      setIsSocialOnly(!!res.data.social_provider);
+    }).catch(() => {});
+  }, []);
 
   function handleLogout() {
     logout();
     navigate('/');
   }
 
-  async function handleDeleteConfirm() {
+  async function handleRevokeAll() {
+    setRevoking(true);
+    setError('');
+    setRevokeSuccess('');
+    try {
+      const res = await profileApi.revokeAllSessions();
+      // 현재 세션용 새 토큰으로 교체
+      login(res.data.access_token, {
+        user_id: res.data.user_id!,
+        username: res.data.username!,
+        email: user!.email,
+      });
+      setRevokeSuccess('다른 모든 기기에서 로그아웃되었습니다.');
+    } catch (e: unknown) {
+      const msg = (e as { response?: { data?: { detail?: string } } })?.response?.data?.detail;
+      setError(msg ?? '로그아웃 처리에 실패했습니다.');
+    } finally {
+      setRevoking(false);
+    }
+  }
+
+  async function handleDeleteConfirm(password: string) {
     setDeleting(true);
     setError('');
     try {
-      await profileApi.deleteMe();
+      await profileApi.deleteMe(password);
       logout();
       navigate('/');
     } catch (e: unknown) {
@@ -46,13 +76,19 @@ export default function ProfileDangerZone() {
           </button>
         </div>
 
-        <div style={{ padding: '20px 24px', border: '1px solid var(--border, #e2e8f0)', borderRadius: 12, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16, opacity: 0.5 }}>
+        <div style={{ padding: '20px 24px', border: '1px solid var(--border, #e2e8f0)', borderRadius: 12, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16 }}>
           <div>
             <p style={{ margin: 0, fontWeight: 600, fontSize: 14 }}>모든 기기 로그아웃</p>
-            <p style={{ margin: '4px 0 0', fontSize: 13, color: 'var(--text-2)' }}>JWT stateless 구조로 현재 미지원입니다.</p>
+            <p style={{ margin: '4px 0 0', fontSize: 13, color: 'var(--text-2)' }}>다른 모든 기기의 세션을 무효화합니다. 현재 세션은 유지됩니다.</p>
+            {revokeSuccess && <p style={{ margin: '6px 0 0', fontSize: 12, color: 'var(--success, #38a169)' }}>{revokeSuccess}</p>}
           </div>
-          <button className="btn btn-outline btn-sm" disabled title="현재 미지원" style={{ flexShrink: 0, cursor: 'not-allowed' }}>
-            미지원
+          <button
+            className="btn btn-outline btn-sm"
+            onClick={handleRevokeAll}
+            disabled={revoking}
+            style={{ flexShrink: 0 }}
+          >
+            {revoking ? '처리 중...' : '전체 로그아웃'}
           </button>
         </div>
 
@@ -78,6 +114,7 @@ export default function ProfileDangerZone() {
           onConfirm={handleDeleteConfirm}
           onCancel={() => { if (!deleting) setShowModal(false); }}
           loading={deleting}
+          isSocialOnly={isSocialOnly}
         />
       )}
     </section>

@@ -27,14 +27,54 @@ class UserProfileResponse(BaseModel):
     user_id: str
     email: str
     username: str
+    avatar_url: Optional[str] = None
     created_at: Optional[datetime.datetime] = None
     updated_at: Optional[datetime.datetime] = None
     is_active: bool
+    social_provider: Optional[str] = None
 
     class Config:
         from_attributes = True
 
 
 class UserUpdateRequest(BaseModel):
-    username: Optional[Annotated[str, Field(min_length=1, max_length=50)]] = None
+    username: Optional[Annotated[str, Field(min_length=2, max_length=20)]] = None
+    email: Optional[EmailStr] = None
     password: Optional[Annotated[str, Field(min_length=8, max_length=100)]] = None
+    current_password: Optional[str] = None
+
+
+class DeleteRequest(BaseModel):
+    password: Optional[str] = None
+
+
+class GoogleLoginRequest(BaseModel):
+    access_token: str
+
+
+class GoogleLoginResponse(TokenResponse):
+    is_new_user: bool = False
+
+
+class EmailCheckResponse(BaseModel):
+    available: bool
+
+
+class UsernameCheckResponse(BaseModel):
+    available: bool
+
+
+class FindUsernameRequest(BaseModel):
+    email: EmailStr
+
+
+class FindUsernameResponse(BaseModel):
+    username: str
+
+
+class ResetPasswordRequest(BaseModel):
+    email: EmailStr
+
+
+class ResetPasswordResponse(BaseModel):
+    temp_password: str

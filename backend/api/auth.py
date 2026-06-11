@@ -1,8 +1,13 @@
 import os
+import random
+import string
 from datetime import datetime, timedelta, timezone
 from typing import Optional
 
 import bcrypt as _bcrypt
+import requests as http_requests
+from google.oauth2 import id_token as google_id_token
+from google.auth.transport import requests as google_requests
 
 from fastapi import Depends, HTTPException, status
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
@@ -21,6 +26,56 @@ GUEST_TOKEN_EXPIRE_HOURS = 1
 
 bearer_scheme = HTTPBearer(auto_error=False)
 
+GOOGLE_CLIENT_ID = os.getenv("GOOGLE_CLIENT_ID", "")
+
+
+# ---------- Google OAuth helpers ----------
+
+def verify_google_id_token(token: str) -> dict:
+    """Google id_token을 공개키로 검증하고 payload를 반환한다.
+    반환값: {"sub": ..., "email": ..., "name": ..., "picture": ...}
+    """
+    if not GOOGLE_CLIENT_ID:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="서버에 GOOGLE_CLIENT_ID 환경변수가 설정되지 않았습니다.",
+        )
+    try:
+        idinfo = google_id_token.verify_oauth2_token(
+            token, google_requests.Request(), GOOGLE_CLIENT_ID
+        )
+        return idinfo
+    except ValueError as e:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail=f"유효하지 않은 Google ID 토큰입니다: {e}",
+        )
+
+
+def verify_google_access_token(access_token: str) -> dict:
+    """Google access_token으로 userinfo 엔드포인트를 호출해 사용자 정보를 반환한다.
+    반환값: {"sub": ..., "email": ..., "name": ..., "picture": ...}
+    """
+    try:
+        resp = http_requests.get(
+            "https://www.googleapis.com/oauth2/v3/userinfo",
+            headers={"Authorization": f"Bearer {access_token}"},
+            timeout=10,
+        )
+        if resp.status_code != 200:
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="유효하지 않은 Google 액세스 토큰입니다.",
+            )
+        return resp.json()
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail=f"Google 인증 중 오류가 발생했습니다: {e}",
+        )
+
 
 # ---------- password helpers ----------
 
@@ -32,12 +87,27 @@ def verify_password(plain: str, hashed: str) -> bool:
     return _bcrypt.checkpw(plain.encode("utf-8"), hashed.encode("utf-8"))
 
 
+def generate_temp_password(length: int = 10) -> str:
+    chars = string.ascii_letters + string.digits + "!@#$%"
+    required = [
+        random.choice(string.ascii_uppercase),
+        random.choice(string.ascii_lowercase),
+        random.choice(string.digits),
+        random.choice("!@#$%"),
+    ]
+    rest = [random.choice(chars) for _ in range(length - len(required))]
+    pool = required + rest
+    random.shuffle(pool)
+    return "".join(pool)
+
+
 # ---------- token helpers ----------
 
-def create_access_token(user_id: str) -> str:
+def create_access_token(user_id: str, token_version: int = 0) -> str:
     payload = {
         "sub": user_id,
         "is_guest": False,
+        "tv": token_version,
         "exp": datetime.now(timezone.utc) + timedelta(hours=ACCESS_TOKEN_EXPIRE_HOURS),
     }
     return jwt.encode(payload, SECRET_KEY, algorithm=ALGORITHM)

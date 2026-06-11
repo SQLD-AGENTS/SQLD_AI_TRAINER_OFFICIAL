@@ -8,13 +8,12 @@ import ProfileStats from '../components/profile/ProfileStats';
 import ProfileDangerZone from '../components/profile/ProfileDangerZone';
 import ProfileComingSoon from '../components/profile/ProfileComingSoon';
 
-type TabId = 'basic' | 'password' | 'study' | 'notify' | 'stats' | 'danger';
+type TabId = 'basic' | 'password' | 'study' | 'stats' | 'danger';
 
 const TABS: { id: TabId; label: string; comingSoon?: boolean; danger?: boolean }[] = [
   { id: 'basic', label: '기본 정보' },
   { id: 'password', label: '비밀번호' },
   { id: 'study', label: '학습 설정', comingSoon: true },
-  { id: 'notify', label: '알림', comingSoon: true },
   { id: 'stats', label: '계정 통계' },
   { id: 'danger', label: '위험 영역', danger: true },
 ];
@@ -81,7 +80,6 @@ export default function ProfilePage() {
               {activeTab === 'basic' && <ProfileBasicInfo />}
               {activeTab === 'password' && <ProfilePasswordChange />}
               {activeTab === 'study' && <ProfileComingSoon label="학습 설정" />}
-              {activeTab === 'notify' && <ProfileComingSoon label="알림" />}
               {activeTab === 'stats' && <ProfileStats />}
               {activeTab === 'danger' && <ProfileDangerZone />}
             </main>
