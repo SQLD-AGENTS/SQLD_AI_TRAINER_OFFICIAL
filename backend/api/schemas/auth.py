@@ -21,6 +21,7 @@ class TokenResponse(BaseModel):
     is_guest: bool = False
     user_id: Optional[str] = None
     username: Optional[str] = None
+    avatar_url: Optional[str] = None
 
 
 class UserProfileResponse(BaseModel):

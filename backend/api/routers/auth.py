@@ -103,7 +103,7 @@ def register(body: RegisterRequest, db: Session = Depends(get_db)):
         db.rollback()
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="회원가입 처리 중 오류가 발생했습니다.")
     token = create_access_token(user.user_id, user.token_version)
-    return TokenResponse(access_token=token, is_guest=False, user_id=user.user_id, username=user.username)
+    return TokenResponse(access_token=token, is_guest=False, user_id=user.user_id, username=user.username, avatar_url=user.avatar_url)
 
 
 @router.post("/login", response_model=TokenResponse, summary="로그인")
@@ -114,7 +114,7 @@ def login(body: LoginRequest, db: Session = Depends(get_db)):
     if not user.is_active:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="비활성화된 계정입니다.")
     token = create_access_token(user.user_id, user.token_version)
-    return TokenResponse(access_token=token, is_guest=False, user_id=user.user_id, username=user.username)
+    return TokenResponse(access_token=token, is_guest=False, user_id=user.user_id, username=user.username, avatar_url=user.avatar_url)
 
 
 @router.post("/google", response_model=GoogleLoginResponse, summary="구글 소셜 로그인")
@@ -181,6 +181,7 @@ def google_login(body: GoogleLoginRequest, db: Session = Depends(get_db)):
         user_id=user.user_id,
         username=user.username,
         is_new_user=is_new_user,
+        avatar_url=user.avatar_url,
     )
 
 
