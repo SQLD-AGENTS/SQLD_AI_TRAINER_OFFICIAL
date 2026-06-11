@@ -1,6 +1,8 @@
-import pathlib
+import os
 import uuid
 
+import boto3
+from botocore.exceptions import BotoCoreError, ClientError
 from fastapi import APIRouter, Depends, File, HTTPException, Query, UploadFile, status
 from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 from sqlalchemy.orm import Session
@@ -34,8 +36,21 @@ from api.schemas.auth import (
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 
-UPLOADS_DIR = pathlib.Path(__file__).resolve().parent.parent.parent / "uploads" / "avatars"
-UPLOADS_DIR.mkdir(parents=True, exist_ok=True)
+_R2_ACCOUNT_ID = os.getenv("R2_ACCOUNT_ID", "")
+_R2_ACCESS_KEY_ID = os.getenv("R2_ACCESS_KEY_ID", "")
+_R2_SECRET_ACCESS_KEY = os.getenv("R2_SECRET_ACCESS_KEY", "")
+_R2_BUCKET_NAME = os.getenv("R2_BUCKET_NAME", "")
+_R2_PUBLIC_URL = os.getenv("R2_PUBLIC_URL", "").rstrip("/")
+
+
+def _r2_client():
+    return boto3.client(
+        "s3",
+        endpoint_url=f"https://{_R2_ACCOUNT_ID}.r2.cloudflarestorage.com",
+        aws_access_key_id=_R2_ACCESS_KEY_ID,
+        aws_secret_access_key=_R2_SECRET_ACCESS_KEY,
+        region_name="auto",
+    )
 
 
 # ── helpers ──────────────────────────────────────────────────────────────────
@@ -324,10 +339,19 @@ async def upload_avatar(
 
     user = _get_active_user(current_user, db)
     ext = "jpg" if file.content_type == "image/jpeg" else "png"
-    filename = f"{user.user_id}.{ext}"
-    (UPLOADS_DIR / filename).write_bytes(contents)
+    object_key = f"avatars/{user.user_id}.{ext}"
 
-    user.avatar_url = f"/static/avatars/{filename}"
+    try:
+        _r2_client().put_object(
+            Bucket=_R2_BUCKET_NAME,
+            Key=object_key,
+            Body=contents,
+            ContentType=file.content_type,
+        )
+    except (BotoCoreError, ClientError) as e:
+        raise HTTPException(status_code=status.HTTP_502_BAD_GATEWAY, detail=f"스토리지 업로드 실패: {e}")
+
+    user.avatar_url = f"{_R2_PUBLIC_URL}/{object_key}"
     try:
         db.commit()
         db.refresh(user)
@@ -343,12 +367,13 @@ def delete_avatar(
     db: Session = Depends(get_db),
 ):
     user = _get_active_user(current_user, db)
-    if user.avatar_url:
-        filename = user.avatar_url.split("/")[-1]
-        avatar_path = UPLOADS_DIR / filename
-        if avatar_path.exists():
-            avatar_path.unlink()
-        user.avatar_url = None
+    if user.avatar_url and _R2_PUBLIC_URL and user.avatar_url.startswith(_R2_PUBLIC_URL):
+        object_key = user.avatar_url[len(_R2_PUBLIC_URL) + 1:]
+        try:
+            _r2_client().delete_object(Bucket=_R2_BUCKET_NAME, Key=object_key)
+        except (BotoCoreError, ClientError):
+            pass
+    user.avatar_url = None
     try:
         db.commit()
         db.refresh(user)
