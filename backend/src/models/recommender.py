@@ -64,10 +64,16 @@ def get_user_weak_chapters(
     threshold: float = 0.5,
     top_k: int = 3,
 ) -> list:
-    q_meta = questions_df[["question_id", "chapter_id"]].copy()
-    user_logs = logs_df[logs_df["user_id"] == user_id].merge(q_meta, on="question_id", how="left")
+    user_logs = logs_df[logs_df["user_id"] == user_id].copy()
     if user_logs.empty:
         raise ValueError(f"user_id '{user_id}'의 학습 이력이 없습니다.")
+
+    # 호출자(_get_user_logs_df)가 이미 chapter_id 를 merge 했으면 재merge 금지.
+    # 재merge 시 pandas 가 chapter_id_x/_y 로 분리해 groupby('chapter_id') 가 KeyError 난다.
+    if "chapter_id" not in user_logs.columns:
+        user_logs = user_logs.merge(
+            questions_df[["question_id", "chapter_id"]], on="question_id", how="left"
+        )
 
     chapter_acc = user_logs.groupby("chapter_id")["is_correct"].mean()
     weak = chapter_acc[chapter_acc < threshold].sort_values().index.tolist()
@@ -82,7 +88,7 @@ def get_content_scores(
     top_wrong: int = 10,
 ) -> np.ndarray:
     user_logs = logs_df[logs_df["user_id"] == user_id].copy()
-    wrong_logs = user_logs[~user_logs["is_correct"]]
+    wrong_logs = user_logs[~user_logs["is_correct"].astype(bool)]  # is_correct가 int(0/1)이어도 안전
 
     if wrong_logs.empty:
         # 오답 없으면 균등 점수
@@ -158,7 +164,7 @@ def recommend(
     # 이미 정답 처리한 문제 제외
     if exclude_correct:
         user_logs = logs_df[logs_df["user_id"] == user_id]
-        correct_ids = set(user_logs[user_logs["is_correct"]]["question_id"].tolist())
+        correct_ids = set(user_logs[user_logs["is_correct"].astype(bool)]["question_id"].tolist())
         candidate_df = candidate_df[~candidate_df["question_id"].isin(correct_ids)]
 
     if candidate_df.empty:
