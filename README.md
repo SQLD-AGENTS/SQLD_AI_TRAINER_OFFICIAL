@@ -391,54 +391,7 @@ TF-IDF 행렬 (sparse)
 
 **모델**: Logistic Regression (C=1.0) / LinearSVC — StratifiedKFold 5-fold 교차 검증
 
----
-
-#### 트랜스포머 기반 의미 검색 (`rag_explainer.py`)
-
-> ⚠ 이 절은 초기 설계 기록이다. 현재 런타임 유사검색은 pgvector(Gemini 1536-dim)이며,
-> 별도의 `rag_explainer.py` 파일은 존재하지 않는다(해설 로직은 `explainer.py`).
-
-문제에 대한 해설을 생성할 때 RAG(Retrieval-Augmented Generation) 파이프라인의 Retrieval 단계에서 트랜스포머 임베딩 모델을 사용한다.
-
-**사용 모델**
-- `jhgan/ko-sroberta-multitask` — 한국어 특화 Sentence-BERT 계열 모델
-- Hugging Face `sentence-transformers` 라이브러리를 통해 로드
-
-**트랜스포머 임베딩 원리**
-
-| 단계 | 설명 |
-|------|------|
-| Tokenization | WordPiece 기반 서브워드 분절 (한국어 형태소 경계에 가깝게 처리) |
-| Encoder | 12-layer Transformer Encoder (BERT 구조), Self-Attention으로 문맥 벡터 생성 |
-| Pooling | Mean Pooling — 모든 토큰 임베딩의 평균으로 문장 단위 벡터(768차원) 산출 |
-| Fine-tuning | Multi-task 학습: NLI(자연어 추론) + STS(의미 유사도) 손실 동시 최적화 |
-
-**TF-IDF 대비 트랜스포머의 차이점**
-
-TF-IDF는 단어 빈도 기반의 sparse 벡터로, 단어가 다르면 유사도가 0에 가까워진다.  
-트랜스포머 임베딩은 Self-Attention을 통해 문맥을 고려한 dense 벡터를 생성하므로, 표현이 달라도 의미가 유사한 문장 간의 유사도를 측정할 수 있다.
-
-```
-TF-IDF:   "기본키 제약조건" ≠ "PK 설정" → 코사인 유사도 ≈ 0
-Transformer: "기본키 제약조건" ≈ "PK 설정" → 코사인 유사도 ≈ 0.85
-```
-
-**FAISS 인덱스 구조**
-
-```
-문제 텍스트 → Sentence Transformer → 768차원 dense 벡터
-                                              ↓
-                                   FAISS IndexFlatL2 (L2 거리 기반 ANN 탐색)
-                                              ↓
-                              top-k 유사 문서 → LLM 프롬프트에 삽입
-```
-
-- `IndexFlatL2`: 정확한 최근접 이웃 탐색 (근사 아닌 완전 탐색), 데이터셋 규모가 작아 속도 충분
-- 임베딩은 최초 `/explain` 요청 시 Lazy Loading으로 생성되어 `faiss_index.bin`에 저장
-
-**저장 아티팩트**: `tfidf_vectorizer.joblib`, `classifier_subject.joblib`, `classifier_difficulty.joblib`
-
----
+--
 
 #### 오답 확률 예측기 (`predictor.py`)
 
