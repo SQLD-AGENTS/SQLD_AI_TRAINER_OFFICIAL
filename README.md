@@ -1,6 +1,6 @@
 # SQLD AI 적응형 학습 플랫폼
 
-> 이 프로젝트는 [chodonghee-hub/sqld-ai-trainer](https://github.com/chodonghee-hub/sqld-ai-trainer) 레포지토리를 이어서 작업했습니다.
+> 이 프로젝트는 [chodonghee-hub/sqld-ai-trainer](https://github.com/chodonghee-hub/SQLD_AI_TRAINER) 레포지토리를 이어서 작업했습니다.
 
 ![Python](https://img.shields.io/badge/Python-3.11-blue?logo=python)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.111+-green?logo=fastapi)
