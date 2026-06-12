@@ -1,5 +1,7 @@
 # SQLD AI 적응형 학습 플랫폼
 
+> 이 프로젝트는 [chodonghee-hub/sqld-ai-trainer](https://github.com/chodonghee-hub/sqld-ai-trainer) 레포지토리를 이어서 작업했습니다.
+
 ![Python](https://img.shields.io/badge/Python-3.11-blue?logo=python)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.111+-green?logo=fastapi)
 ![React](https://img.shields.io/badge/React-19-61DAFB?logo=react)
@@ -9,10 +11,10 @@
 ![Google OAuth](https://img.shields.io/badge/Google_OAuth-2.0-4285F4?logo=google)
 ![Cloudflare R2](https://img.shields.io/badge/Cloudflare_R2-Storage-F38020?logo=cloudflare)
 
-SQLD(SQL 개발자 자격증) 기출 문제를 기반으로 **ML · DKT · RAG/LLM** 기술을 통합한 AI 기반 적응형 학습 플랫폼.
 
-**Live**
-- Frontend: https://sqld-ai-trainer-official.vercel.app
+_SQLD(SQL 개발자 자격증) 기출 문제를 기반으로 **ML · DKT · RAG/LLM** 기술을 통합한 AI 기반 적응형 학습 플랫폼._
+
+🌐 [**배포 환경 바로가기**](https://sqld-ai-trainer-official.vercel.app)
 
 ---
 
