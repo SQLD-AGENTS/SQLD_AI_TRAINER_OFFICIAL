@@ -21,14 +21,15 @@ SQLD(SQL 개발자 자격증) 기출 문제를 기반으로 **ML · DKT · RAG/L
 1. [프로젝트 개요](#프로젝트-개요)
 2. [시스템 아키텍처](#시스템-아키텍처)
 3. [데이터 전처리 및 파이프라인](#데이터-전처리-및-파이프라인)
-4. [AI 모델 상세](#ai-모델-상세)
-5. [백엔드](#백엔드)
-6. [프론트엔드](#프론트엔드)
-7. [코드 관리 전략](#코드-관리-전략)
-8. [로컬 실행](#로컬-실행)
-9. [배포](#배포)
-10. [API 명세](#api-명세)
-11. [데이터셋](#데이터셋)
+4. [DB 스키마 & 임베딩 적재 파이프라인](#db-스키마--임베딩-적재-파이프라인)
+5. [AI 모델 상세](#ai-모델-상세)
+6. [백엔드](#백엔드)
+7. [프론트엔드](#프론트엔드)
+8. [코드 관리 전략](#코드-관리-전략)
+9. [로컬 실행](#로컬-실행)
+10. [배포](#배포)
+11. [API 명세](#api-명세)
+12. [데이터셋](#데이터셋)
 
 ---
 
@@ -52,7 +53,7 @@ SQLD(SQL 개발자 자격증) 기출 문제를 기반으로 **ML · DKT · RAG/L
 
 | 기능 | 설명 |
 |------|------|
-| 문제 풀이 | 297개 SQLD 기출 문제, 챕터·난이도 필터 |
+| 문제 풀이 | 591개 SQLD 기출 문제, 챕터·난이도 필터 |
 | 오답 확률 예측 | XGBoost 기반 문제별 오답 확률 실시간 표시 |
 | 개인화 추천 | DKT + 하이브리드 필터링으로 다음 학습 문제 추천 |
 | AI 해설 | Ollama Cloud LLM + pgvector RAG 파이프라인으로 맞춤 해설 생성 |
@@ -150,18 +151,26 @@ question_id = f"{subject_id}_{chapter_id}_{question_number}"
 
 중복 여부는 파싱 직후 `assert df["question_id"].is_unique`로 즉시 검증한다.
 
-**asset 추출**
+**asset 추출 — `doc_builder` (SSOT)**
 
-JSON의 `assets` 배열에는 문제 본문(`text_block`)과 SQL 코드(`sql_query`)가 혼재한다.
+`assets` 배열엔 본문(`text_block`), SQL(`sql_query`/`sql_ddl`/`sql_dml`), 표(`data_table`/`result_table`), ERD 등 **17종**이 섞여 있다. `doc_builder.py`가 이를 단일 원천(Single Source of Truth)으로 직렬화한다.
 
 ```python
-def _extract_assets(assets):
-    texts = [a["payload"]["text"]         for a in assets if a["asset_type"] == "text_block"]
-    sqls  = [a["payload"].get("code", "") for a in assets if a["asset_type"] == "sql_query"]
-    return " ".join(texts), "\n".join(sqls)
+question_text = doc_builder.build_question_text(assets)  # [지문]+[자료] (표·ERD 평탄화 포함)
+sql_code      = doc_builder.build_sql_code(assets)       # sql_query + sql_ddl + sql_dml
+has_sql_asset = bool(sql_code)
 ```
 
-SQL 코드가 하나라도 추출되면 `has_sql_asset = True`로 기록한다.
+**임베딩·해시의 단일 입력**: `build_doc(assets, choices, explanation)`는 5섹션(`[지문]·[자료]·[SQL]·[보기]·[해설]`) 문서를 만들고, 이 문서가 (1) `content_hash`(md5) 와 (2) Gemini 임베딩의 **동일한 입력**으로 쓰인다. 적재 시 해시 산출(`json_parser`)과 임베딩 시 재구성(`vectorize_questions`)이 같은 함수를 호출하므로, 파싱↔임베딩 표현이 절대 어긋나지 않는다(멱등의 린치핀).
+
+```
+assets ─► build_doc() ─┬─► content_hash (md5)         → questions.content_hash
+                       └─► Gemini embedding (1536d)   → question_embeddings (pgvector HNSW)
+                                                              │
+            /explain 요청 시 cosine(<=>)으로 유사 문제 검색 ◄──┘  → RAG 컨텍스트로 LLM에 주입
+```
+
+`content_hash`는 **스테일 검출 키**다 — 문항 내용이 바뀌면 `questions.content_hash ≠ question_embeddings.content_hash`가 되어 자동으로 재임베딩 대상이 된다. (`verify_pipeline.py`가 이 체인 정합을 게이트로 검증)
 
 **선택지 정보 추출**
 
@@ -179,13 +188,16 @@ SQL 코드가 하나라도 추출되면 `has_sql_asset = True`로 기록한다.
 | `subject_id` | int | 파트 번호 (1~3) |
 | `chapter_id` | int | 챕터 번호 |
 | `chapter_name` | str | 챕터명 (`CHAPTER_NAMES` 매핑) |
-| `question_type` | str | worst_choice / best_choice / fill_blank / different_result |
+| `question_type` | str | 16종 (worst_choice, best_choice, predict_result, fill_blank, identify_sql 등) |
 | `question_text` | str | 문제 본문 (text_block 합산) |
 | `sql_code` | str | SQL 코드 블록 (없으면 빈 문자열) |
 | `has_sql_asset` | bool | SQL 포함 여부 |
 | `choice_kinds` | str | 선택지 유형 쉼표 목록 |
 | `correct_choice` | int | 정답 번호 |
 | `explanation` | str | 해설 텍스트 |
+| `assets` | list(JSON) | 원본 asset 배열 무손실 보존 — `doc_builder` 파생의 원천 |
+| `exam_subject` | int | 기출 시험지 과목 (모의고사 M55~M60 만 값) |
+| `content_hash` | str | `md5(build_doc)` — 임베딩 동기화 키 (재임베딩 동기) |
 
 ---
 
@@ -201,6 +213,8 @@ SQL 코드가 하나라도 추출되면 `has_sql_asset = True`로 기록한다.
 | best_choice | 1 |
 | fill_blank | 2 |
 | different_result | 3 |
+
+> ⚠ `features.py`는 위 **4종만 명시 인코딩**하고, 모의고사(55~60회)에서 추가된 나머지 12종(predict_result, derive_count, identify_sql 등)은 현재 `-1`로 매핑된다. 16종 전체 인코딩은 features.py 보완 예정 항목.
 
 **② choice_kind_complexity** — 선택지 복잡도 점수 (0~3)
 
@@ -277,7 +291,7 @@ acc = clamp(0.65 + (-0.15) + 0.02 × 2, 0.05, 0.95) = 0.54
 
 **풀이 라운드 구성**
 
-각 사용자는 전체 297문제를 1~3라운드 무작위로 반복 풀이한다. 라운드 간 간격은 2주(`14일`)로 설정해 시간적 분포를 만든다.
+각 사용자는 전체 591문제를 1~3라운드 무작위로 반복 풀이한다. 라운드 간 간격은 2주(`14일`)로 설정해 시간적 분포를 만든다.
 
 **생성 결과 컬럼**
 
@@ -290,6 +304,46 @@ acc = clamp(0.65 + (-0.15) + 0.02 × 2, 0.05, 0.95) = 0.54
 | `solve_time_sec` | 풀이 소요 시간(초) |
 | `submitted_at` | 제출 일시 (2025-01-01 기준 시뮬레이션) |
 | `attempt_count` | 해당 사용자의 해당 문제 누적 시도 횟수 |
+
+---
+
+## DB 스키마 & 임베딩 적재 파이프라인
+
+위 ML 데이터 파이프라인(CSV·모델 학습용)과 별개로, **서빙 DB(Postgres + pgvector)** 에 문제·임베딩·유사도를 적재하는 런타임 파이프라인이다. `/explain`(RAG)·추천이 이 데이터를 소비한다.
+
+### DB 스키마 (v4)
+
+| 테이블 | 역할 | 핵심 컬럼 |
+|--------|------|----------|
+| `questions` | 문제 마스터 | `assets`(JSON 무손실), `content_hash`, `status`, `source`, `generated_from`, `exam_subject` |
+| `question_embeddings` | Gemini 1536d 임베딩 (1:1) | `embedding`(pgvector), `model_name`, `content_hash` |
+| `question_similar` | top-k 유사 문제 사전 | `(question_id, similar_question_id)` PK, `similarity`, `computed_at` |
+| `question_dedup_log` | 중복 제거 감사 | `removed_question_id`, `kept_question_id`, `similarity`, `method` |
+| `users` · `answer_logs` | 인증 · 풀이 이력 | — |
+
+- **status 서빙 게이트** — `active`(서빙) / `pending`(생성 문항 검수 대기) / `rejected` / `retired`. 추천·연습·RAG는 `active`만 조회한다(`AppState`도 active만 로드).
+- **content_hash 체인** — `questions.content_hash → question_embeddings.content_hash → question_similar.computed_at`. 문항 내용이 바뀌면 해시 불일치로 **재임베딩 → 재유사도계산**이 연쇄 트리거된다.
+- **마이그레이션** — Alembic. v4 스키마는 단일 통합 마이그레이션으로 관리(스쿼시). 로컬 SQLite는 마이그레이션 없이 `metadata.create_all`로 직접 생성.
+
+### 적재 파이프라인 (4 스크립트, 순차 실행)
+
+```
+load_questions.py        JSON 파싱 → doc_builder content_hash 산출 → questions 적재
+                         (청크 upsert + 데이터셋에서 빠진 original 문항 자동 prune)
+        ↓
+vectorize_questions.py   스테일(신규·내용변경·모델교체) 문항만 Gemini 임베딩
+                         → question_embeddings 적재 + HNSW(cosine) 인덱스
+        ↓
+refresh_similarities.py  active 풀에서 문항별 top-3 cosine(<=>) → question_similar
+                         (upsert-then-prune 단일 트랜잭션 — 중간 '이웃 0개' 상태 없음)
+        ↓
+verify_pipeline.py       V1~V8 불변식 게이트 — content_hash 체인·임베딩 커버리지·
+                         모델 일관성·양측 스테일 검사. 위반 시 exit 1 (CI 겸용)
+```
+
+- **멱등** — `content_hash` 기반 스테일 검출로 변경분만 재처리(전체 재임베딩 회피)
+- **SSOT** — `doc_builder.build_doc()`가 해시·임베딩 입력의 단일 원천 ([1단계](#1단계--json-파싱-json_parserpy) 참조)
+- **모델 SSOT** — `EMBED_MODEL` / `EMBED_TASK_TYPE` / `EMBED_MODEL_NAME`(=`gemini-embedding-001:ss`) 3상수를 전 스크립트가 참조
 
 ---
 
@@ -489,6 +543,8 @@ Linear(128 → 297)
       ↓
 Sigmoid → P(correct) for each question (297개)
 ```
+
+> ⚠ 현재 DKT는 **원본 297문항 기준으로 학습**된 상태(`dkt_question_ids`=297)다. 모의고사 294문항은 입력 시퀀스·출력 벡터에 포함되지 않아 해당 문항엔 ZPD 보정이 적용되지 않는다. 추천기(591 재학습 완료)와 동일하게 DKT도 591 재학습이 필요한 항목.
 
 **학습 설정**
 
@@ -812,7 +868,7 @@ SQLD_AI_TRAINER/    ← 레포 루트
 
 ### 모델 아티팩트 관리
 
-학습된 모델(`outputs/*.joblib`, `dkt_model.pth`)을 git으로 추적한다.
+학습된 모델(`backend/models/*.joblib`, `dkt_model.pth`)을 git으로 추적한다.
 
 **이유**: ML 모델 재현성 확보, Railway 배포 시 별도 학습 불필요, GitHub Actions 없이 단순한 배포 파이프라인 유지.
 
@@ -822,7 +878,8 @@ SQLD_AI_TRAINER/    ← 레포 루트
 .env               ← 비밀 키 (추적 제외)
 backend/*.db       ← SQLite DB (추적 제외)
 .venv/             ← Python 가상환경 (추적 제외)
-outputs/           ← 원칙적 제외, .gitignore에서 명시적 허용 처리
+outputs/           ← 데이터 CSV (추적 제외 — 파이프라인으로 재생성)
+backend/models/    ← 학습 아티팩트는 예외적으로 git 추적 (배포 시 재학습 불필요)
 ```
 
 ### 환경 변수 관리
@@ -952,7 +1009,7 @@ restartPolicyMaxRetries = 3
 | 2 | Part II | SQL 기본, SQL 활용, 관리구문 |
 | 3 | Part III | SQL 수행 구조, 인덱스 튜닝, 조인 튜닝, 옵티마이저, 고급 SQL 튜닝, Lock과 트랜잭션 |
 
-총 **297문제** — `question_type` 4종 (worst_choice, best_choice, fill_blank, different_result).
+총 **591문제** (원본 297 + SQLD 모의고사 55~60회 294문항) — `question_type` 16종.
 
 **JSON 스키마**
 ```json
@@ -972,7 +1029,7 @@ restartPolicyMaxRetries = 3
         },
         {
           "asset_type": "sql_query",
-          "payload": { "sql": "SELECT ..." }
+          "payload": { "dialect": "ansi", "code": "SELECT ..." }
         }
       ],
       "choices": [
@@ -987,8 +1044,8 @@ restartPolicyMaxRetries = 3
 ```
 
 > `sql_query` payload 형식은 파일마다 두 가지 중 하나로 표기된다.
-> - `{ "sql": "SELECT ..." }` — 대부분의 챕터
-> - `{ "dialect": "sql_server" | "plsql" | "ansi", "code": "SELECT ..." }` — dialect 명시가 필요한 챕터 (예: Lock과 트랜잭션)
+> - `{ "dialect": "ansi" | "plsql" | "sql_server", "code": "SELECT ..." }` — **대부분의 챕터** (`doc_builder`가 `code` 키를 파싱)
+> - `{ "sql": "SELECT ..." }` — 극소수 레거시 표기
 >
 > `choice_kind` 가능한 값: `"keyword"` · `"text"` · `"sql_query"` · `"sql_fragment"`
 

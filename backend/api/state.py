@@ -81,10 +81,16 @@ class AppState:
         """
         import json as _json
 
+        from sqlalchemy import text as _sql_text
+
         from api.database import engine  # 지연 import (순환 import 방지)
 
         try:
-            self.questions_df = pd.read_sql_table("questions", engine)
+            # 서빙 풀 = status='active' 만. pending/rejected 생성문항을 추천·연습·RAG·
+            # recommender(원본 591 기준 학습)에서 제외해 정합성 유지.
+            self.questions_df = pd.read_sql_query(
+                _sql_text("SELECT * FROM questions WHERE status = 'active'"), engine
+            )
         except Exception as e:  # noqa: BLE001
             print(f"[AppState] questions 테이블 로드 실패: {e}")
             self.questions_df = pd.DataFrame()

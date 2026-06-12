@@ -112,11 +112,12 @@ def recommend_questions(
             message="풀이 이력이 없어 입문 문제를 추천합니다. 문제를 풀면 맞춤 추천이 시작됩니다.",
         )
 
-    # 약점 챕터 계산
+    # 약점 챕터 계산 — get_user_weak_chapters 는 chapter_id(int)를 반환하므로
+    # 응답 스키마(list[str])·reason 비교(chapter_name 기준)에 맞게 이름으로 변환.
     from recommender import get_user_weak_chapters
-    weak_chapters = get_user_weak_chapters(
-        user_id, user_logs_df, state.questions_df
-    )
+    _weak_ids = get_user_weak_chapters(user_id, user_logs_df, state.questions_df)
+    _id2name = dict(zip(state.questions_df["chapter_id"], state.questions_df["chapter_name"]))
+    weak_chapters = [str(_id2name.get(cid, cid)) for cid in _weak_ids]
 
     # DKT ZPD 확률
     dkt_probs = _build_dkt_probs(state, user_logs_df) if body.use_zpd else None
