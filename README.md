@@ -1,18 +1,20 @@
 # SQLD AI 적응형 학습 플랫폼
 
+> 이 프로젝트는 [chodonghee-hub/sqld-ai-trainer](https://github.com/chodonghee-hub/sqld-ai-trainer) 레포지토리를 이어서 작업했습니다.
+
 ![Python](https://img.shields.io/badge/Python-3.11-blue?logo=python)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.111+-green?logo=fastapi)
 ![React](https://img.shields.io/badge/React-19-61DAFB?logo=react)
 ![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-red?logo=pytorch)
 ![Railway](https://img.shields.io/badge/Railway-Deployed-black?logo=railway)
 ![Vercel](https://img.shields.io/badge/Vercel-Frontend-black?logo=vercel)
+![Google OAuth](https://img.shields.io/badge/Google_OAuth-2.0-4285F4?logo=google)
+![Cloudflare R2](https://img.shields.io/badge/Cloudflare_R2-Storage-F38020?logo=cloudflare)
 
-SQLD(SQL 개발자 자격증) 기출 문제를 기반으로 **ML · DKT · RAG/LLM** 기술을 통합한 AI 기반 적응형 학습 플랫폼.
 
-**Live**
-- Backend API: https://sqldaitrainer-production.up.railway.app
-- API 문서: https://sqldaitrainer-production.up.railway.app/docs
-- Frontend: `https://sqld-ai-trainer.vercel.app` _(배포 예정)_
+_SQLD(SQL 개발자 자격증) 기출 문제를 기반으로 **ML · DKT · RAG/LLM** 기술을 통합한 AI 기반 적응형 학습 플랫폼._
+
+🌐 [**배포 환경 바로가기**](https://sqld-ai-trainer-official.vercel.app)
 
 ---
 
@@ -59,6 +61,8 @@ SQLD(SQL 개발자 자격증) 기출 문제를 기반으로 **ML · DKT · RAG/L
 | AI 해설 | Ollama Cloud LLM + pgvector RAG 파이프라인으로 맞춤 해설 생성 |
 | 학습 대시보드 | 챕터별 정답률 차트, 취약 영역 분석 |
 | 게스트 모드 | 회원가입 없이 문제 풀기 및 AI 해설 이용 가능 |
+| Google OAuth | Google 계정으로 간편 회원가입·로그인 |
+| 프로필 관리 | 닉네임·아바타 변경, 비밀번호 수정, 계정 삭제 (아바타는 Cloudflare R2 저장) |
 
 <br>
 
@@ -82,28 +86,46 @@ SQLD(SQL 개발자 자격증) 기출 문제를 기반으로 **ML · DKT · RAG/L
 [Vercel]                           [Railway — Docker Container]
 React 19 + TypeScript              FastAPI + uvicorn
 (Vite 정적 빌드)         ←──────►   ├─ AppState (Singleton)
-                          HTTPS    │   ├─ TF-IDF Classifier
-                          REST     │   ├─ XGBoost Predictor
-                                   │   ├─ SVD + TF-IDF Recommender
-                                   │   ├─ DKT/LSTM (PyTorch)
-                                   │   ├─ pgvector (Gemini 1536-dim)
-                                   │   └─ RAGExplainer (Ollama Cloud)
+                          HTTPS    │   ├─ XGBoost Predictor      ← Lazy Load
+                          REST     │   ├─ SVD + TF-IDF Recommender ← Lazy Load
+                                   │   ├─ DKT/LSTM (PyTorch)      ← Lazy Load
+                                   │   └─ RAGExplainer            ← Lazy Load
+                                   │       ├─ pgvector cosine 검색 (Gemini 1536-dim)
+                                   │       └─ Ollama Cloud ──► qwen3.5:cloud
                                    ├─ Postgres + pgvector (users·logs·questions·embeddings)
-                                   └─ Ollama Cloud ──► qwen3.5:cloud
+                                   └─ Cloudflare R2 (프로필 아바타)
 ```
 
 ### 모델 로딩 전략
 
-서버 시작 시 ML 모델(약 2GB)을 로드하면 Railway 헬스체크 타임아웃이 발생한다. 이를 해결하기 위해 FastAPI `lifespan` 내에서 `app.state.models`를 먼저 바인딩한 뒤, 모델 로딩은 백그라운드 스레드에서 실행한다.
+서버 시작 시 ML 모델을 모두 로드하면 Railway 헬스체크 타임아웃이 발생한다. 이를 두 가지 전략으로 해결한다.
+
+**전략 1 — 데이터 로딩은 시작 시 1회**
+`lifespan` 내 `_bootstrap()`이 questions 테이블 자동 시딩 + 문제 데이터 로드를 순서대로 실행한다.
 
 ```python
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     create_tables()
-    app.state.models = app_state          # /health 즉시 응답 가능
+    app.state.models = app_state
     loop = asyncio.get_running_loop()
-    loop.run_in_executor(None, app_state.load)  # 백그라운드 로딩
+    await loop.run_in_executor(None, _bootstrap)  # seeding → 데이터 로드
     yield
+
+def _bootstrap():
+    _seed_questions_if_empty()  # questions 테이블 비어 있으면 JSON에서 1회 적재
+    app_state.load()             # Postgres questions 테이블 → questions_df 로드
+```
+
+**전략 2 — ML 모델은 Lazy Loading**
+Recommender, Predictor, DKT, RAG 해설기는 시작 시 로드하지 않고 **첫 API 요청 시점에 지연 로드**한다. OOM 방지 및 헬스체크 즉시 응답을 위해서다.
+
+```python
+# /recommend 첫 호출 시
+app_state.load_recommender_if_needed()
+
+# /predict 첫 호출 시
+app_state.load_predictor_if_needed()
 ```
 
 ---
@@ -708,10 +730,12 @@ Ollama Cloud (qwen3.5:cloud)
 backend/
 ├── api/
 │   ├── main.py              # FastAPI 앱, lifespan, CORS 설정
-│   ├── database.py          # SQLAlchemy 엔진, 세션 관리
+│   ├── database.py          # SQLAlchemy 엔진, 세션 관리, ORM 모델
 │   ├── state.py             # AppState 싱글턴 (모든 모델 보유)
+│   ├── auth.py              # JWT 유틸리티, 비밀번호 해싱, OAuth 검증
+│   ├── embeddings.py        # Gemini 임베딩 API 래퍼
 │   ├── routers/
-│   │   ├── auth.py          # 회원가입·로그인·게스트 JWT 발급
+│   │   ├── auth.py          # 회원가입·로그인·게스트·Google OAuth JWT 발급
 │   │   ├── questions.py     # 문제 목록·상세 조회
 │   │   ├── logs.py          # 풀이 결과 저장 및 정답 판정
 │   │   ├── predict.py       # XGBoost 오답 확률 예측
@@ -725,20 +749,34 @@ backend/
 │   │   ├── predictor.py     # XGBoost / RandomForest 오답 예측기
 │   │   ├── recommender.py   # SVD + TF-IDF 하이브리드 추천기
 │   │   ├── knowledge_tracer.py  # PyTorch LSTM DKT
-│   │   └── embedder.py      # sentence-transformers + FAISS
-│   ├── data/
-│   │   ├── json_parser.py   # 챕터 JSON 파싱
-│   │   ├── features.py      # Feature 엔지니어링, 난이도 추정
-│   │   ├── simulator.py     # 시뮬레이션 학습 이력 생성
-│   │   └── pipeline.py      # 전체 데이터 파이프라인 오케스트레이션
-│   └── explainer.py         # RAG 파이프라인 (pgvector + Ollama)
-├── outputs/                 # 학습된 모델 아티팩트 (git 추적)
-│   ├── questions.csv
-│   ├── user_logs.csv
-│   ├── dkt_model.pth
-│   ├── faiss_index.joblib
-│   ├── sentence_embeddings.npy
-│   └── *.joblib             # 분류기, 예측기, 추천기 모델
+│   │   ├── embedder.py      # sentence-transformers + FAISS (레거시, 오프라인)
+│   │   └── explainer.py     # RAG 파이프라인 (pgvector + Ollama)
+│   └── data/
+│       ├── json_parser.py   # 챕터 JSON 파싱
+│       ├── features.py      # Feature 엔지니어링, 난이도 추정
+│       ├── simulator.py     # 시뮬레이션 학습 이력 생성
+│       └── pipeline.py      # 전체 데이터 파이프라인 오케스트레이션
+├── alembic/                 # DB 마이그레이션 (Alembic)
+│   ├── env.py
+│   └── versions/
+├── uploads/                 # 사용자 아바타 업로드 임시 경로
+├── models/                  # 학습된 모델 아티팩트 (git 추적)
+│   ├── predictor_primary.joblib      # 오답 예측기 (XGBoost or RF, AUC 기준 선택)
+│   ├── predictor_feature_names.joblib
+│   ├── rec_tfidf_matrix.joblib       # 추천기 TF-IDF
+│   ├── rec_user_factors.joblib       # 추천기 SVD 사용자 행렬
+│   ├── rec_item_factors.joblib       # 추천기 SVD 아이템 행렬
+│   ├── rec_*.joblib                  # 추천기 기타 아티팩트
+│   ├── dkt_model.pth                 # DKT LSTM 가중치
+│   ├── dkt_question_ids.joblib
+│   ├── classifier_subject.joblib     # 분류기 (오프라인 전용)
+│   ├── classifier_difficulty.joblib
+│   ├── tfidf_vectorizer.joblib
+│   ├── faiss_index.joblib            # FAISS 인덱스 (레거시, 오프라인 전용)
+│   └── sentence_embeddings.npy       # MiniLM 384-dim (레거시, 오프라인 전용)
+├── outputs/                 # 데이터 파이프라인 산출물
+│   ├── questions.csv        # 문제 마스터 (시딩 소스)
+│   └── user_logs.csv        # 시뮬레이션 학습 이력 (ML 학습용)
 └── requirements_api.txt
 ```
 
@@ -748,23 +786,30 @@ backend/
 
 ```python
 class AppState:
-    classifier: dict              # tfidf_vectorizer, clf_subject, clf_difficulty
-    predictor_model: object       # XGBoost or RandomForest (AUC 기준 자동 선택)
-    predictor_feature_names: list
-    recommender: dict             # tfidf_matrix, user_factors, item_factors
-    dkt_model: DKTModel           # PyTorch LSTM
-    dkt_question_ids: list
-    device: torch.device          # CPU / CUDA / MPS 자동 감지
-    explainer: RAGExplainer       # pgvector + Ollama
+    # 시작 시 로드 (questions 테이블 → DB 단일 소스)
     questions_df: pd.DataFrame
-    logs_df: pd.DataFrame
+    logs_df: pd.DataFrame          # user_logs.csv (오프라인 ML 산출물, 있으면 로드)
+
+    # Lazy Loading — 첫 API 요청 시 로드
+    predictor_model: object        # XGBoost or RandomForest (AUC 기준 자동 선택)
+    predictor_feature_names: list
+    recommender: dict              # tfidf_matrix, user_factors, item_factors
+    dkt_model: DKTModel            # PyTorch LSTM
+    dkt_question_ids: list
+    explainer: RAGExplainer        # pgvector + Ollama (FAISS 아티팩트 불필요)
+
+    device: torch.device           # CPU (Railway 환경)
 ```
+
+> **분류기(`classifier`)**: `classifier_subject.joblib`, `classifier_difficulty.joblib` 아티팩트는 `backend/models/`에 존재하나 현재 런타임 API에서는 로드하지 않는다. 오프라인 학습·평가 용도로만 사용한다.
 
 ### 인증
 
 - JWT Bearer 토큰 (python-jose)
 - 게스트: `POST /auth/guest` → 24시간 유효 토큰, 풀이 이력 미저장
-- 회원: `POST /auth/register` / `POST /auth/login` → 풀이 이력 저장 + 개인화 기능 이용
+- 회원(이메일): `POST /auth/register` / `POST /auth/login` → 풀이 이력 저장 + 개인화 기능 이용
+- 회원(Google): `POST /auth/google` → Google ID 토큰 검증 후 JWT 발급, 신규 계정 자동 생성
+- CORS: 로컬(`localhost:5173`) + Vercel 프리뷰 URL(`https://sqld-ai-trainer*.vercel.app`) regex 자동 허용 + `CORS_ORIGINS` 환경변수로 추가 오리진 지정 가능
 
 ---
 
@@ -781,21 +826,26 @@ frontend/
 │   │   └── AuthContext.tsx       # 인증 상태 전역 관리 (token, user, isGuest)
 │   ├── pages/
 │   │   ├── LandingPage.tsx
-│   │   ├── LoginPage.tsx
-│   │   ├── RegisterPage.tsx
+│   │   ├── LoginPage.tsx        # 이메일/비밀번호 + Google OAuth 로그인
+│   │   ├── RegisterPage.tsx     # 이메일 회원가입 + Google OAuth 가입
+│   │   ├── FindAccountPage.tsx  # 비밀번호 재설정
 │   │   ├── QuestionListPage.tsx  # 챕터·난이도 필터, 페이지네이션
 │   │   ├── QuestionDetailPage.tsx # 풀이·채점·AI 해설·오답 확률
 │   │   ├── DashboardPage.tsx     # 챕터별 차트, 취약 영역
-│   │   └── RecommendPage.tsx     # DKT 추천 문제 목록
+│   │   ├── RecommendPage.tsx     # DKT 추천 문제 목록
+│   │   └── ProfilePage.tsx       # 프로필 정보·비밀번호 변경·계정 삭제
 │   └── components/
 │       ├── auth/AuthGuard.tsx    # 미인증 시 /login 리다이렉트
 │       ├── layout/              # TopBar, PageLayout
 │       ├── question/            # QuestionCard, ChoiceList, SqlBlock,
 │       │                        # AiExplanation, RiskIndicator, FilterPanel
 │       ├── dashboard/           # SummaryCard, AccuracyChart, WeakChapterList
+│       ├── profile/             # ProfileBasicInfo, ProfileStats,
+│       │                        # ProfilePasswordChange, ProfileDangerZone,
+│       │                        # DeleteAccountModal, ProfileComingSoon
 │       ├── recommend/           # RecommendCard
-│       └── ui/                  # DifficultyBadge, AiBadge, Spinner, Alert
-├── vercel.json                  # SPA 라우팅 (/* → index.html)
+│       └── ui/                  # DifficultyBadge, AiBadge, Spinner, Alert, Avatar
+├── vercel.json                  # SPA 라우팅 + /api/* → Railway 프록시 + COOP 헤더
 └── package.json
 ```
 
@@ -806,10 +856,12 @@ frontend/
 | `/` | 랜딩 페이지 | 불필요 |
 | `/login` | 로그인 | 불필요 |
 | `/register` | 회원가입 | 불필요 |
+| `/find-account` | 비밀번호 재설정 | 불필요 |
 | `/questions` | 문제 목록 | 불필요 |
 | `/questions/:id` | 문제 풀이 | 불필요 |
 | `/dashboard` | 학습 대시보드 | 필요 (AuthGuard) |
 | `/recommend` | 추천 문제 | 필요 (AuthGuard) |
+| `/profile` | 프로필 관리 | 필요 (AuthGuard) |
 
 ### API 클라이언트 (`services/api.ts`)
 
@@ -859,7 +911,7 @@ SQLD_AI_TRAINER/    ← 레포 루트
 ├── backend/        ← Python FastAPI (Railway 배포)
 ├── frontend/       ← React + TypeScript (Vercel 배포)
 ├── datasets/       ← 원본 JSON 데이터
-├── outputs/        ← 학습된 모델 아티팩트 (git 추적)
+├── backend/models/ ← 학습된 모델 아티팩트 (git 추적)
 ├── Dockerfile      ← Railway용 (backend만 포함)
 └── railway.toml
 ```
@@ -880,6 +932,7 @@ backend/*.db       ← SQLite DB (추적 제외)
 .venv/             ← Python 가상환경 (추적 제외)
 outputs/           ← 데이터 CSV (추적 제외 — 파이프라인으로 재생성)
 backend/models/    ← 학습 아티팩트는 예외적으로 git 추적 (배포 시 재학습 불필요)
+backend/models/    ← 원칙적 제외, .gitignore에서 명시적 허용 처리
 ```
 
 ### 환경 변수 관리
@@ -889,8 +942,15 @@ backend/models/    ← 학습 아티팩트는 예외적으로 git 추적 (배포
 | `DATABASE_URL` | Railway Variables | Postgres(pgvector) 연결 URL |
 | `JWT_SECRET_KEY` | Railway Variables | JWT 서명 키 (32자 이상) |
 | `OLLAMA_API_KEY` | Railway Variables | Ollama Cloud LLM API 키 |
+| `OLLAMA_MODEL` | Railway Variables | 사용할 Ollama 모델명 (예: `qwen3.5:cloud`) |
+| `OLLAMA_NUM_PREDICT` | Railway Variables | LLM 응답 최대 토큰 수 |
 | `GEMINI_API_KEY` | Railway Variables | Gemini 임베딩(gemini-embedding-001) 키 |
 | `CORS_ORIGINS` | Railway Variables | Vercel 도메인 (콤마 구분) |
+| `R2_ACCOUNT_ID` | Railway Variables | Cloudflare R2 계정 ID (아바타 저장) |
+| `R2_ACCESS_KEY_ID` | Railway Variables | R2 액세스 키 ID |
+| `R2_SECRET_ACCESS_KEY` | Railway Variables | R2 시크릿 액세스 키 |
+| `R2_BUCKET_NAME` | Railway Variables | R2 버킷 이름 |
+| `R2_PUBLIC_URL` | Railway Variables | R2 퍼블릭 URL (아바타 이미지 서빙) |
 | `VITE_API_URL` | Vercel Variables | Railway 백엔드 URL |
 
 로컬 개발 시 **프로젝트 루트 `.env`** 파일에 설정 (`.env.example` 참고). 앱이 루트 `.env`를 로드한다 (`api/database.py`, `api/main.py`).
@@ -961,8 +1021,14 @@ restartPolicyMaxRetries = 3
 | `DATABASE_URL` | Railway Postgres(pgvector) 플러그인 연결 URL |
 | `JWT_SECRET_KEY` | 랜덤 32자 이상 문자열 |
 | `OLLAMA_API_KEY` | Ollama Cloud(ollama.com)에서 발급 |
+| `OLLAMA_MODEL` | 사용할 모델명 (예: `qwen3.5:cloud`) |
 | `GEMINI_API_KEY` | Google AI Studio에서 발급 (문제 임베딩 적재용) |
 | `CORS_ORIGINS` | `https://<vercel-domain>.vercel.app` |
+| `R2_ACCOUNT_ID` | Cloudflare 대시보드 → R2 계정 ID |
+| `R2_ACCESS_KEY_ID` | R2 API 토큰에서 발급 |
+| `R2_SECRET_ACCESS_KEY` | R2 API 토큰 시크릿 |
+| `R2_BUCKET_NAME` | 아바타 저장용 버킷 이름 |
+| `R2_PUBLIC_URL` | 퍼블릭 읽기 URL (예: `https://pub-xxx.r2.dev`) |
 
 ### Frontend — Vercel
 
@@ -973,11 +1039,22 @@ restartPolicyMaxRetries = 3
 | Output Directory | `dist` |
 | `VITE_API_URL` | `https://sqldaitrainer-production.up.railway.app` |
 
-`frontend/vercel.json`이 SPA 라우팅을 처리한다.
+`frontend/vercel.json`이 SPA 라우팅, API 프록시, OAuth COOP 헤더를 처리한다.
 
 ```json
-{ "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }] }
+{
+  "rewrites": [
+    { "source": "/api/:path*", "destination": "https://sqldaitrainer-production.up.railway.app/:path*" },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ],
+  "headers": [
+    { "source": "/(.*)", "headers": [{ "key": "Cross-Origin-Opener-Policy", "value": "same-origin-allow-popups" }] }
+  ]
+}
 ```
+
+- `/api/*` 경로는 Railway 백엔드로 프록시되어 프론트엔드 개발 중 CORS 없이 호출 가능
+- `Cross-Origin-Opener-Policy` 헤더는 Google OAuth 팝업 창이 정상 작동하도록 설정
 
 ---
 
@@ -1055,7 +1132,8 @@ restartPolicyMaxRetries = 3
 
 | 영역 | 기술 |
 |------|------|
-| API 서버 | FastAPI 0.111, uvicorn, SQLAlchemy 2.0, JWT |
+| API 서버 | FastAPI 0.111, uvicorn, SQLAlchemy 2.0 |
+| 인증 | JWT (python-jose) + Google OAuth 2.0 (이메일·소셜 로그인 동시 지원) |
 | ML 분류 | scikit-learn (TF-IDF + Logistic Regression) |
 | 오답 예측 | XGBoost 2.0, RandomForest |
 | 추천 | TruncatedSVD (CF) + TF-IDF 코사인 유사도 (CBF) |
@@ -1064,4 +1142,5 @@ restartPolicyMaxRetries = 3
 | LLM/RAG | Ollama Cloud (qwen3.5:cloud) |
 | DB | Postgres + pgvector (로컬은 SQLite 폴백, SQLAlchemy ORM) |
 | Frontend | React 19, TypeScript, Vite, axios, Recharts, TanStack Query |
-| 배포 | Docker (Railway), Vercel |
+| 파일 저장 | Cloudflare R2 — 프로필 아바타 이미지 저장 및 퍼블릭 서빙 (S3 호환 API) |
+| 배포 | Docker (Railway — 백엔드), Vercel (프론트엔드) |
