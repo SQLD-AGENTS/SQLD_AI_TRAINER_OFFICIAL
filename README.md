@@ -145,7 +145,7 @@ datasets/json/*.json (12개 챕터)
   Feature DataFrame
   (+ question_type_encoded, choice_kind_complexity, difficulty, difficulty_label)
         │
-        ├──► outputs/questions.csv   ← API·ML 공용 문제 마스터 데이터
+        ├──► outputs/questions.csv   ← ML 학습용 문제 Feature 데이터 (런타임 서빙 마스터는 Postgres questions 테이블)
         │
         ▼  [3단계] simulator.py
   시뮬레이션 학습 이력
@@ -153,6 +153,8 @@ datasets/json/*.json (12개 챕터)
         │
         └──► outputs/user_logs.csv  ← ML 모델 학습용 이력 데이터
 ```
+
+> `outputs/questions.csv`는 **ML 모델 학습 입력 전용**이다. 런타임 서빙 문제 마스터는 Postgres `questions` 테이블이며(`AppState`가 `status='active'`만 로드), `load_questions.py`가 CSV가 아닌 JSON에서 직접 시딩한다([DB 스키마 & 임베딩 적재 파이프라인](#db-스키마--임베딩-적재-파이프라인) 참조).
 
 파이프라인 완료 후 `_verify()` 함수로 자동 품질 검증을 수행한다.
 - `question_id` 중복 여부 확인
@@ -750,7 +752,8 @@ backend/
 │   │   ├── recommender.py   # SVD + TF-IDF 하이브리드 추천기
 │   │   ├── knowledge_tracer.py  # PyTorch LSTM DKT
 │   │   ├── embedder.py      # sentence-transformers + FAISS (레거시, 오프라인)
-│   │   └── explainer.py     # RAG 파이프라인 (pgvector + Ollama)
+│   │   ├── explainer.py     # RAG 파이프라인 (pgvector + Ollama)
+│   │   └── pipeline.py      # 전체 모델 학습·비교 오케스트레이션
 │   └── data/
 │       ├── json_parser.py   # 챕터 JSON 파싱
 │       ├── features.py      # Feature 엔지니어링, 난이도 추정
@@ -1084,7 +1087,7 @@ restartPolicyMaxRetries = 3
 |---|---|---|
 | 1 | Part I | 데이터 모델링의 이해, 데이터 모델과 SQL |
 | 2 | Part II | SQL 기본, SQL 활용, 관리구문 |
-| 3 | Part III | SQL 수행 구조, 인덱스 튜닝, 조인 튜닝, 옵티마이저, 고급 SQL 튜닝, Lock과 트랜잭션 |
+| 3 | Part III | SQL 수행 구조, SQL 분석 도구, 인덱스 튜닝, 조인 튜닝, SQL 옵티마이저, 고급 SQL 튜닝, Lock과 트랜잭션 |
 
 총 **591문제** (원본 297 + SQLD 모의고사 55~60회 294문항) — `question_type` 16종.
 
