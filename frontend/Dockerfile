@@ -1,5 +1,6 @@
 # ---- build stage ----
-FROM node:22-alpine AS build
+# node:24 → npm 11 (lockfile이 로컬 npm 11로 생성됨. npm 10이면 optional dep 해석이 달라 npm ci 실패)
+FROM node:24-alpine AS build
 WORKDIR /app
 
 COPY package*.json ./
