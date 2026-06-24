@@ -23,7 +23,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-package-lock.json
 
 # Design prototype files (content absorbed into index.css / TypeScript components)
 src/screens.jsx
