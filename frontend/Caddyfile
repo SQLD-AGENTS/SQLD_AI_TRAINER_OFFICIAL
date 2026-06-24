@@ -1,0 +1,9 @@
+:{$PORT}
+
+root * /srv
+encode gzip
+try_files {path} /index.html
+file_server
+
+# Google 로그인 팝업용 (기존 vercel.json·vite dev가 주던 헤더)
+header Cross-Origin-Opener-Policy same-origin-allow-popups
