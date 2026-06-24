@@ -1,10 +1,12 @@
 # ---- build stage ----
-# node:24 → npm 11 (lockfile이 로컬 npm 11로 생성됨. npm 10이면 optional dep 해석이 달라 npm ci 실패)
 FROM node:24-alpine AS build
 WORKDIR /app
 
 COPY package*.json ./
-RUN npm ci
+# npm ci(엄격 정합)가 아닌 install(reconcile): Vite8(Rolldown)의 wasm 폴백 optional dep
+# (@emnapi/*)이 환경별로 다른 버전으로 해석돼 lockfile 검사가 깨짐. install은 lockfile을
+# 힌트로 쓰되 불일치는 보정하므로 cross-environment에서 안전.
+RUN npm install --no-audit --no-fund
 COPY . .
 
 # Vite는 빌드타임에 VITE_* 를 번들에 인라인 → 반드시 build ARG로 주입
